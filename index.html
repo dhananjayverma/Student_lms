@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CUIMS Glass Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="icon-home" viewBox="0 0 24 24">
+      <path d="M3 10.5 12 3l9 7.5" />
+      <path d="M5 9.5V21h5v-6h4v6h5V9.5" />
+    </symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </symbol>
+    <symbol id="icon-video" viewBox="0 0 24 24">
+      <path d="M15 10l5-3v10l-5-3z" />
+      <rect x="3" y="6" width="12" height="12" rx="2" />
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </symbol>
+    <symbol id="icon-file" viewBox="0 0 24 24">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M8 13h8M8 17h6" />
+    </symbol>
+    <symbol id="icon-wallet" viewBox="0 0 24 24">
+      <path d="M20 7H5a2 2 0 0 1 0-4h13v4" />
+      <path d="M4 7v12a2 2 0 0 0 2 2h14V7" />
+      <path d="M16 14h4" />
+    </symbol>
+    <symbol id="icon-credit" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M3 10h18M7 15h4" />
+    </symbol>
+    <symbol id="icon-id" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <circle cx="9" cy="12" r="2" />
+      <path d="M14 10h4M14 14h3M7 17c.6-1.4 3.4-1.4 4 0" />
+    </symbol>
+    <symbol id="icon-briefcase" viewBox="0 0 24 24">
+      <rect x="3" y="7" width="18" height="13" rx="2" />
+      <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" />
+    </symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M16 3v4M8 3v4M3 10h18" />
+    </symbol>
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path
+        d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+    </symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </symbol>
+    <symbol id="icon-bell" viewBox="0 0 24 24">
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+      <path d="M10 21h4" />
+    </symbol>
+    <symbol id="icon-message" viewBox="0 0 24 24">
+      <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" />
+    </symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" />
+    </symbol>
+    <symbol id="icon-link" viewBox="0 0 24 24">
+      <path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1" />
+      <path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1" />
+    </symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8" />
+    </symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24">
+      <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+    </symbol>
+    <symbol id="icon-megaphone" viewBox="0 0 24 24">
+      <path d="M3 11v2a2 2 0 0 0 2 2h2l4 5v-5l8 3V6l-8 3H5a2 2 0 0 0-2 2z" />
+      <path d="M21 8.5a4 4 0 0 1 0 7" />
+    </symbol>
+    <symbol id="icon-chevron" viewBox="0 0 24 24">
+      <path d="m9 18 6-6-6-6" />
+    </symbol>
+  </svg>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="background-title">Chandigarh<br>University</div>
+
+  <aside class="sidebar">
+    <a class="cu-logo" href="#">
+      <img src="logo.png" alt="CUIMS Chandigarh University">
+    </a>
+
+    <nav class="sidebar-menu" aria-label="CUIMS menu">
+      <a href="#">Academics <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">Accounts <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">ACP Registration</a>
+      <a href="#">Administration <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">Admission Cancellation Form</a>
+      <a href="#">Anti-Ragging Affidavit</a>
+      <a href="#">Apply for Loan Documents</a>
+      <a href="#">Apply for NOC</a>
+      <a href="#">Attendance Exemption Request</a>
+      <a href="#">CAB 2025 Conference Participation</a>
+      <a href="#">Campus Joining Mode Preference Form</a>
+      <a href="#">Career Option Survey</a>
+      <a href="#">Centre For Student Wellbeing (CSW) <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">Counseling Therapy Clinic Registration</a>
+      <a href="#">CR Registration Form</a>
+      <a href="#">DCPD <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">DLL MOOC Coordinator List</a>
+      <a href="#">Download Certificate</a>
+      <a href="#">Download Lecture Plan</a>
+      <a href="#">E Library <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">Examination <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">Freshmen Admission Survey</a>
+      <a href="#">Har Ghar Tiranga Registration</a>
+      <a href="#">HBSO Course Registration</a>
+      <a href="#">Hostel <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">Industrial Summer Training Payment</a>
+      <a href="#">International Study Opportunities</a>
+      <a href="#">Internet Allowance Request</a>
+      <a href="#">Internships View/Apply</a>
+      <a href="#">Library <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">Mentee Registration</a>
+      <a href="#">My No Dues Status</a>
+      <a href="#">My Profile</a>
+      <a href="#">My Research Profile</a>
+      <a href="#">Online Test</a>
+      <a href="#">Ph.D Research & Supervision <svg>
+          <use href="#icon-chevron"></use>
+        </svg></a>
+      <a href="#">Student Care Centres Details</a>
+      <a href="#">Student Counselling Needs Survey</a>
+      <a href="#">Student Document Upload Test</a>
+      <a href="#">Student Feedback test</a>
+    </nav>
+  </aside>
+
+  <main class="shell">
+    <header class="topbar glass">
+      <button class="icon-button" aria-label="Open menu"><svg>
+          <use href="#icon-menu"></use>
+        </svg></button>
+      <label class="search">
+        <span><svg>
+            <use href="#icon-search"></use>
+          </svg></span>
+        <input type="search" placeholder="Search for courses, lectures, documents, students...">
+      </label>
+      <div class="top-actions">
+        <button class="icon-button" aria-label="Change theme"><svg>
+            <use href="#icon-sun"></use>
+          </svg></button>
+        <button class="icon-button badge" aria-label="Notifications"><svg>
+            <use href="#icon-bell"></use>
+          </svg></button>
+        <button class="icon-button" aria-label="Messages"><svg>
+            <use href="#icon-message"></use>
+          </svg></button>
+        <div class="profile">
+          <span class="avatar">DU</span>
+          <div>
+            <strong>DUMMY USER</strong>
+            <span>16BAV1184</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span>Good Morning</span>
+        <h1>DUMMY USER</h1>
+        <p>Learning today, leading tomorrow.</p>
+        <div class="quick-actions">
+          <button><span><svg>
+                <use href="#icon-id"></use>
+              </svg></span>ID Card</button>
+          <button><span><svg>
+                <use href="#icon-mail"></use>
+              </svg></span>Email</button>
+          <button><span><svg>
+                <use href="#icon-link"></use>
+              </svg></span>Important Links</button>
+          <button><span><svg>
+                <use href="#icon-bell"></use>
+              </svg></span>Notices</button>
+        </div>
+      </div>
+
+      <article class="glass card progress-card">
+        <div class="card-title">My Progress</div>
+        <div class="progress-ring" style="--value: 78">
+          <span>78%</span>
+        </div>
+        <p>Overall Progress</p>
+        <button>View Details</button>
+      </article>
+
+      <article class="glass card money-card fee-card">
+        <div class="tile-icon red"><svg>
+            <use href="#icon-wallet"></use>
+          </svg></div>
+        <span>Pending Fee</span>
+        <strong>₹ 10,000</strong>
+        <small>Due</small>
+        <button>Pay Now</button>
+      </article>
+
+      <article class="glass card money-card backlog-card">
+        <div class="tile-icon amber"><svg>
+            <use href="#icon-file"></use>
+          </svg></div>
+        <span>Backlog</span>
+        <strong>02</strong>
+        <small>Subjects</small>
+        <button class="soft">View Details</button>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <div class="dashboard-main">
+        <article class="glass panel academic-panel">
+          <div class="academic-tabs" role="tablist" aria-label="Academic information">
+            <button class="academic-tab active" id="classes-tab" type="button" role="tab" aria-selected="true"
+              aria-controls="classes-panel" data-panel="classes-panel">
+              <svg aria-hidden="true"><use href="#icon-video"></use></svg>
+              Classes / Lectures
+            </button>
+            <button class="academic-tab" id="attendance-tab" type="button" role="tab" aria-selected="false"
+              aria-controls="attendance-panel" data-panel="attendance-panel">
+              <svg aria-hidden="true"><use href="#icon-book"></use></svg>
+              Course &amp; Attendance
+            </button>
+          </div>
+
+          <div class="academic-content active" id="classes-panel" role="tabpanel" aria-labelledby="classes-tab">
+            <div class="class-hero">
+              <div class="class-status">
+                <span class="class-kicker">Now</span>
+                <div>
+                  <strong>Software Engineering</strong>
+                  <small>09am - 09:45am</small>
+                </div>
+                <div class="class-meta">
+                  <b>Room D3-105</b>
+                  <em>Live</em>
+                </div>
+              </div>
+              <div class="current-class">
+                <div>
+                  <span>Up Next</span>
+                  <h2>Software QA</h2>
+                  <p>10am - 10:45am</p>
+                  <strong>Dr. Rashmi Goyal</strong>
+                </div>
+                <mark>23CSH-309</mark>
+                <small>Venue: D3 Block room no. 105</small>
+              </div>
+            </div>
+
+            <div class="later-heading">Happening Later Today</div>
+            <div class="lecture-cards">
+              <article class="lecture-card blue">
+                <h3>AI Advance</h3>
+                <span>10am - 10:45am</span>
+                <strong>Dr. Rashmi Goyal</strong>
+              </article>
+              <article class="lecture-card pink">
+                <h3>Data mining</h3>
+                <span>11am - 11:45am</span>
+                <strong>Dr. Rashmi Goyal</strong>
+              </article>
+              <article class="lecture-card green">
+                <h3>DBMS</h3>
+                <span>01pm - 01:45pm</span>
+                <strong>Dr. Rashmi Goyal</strong>
+              </article>
+              <article class="lecture-card red">
+                <h3>Virtual Reality</h3>
+                <span>03pm - 03:45pm</span>
+                <strong>Dr. Rashmi Goyal</strong>
+              </article>
+            </div>
+          </div>
+
+          <div class="academic-content" id="attendance-panel" role="tabpanel" aria-labelledby="attendance-tab" hidden>
+            <div class="attendance-summary">
+              <div>
+                <span>Current Semester</span>
+                <strong>82%</strong>
+                <small>Overall Attendance</small>
+              </div>
+              <div>
+                <span>Courses</span>
+                <strong>06</strong>
+                <small>Active Subjects</small>
+              </div>
+              <div>
+                <span>Low Attendance</span>
+                <strong>01</strong>
+                <small>Needs Focus</small>
+              </div>
+            </div>
+
+            <div class="course-list">
+              <article class="course-row">
+                <div>
+                  <h3>Software QA</h3>
+                  <span>23CSH-309 • Dr. Rashmi Goyal</span>
+                </div>
+                <strong>88%</strong>
+                <div class="attendance-bar"><span style="width: 88%"></span></div>
+              </article>
+              <article class="course-row warning">
+                <div>
+                  <h3>DBMS</h3>
+                  <span>23CST-204 • Prof. Amit Sharma</span>
+                </div>
+                <strong>72%</strong>
+                <div class="attendance-bar"><span style="width: 72%"></span></div>
+              </article>
+              <article class="course-row">
+                <div>
+                  <h3>Design Thinking</h3>
+                  <span>23HSM-303 • Dr. Meera Sethi</span>
+                </div>
+                <strong>84%</strong>
+                <div class="attendance-bar"><span style="width: 84%"></span></div>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <div class="dashboard-alerts">
+          <article class="glass panel compact dashboard-modal-card">
+            <button class="modal-option" type="button" data-modal-title="Important Messages">
+              <span class="alert-title"><svg aria-hidden="true"><use href="#icon-message"></use></svg>Important Messages</span>
+              <b aria-hidden="true">+</b>
+            </button>
+            <div class="modal-source" hidden>
+              <div class="panel-head">
+                <h2>Important Messages</h2><a href="#">View All</a>
+              </div>
+              <div class="pills"><button>Messages</button><button>Notifications</button><button>Generic</button></div>
+              <div class="message-item">
+                <div><span>Half Day Leave</span><strong>Wed, 16 Dec</strong><small>Casual</small></div><mark>Awaiting</mark>
+              </div>
+              <div class="message-item">
+                <div><span>Half Day Leave</span><strong>Wed, 16 Dec</strong><small>Sick Leave</small></div><mark
+                  class="ok">Approved</mark>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass panel compact dashboard-modal-card">
+            <button class="modal-option" type="button" data-modal-title="Notifications">
+              <span class="alert-title"><svg aria-hidden="true"><use href="#icon-bell"></use></svg>Notifications</span>
+              <b aria-hidden="true">+</b>
+            </button>
+            <div class="modal-source" hidden>
+              <div class="panel-head">
+                <h2>Notifications</h2><a href="#">View All</a>
+              </div>
+              <div class="notice"><span><svg>
+                    <use href="#icon-bell"></use>
+                  </svg></span>
+                <div><strong>Portal maintenance</strong><small>The student portal will be unavailable from 2pm to 6pm
+                    today.</small></div><time>10:30 AM</time>
+              </div>
+              <div class="notice"><span><svg>
+                    <use href="#icon-book"></use>
+                  </svg></span>
+                <div><strong>Computer Science - SA</strong><small>Assignment review is scheduled this week.</small></div>
+                <time>Yesterday</time>
+              </div>
+              <div class="notice"><span><svg>
+                    <use href="#icon-file"></use>
+                  </svg></span>
+                <div><strong>AI Software Life Cycle</strong><small>New lecture notes have been uploaded.</small></div>
+                <time>May 18</time>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass panel compact dashboard-modal-card">
+            <button class="modal-option" type="button" data-modal-title="Job Alerts">
+              <span class="alert-title"><svg aria-hidden="true"><use href="#icon-briefcase"></use></svg>Job Alerts</span>
+              <b aria-hidden="true">+</b>
+            </button>
+            <div class="modal-source" hidden>
+              <div class="panel-head">
+                <h2>Job Alerts</h2><a href="#">View All</a>
+              </div>
+              <div class="job"><span><svg>
+                    <use href="#icon-briefcase"></use>
+                  </svg></span>
+                <div><strong>Software Developer Intern</strong><small>TCS • Noida</small></div><em>New</em>
+              </div>
+              <div class="job"><span><svg>
+                    <use href="#icon-code"></use>
+                  </svg></span>
+                <div><strong>Data Analyst Intern</strong><small>Deloitte • Gurugram</small></div>
+              </div>
+              <div class="job"><span><svg>
+                    <use href="#icon-link"></use>
+                  </svg></span>
+                <div><strong>Web Developer Intern</strong><small>Infosys • Bangalore</small></div>
+              </div>
+              <button class="wide-button">View All Jobs</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="support-stack">
+        <article class="query-summary dashboard-query">
+          <div class="query-heading">
+            <span>?</span>
+            <h2>My Questions/Queries</h2>
+          </div>
+          <div class="query-stats">
+            <div><span>Total</span><strong>50</strong></div>
+            <div><span>Closed</span><strong>40</strong></div>
+            <div><span>Open</span><strong>10</strong></div>
+          </div>
+        </article>
+
+        <article class="mentor-card">
+          <span class="mentor-photo" aria-hidden="true"></span>
+          <div>
+            <strong>Bhavesh Mehta (E1666)</strong>
+            <span>bhaveshe1666@cumail.in</span>
+          </div>
+          <button type="button">Message</button>
+        </article>
+
+        <article class="glass panel conversations">
+          <div class="panel-head">
+            <div class="conversation-heading">
+              <span class="conversation-icon"><svg>
+                  <use href="#icon-message"></use>
+                </svg></span>
+              <h2>Conversations</h2>
+            </div>
+            <a href="#">View All</a>
+          </div>
+          <div class="conversation-tabs" role="tablist" aria-label="Conversation type">
+            <button class="selected" type="button">Chat</button>
+            <button type="button">Mates</button>
+          </div>
+          <div class="conversation-list">
+            <div class="conversation-card">
+              <span class="mate-photo" aria-hidden="true"></span>
+              <div class="mate-copy">
+                <div class="mate-title">
+                  <strong>Maria Doe</strong>
+                  <span>( 23BCS12089 )</span>
+                </div>
+                <span class="mate-email"><svg>
+                    <use href="#icon-mail"></use>
+                  </svg>Maria.23BCS12087@Cumail.In</span>
+              </div>
+              <span class="mate-status">Present</span>
+              <button class="send-message" type="button">Send Message</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="announcements-layout">
+        <article class="glass panel compact announcements-panel">
+          <div class="announcement-head">
+            <div class="announcement-title">
+              <span><svg aria-hidden="true"><use href="#icon-megaphone"></use></svg></span>
+              <div>
+                <h2>Announcements</h2>
+                <small>Latest campus updates and notices</small>
+              </div>
+            </div>
+            <div class="announcement-count">
+              <strong>3</strong>
+              <span>Updates</span>
+            </div>
+          </div>
+          <div class="announcement-tools">
+            <label class="announcement-search">
+              <input type="search" placeholder="Search Announcement">
+              <svg aria-hidden="true"><use href="#icon-search"></use></svg>
+            </label>
+            <div class="announcement-pills" aria-label="Announcement filters">
+              <button class="active" type="button">All</button>
+              <button type="button">News</button>
+              <button type="button">Activities</button>
+            </div>
+          </div>
+          <div class="announcement-board">
+            <div class="announcement-list">
+              <div class="announcement-row featured">
+                <time><strong>Today</strong><span>3:00 PM</span></time>
+                <div class="announcement-copy">
+                  <div class="announcement-meta"><span>News</span><em>New</em></div>
+                  <h3>Chandigarh University emerges as overall champion at AIU National Youth Festival 2025</h3>
+                  <p>Respected All,</p>
+                  <p>We are writing to share with you a momentous achievement that has brought unparalleled glory to our
+                    institution. Chandigarh University has emerged as the <strong>overall champion at the AIU National Youth
+                    Festival 2025, held at Amity University, Noida.</strong></p>
+                  <p><strong>- Overall Champion- Rank 1</strong><br><strong>- Overall in Literary - 1st Position</strong></p>
+                </div>
+              </div>
+              <div class="announcement-row">
+                <time><strong>Oct 20, 2025</strong><span>05:00 PM</span></time>
+                <div class="announcement-copy">
+                  <span>Academics</span>
+                  <p>This prestigious event witnessed participation from universities across India, and our students have made
+                    us proud by excelling in various categories. Students can apply for a maximum of <strong>1 Theory + 1
+                    Practical / 2 Theory / 2 Practical's.</strong></p>
+                </div>
+              </div>
+              <div class="announcement-row">
+                <time><strong>Oct 20, 2025</strong><span>05:00 PM</span></time>
+                <div class="announcement-copy">
+                  <span>Activities</span>
+                  <p>Workshop registrations, placement updates, and department activities will be shared here for quick access
+                    by all students.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass panel calendar-panel">
+          <div class="calendar-head">
+            <div>
+              <h2>May 2026</h2>
+              <span>Meeting on</span>
+            </div>
+            <div class="calendar-actions">
+              <button type="button" aria-label="Previous month"><svg aria-hidden="true"><use href="#icon-chevron"></use></svg></button>
+              <button type="button" aria-label="Next month"><svg aria-hidden="true"><use href="#icon-chevron"></use></svg></button>
+            </div>
+          </div>
+          <div class="calendar-grid" aria-label="May 2026 calendar">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            <button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button">1</button><button type="button">2</button>
+            <button type="button">3</button><button type="button">4</button><button type="button">5</button><button type="button">6</button><button type="button">7</button><button type="button">8</button><button type="button">9</button>
+            <button type="button">10</button><button type="button">11</button><button type="button">12</button><button type="button">13</button><button type="button">14</button><button class="today" type="button">15</button><button type="button">16</button>
+            <button type="button">17</button><button type="button">18</button><button type="button">19</button><button type="button">20</button><button type="button">21</button><button type="button">22</button><button type="button">23</button>
+            <button type="button">24</button><button type="button">25</button><button type="button">26</button><button type="button">27</button><button type="button">28</button><button type="button">29</button><button type="button">30</button>
+            <button type="button">31</button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer glass">
+      <div class="footer-top">
+        <div class="helpline-group">
+          <div class="helpline">
+            <strong>Women Helpline No.</strong>
+            <span>1800 1900 2222</span>
+          </div>
+          <div class="helpline">
+            <strong>General Helpline No:</strong>
+            <span>0160-5017000</span>
+          </div>
+          <div class="helpline">
+            <strong>Wifi Hostels Helpline No.</strong>
+            <span>7347017909 (Mr. Jaspreet Singh)</span>
+          </div>
+        </div>
+        <div class="footer-logo">
+          <img src="logo.png" alt="CUIMS Logo">
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="copyright">
+          &copy; 2025 Chandigarh University, Gharuan, Mohali (Punjab)
+        </div>
+        <div class="footer-contact">
+          <svg><use href="#icon-mail"></use></svg> staffcare@cuchd.in
+        </div>
+      </div>
+    </footer>
+  </main>
+  <div class="dashboard-modal" id="dashboard-modal" hidden>
+    <div class="modal-backdrop" data-modal-close></div>
+    <section class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <h2 id="modal-title"></h2>
+        <button class="modal-close" type="button" aria-label="Close" data-modal-close>×</button>
+      </div>
+      <div class="modal-body"></div>
+    </section>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>
