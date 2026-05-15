@@ -993,6 +993,10 @@
   min-height: 392px;
   padding: 14px;
   border-radius: 14px;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .calendar-head {
@@ -1045,16 +1049,18 @@
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   overflow: hidden;
   border: 1px solid rgba(7, 21, 79, 0.10);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.22);
+  flex: 1;
 }
 
 .calendar-grid span,
 .calendar-grid button {
   display: grid;
-  min-height: 42px;
+  min-height: auto;
   place-items: center;
   border-right: 1px solid rgba(7, 21, 79, 0.08);
   border-bottom: 1px solid rgba(7, 21, 79, 0.08);
