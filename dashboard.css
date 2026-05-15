@@ -1581,7 +1581,7 @@
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.75fr);
-  align-items: start;
+  align-items: stretch;
   gap: 14px;
 }
 
@@ -1593,7 +1593,6 @@
 }
 
 .announcements-layout .calendar-panel {
-  align-self: start;
 }
 
 .announcement-head {
