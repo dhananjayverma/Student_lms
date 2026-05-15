@@ -113,29 +113,35 @@
 }
 
 .sidebar-menu a.active {
-  color: var(--ink);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
-  border-color: rgba(255, 255, 255, 0.8);
-  border-left: 3px solid var(--blue, #1e62ff);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  color: #404D61;
+  background: rgba(64, 77, 97, 0.08);
+  border-color: rgba(64, 77, 97, 0.15);
+  border-left: 3px solid #404D61;
+  box-shadow: 0 4px 12px rgba(64, 77, 97, 0.05);
 }
 
 .sidebar-menu a.active > svg:first-child {
-  color: var(--blue, #1e62ff);
+  color: #404D61;
+}
+
+.sidebar-menu a.active > svg:last-child {
+  color: #404D61;
+  opacity: 1;
 }
 
 .sidebar-menu a:hover {
-  color: var(--ink);
-  border-color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.6);
+  color: #404D61;
+  border-color: rgba(64, 77, 97, 0.15);
+  background: rgba(64, 77, 97, 0.08);
   transform: translateX(4px);
 }
 
 .sidebar-menu a:hover > svg:first-child {
-  color: var(--blue, #1e62ff);
+  color: #404D61;
 }
 
 .sidebar-menu a:hover > svg:last-child {
+  color: #404D61;
   opacity: 1;
 }
 

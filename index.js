@@ -15,6 +15,22 @@ if (sidebar && sidebarMenu) {
     event.stopPropagation();
     sidebarMenu.scrollTop += event.deltaY;
   }, { passive: false });
+
+  const sidebarLinks = sidebarMenu.querySelectorAll("a");
+  sidebarLinks.forEach(link => {
+    link.addEventListener("click", (event) => {
+      // Prevent jumping to top if href is "#"
+      if (link.getAttribute("href") === "#") {
+        event.preventDefault();
+      }
+      
+      // Remove active class from all links
+      sidebarLinks.forEach(l => l.classList.remove("active"));
+      
+      // Add active class to the clicked link
+      link.classList.add("active");
+    });
+  });
 }
 
 const academicTabs = document.querySelectorAll(".academic-tab");
