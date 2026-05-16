@@ -5,10 +5,30 @@ const greetingNode = document.querySelector(".hero-copy > span");
 const sidebar = document.querySelector(".sidebar");
 const sidebarMenu = document.querySelector(".sidebar-menu");
 const sidebarToggleButton = document.querySelector(".sidebar-toggle-button");
+const themeToggleButton = document.querySelector(".theme-toggle-button");
+const shell = document.querySelector(".shell");
 
 if (greetingNode) {
   greetingNode.textContent = greeting;
 }
+
+const setTheme = (theme) => {
+  const isDark = theme === "dark";
+
+  document.body.classList.toggle("dark-theme", isDark);
+  themeToggleButton?.setAttribute("aria-pressed", String(isDark));
+  themeToggleButton?.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+};
+
+const savedTheme = localStorage.getItem("dashboard-theme");
+const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+setTheme(savedTheme || (prefersDarkTheme ? "dark" : "light"));
+
+themeToggleButton?.addEventListener("click", () => {
+  const nextTheme = document.body.classList.contains("dark-theme") ? "light" : "dark";
+  localStorage.setItem("dashboard-theme", nextTheme);
+  setTheme(nextTheme);
+});
 
 if (sidebar && sidebarMenu) {
   sidebar.addEventListener("wheel", (event) => {
@@ -71,6 +91,49 @@ if (sidebarToggleButton) {
     }, 420);
   });
 }
+
+if (shell) {
+  let lastShellScrollTop = shell.scrollTop;
+
+  shell.addEventListener("scroll", () => {
+    const currentScrollTop = shell.scrollTop;
+    const scrollDifference = currentScrollTop - lastShellScrollTop;
+    const isScrollingDown = scrollDifference > 4;
+    const isScrollingUp = scrollDifference < -4;
+    const isAwayFromTop = currentScrollTop > 90;
+
+    if (isScrollingDown && isAwayFromTop) {
+      document.body.classList.add("navbar-hidden");
+    }
+
+    if (isScrollingUp || !isAwayFromTop) {
+      document.body.classList.remove("navbar-hidden");
+    }
+
+    lastShellScrollTop = Math.max(currentScrollTop, 0);
+  }, { passive: true });
+}
+
+const privateDataCards = document.querySelectorAll(".fee-card, .backlog-card");
+
+privateDataCards.forEach((card) => {
+  card.addEventListener("pointerdown", (event) => {
+    privateDataCards.forEach((item) => {
+      if (item !== card) {
+        item.classList.remove("data-visible");
+      }
+    });
+
+    card.classList.toggle("data-visible");
+    event.stopPropagation();
+  });
+});
+
+document.addEventListener("pointerdown", () => {
+  privateDataCards.forEach((card) => {
+    card.classList.remove("data-visible");
+  });
+});
 
 const academicTabs = document.querySelectorAll(".academic-tab");
 const academicPanels = document.querySelectorAll(".academic-content");

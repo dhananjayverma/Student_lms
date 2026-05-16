@@ -24,6 +24,15 @@
     transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+body.dark-theme .sidebar {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, rgba(20, 31, 48, 0.82), rgba(9, 15, 27, 0.58));
+  box-shadow:
+    0 16px 42px rgba(0, 0, 0, 0.34),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.04);
+}
+
 .sidebar::-webkit-scrollbar {
   display: none;
 }
@@ -44,6 +53,19 @@
     justify-content 360ms ease;
 }
 
+body.dark-theme .cu-logo {
+  margin: 10px;
+  min-height: 62px;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(245, 248, 255, 0.92);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
 .cu-logo img {
   display: block;
   width: 140px;
@@ -54,6 +76,10 @@
     width 360ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 260ms ease,
     transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.dark-theme .cu-logo img {
+  filter: contrast(1.08) saturate(1.08);
 }
 
 .sidebar-menu {
@@ -127,6 +153,37 @@
   text-align: left;
   width: 100%;
   appearance: none;
+}
+
+body.dark-theme .sidebar-menu a,
+body.dark-theme .sidebar-menu .menu-toggle {
+  color: #d4deee;
+}
+
+body.dark-theme .sidebar-menu a > svg:first-child,
+body.dark-theme .sidebar-menu .menu-toggle > svg:not(.chevron) {
+  color: #b7c5d9;
+  opacity: 1;
+}
+
+body.dark-theme .sidebar-menu a > svg:last-child,
+body.dark-theme .sidebar-menu .menu-toggle .chevron {
+  color: #9dafc8;
+  opacity: 1;
+}
+
+body.dark-theme .sidebar-menu a.active,
+body.dark-theme .sidebar-menu a:hover,
+body.dark-theme .sidebar-menu .menu-toggle:hover {
+  color: #eef5ff;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .sidebar-menu a.active > svg,
+body.dark-theme .sidebar-menu a:hover > svg,
+body.dark-theme .sidebar-menu .menu-toggle:hover > svg {
+  color: #eef5ff;
 }
 
 body.sidebar-collapsed .sidebar {
@@ -334,6 +391,25 @@ body.sidebar-animating .sidebar {
   box-shadow:
     0 10px 22px rgba(94, 116, 139, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+body.dark-theme .menu-submenu-inner {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .menu-submenu-inner a,
+body.dark-theme .menu-submenu-inner .menu-toggle {
+  color: #d7e1ef;
+}
+
+body.dark-theme .menu-submenu-inner a:hover,
+body.dark-theme .menu-submenu-inner .menu-toggle:hover,
+body.dark-theme .menu-submenu-inner a.active {
+  color: #f0f6ff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner {
