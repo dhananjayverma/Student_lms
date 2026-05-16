@@ -5,8 +5,10 @@ const greetingNode = document.querySelector(".hero-copy > span");
 const sidebar = document.querySelector(".sidebar");
 const sidebarMenu = document.querySelector(".sidebar-menu");
 const sidebarToggleButton = document.querySelector(".sidebar-toggle-button");
-const themeToggleButton = document.querySelector(".theme-toggle-button");
+const sidebarBackdrop = document.querySelector(".sidebar-backdrop");
+const themeToggleButtons = document.querySelectorAll(".theme-toggle-button, .drawer-theme-toggle");
 const shell = document.querySelector(".shell");
+const mobileSidebarQuery = window.matchMedia("(max-width: 980px)");
 
 if (greetingNode) {
   greetingNode.textContent = greeting;
@@ -16,19 +18,46 @@ const setTheme = (theme) => {
   const isDark = theme === "dark";
 
   document.body.classList.toggle("dark-theme", isDark);
-  themeToggleButton?.setAttribute("aria-pressed", String(isDark));
-  themeToggleButton?.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  themeToggleButtons.forEach((button) => {
+    button.setAttribute("aria-pressed", String(isDark));
+    button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  });
 };
 
 const savedTheme = localStorage.getItem("dashboard-theme");
 const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
 setTheme(savedTheme || (prefersDarkTheme ? "dark" : "light"));
 
-themeToggleButton?.addEventListener("click", () => {
-  const nextTheme = document.body.classList.contains("dark-theme") ? "light" : "dark";
-  localStorage.setItem("dashboard-theme", nextTheme);
-  setTheme(nextTheme);
+themeToggleButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const nextTheme = document.body.classList.contains("dark-theme") ? "light" : "dark";
+    localStorage.setItem("dashboard-theme", nextTheme);
+    setTheme(nextTheme);
+  });
 });
+
+const setSidebarToggleState = () => {
+  const isMobile = mobileSidebarQuery.matches;
+  const isDrawerOpen = document.body.classList.contains("nav-drawer-open");
+  const isCollapsed = document.body.classList.contains("sidebar-collapsed");
+
+  if (isMobile) {
+    sidebarToggleButton?.setAttribute("aria-pressed", String(isDrawerOpen));
+    sidebarToggleButton?.setAttribute("aria-label", isDrawerOpen ? "Close navigation drawer" : "Open navigation drawer");
+    sidebar?.setAttribute("aria-hidden", String(!isDrawerOpen));
+    return;
+  }
+
+  document.body.classList.remove("nav-drawer-open");
+  sidebarToggleButton?.setAttribute("aria-pressed", String(isCollapsed));
+  sidebarToggleButton?.setAttribute("aria-label", isCollapsed ? "Expand sidebar" : "Shrink sidebar");
+  sidebar?.removeAttribute("aria-hidden");
+};
+
+const closeSidebarDrawer = () => {
+  document.body.classList.remove("nav-drawer-open");
+  setSidebarToggleState();
+};
 
 if (sidebar && sidebarMenu) {
   sidebar.addEventListener("wheel", (event) => {
@@ -59,6 +88,10 @@ if (sidebar && sidebarMenu) {
       
       // Add active class to the clicked link
       link.classList.add("active");
+
+      if (mobileSidebarQuery.matches) {
+        closeSidebarDrawer();
+      }
     });
   });
 
@@ -80,6 +113,14 @@ if (sidebarToggleButton) {
   let sidebarAnimationTimer;
 
   sidebarToggleButton.addEventListener("click", () => {
+    if (mobileSidebarQuery.matches) {
+      const isOpen = document.body.classList.toggle("nav-drawer-open");
+      sidebarToggleButton.setAttribute("aria-pressed", String(isOpen));
+      sidebarToggleButton.setAttribute("aria-label", isOpen ? "Close navigation drawer" : "Open navigation drawer");
+      sidebar?.setAttribute("aria-hidden", String(!isOpen));
+      return;
+    }
+
     const isCollapsed = document.body.classList.toggle("sidebar-collapsed");
     document.body.classList.add("sidebar-animating");
     sidebarToggleButton.setAttribute("aria-pressed", String(isCollapsed));
@@ -91,6 +132,12 @@ if (sidebarToggleButton) {
     }, 420);
   });
 }
+
+document.querySelectorAll("[data-sidebar-close]").forEach((trigger) => {
+  trigger.addEventListener("click", closeSidebarDrawer);
+});
+mobileSidebarQuery.addEventListener("change", setSidebarToggleState);
+setSidebarToggleState();
 
 if (shell) {
   let lastShellScrollTop = shell.scrollTop;
@@ -197,7 +244,85 @@ modal?.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && document.body.classList.contains("nav-drawer-open")) {
+    closeSidebarDrawer();
+  }
+
   if (event.key === "Escape" && modal && !modal.hidden) {
     closeDashboardModal();
   }
 });
+
+const laterHeadingToggle = document.querySelector(".later-heading");
+const laterLectures = document.querySelector(".lecture-cards");
+
+if (laterHeadingToggle && laterLectures) {
+  if (window.innerWidth <= 980) {
+    laterLectures.classList.add("collapsed");
+    laterHeadingToggle.classList.add("collapsed");
+    laterHeadingToggle.setAttribute("aria-expanded", "false");
+  }
+
+  laterHeadingToggle.addEventListener("click", () => {
+    if (window.innerWidth > 980) return;
+    const isExpanded = laterHeadingToggle.getAttribute("aria-expanded") === "true";
+    laterHeadingToggle.setAttribute("aria-expanded", !isExpanded);
+    laterLectures.classList.toggle("collapsed");
+    laterHeadingToggle.classList.toggle("collapsed");
+  });
+}
+
+const announcementHeadingToggle = document.querySelector(".announcement-head");
+const announcementsPanel = document.querySelector(".announcements-panel");
+
+if (announcementHeadingToggle && announcementsPanel) {
+  if (window.innerWidth <= 980) {
+    announcementsPanel.classList.add("collapsed");
+    announcementHeadingToggle.setAttribute("aria-expanded", "false");
+  }
+
+  announcementHeadingToggle.addEventListener("click", () => {
+    if (window.innerWidth > 980) return;
+    const isExpanded = announcementHeadingToggle.getAttribute("aria-expanded") === "true";
+    announcementHeadingToggle.setAttribute("aria-expanded", !isExpanded);
+    announcementsPanel.classList.toggle("collapsed");
+  });
+}
+
+const calendarHeadingToggle = document.querySelector(".calendar-head");
+const calendarPanelObj = document.querySelector(".calendar-panel");
+
+if (calendarHeadingToggle && calendarPanelObj) {
+  if (window.innerWidth <= 980) {
+    calendarPanelObj.classList.add("collapsed");
+    calendarHeadingToggle.setAttribute("aria-expanded", "false");
+  }
+
+  calendarHeadingToggle.addEventListener("click", () => {
+    if (window.innerWidth > 980) return;
+    const isExpanded = calendarHeadingToggle.getAttribute("aria-expanded") === "true";
+    calendarHeadingToggle.setAttribute("aria-expanded", !isExpanded);
+    calendarPanelObj.classList.toggle("collapsed");
+  });
+}
+
+const conversationPanelHead = document.querySelector(".conversations .panel-head");
+const conversationsPanel = document.querySelector(".conversations");
+
+if (conversationPanelHead && conversationsPanel) {
+  if (window.innerWidth <= 980) {
+    conversationsPanel.classList.add("collapsed");
+    conversationPanelHead.setAttribute("aria-expanded", "false");
+  }
+
+  conversationPanelHead.addEventListener("click", () => {
+    if (window.innerWidth > 980) return;
+    
+    // Don't toggle if clicking on the "View All" link
+    if (event.target.tagName.toLowerCase() === 'a') return;
+
+    const isExpanded = conversationPanelHead.getAttribute("aria-expanded") === "true";
+    conversationPanelHead.setAttribute("aria-expanded", !isExpanded);
+    conversationsPanel.classList.toggle("collapsed");
+  });
+}

@@ -8,7 +8,7 @@
   --green: #26c681;
   --amber: #ff9a2e;
   --violet: #7b43ff;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 15px;
 }
 
@@ -16,18 +16,15 @@
   box-sizing: border-box;
 }
 
-@keyframes bgPulse {
-  0%, 100% { background: #f0f4f8; }
-  50% { background: #e6ebf2; }
-}
-
 body {
   height: 100vh;
   margin: 0;
   color: var(--ink);
-  background: #f0f4f8;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(30, 98, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 100% 12%, rgba(38, 198, 129, 0.10), transparent 28%),
+    linear-gradient(180deg, #f8fbff 0%, #eef4f9 52%, #f7faf7 100%);
   overflow: hidden;
-  animation: bgPulse 10s ease-in-out infinite;
   transition: background 320ms ease, color 320ms ease;
 }
 
@@ -37,36 +34,52 @@ body.dark-theme {
   --line: rgba(255, 255, 255, 0.13);
   --glass: linear-gradient(135deg, rgba(22, 32, 48, 0.78), rgba(10, 16, 27, 0.48));
   color: var(--ink);
-  background: #09111e;
-  animation: none;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(84, 126, 255, 0.16), transparent 30%),
+    radial-gradient(circle at 100% 10%, rgba(38, 198, 129, 0.10), transparent 28%),
+    linear-gradient(180deg, #0c1422 0%, #09111e 58%, #0b1720 100%);
 }
 
 body.modal-open {
   overflow: hidden;
 }
 
-@keyframes gridScroll {
-  0% { background-position: 0 0; }
-  100% { background-position: 44px 44px; }
-}
-
 body::before {
   content: "";
   position: fixed;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(rgba(7, 21, 79, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7, 21, 79, 0.035) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: linear-gradient(to bottom, black, transparent 85%);
-  animation: gridScroll 20s linear infinite;
+  background:
+    linear-gradient(90deg, rgba(7, 21, 79, 0.055), transparent 22%, transparent 78%, rgba(7, 21, 79, 0.045)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 32%, rgba(255, 255, 255, 0.32));
+  opacity: 0.86;
 }
 
 body.dark-theme::before {
-  background-image:
-    linear-gradient(rgba(198, 214, 235, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(198, 214, 235, 0.045) 1px, transparent 1px);
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.18), transparent 24%, transparent 76%, rgba(0, 0, 0, 0.18)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 36%, rgba(0, 0, 0, 0.16));
+  opacity: 0.9;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.62), transparent 48%),
+    linear-gradient(180deg, transparent 0%, rgba(7, 21, 79, 0.035) 100%);
+  opacity: 0.72;
+}
+
+body.dark-theme::after {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(84, 126, 255, 0.08), transparent 48%),
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.22) 100%);
+  opacity: 0.72;
 }
 
 a {
@@ -133,50 +146,15 @@ body.dark-theme .glass {
   display: none;
 }
 
-@keyframes titleBreathe {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.88; }
-  50% { transform: translate(-50%, -50%) scale(1.025); opacity: 0.58; }
-}
-
-.background-title {
-  position: fixed;
-  left: calc(50% + 146px);
-  top: 46%;
-  z-index: 0;
-  width: calc(100vw - 292px);
-  transform: translate(-50%, -50%);
-  color: rgba(7, 21, 79, 0.105);
-  font-size: clamp(6.5rem, 10.5vw, 14.5rem);
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 0.9;
-  text-align: center;
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.56),
-    0 18px 42px rgba(7, 21, 79, 0.055);
-  pointer-events: none;
-  user-select: none;
-  animation: titleBreathe 8s ease-in-out infinite;
-}
-
-body.dark-theme .background-title {
-  color: rgba(178, 199, 225, 0.1);
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.05),
-    0 18px 48px rgba(100, 150, 220, 0.1);
-}
-
-body.sidebar-collapsed .background-title {
-  left: calc(50% + 55px);
-  width: calc(100vw - 110px);
-}
-
 @media (max-width: 980px) {
-  .background-title {
-    left: 50%;
-    top: 52%;
-    width: 92vw;
-    color: rgba(7, 21, 79, 0.085);
-    font-size: clamp(4.5rem, 16vw, 8rem);
+  body {
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body.nav-drawer-open {
+    overflow: hidden;
   }
 }

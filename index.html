@@ -7,7 +7,8 @@
   <title>CUIMS Glass Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="sidebar.css">
   <link rel="stylesheet" href="dashboard.css">
@@ -109,19 +110,63 @@
   </svg>
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
-  <div class="background-title">Chandigarh<br>University</div>
 
-  <aside class="sidebar">
-    <a class="cu-logo" href="#">
-      <img src="logo.png" alt="CUIMS Chandigarh University">
-    </a>
+  <div class="sidebar-backdrop" data-sidebar-close></div>
+  <aside class="sidebar" id="site-sidebar">
+    <div class="drawer-head">
+      <a class="cu-logo" href="#">
+        <img src="logo.png" alt="CUIMS Chandigarh University">
+      </a>
+      <button class="drawer-close" type="button" aria-label="Close navigation drawer"
+        data-sidebar-close>&times;</button>
+    </div>
+
+    <div class="drawer-user">
+      <span class="avatar">DV</span>
+      <div>
+        <strong>Dhananjay Kumar Verma</strong>
+        <span>16BAV1184</span>
+      </div>
+    </div>
+    <div class="drawer-search">
+      <label>
+        <svg><use href="#icon-search"></use></svg>
+        <input type="search" placeholder="Search...">
+      </label>
+    </div>
+
+    <div class="drawer-actions" aria-label="Quick actions">
+      <button class="drawer-action drawer-theme-toggle" type="button" aria-label="Switch to dark mode"
+        aria-pressed="false">
+        <svg>
+          <use href="#icon-sun"></use>
+        </svg>
+        <span>Theme</span>
+      </button>
+      <button class="drawer-action" type="button">
+        <svg>
+          <use href="#icon-bell"></use>
+        </svg>
+        <span>Notifications</span>
+      </button>
+      <button class="drawer-action" type="button">
+        <svg>
+          <use href="#icon-message"></use>
+        </svg>
+        <span>Messages</span>
+      </button>
+    </div>
 
     <nav class="sidebar-menu" aria-label="CUIMS menu">
       <div class="menu-group">
         <button class="menu-toggle" type="button" aria-expanded="false">
-          <svg><use href="#icon-book"></use></svg>
+          <svg>
+            <use href="#icon-book"></use>
+          </svg>
           <span>Academics</span>
-          <svg class="chevron"><use href="#icon-chevron"></use></svg>
+          <svg class="chevron">
+            <use href="#icon-chevron"></use>
+          </svg>
         </button>
         <div class="menu-submenu">
           <div class="menu-submenu-inner">
@@ -138,7 +183,9 @@
             <div class="menu-group">
               <button class="menu-toggle" type="button" aria-expanded="false">
                 <span>Project</span>
-                <svg class="chevron"><use href="#icon-chevron"></use></svg>
+                <svg class="chevron">
+                  <use href="#icon-chevron"></use>
+                </svg>
               </button>
               <div class="menu-submenu">
                 <div class="menu-submenu-inner">
@@ -151,7 +198,9 @@
             <div class="menu-group">
               <button class="menu-toggle" type="button" aria-expanded="false">
                 <span>Social Internship</span>
-                <svg class="chevron"><use href="#icon-chevron"></use></svg>
+                <svg class="chevron">
+                  <use href="#icon-chevron"></use>
+                </svg>
               </button>
               <div class="menu-submenu">
                 <div class="menu-submenu-inner">
@@ -167,168 +216,264 @@
         </div>
       </div>
       <a href="#">
-        <svg><use href="#icon-briefcase"></use></svg>
+        <svg>
+          <use href="#icon-briefcase"></use>
+        </svg>
         <span>Accounts</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>ACP Registration</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-users"></use></svg>
+        <svg>
+          <use href="#icon-users"></use>
+        </svg>
         <span>Administration</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>Admission Cancellation Form</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>Anti-Ragging Affidavit</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-wallet"></use></svg>
+        <svg>
+          <use href="#icon-wallet"></use>
+        </svg>
         <span>Apply for Loan Documents</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>Apply for NOC</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-clock"></use></svg>
+        <svg>
+          <use href="#icon-clock"></use>
+        </svg>
         <span>Attendance Exemption Request</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-users"></use></svg>
+        <svg>
+          <use href="#icon-users"></use>
+        </svg>
         <span>CAB 2025 Conference Participation</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-home"></use></svg>
+        <svg>
+          <use href="#icon-home"></use>
+        </svg>
         <span>Campus Joining Mode Preference Form</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-search"></use></svg>
+        <svg>
+          <use href="#icon-search"></use>
+        </svg>
         <span>Career Option Survey</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-heart"></use></svg>
+        <svg>
+          <use href="#icon-heart"></use>
+        </svg>
         <span>Centre For Student Wellbeing (CSW)</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-heart"></use></svg>
+        <svg>
+          <use href="#icon-heart"></use>
+        </svg>
         <span>Counseling Therapy Clinic Registration</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-id"></use></svg>
+        <svg>
+          <use href="#icon-id"></use>
+        </svg>
         <span>CR Registration Form</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-briefcase"></use></svg>
+        <svg>
+          <use href="#icon-briefcase"></use>
+        </svg>
         <span>DCPD</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-users"></use></svg>
+        <svg>
+          <use href="#icon-users"></use>
+        </svg>
         <span>DLL MOOC Coordinator List</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>Download Certificate</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-book"></use></svg>
+        <svg>
+          <use href="#icon-book"></use>
+        </svg>
         <span>Download Lecture Plan</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-code"></use></svg>
+        <svg>
+          <use href="#icon-code"></use>
+        </svg>
         <span>E Library</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>Examination</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-search"></use></svg>
+        <svg>
+          <use href="#icon-search"></use>
+        </svg>
         <span>Freshmen Admission Survey</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-heart"></use></svg>
+        <svg>
+          <use href="#icon-heart"></use>
+        </svg>
         <span>Har Ghar Tiranga Registration</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-book"></use></svg>
+        <svg>
+          <use href="#icon-book"></use>
+        </svg>
         <span>HBSO Course Registration</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-home"></use></svg>
+        <svg>
+          <use href="#icon-home"></use>
+        </svg>
         <span>Hostel</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-wallet"></use></svg>
+        <svg>
+          <use href="#icon-wallet"></use>
+        </svg>
         <span>Industrial Summer Training Payment</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-link"></use></svg>
+        <svg>
+          <use href="#icon-link"></use>
+        </svg>
         <span>International Study Opportunities</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-code"></use></svg>
+        <svg>
+          <use href="#icon-code"></use>
+        </svg>
         <span>Internet Allowance Request</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-briefcase"></use></svg>
+        <svg>
+          <use href="#icon-briefcase"></use>
+        </svg>
         <span>Internships View/Apply</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-book"></use></svg>
+        <svg>
+          <use href="#icon-book"></use>
+        </svg>
         <span>Library</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-users"></use></svg>
+        <svg>
+          <use href="#icon-users"></use>
+        </svg>
         <span>Mentee Registration</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>My No Dues Status</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-id"></use></svg>
+        <svg>
+          <use href="#icon-id"></use>
+        </svg>
         <span>My Profile</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-search"></use></svg>
+        <svg>
+          <use href="#icon-search"></use>
+        </svg>
         <span>My Research Profile</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>Online Test</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-book"></use></svg>
+        <svg>
+          <use href="#icon-book"></use>
+        </svg>
         <span>Ph.D Research & Supervision</span>
-        <svg><use href="#icon-chevron"></use></svg>
+        <svg>
+          <use href="#icon-chevron"></use>
+        </svg>
       </a>
       <a href="#">
-        <svg><use href="#icon-users"></use></svg>
+        <svg>
+          <use href="#icon-users"></use>
+        </svg>
         <span>Student Care Centres Details</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-heart"></use></svg>
+        <svg>
+          <use href="#icon-heart"></use>
+        </svg>
         <span>Student Counselling Needs Survey</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-file"></use></svg>
+        <svg>
+          <use href="#icon-file"></use>
+        </svg>
         <span>Student Document Upload Test</span>
       </a>
       <a href="#">
-        <svg><use href="#icon-message"></use></svg>
+        <svg>
+          <use href="#icon-message"></use>
+        </svg>
         <span>Student Feedback test</span>
       </a>
     </nav>
@@ -336,9 +481,13 @@
 
   <main class="shell">
     <header class="topbar glass">
-      <button class="icon-button sidebar-toggle-button" type="button" aria-label="Shrink sidebar" aria-pressed="false"><svg>
+      <button class="icon-button sidebar-toggle-button" type="button" aria-label="Open navigation drawer"
+        aria-pressed="false" aria-controls="site-sidebar"><svg>
           <use href="#icon-menu"></use>
         </svg></button>
+      <a class="mobile-logo" href="#">
+        <img src="logo.png" alt="CUIMS Logo">
+      </a>
       <label class="search">
         <span><svg>
             <use href="#icon-search"></use>
@@ -346,7 +495,8 @@
         <input type="search" placeholder="Search for courses, lectures, documents, students...">
       </label>
       <div class="top-actions">
-        <button class="icon-button theme-toggle-button" type="button" aria-label="Switch to dark mode" aria-pressed="false"><svg>
+        <button class="icon-button theme-toggle-button" type="button" aria-label="Switch to dark mode"
+          aria-pressed="false"><svg>
             <use href="#icon-sun"></use>
           </svg></button>
         <button class="icon-button badge" aria-label="Notifications"><svg>
@@ -383,6 +533,9 @@
           <button><span><svg>
                 <use href="#icon-bell"></use>
               </svg></span>Notices</button>
+          <button><span><svg>
+                <use href="#icon-book"></use>
+              </svg></span>LMS</button>
         </div>
       </div>
 
@@ -422,12 +575,16 @@
           <div class="academic-tabs" role="tablist" aria-label="Academic information">
             <button class="academic-tab active" id="classes-tab" type="button" role="tab" aria-selected="true"
               aria-controls="classes-panel" data-panel="classes-panel">
-              <svg aria-hidden="true"><use href="#icon-video"></use></svg>
+              <svg aria-hidden="true">
+                <use href="#icon-video"></use>
+              </svg>
               Classes / Lectures
             </button>
             <button class="academic-tab" id="attendance-tab" type="button" role="tab" aria-selected="false"
               aria-controls="attendance-panel" data-panel="attendance-panel">
-              <svg aria-hidden="true"><use href="#icon-book"></use></svg>
+              <svg aria-hidden="true">
+                <use href="#icon-book"></use>
+              </svg>
               Course &amp; Attendance
             </button>
           </div>
@@ -533,7 +690,11 @@
         <div class="dashboard-alerts">
           <article class="glass panel compact dashboard-modal-card">
             <button class="modal-option" type="button" data-modal-title="Important Messages">
-              <span class="alert-title"><svg aria-hidden="true"><use href="#icon-message"></use></svg>Important Messages</span>
+              <span class="alert-title">
+                <span class="alert-badge">3</span>
+                <svg aria-hidden="true">
+                  <use href="#icon-message"></use>
+                </svg>Important Messages</span>
               <b aria-hidden="true">+</b>
             </button>
             <div class="modal-source" hidden>
@@ -542,7 +703,8 @@
               </div>
               <div class="pills"><button>Messages</button><button>Notifications</button><button>Generic</button></div>
               <div class="message-item">
-                <div><span>Half Day Leave</span><strong>Wed, 16 Dec</strong><small>Casual</small></div><mark>Awaiting</mark>
+                <div><span>Half Day Leave</span><strong>Wed, 16 Dec</strong><small>Casual</small></div>
+                <mark>Awaiting</mark>
               </div>
               <div class="message-item">
                 <div><span>Half Day Leave</span><strong>Wed, 16 Dec</strong><small>Sick Leave</small></div><mark
@@ -553,7 +715,11 @@
 
           <article class="glass panel compact dashboard-modal-card">
             <button class="modal-option" type="button" data-modal-title="Notifications">
-              <span class="alert-title"><svg aria-hidden="true"><use href="#icon-bell"></use></svg>Notifications</span>
+              <span class="alert-title">
+                <span class="alert-badge">12</span>
+                <svg aria-hidden="true">
+                  <use href="#icon-bell"></use>
+                </svg>Notifications</span>
               <b aria-hidden="true">+</b>
             </button>
             <div class="modal-source" hidden>
@@ -569,7 +735,8 @@
               <div class="notice"><span><svg>
                     <use href="#icon-book"></use>
                   </svg></span>
-                <div><strong>Computer Science - SA</strong><small>Assignment review is scheduled this week.</small></div>
+                <div><strong>Computer Science - SA</strong><small>Assignment review is scheduled this week.</small>
+                </div>
                 <time>Yesterday</time>
               </div>
               <div class="notice"><span><svg>
@@ -583,7 +750,11 @@
 
           <article class="glass panel compact dashboard-modal-card">
             <button class="modal-option" type="button" data-modal-title="Job Alerts">
-              <span class="alert-title"><svg aria-hidden="true"><use href="#icon-briefcase"></use></svg>Job Alerts</span>
+              <span class="alert-title">
+                <span class="alert-badge">5</span>
+                <svg aria-hidden="true">
+                  <use href="#icon-briefcase"></use>
+                </svg>Job Alerts</span>
               <b aria-hidden="true">+</b>
             </button>
             <div class="modal-source" hidden>
@@ -671,7 +842,9 @@
         <article class="glass panel compact announcements-panel">
           <div class="announcement-head">
             <div class="announcement-title">
-              <span><svg aria-hidden="true"><use href="#icon-megaphone"></use></svg></span>
+              <span><svg aria-hidden="true">
+                  <use href="#icon-megaphone"></use>
+                </svg></span>
               <div>
                 <h2>Official Announcements</h2>
                 <small>Campus notices and administrative circulars</small>
@@ -681,7 +854,9 @@
           <div class="announcement-tools">
             <label class="announcement-search">
               <input type="search" placeholder="Search Announcement">
-              <svg aria-hidden="true"><use href="#icon-search"></use></svg>
+              <svg aria-hidden="true">
+                <use href="#icon-search"></use>
+              </svg>
             </label>
             <div class="announcement-pills" aria-label="Announcement filters">
               <button class="active" type="button">All</button>
@@ -698,25 +873,30 @@
                   <h3>Chandigarh University emerges as overall champion at AIU National Youth Festival 2025</h3>
                   <p>Respected All,</p>
                   <p>We are writing to share with you a momentous achievement that has brought unparalleled glory to our
-                    institution. Chandigarh University has emerged as the <strong>overall champion at the AIU National Youth
-                    Festival 2025, held at Amity University, Noida.</strong></p>
-                  <p><strong>- Overall Champion- Rank 1</strong><br><strong>- Overall in Literary - 1st Position</strong></p>
+                    institution. Chandigarh University has emerged as the <strong>overall champion at the AIU National
+                      Youth
+                      Festival 2025, held at Amity University, Noida.</strong></p>
+                  <p><strong>- Overall Champion- Rank 1</strong><br><strong>- Overall in Literary - 1st
+                      Position</strong></p>
                 </div>
               </div>
               <div class="announcement-row">
                 <time><strong>Oct 20, 2025</strong><span>05:00 PM</span></time>
                 <div class="announcement-copy">
                   <span>Academics</span>
-                  <p>This prestigious event witnessed participation from universities across India, and our students have made
-                    us proud by excelling in various categories. Students can apply for a maximum of <strong>1 Theory + 1
-                    Practical / 2 Theory / 2 Practical's.</strong></p>
+                  <p>This prestigious event witnessed participation from universities across India, and our students
+                    have made
+                    us proud by excelling in various categories. Students can apply for a maximum of <strong>1 Theory +
+                      1
+                      Practical / 2 Theory / 2 Practical's.</strong></p>
                 </div>
               </div>
               <div class="announcement-row">
                 <time><strong>Oct 20, 2025</strong><span>05:00 PM</span></time>
                 <div class="announcement-copy">
                   <span>Activities</span>
-                  <p>Workshop registrations, placement updates, and department activities will be shared here for quick access
+                  <p>Workshop registrations, placement updates, and department activities will be shared here for quick
+                    access
                     by all students.</p>
                 </div>
               </div>
@@ -731,18 +911,36 @@
               <span>Meeting on</span>
             </div>
             <div class="calendar-actions">
-              <button type="button" aria-label="Previous month"><svg aria-hidden="true"><use href="#icon-chevron"></use></svg></button>
-              <button type="button" aria-label="Next month"><svg aria-hidden="true"><use href="#icon-chevron"></use></svg></button>
+              <button type="button" aria-label="Previous month"><svg aria-hidden="true">
+                  <use href="#icon-chevron"></use>
+                </svg></button>
+              <button type="button" aria-label="Next month"><svg aria-hidden="true">
+                  <use href="#icon-chevron"></use>
+                </svg></button>
             </div>
           </div>
+
+
           <div class="calendar-grid" aria-label="May 2026 calendar">
             <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-            <button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button">1</button><button type="button">2</button>
-            <button type="button">3</button><button type="button">4</button><button type="button">5</button><button type="button">6</button><button type="button">7</button><button type="button">8</button><button type="button">9</button>
-            <button type="button">10</button><button type="button">11</button><button type="button">12</button><button type="button">13</button><button type="button">14</button><button class="today" type="button">15</button><button type="button">16</button>
-            <button type="button">17</button><button type="button">18</button><button type="button">19</button><button type="button">20</button><button type="button">21</button><button type="button">22</button><button type="button">23</button>
-            <button type="button">24</button><button type="button">25</button><button type="button">26</button><button type="button">27</button><button type="button">28</button><button type="button">29</button><button type="button">30</button>
-            <button type="button">31</button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button><button type="button" disabled></button>
+            <button type="button" disabled></button><button type="button" disabled></button><button type="button"
+              disabled></button><button type="button" disabled></button><button type="button" disabled></button><button
+              type="button">1</button><button type="button">2</button>
+            <button type="button">3</button><button type="button">4</button><button type="button">5</button><button
+              type="button">6</button><button type="button">7</button><button type="button">8</button><button
+              type="button">9</button>
+            <button type="button">10</button><button type="button">11</button><button type="button">12</button><button
+              type="button">13</button><button type="button">14</button><button class="today"
+              type="button">15</button><button type="button">16</button>
+            <button type="button">17</button><button type="button">18</button><button type="button">19</button><button
+              type="button">20</button><button type="button">21</button><button type="button">22</button><button
+              type="button">23</button>
+            <button type="button">24</button><button type="button">25</button><button type="button">26</button><button
+              type="button">27</button><button type="button">28</button><button type="button">29</button><button
+              type="button">30</button>
+            <button type="button">31</button><button type="button" disabled></button><button type="button"
+              disabled></button><button type="button" disabled></button><button type="button" disabled></button><button
+              type="button" disabled></button><button type="button" disabled></button>
           </div>
         </article>
       </div>
@@ -773,10 +971,14 @@
           &copy; 2025 Chandigarh University, Gharuan, Mohali (Punjab)
         </div>
         <div class="footer-contact">
-          <svg><use href="#icon-mail"></use></svg> staffcare@cuchd.in
+          <svg>
+            <use href="#icon-mail"></use>
+          </svg> staffcare@cuchd.in
         </div>
       </div>
     </footer>
+
+
   </main>
   <div class="dashboard-modal" id="dashboard-modal" hidden>
     <div class="modal-backdrop" data-modal-close></div>
@@ -788,6 +990,9 @@
       <div class="modal-body"></div>
     </section>
   </div>
+
+
+
   <script src="index.js"></script>
 </body>
 
