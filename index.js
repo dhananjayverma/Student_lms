@@ -4,6 +4,7 @@ const greeting = hour < 12 ? "Good Morning," : hour < 17 ? "Good Afternoon," : "
 const greetingNode = document.querySelector(".hero-copy > span");
 const sidebar = document.querySelector(".sidebar");
 const sidebarMenu = document.querySelector(".sidebar-menu");
+const sidebarToggleButton = document.querySelector(".sidebar-toggle-button");
 
 if (greetingNode) {
   greetingNode.textContent = greeting;
@@ -13,10 +14,19 @@ if (sidebar && sidebarMenu) {
   sidebar.addEventListener("wheel", (event) => {
     event.preventDefault();
     event.stopPropagation();
+
+    const privateScroller = event.target.closest(".menu-submenu-inner");
+    const canScrollSubmenu = privateScroller && privateScroller.scrollHeight > privateScroller.clientHeight;
+
+    if (canScrollSubmenu) {
+      privateScroller.scrollTop += event.deltaY;
+      return;
+    }
+
     sidebarMenu.scrollTop += event.deltaY;
   }, { passive: false });
 
-  const sidebarLinks = sidebarMenu.querySelectorAll("a");
+  const sidebarLinks = sidebarMenu.querySelectorAll("a:not(.menu-toggle)");
   sidebarLinks.forEach(link => {
     link.addEventListener("click", (event) => {
       // Prevent jumping to top if href is "#"
@@ -30,6 +40,27 @@ if (sidebar && sidebarMenu) {
       // Add active class to the clicked link
       link.classList.add("active");
     });
+  });
+
+  const menuToggles = sidebarMenu.querySelectorAll(".menu-toggle");
+  menuToggles.forEach(toggle => {
+    const parentGroup = toggle.closest(".menu-group");
+    toggle.setAttribute("aria-expanded", String(parentGroup?.classList.contains("expanded")));
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      const parentGroup = toggle.closest(".menu-group");
+      const isExpanded = parentGroup.classList.toggle("expanded");
+      toggle.setAttribute("aria-expanded", String(isExpanded));
+    });
+  });
+}
+
+if (sidebarToggleButton) {
+  sidebarToggleButton.addEventListener("click", () => {
+    const isCollapsed = document.body.classList.toggle("sidebar-collapsed");
+    sidebarToggleButton.setAttribute("aria-pressed", String(isCollapsed));
+    sidebarToggleButton.setAttribute("aria-label", isCollapsed ? "Expand sidebar" : "Shrink sidebar");
   });
 }
 

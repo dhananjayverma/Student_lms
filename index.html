@@ -117,11 +117,55 @@
     </a>
 
     <nav class="sidebar-menu" aria-label="CUIMS menu">
-      <a href="#" class="active">
-        <svg><use href="#icon-book"></use></svg>
-        <span>Academics</span>
-        <svg><use href="#icon-chevron"></use></svg>
-      </a>
+      <div class="menu-group">
+        <button class="menu-toggle" type="button" aria-expanded="false">
+          <svg><use href="#icon-book"></use></svg>
+          <span>Academics</span>
+          <svg class="chevron"><use href="#icon-chevron"></use></svg>
+        </button>
+        <div class="menu-submenu">
+          <div class="menu-submenu-inner">
+            <a href="#" class="active">Academic Calendar</a>
+            <a href="#">Department of Life Long(DLL)</a>
+            <a href="#">Employability Enhancement Soft Skills (EEP)</a>
+            <a href="#">Experiential Learning Summer School (ELSS)</a>
+            <a href="#">My Attendance</a>
+            <a href="#">My Attendance ACP/Winning Camp</a>
+            <a href="#">My Attendance For Summer Session</a>
+            <a href="#">My Courses and Lecture Plan</a>
+            <a href="#">My Time Table</a>
+            <a href="#">My Time Table ACP/Winning Camp</a>
+            <div class="menu-group">
+              <button class="menu-toggle" type="button" aria-expanded="false">
+                <span>Project</span>
+                <svg class="chevron"><use href="#icon-chevron"></use></svg>
+              </button>
+              <div class="menu-submenu">
+                <div class="menu-submenu-inner">
+                  <a href="#">Project Dashboard for Student</a>
+                  <a href="#">Project Request</a>
+                </div>
+              </div>
+            </div>
+            <a href="#">Resource Library</a>
+            <div class="menu-group">
+              <button class="menu-toggle" type="button" aria-expanded="false">
+                <span>Social Internship</span>
+                <svg class="chevron"><use href="#icon-chevron"></use></svg>
+              </button>
+              <div class="menu-submenu">
+                <div class="menu-submenu-inner">
+                  <a href="#">Daily Diary</a>
+                  <a href="#">Model Selection & Activity Upload</a>
+                  <a href="#">Model Selection Part 2 & Activity Upload</a>
+                </div>
+              </div>
+            </div>
+            <a href="#">Student Entrepreneurship Form</a>
+            <a href="#">VAC Registration</a>
+          </div>
+        </div>
+      </div>
       <a href="#">
         <svg><use href="#icon-briefcase"></use></svg>
         <span>Accounts</span>
@@ -292,7 +336,7 @@
 
   <main class="shell">
     <header class="topbar glass">
-      <button class="icon-button" aria-label="Open menu"><svg>
+      <button class="icon-button sidebar-toggle-button" type="button" aria-label="Shrink sidebar" aria-pressed="false"><svg>
           <use href="#icon-menu"></use>
         </svg></button>
       <label class="search">

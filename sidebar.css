@@ -17,6 +17,10 @@
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   scrollbar-width: none;
+  transition:
+    width 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-radius 300ms ease,
+    box-shadow 300ms ease;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -41,6 +45,7 @@
   max-width: 100%;
   height: auto;
   object-fit: contain;
+  transition: width 260ms ease, opacity 220ms ease;
 }
 
 .sidebar-menu {
@@ -57,6 +62,10 @@
   scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
 
+.sidebar-menu > .menu-group.expanded {
+  gap: 4px;
+}
+
 .sidebar-menu::-webkit-scrollbar {
   width: 4px;
 }
@@ -70,7 +79,14 @@
   border-radius: 4px;
 }
 
-.sidebar-menu a {
+/* Shared styles for toggle and links */
+.menu-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-menu a,
+.sidebar-menu .menu-toggle {
   display: flex;
   align-items: center;
   min-height: 40px;
@@ -86,16 +102,74 @@
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  appearance: none;
 }
 
-.sidebar-menu a span {
+body.sidebar-collapsed .sidebar {
+  width: 78px;
+  border-radius: 22px;
+}
+
+body.sidebar-collapsed .cu-logo {
+  justify-content: center;
+  padding-inline: 10px;
+}
+
+body.sidebar-collapsed .cu-logo img {
+  width: 42px;
+}
+
+body.sidebar-collapsed .sidebar-menu {
+  padding-inline: 10px;
+}
+
+body.sidebar-collapsed .sidebar-menu a,
+body.sidebar-collapsed .sidebar-menu .menu-toggle {
+  justify-content: center;
+  min-height: 44px;
+  gap: 0;
+  padding: 10px;
+}
+
+body.sidebar-collapsed .sidebar-menu a span,
+body.sidebar-collapsed .sidebar-menu .menu-toggle span,
+body.sidebar-collapsed .sidebar-menu a > svg:last-child,
+body.sidebar-collapsed .sidebar-menu .menu-toggle .chevron,
+body.sidebar-collapsed .menu-submenu {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-menu a:hover,
+body.sidebar-collapsed .sidebar-menu .menu-toggle:hover {
+  transform: translateY(-1px);
+}
+
+body.sidebar-collapsed .menu-group.expanded > .menu-toggle {
+  background: rgba(94, 116, 139, 0.14);
+  color: #405267;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+body.sidebar-collapsed .menu-group.expanded > .menu-toggle > svg {
+  color: #405267;
+}
+
+.sidebar-menu a span,
+.sidebar-menu .menu-toggle span {
   flex: 1;
-  white-space: nowrap;
+  white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.sidebar-menu a > svg:first-child {
+.sidebar-menu a > svg:first-child,
+.sidebar-menu .menu-toggle > svg:not(.chevron) {
   flex-shrink: 0;
   width: 18px;
   height: 18px;
@@ -103,46 +177,180 @@
   transition: color 250ms ease;
 }
 
-.sidebar-menu a > svg:last-child {
+.sidebar-menu a > svg:last-child,
+.sidebar-menu .menu-toggle .chevron {
   flex-shrink: 0;
   width: 12px;
   height: 12px;
   color: #b0b8d1;
-  opacity: 0.5;
-  transition: opacity 250ms ease;
+  transition: transform 300ms ease, color 250ms ease;
+}
+
+/* Active and Hover states */
+.sidebar-menu a.active,
+.sidebar-menu a:hover,
+.sidebar-menu .menu-toggle:hover {
+  color: #404D61;
+  border-color: rgba(64, 77, 97, 0.15);
+  background: rgba(64, 77, 97, 0.08);
 }
 
 .sidebar-menu a.active {
-  color: #404D61;
-  background: rgba(64, 77, 97, 0.08);
-  border-color: rgba(64, 77, 97, 0.15);
   border-left: 3px solid #404D61;
   box-shadow: 0 4px 12px rgba(64, 77, 97, 0.05);
 }
 
-.sidebar-menu a.active > svg:first-child {
-  color: #404D61;
-}
-
-.sidebar-menu a.active > svg:last-child {
-  color: #404D61;
-  opacity: 1;
-}
-
-.sidebar-menu a:hover {
-  color: #404D61;
-  border-color: rgba(64, 77, 97, 0.15);
-  background: rgba(64, 77, 97, 0.08);
+.sidebar-menu a:hover,
+.sidebar-menu .menu-toggle:hover {
   transform: translateX(4px);
 }
 
-.sidebar-menu a:hover > svg:first-child {
+.sidebar-menu a.active > svg,
+.sidebar-menu a:hover > svg,
+.sidebar-menu .menu-toggle:hover > svg {
   color: #404D61;
 }
 
-.sidebar-menu a:hover > svg:last-child {
-  color: #404D61;
+/* Accordion expanded state */
+.menu-group.expanded > .menu-toggle {
+  background: #5E748B;
+  color: #ffffff;
+  border-color: #5E748B;
+  border-left: 3px solid transparent;
+  box-shadow: 0 8px 18px rgba(94, 116, 139, 0.18);
+}
+
+.menu-group.expanded > .menu-toggle > svg {
+  color: #ffffff;
+}
+
+.menu-group.expanded > .menu-toggle .chevron {
+  transform: rotate(180deg);
+}
+
+/* Submenu container with Grid for smooth height animation */
+.menu-submenu {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  transition:
+    grid-template-rows 420ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 220ms ease,
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+
+.menu-group.expanded > .menu-submenu {
+  grid-template-rows: 1fr;
   opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.menu-submenu-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+  margin: 0 2px 0 8px;
+  padding: 8px;
+  position: relative;
+  border-left: 0;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(94, 116, 139, 0.1);
+  box-shadow:
+    0 10px 22px rgba(94, 116, 139, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner {
+  max-height: min(390px, 58vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 10px;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(94, 116, 139, 0.32) transparent;
+}
+
+.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner::-webkit-scrollbar-thumb {
+  min-height: 44px;
+  border-radius: 999px;
+  background: rgba(94, 116, 139, 0.22);
+  transition: background 220ms ease, box-shadow 220ms ease;
+}
+
+.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner:hover::-webkit-scrollbar-thumb {
+  background: rgba(94, 116, 139, 0.52);
+  box-shadow: 0 0 8px rgba(94, 116, 139, 0.18);
+}
+
+/* Extra margin when expanded to not mess with the 0fr height calculation */
+.menu-group.expanded > .menu-submenu > .menu-submenu-inner {
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+/* Special styles for nested submenu items */
+.menu-submenu-inner a,
+.menu-submenu-inner .menu-toggle {
+  min-height: 34px;
+  border: 0;
+  border-left: 0;
+  border-radius: 9px;
+  padding: 8px 11px;
+  background: transparent;
+  color: #405267;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: none;
+  transition:
+    transform 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease;
+}
+
+.menu-submenu-inner a:hover,
+.menu-submenu-inner .menu-toggle:hover {
+  transform: translateX(4px);
+  background: rgba(94, 116, 139, 0.18);
+  color: #2f4052;
+  box-shadow: none;
+}
+
+.menu-submenu-inner a.active {
+  border-left: 0;
+  font-weight: 700;
+  background: rgba(94, 116, 139, 0.24);
+  color: #2f4052;
+  box-shadow: none;
+}
+
+.menu-submenu-inner .menu-group {
+  gap: 4px;
+}
+
+.menu-submenu-inner .menu-submenu-inner {
+  margin: 2px 0 0 8px;
+  padding: 4px 0 4px 8px;
+}
+
+.menu-submenu-inner .menu-submenu-inner a {
+  min-height: 30px;
+  padding: 7px 10px;
+  font-size: 0.72rem;
+  background: transparent;
 }
 
 @media (max-width: 980px) {
@@ -157,5 +365,45 @@
 
   .cu-logo {
     min-height: 86px;
+  }
+
+  body.sidebar-collapsed .sidebar {
+    width: auto;
+  }
+
+  body.sidebar-collapsed .cu-logo {
+    justify-content: flex-start;
+    padding: 16px 16px 12px;
+  }
+
+  body.sidebar-collapsed .cu-logo img {
+    width: 140px;
+  }
+
+  body.sidebar-collapsed .sidebar-menu {
+    padding: 12px 12px 24px;
+  }
+
+  body.sidebar-collapsed .sidebar-menu a,
+  body.sidebar-collapsed .sidebar-menu .menu-toggle {
+    justify-content: flex-start;
+    min-height: 40px;
+    gap: 12px;
+    padding: 8px 12px 8px 10px;
+  }
+
+  body.sidebar-collapsed .sidebar-menu a span,
+  body.sidebar-collapsed .sidebar-menu .menu-toggle span,
+  body.sidebar-collapsed .sidebar-menu a > svg:last-child,
+  body.sidebar-collapsed .sidebar-menu .menu-toggle .chevron {
+    display: block;
+  }
+
+  body.sidebar-collapsed .menu-submenu {
+    display: grid;
+  }
+
+  .sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner {
+    max-height: 260px;
   }
 }
