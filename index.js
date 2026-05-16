@@ -57,10 +57,18 @@ if (sidebar && sidebarMenu) {
 }
 
 if (sidebarToggleButton) {
+  let sidebarAnimationTimer;
+
   sidebarToggleButton.addEventListener("click", () => {
     const isCollapsed = document.body.classList.toggle("sidebar-collapsed");
+    document.body.classList.add("sidebar-animating");
     sidebarToggleButton.setAttribute("aria-pressed", String(isCollapsed));
     sidebarToggleButton.setAttribute("aria-label", isCollapsed ? "Expand sidebar" : "Shrink sidebar");
+
+    clearTimeout(sidebarAnimationTimer);
+    sidebarAnimationTimer = setTimeout(() => {
+      document.body.classList.remove("sidebar-animating");
+    }, 420);
   });
 }
 
