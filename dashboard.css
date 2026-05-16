@@ -2987,6 +2987,7 @@ body.dark-theme .tabs .selected {
   .mobile-logo {
     display: flex;
     margin: 0;
+    order: -1;
   }
 
   .mobile-logo img {
