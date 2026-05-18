@@ -112,7 +112,7 @@ body.dark-theme .cu-logo img {
     gap 300ms ease;
 }
 
-.sidebar-menu > .menu-group.expanded {
+.sidebar-menu>.menu-group.expanded {
   gap: 4px;
 }
 
@@ -173,13 +173,13 @@ body.dark-theme .sidebar-menu .menu-toggle {
   color: #d4deee;
 }
 
-body.dark-theme .sidebar-menu a > svg:first-child,
-body.dark-theme .sidebar-menu .menu-toggle > svg:not(.chevron) {
+body.dark-theme .sidebar-menu a>svg:first-child,
+body.dark-theme .sidebar-menu .menu-toggle>svg:not(.chevron) {
   color: #b7c5d9;
   opacity: 1;
 }
 
-body.dark-theme .sidebar-menu a > svg:last-child,
+body.dark-theme .sidebar-menu a>svg:last-child,
 body.dark-theme .sidebar-menu .menu-toggle .chevron {
   color: #9dafc8;
   opacity: 1;
@@ -193,9 +193,9 @@ body.dark-theme .sidebar-menu .menu-toggle:hover {
   background: rgba(255, 255, 255, 0.08);
 }
 
-body.dark-theme .sidebar-menu a.active > svg,
-body.dark-theme .sidebar-menu a:hover > svg,
-body.dark-theme .sidebar-menu .menu-toggle:hover > svg {
+body.dark-theme .sidebar-menu a.active>svg,
+body.dark-theme .sidebar-menu a:hover>svg,
+body.dark-theme .sidebar-menu .menu-toggle:hover>svg {
   color: #eef5ff;
 }
 
@@ -238,7 +238,7 @@ body.sidebar-collapsed .sidebar-menu .menu-toggle span {
   visibility: hidden;
 }
 
-body.sidebar-collapsed .sidebar-menu a > svg:last-child,
+body.sidebar-collapsed .sidebar-menu a>svg:last-child,
 body.sidebar-collapsed .sidebar-menu .menu-toggle .chevron {
   width: 0;
   opacity: 0;
@@ -258,19 +258,19 @@ body.sidebar-collapsed .sidebar-menu .menu-toggle:hover {
   transform: translateY(-1px);
 }
 
-body.sidebar-collapsed .sidebar-menu a:hover > svg:first-child,
-body.sidebar-collapsed .sidebar-menu .menu-toggle:hover > svg:not(.chevron) {
+body.sidebar-collapsed .sidebar-menu a:hover>svg:first-child,
+body.sidebar-collapsed .sidebar-menu .menu-toggle:hover>svg:not(.chevron) {
   transform: scale(1.08);
 }
 
-body.sidebar-collapsed .menu-group.expanded > .menu-toggle {
+body.sidebar-collapsed .menu-group.expanded>.menu-toggle {
   background: rgba(94, 116, 139, 0.14);
   color: #405267;
   border-color: transparent;
   box-shadow: none;
 }
 
-body.sidebar-collapsed .menu-group.expanded > .menu-toggle > svg {
+body.sidebar-collapsed .menu-group.expanded>.menu-toggle>svg {
   color: #405267;
 }
 
@@ -279,9 +279,17 @@ body.sidebar-animating .sidebar {
 }
 
 @keyframes sidebarSoftPop {
-  0% { transform: scaleX(1); }
-  42% { transform: scaleX(0.985); }
-  100% { transform: scaleX(1); }
+  0% {
+    transform: scaleX(1);
+  }
+
+  42% {
+    transform: scaleX(0.985);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
 }
 
 .sidebar-menu a span,
@@ -301,8 +309,8 @@ body.sidebar-animating .sidebar {
     visibility 220ms ease;
 }
 
-.sidebar-menu a > svg:first-child,
-.sidebar-menu .menu-toggle > svg:not(.chevron) {
+.sidebar-menu a>svg:first-child,
+.sidebar-menu .menu-toggle>svg:not(.chevron) {
   flex-shrink: 0;
   width: 18px;
   height: 18px;
@@ -312,7 +320,7 @@ body.sidebar-animating .sidebar {
     transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.sidebar-menu a > svg:last-child,
+.sidebar-menu a>svg:last-child,
 .sidebar-menu .menu-toggle .chevron {
   flex-shrink: 0;
   width: 12px;
@@ -347,14 +355,14 @@ body.sidebar-animating .sidebar {
   transform: translateX(4px);
 }
 
-.sidebar-menu a.active > svg,
-.sidebar-menu a:hover > svg,
-.sidebar-menu .menu-toggle:hover > svg {
+.sidebar-menu a.active>svg,
+.sidebar-menu a:hover>svg,
+.sidebar-menu .menu-toggle:hover>svg {
   color: #404D61;
 }
 
 /* Accordion expanded state */
-.menu-group.expanded > .menu-toggle {
+.menu-group.expanded>.menu-toggle {
   background: #5E748B;
   color: #ffffff;
   border-color: #5E748B;
@@ -362,11 +370,11 @@ body.sidebar-animating .sidebar {
   box-shadow: 0 8px 18px rgba(94, 116, 139, 0.18);
 }
 
-.menu-group.expanded > .menu-toggle > svg {
+.menu-group.expanded>.menu-toggle>svg {
   color: #ffffff;
 }
 
-.menu-group.expanded > .menu-toggle .chevron {
+.menu-group.expanded>.menu-toggle .chevron {
   transform: rotate(180deg);
 }
 
@@ -383,7 +391,7 @@ body.sidebar-animating .sidebar {
   overflow: hidden;
 }
 
-.menu-group.expanded > .menu-submenu {
+.menu-group.expanded>.menu-submenu {
   grid-template-rows: 1fr;
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -425,7 +433,7 @@ body.dark-theme .menu-submenu-inner a.active {
   background: rgba(255, 255, 255, 0.08);
 }
 
-.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner {
+.sidebar-menu>.menu-group>.menu-submenu>.menu-submenu-inner {
   max-height: min(390px, 58vh);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -435,28 +443,28 @@ body.dark-theme .menu-submenu-inner a.active {
   scrollbar-color: rgba(94, 116, 139, 0.32) transparent;
 }
 
-.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner::-webkit-scrollbar {
+.sidebar-menu>.menu-group>.menu-submenu>.menu-submenu-inner::-webkit-scrollbar {
   width: 5px;
 }
 
-.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner::-webkit-scrollbar-track {
+.sidebar-menu>.menu-group>.menu-submenu>.menu-submenu-inner::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner::-webkit-scrollbar-thumb {
+.sidebar-menu>.menu-group>.menu-submenu>.menu-submenu-inner::-webkit-scrollbar-thumb {
   min-height: 44px;
   border-radius: 999px;
   background: rgba(94, 116, 139, 0.22);
   transition: background 220ms ease, box-shadow 220ms ease;
 }
 
-.sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner:hover::-webkit-scrollbar-thumb {
+.sidebar-menu>.menu-group>.menu-submenu>.menu-submenu-inner:hover::-webkit-scrollbar-thumb {
   background: rgba(94, 116, 139, 0.52);
   box-shadow: 0 0 8px rgba(94, 116, 139, 0.18);
 }
 
 /* Extra margin when expanded to not mess with the 0fr height calculation */
-.menu-group.expanded > .menu-submenu > .menu-submenu-inner {
+.menu-group.expanded>.menu-submenu>.menu-submenu-inner {
   margin-top: 4px;
   margin-bottom: 6px;
 }
@@ -553,17 +561,17 @@ body.dark-theme .menu-submenu-inner a.active {
   }
 
   .drawer-head {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 42px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    padding: 12px 12px 8px;
+    gap: 12px;
+    padding: 10px 14px 6px;
   }
 
   .drawer-close {
     display: grid;
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
     place-items: center;
     border: 1px solid rgba(7, 21, 79, 0.10);
     border-radius: 14px;
@@ -572,7 +580,7 @@ body.dark-theme .menu-submenu-inner a.active {
     box-shadow:
       inset 0 1px 1px rgba(255, 255, 255, 0.8),
       0 8px 18px rgba(7, 21, 79, 0.06);
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 700;
     line-height: 1;
   }
@@ -583,13 +591,15 @@ body.dark-theme .menu-submenu-inner a.active {
 
   .cu-logo {
     min-width: 0;
-    min-height: 76px;
+    min-height: 52px;
     box-shadow: none;
-    border-radius: 16px;
-    padding: 12px;
-    background:
-      radial-gradient(circle at 100% 0%, rgba(30, 98, 255, 0.08), transparent 34%),
-      rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    padding: 8px 4px;
+    background: transparent;
+  }
+
+  .cu-logo img {
+    width: 75px;
   }
 
   .drawer-user {
@@ -699,17 +709,17 @@ body.dark-theme .menu-submenu-inner a.active {
     color: #8fb1ff;
   }
 
-  .sidebar-menu a > svg:first-child,
-  .sidebar-menu .menu-toggle > svg:not(.chevron),
-  body.sidebar-collapsed .sidebar-menu a > svg:first-child,
-  body.sidebar-collapsed .sidebar-menu .menu-toggle > svg:not(.chevron) {
+  .sidebar-menu a>svg:first-child,
+  .sidebar-menu .menu-toggle>svg:not(.chevron),
+  body.sidebar-collapsed .sidebar-menu a>svg:first-child,
+  body.sidebar-collapsed .sidebar-menu .menu-toggle>svg:not(.chevron) {
     color: #1e62ff;
     opacity: 1;
   }
 
-  .sidebar-menu a > svg:last-child,
+  .sidebar-menu a>svg:last-child,
   .sidebar-menu .menu-toggle .chevron,
-  body.sidebar-collapsed .sidebar-menu a > svg:last-child,
+  body.sidebar-collapsed .sidebar-menu a>svg:last-child,
   body.sidebar-collapsed .sidebar-menu .menu-toggle .chevron {
     color: #7180a6;
   }
@@ -748,7 +758,7 @@ body.dark-theme .menu-submenu-inner a.active {
     visibility: visible;
   }
 
-  body.sidebar-collapsed .sidebar-menu a > svg:last-child,
+  body.sidebar-collapsed .sidebar-menu a>svg:last-child,
   body.sidebar-collapsed .sidebar-menu .menu-toggle .chevron {
     display: block;
     width: 12px;
@@ -764,12 +774,12 @@ body.dark-theme .menu-submenu-inner a.active {
     pointer-events: auto;
   }
 
-  body.sidebar-collapsed .menu-group.expanded > .menu-submenu {
+  body.sidebar-collapsed .menu-group.expanded>.menu-submenu {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 
-  .sidebar-menu > .menu-group > .menu-submenu > .menu-submenu-inner {
+  .sidebar-menu>.menu-group>.menu-submenu>.menu-submenu-inner {
     max-height: 260px;
   }
 }
@@ -787,7 +797,7 @@ body.dark-theme .menu-submenu-inner a.active {
   }
 
   .cu-logo {
-    display: none;
+    display: flex;
   }
 
   .drawer-search {

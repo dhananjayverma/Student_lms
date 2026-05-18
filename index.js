@@ -326,3 +326,31 @@ if (conversationPanelHead && conversationsPanel) {
     conversationsPanel.classList.toggle("collapsed");
   });
 }
+
+// Profile Modal Tabs Delegation
+document.addEventListener("click", (event) => {
+  const tab = event.target.closest(".profile-tab");
+  if (!tab) return;
+
+  const tabsContainer = tab.closest(".profile-tabs-section");
+  if (!tabsContainer) return;
+
+  const targetId = tab.dataset.tab;
+  
+  // Deactivate all tabs in this container
+  tabsContainer.querySelectorAll(".profile-tab").forEach(t => t.classList.remove("active"));
+  
+  // Deactivate all panels in this container
+  tabsContainer.querySelectorAll(".profile-panel").forEach(p => {
+    p.classList.remove("active");
+    p.hidden = true;
+  });
+  
+  // Activate selected tab and panel
+  tab.classList.add("active");
+  const targetPanel = tabsContainer.querySelector(`#tab-${targetId}`);
+  if (targetPanel) {
+    targetPanel.classList.add("active");
+    targetPanel.hidden = false;
+  }
+});

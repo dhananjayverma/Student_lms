@@ -121,11 +121,149 @@
         data-sidebar-close>&times;</button>
     </div>
 
-    <div class="drawer-user">
-      <span class="avatar">DV</span>
-      <div>
-        <strong>Dhananjay Kumar Verma</strong>
-        <span>16BAV1184</span>
+    <div class="dashboard-modal-card">
+      <button class="drawer-user modal-option" type="button" data-modal-title="Student Profile" style="width: 100%; border: none; background: transparent; text-align: left; cursor: pointer;">
+        <span class="avatar">DV</span>
+        <div>
+          <strong>Dhananjay Kumar Verma</strong>
+          <span>16BAV1184</span>
+        </div>
+      </button>
+      
+      <div class="modal-source" hidden>
+        <!-- Reusing the same profile modal content -->
+        <div class="profile-modal-content">
+          <div class="profile-header-section">
+            <div class="profile-photo-wrapper">
+              <img src="student_photo.png" alt="Dhananjay Kumar Verma">
+            </div>
+            <div class="profile-main-info">
+              <div class="profile-title-block">
+                <h2>Dhananjay Kumar Verma <span class="profile-id">(16BAV1184)</span></h2>
+                <a href="mailto:dhananjay.16bav1184@cumail.in" class="profile-email">dhananjay.16bav1184@cumail.in</a>
+              </div>
+              
+              <div class="profile-details-grid">
+                <div class="detail-group">
+                  <span>Father's Name</span>
+                  <strong>Surinder Verma</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Mother's Name</span>
+                  <strong>Anita Verma</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Religion</span>
+                  <strong>Hinduism</strong>
+                </div>
+                <div class="detail-group">
+                  <span>D.O.B</span>
+                  <strong>15 August 2002</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Admission Year</span>
+                  <strong>2020</strong>
+                </div>
+                <div class="detail-group">
+                  <span>University</span>
+                  <strong>Chandigarh University</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Current Semester</span>
+                  <strong>8</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Blood Group</span>
+                  <strong>O+</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Program Code</span>
+                  <strong>BAV - B.A. (VFX)</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Student Status</span>
+                  <strong class="status-active">Active</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Category</span>
+                  <strong>General</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Course Registration</span>
+                  <strong class="status-closed">Closed</strong>
+                </div>
+                <div class="detail-group full-width">
+                  <span>Address</span>
+                  <strong>Sector 62, Mohali, Punjab 160062</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-tabs-section">
+            <div class="profile-tabs" role="tablist">
+              <button class="profile-tab active" data-tab="contact">Contact Details</button>
+              <button class="profile-tab" data-tab="qualification">Qualification Details</button>
+              <button class="profile-tab" data-tab="mentor">Mentor Details</button>
+              <button class="profile-tab" data-tab="facilities">Facilities Availed</button>
+            </div>
+            
+            <div class="profile-tab-content">
+              <div class="profile-panel active" id="tab-contact">
+                <div class="table-responsive">
+                  <table class="profile-table">
+                    <thead>
+                      <tr>
+                        <th>Contact Type</th>
+                        <th>Residence</th>
+                        <th>Office</th>
+                        <th>Mobile</th>
+                        <th>Email ID</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Father</td>
+                        <td>Permanent</td>
+                        <td>N/A</td>
+                        <td>+91 9876543211</td>
+                        <td>surinder.v@example.com</td>
+                      </tr>
+                      <tr>
+                        <td>Student</td>
+                        <td>Hostel</td>
+                        <td>N/A</td>
+                        <td>+91 9876543210</td>
+                        <td>dhananjay.16bav1184@cumail.in</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              <div class="profile-panel" id="tab-qualification" hidden>
+                <div class="empty-state">
+                  <svg aria-hidden="true"><use href="#icon-file"></use></svg>
+                  <p>Qualification details not available.</p>
+                </div>
+              </div>
+              
+              <div class="profile-panel" id="tab-mentor" hidden>
+                <div class="empty-state">
+                  <svg aria-hidden="true"><use href="#icon-users"></use></svg>
+                  <p>Mentor details not assigned yet.</p>
+                </div>
+              </div>
+              
+              <div class="profile-panel" id="tab-facilities" hidden>
+                <div class="empty-state">
+                  <svg aria-hidden="true"><use href="#icon-home"></use></svg>
+                  <p>No active facilities availed.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="drawer-search">
