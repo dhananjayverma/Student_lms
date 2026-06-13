@@ -2,7 +2,7 @@
   --ink: #07154f;
   --muted: #6f7baa;
   --line: rgba(255, 255, 255, 0.6);
-  --glass: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 100%);
+  --glass: #ffffff;
   --blue: #1e62ff;
   --red: #ff404f;
   --green: #26c681;
@@ -32,7 +32,7 @@ body.dark-theme {
   --ink: #edf4ff;
   --muted: #aebbd0;
   --line: rgba(255, 255, 255, 0.13);
-  --glass: linear-gradient(135deg, rgba(22, 32, 48, 0.78), rgba(10, 16, 27, 0.48));
+  --glass: #131e30;
   color: var(--ink);
   background:
     radial-gradient(circle at 18% 0%, rgba(84, 126, 255, 0.16), transparent 30%),
@@ -57,10 +57,7 @@ body::before {
 }
 
 body.dark-theme::before {
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.18), transparent 24%, transparent 76%, rgba(0, 0, 0, 0.18)),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 36%, rgba(0, 0, 0, 0.16));
-  opacity: 0.9;
+  display: none;
 }
 
 body::after {
@@ -76,10 +73,7 @@ body::after {
 }
 
 body.dark-theme::after {
-  background:
-    radial-gradient(ellipse at 50% 100%, rgba(84, 126, 255, 0.08), transparent 48%),
-    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.22) 100%);
-  opacity: 0.72;
+  display: none;
 }
 
 a {
@@ -118,19 +112,11 @@ svg {
 .glass {
   border: 1px solid var(--line);
   background: var(--glass);
-  box-shadow: 
-    0 18px 48px rgba(7, 21, 79, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.9),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 4px 16px rgba(7, 21, 79, 0.08);
 }
 
 body.dark-theme .glass {
-  box-shadow:
-    0 18px 48px rgba(0, 0, 0, 0.32),
-    inset 0 1px 1px rgba(255, 255, 255, 0.12),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
 }
 
 .ambient {

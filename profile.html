@@ -105,7 +105,7 @@
       <path d="M21 8.5a4 4 0 0 1 0 7" />
     </symbol>
     <symbol id="icon-chevron" viewBox="0 0 24 24">
-      <path d="m9 18 6-6-6-6" />
+      <path d="m6 9 6 6 6-6" />
     </symbol>
   </svg>
   <div class="ambient ambient-one"></div>
@@ -615,14 +615,28 @@
         <span>Student Feedback test</span>
       </a>
     </nav>
+    <div class="sidebar-footer">
+      <span>V.2025</span>
+      <button class="logout-button" type="button">
+        <svg>
+          <use href="#icon-arrow"></use>
+        </svg>
+        <span>Log Out</span>
+      </button>
+    </div>
   </aside>
 
   <main class="shell">
-    <header class="topbar glass">
+    <header class="topbar">
       <button class="icon-button sidebar-toggle-button" type="button" aria-label="Open navigation drawer"
         aria-pressed="false" aria-controls="site-sidebar"><svg>
           <use href="#icon-menu"></use>
         </svg></button>
+      <div class="nav-weather" aria-label="Date and weather">
+        <strong class="nav-date">Jun 13, 2026</strong>
+        <span class="weather-icon" aria-hidden="true"><svg><use href="#icon-sun"></use></svg></span>
+        <span class="weather-copy"><b>45°C</b><small>Clear sky</small></span>
+      </div>
       <a class="mobile-logo" href="#">
         <img src="logo.png" alt="CUIMS Logo">
       </a>
@@ -630,26 +644,36 @@
         <span><svg>
             <use href="#icon-search"></use>
           </svg></span>
-        <input type="search" placeholder="Search for courses, lectures, documents, students...">
+        <input type="search" placeholder="Search & Bookmark your page">
       </label>
       <div class="top-actions">
-        <button class="icon-button theme-toggle-button" type="button" aria-label="Switch to dark mode"
-          aria-pressed="false"><svg>
-            <use href="#icon-sun"></use>
+        <div class="theme-switch" aria-label="Color theme">
+          <button class="theme-choice" type="button" data-theme-value="light">
+            <svg><use href="#icon-sun"></use></svg><span>Light</span>
+          </button>
+          <button class="theme-choice" type="button" data-theme-value="dark">
+            <span class="moon-icon" aria-hidden="true">☾</span><span>Dark</span>
+          </button>
+        </div>
+        <button class="nav-utility" type="button" aria-label="Home"><svg>
+            <use href="#icon-home"></use>
           </svg></button>
-        <button class="icon-button badge" aria-label="Notifications"><svg>
+        <button class="nav-utility badge" type="button" aria-label="Notifications"><svg>
             <use href="#icon-bell"></use>
           </svg></button>
-        <button class="icon-button" aria-label="Messages"><svg>
+        <button class="nav-utility" type="button" aria-label="Messages"><svg>
             <use href="#icon-message"></use>
           </svg></button>
         <div class="dashboard-modal-card profile-trigger-wrapper">
           <button class="profile modal-option" type="button" data-modal-title="Student Profile">
-            <span class="avatar">DV</span>
+            <span class="profile-avatar" aria-hidden="true"><img src="student_photo.png" alt=""></span>
             <div>
               <strong>Dhananjay Kumar Verma</strong>
               <span>16BAV1184</span>
             </div>
+            <svg class="profile-chevron" aria-hidden="true">
+              <use href="#icon-chevron"></use>
+            </svg>
           </button>
           
           <div class="modal-source" hidden>

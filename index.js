@@ -7,8 +7,10 @@ const sidebarMenu = document.querySelector(".sidebar-menu");
 const sidebarToggleButton = document.querySelector(".sidebar-toggle-button");
 const sidebarBackdrop = document.querySelector(".sidebar-backdrop");
 const themeToggleButtons = document.querySelectorAll(".theme-toggle-button, .drawer-theme-toggle");
+const themeChoiceButtons = document.querySelectorAll("[data-theme-value]");
 const shell = document.querySelector(".shell");
 const mobileSidebarQuery = window.matchMedia("(max-width: 980px)");
+const desktopDashboardQuery = window.matchMedia("(min-width: 1181px)");
 
 if (greetingNode) {
   greetingNode.textContent = greeting;
@@ -22,6 +24,11 @@ const setTheme = (theme) => {
     button.setAttribute("aria-pressed", String(isDark));
     button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
   });
+  themeChoiceButtons.forEach((button) => {
+    const isActive = button.dataset.themeValue === theme;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
 };
 
 const savedTheme = localStorage.getItem("dashboard-theme");
@@ -34,6 +41,24 @@ themeToggleButtons.forEach((button) => {
     localStorage.setItem("dashboard-theme", nextTheme);
     setTheme(nextTheme);
   });
+});
+
+themeChoiceButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const nextTheme = button.dataset.themeValue;
+    localStorage.setItem("dashboard-theme", nextTheme);
+    setTheme(nextTheme);
+  });
+});
+
+const currentDate = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric"
+}).format(new Date());
+
+document.querySelectorAll(".nav-date").forEach((node) => {
+  node.textContent = currentDate;
 });
 
 const setSidebarToggleState = () => {
@@ -110,8 +135,6 @@ if (sidebar && sidebarMenu) {
 }
 
 if (sidebarToggleButton) {
-  let sidebarAnimationTimer;
-
   sidebarToggleButton.addEventListener("click", () => {
     if (mobileSidebarQuery.matches) {
       const isOpen = document.body.classList.toggle("nav-drawer-open");
@@ -122,14 +145,8 @@ if (sidebarToggleButton) {
     }
 
     const isCollapsed = document.body.classList.toggle("sidebar-collapsed");
-    document.body.classList.add("sidebar-animating");
     sidebarToggleButton.setAttribute("aria-pressed", String(isCollapsed));
     sidebarToggleButton.setAttribute("aria-label", isCollapsed ? "Expand sidebar" : "Shrink sidebar");
-
-    clearTimeout(sidebarAnimationTimer);
-    sidebarAnimationTimer = setTimeout(() => {
-      document.body.classList.remove("sidebar-animating");
-    }, 420);
   });
 }
 
@@ -139,27 +156,44 @@ document.querySelectorAll("[data-sidebar-close]").forEach((trigger) => {
 mobileSidebarQuery.addEventListener("change", setSidebarToggleState);
 setSidebarToggleState();
 
-if (shell) {
-  let lastShellScrollTop = shell.scrollTop;
+const updateNavbarSurface = () => {
+  const scrollTop = mobileSidebarQuery.matches
+    ? window.scrollY
+    : shell?.scrollTop || 0;
 
-  shell.addEventListener("scroll", () => {
-    const currentScrollTop = shell.scrollTop;
-    const scrollDifference = currentScrollTop - lastShellScrollTop;
-    const isScrollingDown = scrollDifference > 4;
-    const isScrollingUp = scrollDifference < -4;
-    const isAwayFromTop = currentScrollTop > 90;
+  document.body.classList.toggle("navbar-scrolled", scrollTop > 12);
+};
 
-    if (isScrollingDown && isAwayFromTop) {
-      document.body.classList.add("navbar-hidden");
-    }
+shell?.addEventListener("scroll", updateNavbarSurface, { passive: true });
+window.addEventListener("scroll", updateNavbarSurface, { passive: true });
+mobileSidebarQuery.addEventListener("change", updateNavbarSurface);
+updateNavbarSurface();
 
-    if (isScrollingUp || !isAwayFromTop) {
-      document.body.classList.remove("navbar-hidden");
-    }
+const dashboardGrid = document.querySelector(".dashboard-grid");
+const dashboardMain = document.querySelector(".dashboard-main");
+const supportStack = document.querySelector(".support-stack");
+const announcementsLayout = document.querySelector(".announcements-layout");
+const layoutAnnouncementsPanel = announcementsLayout?.querySelector(".announcements-panel");
+const layoutCalendarPanel = announcementsLayout?.querySelector(".calendar-panel");
 
-    lastShellScrollTop = Math.max(currentScrollTop, 0);
-  }, { passive: true });
-}
+const updateDashboardColumns = () => {
+  if (!dashboardGrid || !dashboardMain || !supportStack || !announcementsLayout ||
+      !layoutAnnouncementsPanel || !layoutCalendarPanel) return;
+
+  if (desktopDashboardQuery.matches) {
+    dashboardMain.append(layoutAnnouncementsPanel);
+    supportStack.append(layoutCalendarPanel);
+    announcementsLayout.hidden = true;
+    return;
+  }
+
+  announcementsLayout.append(layoutAnnouncementsPanel, layoutCalendarPanel);
+  announcementsLayout.hidden = false;
+  dashboardGrid.append(announcementsLayout);
+};
+
+desktopDashboardQuery.addEventListener("change", updateDashboardColumns);
+updateDashboardColumns();
 
 const privateDataCards = document.querySelectorAll(".fee-card, .backlog-card");
 
