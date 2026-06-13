@@ -173,21 +173,30 @@ const dashboardGrid = document.querySelector(".dashboard-grid");
 const dashboardMain = document.querySelector(".dashboard-main");
 const supportStack = document.querySelector(".support-stack");
 const announcementsLayout = document.querySelector(".announcements-layout");
+const layoutAnnouncementsMain = announcementsLayout?.querySelector(".announcements-main");
 const layoutAnnouncementsPanel = announcementsLayout?.querySelector(".announcements-panel");
-const layoutCalendarPanel = announcementsLayout?.querySelector(".calendar-panel");
+const layoutAnnouncementWidgets = announcementsLayout?.querySelector(".announcement-widgets-left");
+const layoutAnnouncementsSidebar = announcementsLayout?.querySelector(".announcements-sidebar");
 
 const updateDashboardColumns = () => {
   if (!dashboardGrid || !dashboardMain || !supportStack || !announcementsLayout ||
-      !layoutAnnouncementsPanel || !layoutCalendarPanel) return;
+      !layoutAnnouncementsMain || !layoutAnnouncementsPanel || !layoutAnnouncementsSidebar) return;
 
   if (desktopDashboardQuery.matches) {
+    if (layoutAnnouncementWidgets) {
+      dashboardMain.append(layoutAnnouncementWidgets);
+    }
     dashboardMain.append(layoutAnnouncementsPanel);
-    supportStack.append(layoutCalendarPanel);
+    supportStack.append(layoutAnnouncementsSidebar);
     announcementsLayout.hidden = true;
     return;
   }
 
-  announcementsLayout.append(layoutAnnouncementsPanel, layoutCalendarPanel);
+  if (layoutAnnouncementWidgets) {
+    layoutAnnouncementsMain.prepend(layoutAnnouncementWidgets);
+  }
+  layoutAnnouncementsMain.append(layoutAnnouncementsPanel);
+  announcementsLayout.append(layoutAnnouncementsMain, layoutAnnouncementsSidebar);
   announcementsLayout.hidden = false;
   dashboardGrid.append(announcementsLayout);
 };
@@ -339,6 +348,21 @@ if (calendarHeadingToggle && calendarPanelObj) {
     calendarPanelObj.classList.toggle("collapsed");
   });
 }
+
+document.querySelectorAll(".announcement-widget-tabs").forEach((tablist) => {
+  tablist.addEventListener("click", (event) => {
+    const button = event.target.closest("button[role='tab']");
+    if (!button || button.classList.contains("active")) return;
+
+    tablist.querySelectorAll("button[role='tab']").forEach((tab) => {
+      tab.classList.remove("active");
+      tab.setAttribute("aria-selected", "false");
+    });
+
+    button.classList.add("active");
+    button.setAttribute("aria-selected", "true");
+  });
+});
 
 const conversationPanelHead = document.querySelector(".conversations .panel-head");
 const conversationsPanel = document.querySelector(".conversations");
