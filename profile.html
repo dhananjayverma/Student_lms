@@ -115,6 +115,14 @@
       <circle cx="9" cy="7" r="4" />
       <path d="m16 11 2 2 4-4" />
     </symbol>
+    <symbol id="icon-graduation" viewBox="0 0 24 24">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5" />
+    </symbol>
+    <symbol id="icon-trending-up" viewBox="0 0 24 24">
+      <path d="m23 6-9.5 9.5-5-5L1 18" />
+      <path d="M17 6h6v6" />
+    </symbol>
   </svg>
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
@@ -973,49 +981,166 @@
           </div>
 
           <div class="academic-content" id="attendance-panel" role="tabpanel" aria-labelledby="attendance-tab" hidden>
-            <div class="attendance-summary">
-              <div>
-                <span>Current Semester</span>
-                <strong>82%</strong>
-                <small>Overall Attendance</small>
+            <div class="attendance-header">
+              <div class="attendance-title-block">
+                <span class="attendance-header-icon">
+                  <svg>
+                    <use href="#icon-book"></use>
+                  </svg>
+                </span>
+                <div>
+                  <h2>Course & Attendance</h2>
+                  <p>Track your academic progress and attendance</p>
+                </div>
               </div>
-              <div>
-                <span>Courses</span>
-                <strong>06</strong>
-                <small>Active Subjects</small>
-              </div>
-              <div>
-                <span>Low Attendance</span>
-                <strong>01</strong>
-                <small>Needs Focus</small>
+              <div class="attendance-actions">
+                <button class="semester-select-btn" type="button">
+                  <svg class="btn-icon-left">
+                    <use href="#icon-calendar"></use>
+                  </svg>
+                  <span>This Semester</span>
+                  <svg class="btn-icon-right">
+                    <use href="#icon-chevron"></use>
+                  </svg>
+                </button>
               </div>
             </div>
 
-            <div class="course-list">
-              <article class="course-row">
-                <div>
-                  <h3>Software QA</h3>
-                  <span>23CSH-309 • Dr. Rashmi Goyal</span>
+            <div class="attendance-grid">
+              <!-- Left Column: Summary Cards -->
+              <div class="attendance-left-col">
+                <!-- Card 1: Current Semester -->
+                <div class="glass card attendance-stat-card progress-ring-card">
+                  <div class="progress-ring-section">
+                    <div class="progress-ring-mini" style="--value: 82">
+                      <span>82%</span>
+                    </div>
+                  </div>
+                  <div class="card-icon-top-right">
+                    <svg>
+                      <use href="#icon-users"></use>
+                    </svg>
+                  </div>
+                  <div class="stat-card-text">
+                    <strong>Current Semester</strong>
+                    <span>Overall Attendance</span>
+                  </div>
                 </div>
-                <strong>88%</strong>
-                <div class="attendance-bar"><span style="width: 88%"></span></div>
-              </article>
-              <article class="course-row warning">
-                <div>
-                  <h3>DBMS</h3>
-                  <span>23CST-204 • Prof. Amit Sharma</span>
+
+                <!-- Card 2: Courses -->
+                <div class="glass card attendance-stat-card icon-stat-card green-theme">
+                  <div class="stat-icon-circle">
+                    <svg>
+                      <use href="#icon-graduation"></use>
+                    </svg>
+                  </div>
+                  <div class="stat-card-text">
+                    <strong>06</strong>
+                    <b>Courses</b>
+                    <span>Active Subjects</span>
+                  </div>
                 </div>
-                <strong>72%</strong>
-                <div class="attendance-bar"><span style="width: 72%"></span></div>
-              </article>
-              <article class="course-row">
-                <div>
-                  <h3>Design Thinking</h3>
-                  <span>23HSM-303 • Dr. Meera Sethi</span>
+
+                <!-- Card 3: Low Attendance -->
+                <div class="glass card attendance-stat-card icon-stat-card amber-theme">
+                  <div class="stat-icon-circle">
+                    <svg>
+                      <use href="#icon-trending-up"></use>
+                    </svg>
+                  </div>
+                  <div class="stat-card-text">
+                    <strong>01</strong>
+                    <b>Low Attendance</b>
+                    <span>Needs Focus</span>
+                  </div>
                 </div>
-                <strong>84%</strong>
-                <div class="attendance-bar"><span style="width: 84%"></span></div>
-              </article>
+              </div>
+
+              <!-- Right Column: Course List -->
+              <div class="glass card attendance-right-card">
+                <div class="course-list">
+                  <!-- Course 1 -->
+                  <div class="course-row-item">
+                    <div class="course-icon-box blue-box">
+                      <svg>
+                        <use href="#icon-code"></use>
+                      </svg>
+                    </div>
+                    <div class="course-info">
+                      <h3>Software QA</h3>
+                      <span>23CSH-309 • Dr. Rashmi Goyal</span>
+                    </div>
+                    <div class="course-progress-section">
+                      <div class="course-progress-bar">
+                        <span class="bg-blue-green" style="width: 88%"></span>
+                      </div>
+                    </div>
+                    <span class="course-percentage">88%</span>
+                    <button class="course-dots-btn" type="button" aria-label="More options">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="1.5"></circle>
+                        <circle cx="12" cy="5" r="1.5"></circle>
+                        <circle cx="12" cy="19" r="1.5"></circle>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Course 2 -->
+                  <div class="course-row-item warning">
+                    <div class="course-icon-box orange-box">
+                      <svg>
+                        <use href="#icon-wallet"></use>
+                      </svg>
+                    </div>
+                    <div class="course-info">
+                      <h3>DBMS</h3>
+                      <span>23CST-204 • Prof. Amit Sharma</span>
+                    </div>
+                    <div class="course-progress-section">
+                      <div class="course-progress-bar">
+                        <span class="bg-orange" style="width: 72%"></span>
+                      </div>
+                    </div>
+                    <span class="course-percentage warning">72%</span>
+                    <button class="course-dots-btn" type="button" aria-label="More options">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="1.5"></circle>
+                        <circle cx="12" cy="5" r="1.5"></circle>
+                        <circle cx="12" cy="19" r="1.5"></circle>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Course 3 -->
+                  <div class="course-row-item">
+                    <div class="course-icon-box green-box">
+                      <svg>
+                        <use href="#icon-sun"></use>
+                      </svg>
+                    </div>
+                    <div class="course-info">
+                      <h3>Design Thinking</h3>
+                      <span>23HSM-303 • Dr. Meera Sethi</span>
+                    </div>
+                    <div class="course-progress-section">
+                      <div class="course-progress-bar">
+                        <span class="bg-blue-green" style="width: 84%"></span>
+                      </div>
+                    </div>
+                    <span class="course-percentage">84%</span>
+                    <button class="course-dots-btn" type="button" aria-label="More options">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="1.5"></circle>
+                        <circle cx="12" cy="5" r="1.5"></circle>
+                        <circle cx="12" cy="19" r="1.5"></circle>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </article>

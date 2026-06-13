@@ -36,11 +36,13 @@ body.sidebar-collapsed .shell {
     opacity: 0.75;
     box-shadow: 0 0 0 0 rgba(38, 198, 129, 0.7);
   }
+
   50% {
     transform: scale(1.1);
     opacity: 1;
     box-shadow: 0 0 0 6px rgba(38, 198, 129, 0);
   }
+
   100% {
     transform: scale(0.95);
     opacity: 0.75;
@@ -737,7 +739,7 @@ body.dark-theme .nav-utility {
   border-radius: 18px;
   padding: 22px 24px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.90) 100%);
-  box-shadow: 
+  box-shadow:
     0 10px 30px -8px rgba(7, 21, 79, 0.06),
     inset 0 1px 1px rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
@@ -756,7 +758,7 @@ body.dark-theme .hero-copy {
   --card-gradient-end: rgba(19, 30, 48, 0);
   border-color: rgba(255, 255, 255, 0.08);
   background: linear-gradient(135deg, rgba(19, 30, 48, 0.96) 0%, rgba(19, 30, 48, 0.88) 100%);
-  box-shadow: 
+  box-shadow:
     0 10px 30px -8px rgba(0, 0, 0, 0.3),
     inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
@@ -1301,9 +1303,7 @@ body.dark-theme .academic-tab.active {
 
 body.dark-theme .class-status,
 body.dark-theme .current-class,
-body.dark-theme .lecture-card,
-body.dark-theme .attendance-summary>div,
-body.dark-theme .course-row {
+body.dark-theme .lecture-card {
   border-color: rgba(255, 255, 255, 0.1);
   background: #1a2740;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -1515,9 +1515,7 @@ body.dark-theme .tabs .selected {
 
 .class-status,
 .current-class,
-.lecture-card,
-.attendance-summary>div,
-.course-row {
+.lecture-card {
   border: 1px solid rgba(7, 21, 79, 0.10);
   border-radius: 12px;
   background: #fbfcfe;
@@ -1762,8 +1760,37 @@ body.dark-theme .tabs .selected {
 .attendance-summary>div {
   display: grid;
   gap: 5px;
-  padding: 12px;
+  padding: 14px;
   border-radius: 12px;
+  border: 1px solid rgba(30, 98, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%);
+  box-shadow:
+    0 4px 16px rgba(7, 21, 79, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1), border-color 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.attendance-summary>div:hover {
+  transform: translateY(-2px);
+  border-color: rgba(30, 98, 255, 0.18);
+  box-shadow:
+    0 10px 24px rgba(7, 21, 79, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+body.dark-theme .attendance-summary>div {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(26, 39, 64, 0.96) 0%, rgba(26, 39, 64, 0.88) 100%) !important;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .attendance-summary>div:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 .attendance-summary span {
@@ -1785,11 +1812,62 @@ body.dark-theme .tabs .selected {
 }
 
 .course-row {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px 14px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 12px;
+  border: 1px solid rgba(30, 98, 255, 0.06);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%);
+  box-shadow:
+    0 2px 8px rgba(7, 21, 79, 0.02),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1), border-color 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.course-row::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: var(--blue);
+  opacity: 0.6;
+  transition: opacity 320ms ease;
+}
+
+.course-row.warning::before {
+  background: var(--amber);
+}
+
+.course-row:hover {
+  transform: translateX(4px);
+  border-color: rgba(30, 98, 255, 0.18);
+  box-shadow:
+    0 6px 20px rgba(7, 21, 79, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+.course-row:hover::before {
+  opacity: 1;
+}
+
+body.dark-theme .course-row {
+  border-color: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(135deg, rgba(26, 39, 64, 0.96) 0%, rgba(26, 39, 64, 0.88) 100%) !important;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .course-row:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 .course-row h3 {
@@ -1806,9 +1884,15 @@ body.dark-theme .tabs .selected {
 .attendance-bar {
   grid-column: 1 / -1;
   overflow: hidden;
-  height: 7px;
+  height: 8px;
   border-radius: 999px;
-  background: rgba(7, 21, 79, 0.08);
+  background: rgba(7, 21, 79, 0.05);
+  box-shadow: inset 0 1px 2px rgba(7, 21, 79, 0.08);
+}
+
+body.dark-theme .attendance-bar {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .attendance-bar span {
@@ -1816,10 +1900,12 @@ body.dark-theme .tabs .selected {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--blue), #45d39a);
+  box-shadow: 0 1px 4px rgba(30, 98, 255, 0.3);
 }
 
 .course-row.warning .attendance-bar span {
   background: linear-gradient(90deg, var(--amber), #ffcf73);
+  box-shadow: 0 1px 4px rgba(255, 154, 46, 0.3);
 }
 
 .tabs {
@@ -2645,19 +2731,19 @@ body.dark-theme .query-stats div {
   flex: 1;
 }
 
-.dashboard-main > .announcements-panel {
+.dashboard-main>.announcements-panel {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.support-stack > .announcements-sidebar {
+.support-stack>.announcements-sidebar {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.support-stack > .announcements-sidebar .calendar-panel {
+.support-stack>.announcements-sidebar .calendar-panel {
   flex: 1;
 }
 
@@ -4604,5 +4690,486 @@ body.dark-theme .empty-state {
   .profile-title-block .profile-id {
     display: block;
     margin-top: 4px;
+  }
+}
+
+/* Redesigned Course & Attendance Section Styles */
+.attendance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.attendance-title-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.attendance-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1e3a8a;
+  /* deep blue */
+  color: #ffffff;
+}
+
+body.dark-theme .attendance-header-icon {
+  background: #3b82f6;
+  /* bright blue */
+}
+
+.attendance-header-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.attendance-title-block h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.attendance-title-block p {
+  margin: 2px 0 0;
+  font-size: 0.76rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.semester-select-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  border: 1px solid rgba(7, 21, 79, 0.08);
+  border-radius: 10px;
+  padding: 0 14px;
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(7, 21, 79, 0.03);
+  transition: all 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.dark-theme .semester-select-btn {
+  background: #1a2740;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.semester-select-btn:hover {
+  background: #fbfcfe;
+  border-color: rgba(30, 98, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+body.dark-theme .semester-select-btn:hover {
+  background: #223253;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.semester-select-btn svg {
+  width: 14px;
+  height: 14px;
+  color: #6f7baa;
+}
+
+body.dark-theme .semester-select-btn svg {
+  color: #aebbd0;
+}
+
+/* Attendance Layout Grid */
+.attendance-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.attendance-left-col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Summary Cards */
+.attendance-stat-card {
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 98, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%);
+  box-shadow:
+    0 4px 16px rgba(7, 21, 79, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1), border-color 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.dark-theme .attendance-stat-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(19, 30, 48, 0.96) 0%, rgba(19, 30, 48, 0.88) 100%);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.attendance-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(30, 98, 255, 0.18);
+  box-shadow:
+    0 12px 28px rgba(7, 21, 79, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+body.dark-theme .attendance-stat-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.progress-ring-card {
+  padding: 18px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 146px;
+}
+
+.progress-ring-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.progress-ring-mini {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle closest-side, rgba(255, 255, 255, 0.96) 74%, transparent 75%),
+    conic-gradient(var(--blue) calc(var(--value) * 1%), rgba(7, 21, 79, 0.08) 0);
+  box-shadow: inset 0 1px 3px rgba(7, 21, 79, 0.06);
+}
+
+body.dark-theme .progress-ring-mini {
+  background:
+    radial-gradient(circle closest-side, rgba(19, 30, 48, 0.96) 74%, transparent 75%),
+    conic-gradient(#6b99ff calc(var(--value) * 1%), rgba(255, 255, 255, 0.1) 0);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.progress-ring-mini span {
+  font-size: 0.92rem;
+  font-weight: 850;
+  color: var(--ink);
+}
+
+.card-icon-top-right {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: var(--violet);
+}
+
+.card-icon-top-right svg {
+  width: 18px;
+  height: 18px;
+}
+
+.stat-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-card-text strong {
+  font-size: 1.4rem;
+  font-weight: 850;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.progress-ring-card .stat-card-text strong {
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-top: 10px;
+}
+
+.stat-card-text b {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-top: 1px;
+}
+
+.stat-card-text span {
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.icon-stat-card {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 128px;
+  align-items: flex-start;
+}
+
+.stat-icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.green-theme .stat-icon-circle {
+  background: rgba(38, 198, 129, 0.1);
+  color: var(--green);
+}
+
+.amber-theme .stat-icon-circle {
+  background: rgba(255, 154, 46, 0.1);
+  color: var(--amber);
+}
+
+.stat-icon-circle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Right Column: Course List Container */
+.attendance-right-card {
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 98, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%);
+  box-shadow:
+    0 4px 16px rgba(7, 21, 79, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+body.dark-theme .attendance-right-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(19, 30, 48, 0.96) 0%, rgba(19, 30, 48, 0.88) 100%);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.attendance-right-card .course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.course-row-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.course-row-item:not(:last-child) {
+  border-bottom: 1px solid rgba(7, 21, 79, 0.04);
+}
+
+body.dark-theme .course-row-item:not(:last-child) {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.course-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.course-icon-box svg {
+  width: 18px;
+  height: 18px;
+}
+
+.blue-box {
+  background: rgba(30, 98, 255, 0.08);
+  color: var(--blue);
+}
+
+.orange-box {
+  background: rgba(255, 154, 46, 0.08);
+  color: var(--amber);
+}
+
+.green-box {
+  background: rgba(38, 198, 129, 0.08);
+  color: var(--green);
+}
+
+.course-info {
+  width: 190px;
+  flex-shrink: 0;
+}
+
+.course-info h3 {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.course-info span {
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.course-progress-section {
+  flex: 1;
+  min-width: 100px;
+}
+
+.course-progress-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(7, 21, 79, 0.05);
+  overflow: hidden;
+}
+
+body.dark-theme .course-progress-bar {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.course-progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.course-progress-bar span.bg-blue-green {
+  background: linear-gradient(90deg, var(--blue), #45d39a);
+  box-shadow: 0 1px 4px rgba(30, 98, 255, 0.2);
+}
+
+.course-progress-bar span.bg-orange {
+  background: linear-gradient(90deg, var(--amber), #ffcf73);
+  box-shadow: 0 1px 4px rgba(255, 154, 46, 0.2);
+}
+
+.course-percentage {
+  font-size: 0.84rem;
+  font-weight: 900;
+  color: var(--ink);
+  min-width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.course-percentage.warning {
+  color: var(--amber);
+}
+
+.course-dots-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  color: #a6a8ad;
+  border: none;
+  cursor: pointer;
+  transition: all 220ms ease;
+  flex-shrink: 0;
+}
+
+.course-dots-btn:hover {
+  background: rgba(7, 21, 79, 0.05);
+  color: var(--ink);
+}
+
+body.dark-theme .course-dots-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.course-dots-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Responsiveness adjustments for attendance-grid */
+@media (max-width: 1180px) {
+  .attendance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .attendance-left-col {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .attendance-stat-card {
+    flex: 1 1 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .attendance-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .semester-select-btn {
+    align-self: flex-start;
+  }
+
+  .attendance-left-col {
+    flex-direction: column;
+  }
+
+  .course-row-item {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .course-info {
+    flex: 1;
+    width: auto;
+  }
+
+  .course-dots-btn {
+    order: 1;
+  }
+
+  .course-progress-section {
+    width: 100%;
+    flex-basis: 100%;
+    order: 2;
+  }
+
+  .course-percentage {
+    order: 1;
   }
 }
