@@ -183,19 +183,19 @@ const updateDashboardColumns = () => {
     !layoutAnnouncementsMain || !layoutAnnouncementsPanel || !layoutAnnouncementsSidebar) return;
 
   if (desktopDashboardQuery.matches) {
+    dashboardMain.append(layoutAnnouncementsPanel);
     if (layoutAnnouncementWidgets) {
       dashboardMain.append(layoutAnnouncementWidgets);
     }
-    dashboardMain.append(layoutAnnouncementsPanel);
     supportStack.append(layoutAnnouncementsSidebar);
     announcementsLayout.hidden = true;
     return;
   }
 
-  if (layoutAnnouncementWidgets) {
-    layoutAnnouncementsMain.prepend(layoutAnnouncementWidgets);
-  }
   layoutAnnouncementsMain.append(layoutAnnouncementsPanel);
+  if (layoutAnnouncementWidgets) {
+    layoutAnnouncementsMain.append(layoutAnnouncementWidgets);
+  }
   announcementsLayout.append(layoutAnnouncementsMain, layoutAnnouncementsSidebar);
   announcementsLayout.hidden = false;
   dashboardGrid.append(announcementsLayout);
@@ -250,6 +250,7 @@ const modal = document.querySelector("#dashboard-modal");
 const modalTitle = modal?.querySelector("#modal-title");
 const modalBody = modal?.querySelector(".modal-body");
 const modalOptions = document.querySelectorAll(".modal-option");
+const conversationViewAll = document.querySelector(".conversation-view-all");
 let lastModalTrigger = null;
 
 const closeDashboardModal = () => {
@@ -261,23 +262,52 @@ const closeDashboardModal = () => {
   lastModalTrigger?.focus();
 };
 
+const openDashboardModalFromSource = (trigger, source, title) => {
+  if (!modal || !modalTitle || !modalBody || !source) return;
+
+  lastModalTrigger = trigger;
+  modalTitle.textContent = title || trigger.textContent.trim();
+  modalBody.replaceChildren(
+    ...Array.from(source.children)
+      .filter((child) => !child.classList.contains("panel-head"))
+      .map((child) => child.cloneNode(true))
+  );
+  modal.hidden = false;
+  document.body.classList.add("modal-open");
+  modal.querySelector(".modal-close")?.focus();
+};
+
 modalOptions.forEach((option) => {
   option.addEventListener("click", () => {
     const source = option.parentElement?.querySelector(".modal-source");
 
-    if (!modal || !modalTitle || !modalBody || !source) return;
-
-    lastModalTrigger = option;
-    modalTitle.textContent = option.dataset.modalTitle || option.textContent.trim();
-    modalBody.replaceChildren(
-      ...Array.from(source.children)
-        .filter((child) => !child.classList.contains("panel-head"))
-        .map((child) => child.cloneNode(true))
-    );
-    modal.hidden = false;
-    document.body.classList.add("modal-open");
-    modal.querySelector(".modal-close")?.focus();
+    openDashboardModalFromSource(option, source, option.dataset.modalTitle || option.textContent.trim());
   });
+});
+
+conversationViewAll?.addEventListener("click", (event) => {
+  event.preventDefault();
+  const source = document.querySelector(".conversation-modal-source");
+  openDashboardModalFromSource(
+    conversationViewAll,
+    source,
+    conversationViewAll.dataset.modalTitle || "Conversation Details"
+  );
+});
+
+document.querySelectorAll(".widget-view-all-link").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const sourceId = link.dataset.sourceId;
+    const source = document.getElementById(sourceId);
+    openDashboardModalFromSource(link, source, link.dataset.modalTitle || link.textContent.trim());
+  });
+});
+
+modalBody?.addEventListener("click", (event) => {
+  if (event.target.closest(".send-message")) {
+    event.preventDefault();
+  }
 });
 
 modal?.addEventListener("click", (event) => {
@@ -298,6 +328,57 @@ document.addEventListener("keydown", (event) => {
 
 const laterHeadingToggle = document.querySelector(".later-heading");
 const laterLectures = document.querySelector(".lecture-cards");
+const classFilterButtons = document.querySelectorAll(".class-filter");
+const scheduleItems = document.querySelectorAll(".schedule-item");
+const messageFilterButtons = document.querySelectorAll("[data-message-filter]");
+const messageItems = document.querySelectorAll(".important-message-item");
+const messageEmptyState = document.querySelector(".message-empty-state");
+
+classFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.filter || "all";
+
+    classFilterButtons.forEach((item) => {
+      item.classList.toggle("active", item === button);
+    });
+
+    scheduleItems.forEach((item) => {
+      const isMatch =
+        filter === "all" ||
+        item.dataset.status === filter ||
+        item.dataset.period === filter;
+
+      item.classList.toggle("is-hidden", !isMatch);
+    });
+  });
+});
+
+messageFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.messageFilter || "all";
+    let visibleCount = 0;
+
+    messageFilterButtons.forEach((item) => {
+      const isActive = item === button;
+      item.classList.toggle("active", isActive);
+      item.setAttribute("aria-selected", String(isActive));
+    });
+
+    messageItems.forEach((item) => {
+      const isMatch =
+        filter === "all" ||
+        item.dataset.messageType === filter ||
+        item.dataset.messageStatus === filter;
+
+      item.classList.toggle("is-hidden", !isMatch);
+      if (isMatch) visibleCount += 1;
+    });
+
+    if (messageEmptyState) {
+      messageEmptyState.hidden = visibleCount > 0;
+    }
+  });
+});
 
 if (laterHeadingToggle && laterLectures) {
   if (window.innerWidth <= 980) {
@@ -334,6 +415,90 @@ if (announcementHeadingToggle && announcementsPanel) {
 
 const calendarHeadingToggle = document.querySelector(".calendar-head");
 const calendarPanelObj = document.querySelector(".calendar-panel");
+const calendarPanels = document.querySelectorAll(".calendar-panel");
+const calendarState = new WeakMap();
+const calendarMeetings = {
+  "2026-05-15": "Meeting on",
+  "2026-06-10": "Meeting on",
+  "2026-07-08": "Meeting on"
+};
+const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const monthFormatter = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" });
+
+const getDateKey = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+const renderCalendar = (panel) => {
+  const state = calendarState.get(panel) || { year: 2026, month: 4, filter: "month" };
+  const title = panel.querySelector(".calendar-head h2");
+  const subtitle = panel.querySelector(".calendar-head span");
+  const grid = panel.querySelector(".calendar-grid");
+  const firstDay = new Date(state.year, state.month, 1);
+  const daysInMonth = new Date(state.year, state.month + 1, 0).getDate();
+  const leadingDays = firstDay.getDay();
+
+  if (!grid) return;
+
+  if (title) {
+    title.textContent = monthFormatter.format(firstDay);
+  }
+
+  if (subtitle) {
+    subtitle.textContent = state.filter === "meeting"
+      ? "Meeting dates"
+      : state.filter === "all"
+        ? "All month view"
+        : "This month";
+  }
+
+  grid.replaceChildren();
+  weekdayLabels.forEach((label) => {
+    const dayLabel = document.createElement("span");
+    dayLabel.textContent = label;
+    grid.append(dayLabel);
+  });
+
+  for (let cell = 0; cell < 42; cell += 1) {
+    const dayNumber = cell - leadingDays + 1;
+    const date = new Date(state.year, state.month, dayNumber);
+    const isCurrentMonth = dayNumber >= 1 && dayNumber <= daysInMonth;
+    const dateKey = getDateKey(date);
+    const isMeeting = Boolean(calendarMeetings[dateKey]);
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.textContent = date.getDate();
+    button.dataset.calendarDay = `${isCurrentMonth ? "month" : "outside"}${isMeeting ? " meeting" : ""}`;
+
+    if (!isCurrentMonth) {
+      button.classList.add("outside-month");
+    }
+
+    if (isCurrentMonth && date.getDate() === 15 && state.month === 4 && state.year === 2026) {
+      button.classList.add("today");
+    }
+
+    if (isMeeting) {
+      button.classList.add("meeting-day");
+      button.setAttribute("aria-label", `${date.getDate()} ${calendarMeetings[dateKey]}`);
+    }
+
+    if (state.filter === "month" && !isCurrentMonth) {
+      button.disabled = true;
+      button.textContent = "";
+    }
+
+    if (state.filter === "meeting" && !isMeeting) {
+      button.classList.add("calendar-filter-muted");
+    }
+
+    grid.append(button);
+  }
+};
 
 if (calendarHeadingToggle && calendarPanelObj) {
   if (window.innerWidth <= 980) {
@@ -348,6 +513,46 @@ if (calendarHeadingToggle && calendarPanelObj) {
     calendarPanelObj.classList.toggle("collapsed");
   });
 }
+
+calendarPanels.forEach((panel) => {
+  calendarState.set(panel, { year: 2026, month: 4, filter: "all" });
+
+  panel.querySelectorAll("[data-calendar-filter]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const state = calendarState.get(panel);
+      state.filter = button.dataset.calendarFilter || "month";
+
+      panel.querySelectorAll("[data-calendar-filter]").forEach((item) => {
+        item.classList.toggle("active", item === button);
+      });
+
+      renderCalendar(panel);
+    });
+  });
+
+  const monthButtons = panel.querySelectorAll(".calendar-actions button");
+  monthButtons[0]?.addEventListener("click", () => {
+    const state = calendarState.get(panel);
+    state.month -= 1;
+    if (state.month < 0) {
+      state.month = 11;
+      state.year -= 1;
+    }
+    renderCalendar(panel);
+  });
+
+  monthButtons[1]?.addEventListener("click", () => {
+    const state = calendarState.get(panel);
+    state.month += 1;
+    if (state.month > 11) {
+      state.month = 0;
+      state.year += 1;
+    }
+    renderCalendar(panel);
+  });
+
+  renderCalendar(panel);
+});
 
 document.querySelectorAll(".announcement-widget-tabs").forEach((tablist) => {
   tablist.addEventListener("click", (event) => {
@@ -373,7 +578,7 @@ if (conversationPanelHead && conversationsPanel) {
     conversationPanelHead.setAttribute("aria-expanded", "false");
   }
 
-  conversationPanelHead.addEventListener("click", () => {
+  conversationPanelHead.addEventListener("click", (event) => {
     if (window.innerWidth > 980) return;
 
     // Don't toggle if clicking on the "View All" link

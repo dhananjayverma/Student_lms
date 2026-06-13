@@ -931,8 +931,21 @@
           </div>
 
           <div class="academic-content active" id="classes-panel" role="tabpanel" aria-labelledby="classes-tab">
+            <div class="class-toolbar">
+              <div>
+                <span>Today Schedule</span>
+                <strong>5 lectures planned</strong>
+              </div>
+              <div class="class-filters" aria-label="Filter classes">
+                <button class="class-filter active" type="button" data-filter="all">All</button>
+                <button class="class-filter" type="button" data-filter="live">Live</button>
+                <button class="class-filter" type="button" data-filter="upcoming">Upcoming</button>
+                <button class="class-filter" type="button" data-filter="afternoon">Afternoon</button>
+              </div>
+            </div>
+
             <div class="class-hero">
-              <div class="class-status">
+              <div class="class-status schedule-item" data-status="live" data-period="morning">
                 <span class="class-kicker">Now</span>
                 <div>
                   <strong>Software Engineering</strong>
@@ -943,7 +956,7 @@
                   <em>Live</em>
                 </div>
               </div>
-              <div class="current-class">
+              <div class="current-class schedule-item" data-status="upcoming" data-period="morning">
                 <div>
                   <span>Up Next</span>
                   <h2>Software QA</h2>
@@ -957,25 +970,29 @@
 
             <div class="later-heading">Happening Later Today</div>
             <div class="lecture-cards">
-              <article class="lecture-card blue">
+              <article class="lecture-card blue schedule-item" data-status="upcoming" data-period="morning">
                 <h3>AI Advance</h3>
                 <span>10am - 10:45am</span>
                 <strong>Dr. Rashmi Goyal</strong>
+                <small>Lab 2</small>
               </article>
-              <article class="lecture-card pink">
+              <article class="lecture-card pink schedule-item" data-status="upcoming" data-period="morning">
                 <h3>Data mining</h3>
                 <span>11am - 11:45am</span>
                 <strong>Dr. Rashmi Goyal</strong>
+                <small>D3-203</small>
               </article>
-              <article class="lecture-card green">
+              <article class="lecture-card green schedule-item" data-status="upcoming" data-period="afternoon">
                 <h3>DBMS</h3>
                 <span>01pm - 01:45pm</span>
                 <strong>Dr. Rashmi Goyal</strong>
+                <small>D3-105</small>
               </article>
-              <article class="lecture-card red">
+              <article class="lecture-card red schedule-item" data-status="upcoming" data-period="afternoon">
                 <h3>Virtual Reality</h3>
                 <span>03pm - 03:45pm</span>
                 <strong>Dr. Rashmi Goyal</strong>
+                <small>Studio</small>
               </article>
             </div>
           </div>
@@ -1388,25 +1405,30 @@
             </div>
           </div>
 
+          <div class="calendar-filters" aria-label="Calendar filters">
+            <button class="active" type="button" data-calendar-filter="all">All Months</button>
+            <button type="button" data-calendar-filter="month">This Month</button>
+            <button type="button" data-calendar-filter="meeting">Meetings</button>
+          </div>
 
           <div class="calendar-grid" aria-label="May 2026 calendar">
             <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
             <button type="button" disabled></button><button type="button" disabled></button><button type="button"
               disabled></button><button type="button" disabled></button><button type="button" disabled></button><button
-              type="button">1</button><button type="button">2</button>
-            <button type="button">3</button><button type="button">4</button><button type="button">5</button><button
-              type="button">6</button><button type="button">7</button><button type="button">8</button><button
-              type="button">9</button>
-            <button type="button">10</button><button type="button">11</button><button type="button">12</button><button
-              type="button">13</button><button type="button">14</button><button class="today"
-              type="button">15</button><button type="button">16</button>
-            <button type="button">17</button><button type="button">18</button><button type="button">19</button><button
-              type="button">20</button><button type="button">21</button><button type="button">22</button><button
-              type="button">23</button>
-            <button type="button">24</button><button type="button">25</button><button type="button">26</button><button
-              type="button">27</button><button type="button">28</button><button type="button">29</button><button
-              type="button">30</button>
-            <button type="button">31</button><button type="button" disabled></button><button type="button"
+              type="button" data-calendar-day="month">1</button><button type="button" data-calendar-day="month">2</button>
+            <button type="button" data-calendar-day="month">3</button><button type="button" data-calendar-day="month">4</button><button type="button" data-calendar-day="month">5</button><button
+              type="button" data-calendar-day="month">6</button><button type="button" data-calendar-day="month">7</button><button type="button" data-calendar-day="month">8</button><button
+              type="button" data-calendar-day="month">9</button>
+            <button type="button" data-calendar-day="month">10</button><button type="button" data-calendar-day="month">11</button><button type="button" data-calendar-day="month">12</button><button
+              type="button" data-calendar-day="month">13</button><button type="button" data-calendar-day="month">14</button><button class="today meeting-day"
+              type="button" data-calendar-day="month meeting">15</button><button type="button" data-calendar-day="month">16</button>
+            <button type="button" data-calendar-day="month">17</button><button type="button" data-calendar-day="month">18</button><button type="button" data-calendar-day="month">19</button><button
+              type="button" data-calendar-day="month">20</button><button type="button" data-calendar-day="month">21</button><button type="button" data-calendar-day="month">22</button><button
+              type="button" data-calendar-day="month">23</button>
+            <button type="button" data-calendar-day="month">24</button><button type="button" data-calendar-day="month">25</button><button type="button" data-calendar-day="month">26</button><button
+              type="button" data-calendar-day="month">27</button><button type="button" data-calendar-day="month">28</button><button type="button" data-calendar-day="month">29</button><button
+              type="button" data-calendar-day="month">30</button>
+            <button type="button" data-calendar-day="month">31</button><button type="button" disabled></button><button type="button"
               disabled></button><button type="button" disabled></button><button type="button" disabled></button><button
               type="button" disabled></button><button type="button" disabled></button>
           </div>
