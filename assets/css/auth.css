@@ -43,7 +43,7 @@ a {
 
 .auth-shell {
   width: min(450px, 100%);
-  height: calc(100vh - 12px);
+  height: calc(98vh - 12px);
   min-height: 600px;
   /* margin-left: 24px; */
   border: 1px solid rgba(255, 255, 255, 0.35);
