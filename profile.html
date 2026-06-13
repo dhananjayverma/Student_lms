@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="sidebar.css">
-  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/sidebar.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 
 <body>
@@ -107,6 +107,19 @@
     <symbol id="icon-chevron" viewBox="0 0 24 24">
       <path d="m6 9 6 6 6-6" />
     </symbol>
+    <symbol id="icon-chat-dots" viewBox="0 0 24 24">
+      <path
+        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+      <circle cx="9" cy="12" r="1" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+      <circle cx="15" cy="12" r="1" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="icon-clipboard-search" viewBox="0 0 24 24">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <rect x="8" y="2" width="8" height="4" rx="1" />
+      <circle cx="11" cy="14" r="3" />
+      <path d="m13.5 16.5 2.5 2.5" />
+    </symbol>
     <symbol id="icon-shield" viewBox="0 0 24 24">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
     </symbol>
@@ -127,166 +140,21 @@
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
 
+
   <div class="sidebar-backdrop" data-sidebar-close></div>
   <aside class="sidebar" id="site-sidebar">
     <div class="drawer-head">
-      <a class="cu-logo" href="#">
-        <img src="logo.png" alt="CUIMS Chandigarh University">
+      <a class="cu-logo" href="index.html" aria-label="Go to main dashboard">
+        <img src="assets/images/logo.png" alt="CUIMS Chandigarh University">
       </a>
       <button class="drawer-close" type="button" aria-label="Close navigation drawer"
         data-sidebar-close>&times;</button>
     </div>
 
-    <div class="dashboard-modal-card">
-      <button class="drawer-user modal-option" type="button" data-modal-title="Student Profile"
-        style="width: 100%; border: none; background: transparent; text-align: left; cursor: pointer;">
-        <span class="avatar">DV</span>
-        <div>
-          <strong>Dhananjay Kumar Verma</strong>
-          <span>16BAV1184</span>
-        </div>
-      </button>
-
-      <div class="modal-source" hidden>
-        <!-- Reusing the same profile modal content -->
-        <div class="profile-modal-content">
-          <div class="profile-header-section">
-            <div class="profile-photo-wrapper">
-              <img src="student_photo.png" alt="Dhananjay Kumar Verma">
-            </div>
-            <div class="profile-main-info">
-              <div class="profile-title-block">
-                <h2>Dhananjay Kumar Verma <span class="profile-id">(16BAV1184)</span></h2>
-                <a href="mailto:dhananjay.16bav1184@cumail.in" class="profile-email">dhananjay.16bav1184@cumail.in</a>
-              </div>
-
-              <div class="profile-details-grid">
-                <div class="detail-group">
-                  <span>Father's Name</span>
-                  <strong>Surinder Verma</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Mother's Name</span>
-                  <strong>Anita Verma</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Religion</span>
-                  <strong>Hinduism</strong>
-                </div>
-                <div class="detail-group">
-                  <span>D.O.B</span>
-                  <strong>15 August 2002</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Admission Year</span>
-                  <strong>2020</strong>
-                </div>
-                <div class="detail-group">
-                  <span>University</span>
-                  <strong>Chandigarh University</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Current Semester</span>
-                  <strong>8</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Blood Group</span>
-                  <strong>O+</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Program Code</span>
-                  <strong>BAV - B.A. (VFX)</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Student Status</span>
-                  <strong class="status-active">Active</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Category</span>
-                  <strong>General</strong>
-                </div>
-                <div class="detail-group">
-                  <span>Course Registration</span>
-                  <strong class="status-closed">Closed</strong>
-                </div>
-                <div class="detail-group full-width">
-                  <span>Address</span>
-                  <strong>Sector 62, Mohali, Punjab 160062</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="profile-tabs-section">
-            <div class="profile-tabs" role="tablist">
-              <button class="profile-tab active" data-tab="contact">Contact Details</button>
-              <button class="profile-tab" data-tab="qualification">Qualification Details</button>
-              <button class="profile-tab" data-tab="mentor">Mentor Details</button>
-              <button class="profile-tab" data-tab="facilities">Facilities Availed</button>
-            </div>
-
-            <div class="profile-tab-content">
-              <div class="profile-panel active" id="tab-contact">
-                <div class="table-responsive">
-                  <table class="profile-table">
-                    <thead>
-                      <tr>
-                        <th>Contact Type</th>
-                        <th>Residence</th>
-                        <th>Office</th>
-                        <th>Mobile</th>
-                        <th>Email ID</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Father</td>
-                        <td>Permanent</td>
-                        <td>N/A</td>
-                        <td>+91 9876543211</td>
-                        <td>surinder.v@example.com</td>
-                      </tr>
-                      <tr>
-                        <td>Student</td>
-                        <td>Hostel</td>
-                        <td>N/A</td>
-                        <td>+91 9876543210</td>
-                        <td>dhananjay.16bav1184@cumail.in</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <div class="profile-panel" id="tab-qualification" hidden>
-                <div class="empty-state">
-                  <svg aria-hidden="true">
-                    <use href="#icon-file"></use>
-                  </svg>
-                  <p>Qualification details not available.</p>
-                </div>
-              </div>
-
-              <div class="profile-panel" id="tab-mentor" hidden>
-                <div class="empty-state">
-                  <svg aria-hidden="true">
-                    <use href="#icon-users"></use>
-                  </svg>
-                  <p>Mentor details not assigned yet.</p>
-                </div>
-              </div>
-
-              <div class="profile-panel" id="tab-facilities" hidden>
-                <div class="empty-state">
-                  <svg aria-hidden="true">
-                    <use href="#icon-home"></use>
-                  </svg>
-                  <p>No active facilities availed.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="drawer-user">
+      <div>
+        <strong>Dhananjay Kumar Verma</strong>
+        <span>16BAV1184</span>
       </div>
     </div>
     <div class="drawer-search">
@@ -306,7 +174,7 @@
         </svg>
         <span>Theme</span>
       </button>
-      <button class="drawer-action" type="button">
+      <button class="drawer-action nav-notification-trigger" type="button" aria-label="Notifications" data-modal-title="Notifications" data-source-id="navbar-notifications-source">
         <svg>
           <use href="#icon-bell"></use>
         </svg>
@@ -333,7 +201,7 @@
         </button>
         <div class="menu-submenu">
           <div class="menu-submenu-inner">
-            <a href="#" class="active">Academic Calendar</a>
+            <a href="#">Academic Calendar</a>
             <a href="#">Department of Life Long(DLL)</a>
             <a href="#">Employability Enhancement Soft Skills (EEP)</a>
             <a href="#">Experiential Learning Summer School (ELSS)</a>
@@ -588,7 +456,7 @@
         </svg>
         <span>My No Dues Status</span>
       </a>
-      <a href="#">
+      <a href="profile.html" class="active">
         <svg>
           <use href="#icon-id"></use>
         </svg>
@@ -664,8 +532,8 @@
           </svg></span>
         <span class="weather-copy"><b>45°C</b><small>Clear sky</small></span>
       </div>
-      <a class="mobile-logo" href="#">
-        <img src="logo.png" alt="CUIMS Logo">
+      <a class="mobile-logo" href="index.html" aria-label="Go to main dashboard">
+        <img src="assets/images/logo.png" alt="CUIMS Logo">
       </a>
       <label class="search">
         <span><svg>
@@ -684,18 +552,19 @@
             <span class="moon-icon" aria-hidden="true">☾</span><span>Dark</span>
           </button>
         </div>
-        <button class="nav-utility" type="button" aria-label="Home"><svg>
+        <a class="nav-utility" href="index.html" aria-label="Go to main dashboard"><svg>
             <use href="#icon-home"></use>
-          </svg></button>
-        <button class="nav-utility badge" type="button" aria-label="Notifications"><svg>
+          </svg></a>
+        <button class="nav-utility badge nav-notification-trigger" type="button" aria-label="Notifications" data-modal-title="Notifications" data-source-id="navbar-notifications-source"><svg>
             <use href="#icon-bell"></use>
           </svg></button>
         <button class="nav-utility" type="button" aria-label="Messages"><svg>
             <use href="#icon-message"></use>
           </svg></button>
-        <div class="dashboard-modal-card profile-trigger-wrapper">
-          <button class="profile modal-option" type="button" data-modal-title="Student Profile">
-            <span class="profile-avatar" aria-hidden="true"><img src="student_photo.png" alt=""></span>
+        <div class="profile-trigger-wrapper">
+          <button class="profile profile-menu-trigger" type="button" aria-expanded="false"
+            aria-controls="profile-menu">
+            <span class="profile-avatar" aria-hidden="true"><img src="assets/images/student_photo.png" alt=""></span>
             <div>
               <strong>Dhananjay Kumar Verma</strong>
               <span>16BAV1184</span>
@@ -704,735 +573,390 @@
               <use href="#icon-chevron"></use>
             </svg>
           </button>
-
-          <div class="modal-source" hidden>
-            <div class="profile-modal-content">
-              <div class="profile-header-section">
-                <div class="profile-photo-wrapper">
-                  <img src="student_photo.png" alt="Dhananjay Kumar Verma">
-                </div>
-                <div class="profile-main-info">
-                  <div class="profile-title-block">
-                    <h2>Dhananjay Kumar Verma <span class="profile-id">(16BAV1184)</span></h2>
-                    <a href="mailto:dhananjay.16bav1184@cumail.in"
-                      class="profile-email">dhananjay.16bav1184@cumail.in</a>
-                  </div>
-
-                  <div class="profile-details-grid">
-                    <div class="detail-group">
-                      <span>Father's Name</span>
-                      <strong>Surinder Verma</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Mother's Name</span>
-                      <strong>Anita Verma</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Religion</span>
-                      <strong>Hinduism</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>D.O.B</span>
-                      <strong>15 August 2002</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Admission Year</span>
-                      <strong>2020</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>University</span>
-                      <strong>Chandigarh University</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Current Semester</span>
-                      <strong>8</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Blood Group</span>
-                      <strong>O+</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Program Code</span>
-                      <strong>BAV - B.A. (VFX)</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Student Status</span>
-                      <strong class="status-active">Active</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Category</span>
-                      <strong>General</strong>
-                    </div>
-                    <div class="detail-group">
-                      <span>Course Registration</span>
-                      <strong class="status-closed">Closed</strong>
-                    </div>
-                    <div class="detail-group full-width">
-                      <span>Address</span>
-                      <strong>Sector 62, Mohali, Punjab 160062</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="profile-tabs-section">
-                <div class="profile-tabs" role="tablist">
-                  <button class="profile-tab active" data-tab="contact">Contact Details</button>
-                  <button class="profile-tab" data-tab="qualification">Qualification Details</button>
-                  <button class="profile-tab" data-tab="mentor">Mentor Details</button>
-                  <button class="profile-tab" data-tab="facilities">Facilities Availed</button>
-                </div>
-
-                <div class="profile-tab-content">
-                  <div class="profile-panel active" id="tab-contact">
-                    <div class="table-responsive">
-                      <table class="profile-table">
-                        <thead>
-                          <tr>
-                            <th>Contact Type</th>
-                            <th>Residence</th>
-                            <th>Office</th>
-                            <th>Mobile</th>
-                            <th>Email ID</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Father</td>
-                            <td>Permanent</td>
-                            <td>N/A</td>
-                            <td>+91 9876543211</td>
-                            <td>surinder.v@example.com</td>
-                          </tr>
-                          <tr>
-                            <td>Student</td>
-                            <td>Hostel</td>
-                            <td>N/A</td>
-                            <td>+91 9876543210</td>
-                            <td>dhananjay.16bav1184@cumail.in</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <div class="profile-panel" id="tab-qualification" hidden>
-                    <div class="empty-state">
-                      <svg aria-hidden="true">
-                        <use href="#icon-file"></use>
-                      </svg>
-                      <p>Qualification details not available.</p>
-                    </div>
-                  </div>
-
-                  <div class="profile-panel" id="tab-mentor" hidden>
-                    <div class="empty-state">
-                      <svg aria-hidden="true">
-                        <use href="#icon-users"></use>
-                      </svg>
-                      <p>Mentor details not assigned yet.</p>
-                    </div>
-                  </div>
-
-                  <div class="profile-panel" id="tab-facilities" hidden>
-                    <div class="empty-state">
-                      <svg aria-hidden="true">
-                        <use href="#icon-home"></use>
-                      </svg>
-                      <p>No active facilities availed.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="profile-menu" id="profile-menu" hidden>
+            <a href="profile.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>My Profile</span></a>
+            <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1z"/></svg><span>Account Settings</span></a>
+            <a href="#"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Change Password</span></a>
+            <a href="#"><svg viewBox="0 0 24 24"><path d="M3 9a14 14 0 0 1 18 0M6 13a9 9 0 0 1 12 0M9.5 17a4 4 0 0 1 5 0"/><circle cx="12" cy="20" r=".5" fill="currentColor"/></svg><span>Change Internet Password</span></a>
+            <a href="login.html" data-logout><svg viewBox="0 0 24 24"><path d="M14 8V5H4v14h10v-3M10 12h11M18 9l3 3-3 3"/></svg><span>Sign Out</span></a>
           </div>
         </div>
       </div>
     </header>
 
-    <section class="hero">
-      <div class="hero-copy">
-        <span>Good Morning</span>
-        <h1>Dhananjay Kumar Verma</h1>
-        <p>Learning today, leading tomorrow.</p>
-        <div class="quick-actions">
-          <button><span><svg>
-                <use href="#icon-id"></use>
-              </svg></span>ID Card</button>
-          <button><span><svg>
-                <use href="#icon-mail"></use>
-              </svg></span>Email</button>
-          <button><span><svg>
-                <use href="#icon-link"></use>
-              </svg></span>Important Links</button>
-          <button><span><svg>
-                <use href="#icon-bell"></use>
-              </svg></span>Notices</button>
-          <button><span><svg>
-                <use href="#icon-book"></use>
-              </svg></span>LMS</button>
-          <button><span><svg>
-                <use href="#icon-shield"></use>
-              </svg></span>Anti Ragging</button>
-          <button><span><svg>
-                <use href="#icon-user-check"></use>
-              </svg></span>Student Facilitation</button>
-        </div>
-      </div>
-
-      <article class="glass card progress-card">
-        <div class="card-title">My Progress</div>
-        <div class="progress-ring" style="--value: 78">
-          <span>78%</span>
-        </div>
-        <p>Overall Progress</p>
-        <button>View Details</button>
-      </article>
-
-      <article class="glass card money-card fee-card">
-        <div class="tile-icon red"><svg>
-            <use href="#icon-wallet"></use>
-          </svg></div>
-        <span>Pending Fee</span>
-        <strong>₹ 10,000</strong>
-        <small>Due</small>
-        <button>Pay Now</button>
-      </article>
-
-      <article class="glass card money-card backlog-card">
-        <div class="tile-icon amber"><svg>
-            <use href="#icon-file"></use>
-          </svg></div>
-        <span>Backlog</span>
-        <strong>02</strong>
-        <small>Subjects</small>
-        <button class="soft">View Details</button>
-      </article>
-    </section>
-
-    <section class="dashboard-grid">
-      <div class="dashboard-main">
-        <article class="glass panel academic-panel">
-          <div class="academic-tabs" role="tablist" aria-label="Academic information">
-            <button class="academic-tab active" id="classes-tab" type="button" role="tab" aria-selected="true"
-              aria-controls="classes-panel" data-panel="classes-panel">
-              <svg aria-hidden="true">
-                <use href="#icon-video"></use>
-              </svg>
-              Classes / Lectures
-            </button>
-            <button class="academic-tab" id="attendance-tab" type="button" role="tab" aria-selected="false"
-              aria-controls="attendance-panel" data-panel="attendance-panel">
-              <svg aria-hidden="true">
-                <use href="#icon-book"></use>
-              </svg>
-              Course &amp; Attendance
-            </button>
-          </div>
-
-          <div class="academic-content active" id="classes-panel" role="tabpanel" aria-labelledby="classes-tab">
-            <div class="class-toolbar">
-              <div>
-                <span>Today Schedule</span>
-                <strong>5 lectures planned</strong>
-              </div>
-              <div class="class-filters" aria-label="Filter classes">
-                <button class="class-filter active" type="button" data-filter="all">All</button>
-                <button class="class-filter" type="button" data-filter="live">Live</button>
-                <button class="class-filter" type="button" data-filter="upcoming">Upcoming</button>
-                <button class="class-filter" type="button" data-filter="afternoon">Afternoon</button>
-              </div>
-            </div>
-
-            <div class="class-hero">
-              <div class="class-status schedule-item" data-status="live" data-period="morning">
-                <span class="class-kicker">Now</span>
-                <div>
-                  <strong>Software Engineering</strong>
-                  <small>09am - 09:45am</small>
-                </div>
-                <div class="class-meta">
-                  <b>Room D3-105</b>
-                  <em>Live</em>
-                </div>
-              </div>
-              <div class="current-class schedule-item" data-status="upcoming" data-period="morning">
-                <div>
-                  <span>Up Next</span>
-                  <h2>Software QA</h2>
-                  <p>10am - 10:45am</p>
-                  <strong>Dr. Rashmi Goyal</strong>
-                </div>
-                <mark>23CSH-309</mark>
-                <small>Venue: D3 Block room no. 105</small>
-              </div>
-            </div>
-
-            <div class="later-heading">Happening Later Today</div>
-            <div class="lecture-cards">
-              <article class="lecture-card blue schedule-item" data-status="upcoming" data-period="morning">
-                <h3>AI Advance</h3>
-                <span>10am - 10:45am</span>
-                <strong>Dr. Rashmi Goyal</strong>
-                <small>Lab 2</small>
-              </article>
-              <article class="lecture-card pink schedule-item" data-status="upcoming" data-period="morning">
-                <h3>Data mining</h3>
-                <span>11am - 11:45am</span>
-                <strong>Dr. Rashmi Goyal</strong>
-                <small>D3-203</small>
-              </article>
-              <article class="lecture-card green schedule-item" data-status="upcoming" data-period="afternoon">
-                <h3>DBMS</h3>
-                <span>01pm - 01:45pm</span>
-                <strong>Dr. Rashmi Goyal</strong>
-                <small>D3-105</small>
-              </article>
-              <article class="lecture-card red schedule-item" data-status="upcoming" data-period="afternoon">
-                <h3>Virtual Reality</h3>
-                <span>03pm - 03:45pm</span>
-                <strong>Dr. Rashmi Goyal</strong>
-                <small>Studio</small>
-              </article>
-            </div>
-          </div>
-
-          <div class="academic-content" id="attendance-panel" role="tabpanel" aria-labelledby="attendance-tab" hidden>
-            <div class="attendance-header">
-              <div class="attendance-title-block">
-                <span class="attendance-header-icon">
-                  <svg>
-                    <use href="#icon-book"></use>
-                  </svg>
-                </span>
-                <div>
-                  <h2>Course & Attendance</h2>
-                  <p>Track your academic progress and attendance</p>
-                </div>
-              </div>
-              <div class="attendance-actions">
-                <button class="semester-select-btn" type="button">
-                  <svg class="btn-icon-left">
-                    <use href="#icon-calendar"></use>
-                  </svg>
-                  <span>This Semester</span>
-                  <svg class="btn-icon-right">
-                    <use href="#icon-chevron"></use>
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="attendance-grid">
-              <!-- Left Column: Summary Cards -->
-              <div class="attendance-left-col">
-                <!-- Card 1: Current Semester -->
-                <div class="glass card attendance-stat-card progress-ring-card">
-                  <div class="progress-ring-section">
-                    <div class="progress-ring-mini" style="--value: 82">
-                      <span>82%</span>
-                    </div>
-                  </div>
-                  <div class="card-icon-top-right">
-                    <svg>
-                      <use href="#icon-users"></use>
-                    </svg>
-                  </div>
-                  <div class="stat-card-text">
-                    <strong>Current Semester</strong>
-                    <span>Overall Attendance</span>
-                  </div>
-                </div>
-
-                <!-- Card 2: Courses -->
-                <div class="glass card attendance-stat-card icon-stat-card green-theme">
-                  <div class="stat-icon-circle">
-                    <svg>
-                      <use href="#icon-graduation"></use>
-                    </svg>
-                  </div>
-                  <div class="stat-card-text">
-                    <strong>06</strong>
-                    <b>Courses</b>
-                    <span>Active Subjects</span>
-                  </div>
-                </div>
-
-                <!-- Card 3: Low Attendance -->
-                <div class="glass card attendance-stat-card icon-stat-card amber-theme">
-                  <div class="stat-icon-circle">
-                    <svg>
-                      <use href="#icon-trending-up"></use>
-                    </svg>
-                  </div>
-                  <div class="stat-card-text">
-                    <strong>01</strong>
-                    <b>Low Attendance</b>
-                    <span>Needs Focus</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Column: Course List -->
-              <div class="glass card attendance-right-card">
-                <div class="course-list">
-                  <!-- Course 1 -->
-                  <div class="course-row-item">
-                    <div class="course-icon-box blue-box">
-                      <svg>
-                        <use href="#icon-code"></use>
-                      </svg>
-                    </div>
-                    <div class="course-info">
-                      <h3>Software QA</h3>
-                      <span>23CSH-309 • Dr. Rashmi Goyal</span>
-                    </div>
-                    <div class="course-progress-section">
-                      <div class="course-progress-bar">
-                        <span class="bg-blue-green" style="width: 88%"></span>
-                      </div>
-                    </div>
-                    <span class="course-percentage">88%</span>
-                    <button class="course-dots-btn" type="button" aria-label="More options">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="1.5"></circle>
-                        <circle cx="12" cy="5" r="1.5"></circle>
-                        <circle cx="12" cy="19" r="1.5"></circle>
-                      </svg>
-                    </button>
-                  </div>
-
-                  <!-- Course 2 -->
-                  <div class="course-row-item warning">
-                    <div class="course-icon-box orange-box">
-                      <svg>
-                        <use href="#icon-wallet"></use>
-                      </svg>
-                    </div>
-                    <div class="course-info">
-                      <h3>DBMS</h3>
-                      <span>23CST-204 • Prof. Amit Sharma</span>
-                    </div>
-                    <div class="course-progress-section">
-                      <div class="course-progress-bar">
-                        <span class="bg-orange" style="width: 72%"></span>
-                      </div>
-                    </div>
-                    <span class="course-percentage warning">72%</span>
-                    <button class="course-dots-btn" type="button" aria-label="More options">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="1.5"></circle>
-                        <circle cx="12" cy="5" r="1.5"></circle>
-                        <circle cx="12" cy="19" r="1.5"></circle>
-                      </svg>
-                    </button>
-                  </div>
-
-                  <!-- Course 3 -->
-                  <div class="course-row-item">
-                    <div class="course-icon-box green-box">
-                      <svg>
-                        <use href="#icon-sun"></use>
-                      </svg>
-                    </div>
-                    <div class="course-info">
-                      <h3>Design Thinking</h3>
-                      <span>23HSM-303 • Dr. Meera Sethi</span>
-                    </div>
-                    <div class="course-progress-section">
-                      <div class="course-progress-bar">
-                        <span class="bg-blue-green" style="width: 84%"></span>
-                      </div>
-                    </div>
-                    <span class="course-percentage">84%</span>
-                    <button class="course-dots-btn" type="button" aria-label="More options">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="1.5"></circle>
-                        <circle cx="12" cy="5" r="1.5"></circle>
-                        <circle cx="12" cy="19" r="1.5"></circle>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <div class="dashboard-alerts">
-          <article class="glass panel compact dashboard-modal-card">
-            <button class="modal-option" type="button" data-modal-title="Important Messages">
-              <span class="alert-title">
-                <span class="alert-badge">3</span>
-                <svg aria-hidden="true">
-                  <use href="#icon-message"></use>
-                </svg>Important Messages</span>
-              <b aria-hidden="true">+</b>
-            </button>
-            <div class="modal-source" hidden>
-              <div class="panel-head">
-                <h2>Important Messages</h2><a href="#">View All</a>
-              </div>
-              <div class="pills"><button>Messages</button><button>Notifications</button><button>Generic</button></div>
-              <div class="message-item">
-                <div><span>Half Day Leave</span><strong>Wed, 16 Dec</strong><small>Casual</small></div>
-                <mark>Awaiting</mark>
-              </div>
-              <div class="message-item">
-                <div><span>Half Day Leave</span><strong>Wed, 16 Dec</strong><small>Sick Leave</small></div><mark
-                  class="ok">Approved</mark>
-              </div>
-            </div>
-          </article>
-
-          <article class="glass panel compact dashboard-modal-card">
-            <button class="modal-option" type="button" data-modal-title="Notifications">
-              <span class="alert-title">
-                <span class="alert-badge">12</span>
-                <svg aria-hidden="true">
-                  <use href="#icon-bell"></use>
-                </svg>Notifications</span>
-              <b aria-hidden="true">+</b>
-            </button>
-            <div class="modal-source" hidden>
-              <div class="panel-head">
-                <h2>Notifications</h2><a href="#">View All</a>
-              </div>
-              <div class="notice"><span><svg>
-                    <use href="#icon-bell"></use>
-                  </svg></span>
-                <div><strong>Portal maintenance</strong><small>The student portal will be unavailable from 2pm to 6pm
-                    today.</small></div><time>10:30 AM</time>
-              </div>
-              <div class="notice"><span><svg>
-                    <use href="#icon-book"></use>
-                  </svg></span>
-                <div><strong>Computer Science - SA</strong><small>Assignment review is scheduled this week.</small>
-                </div>
-                <time>Yesterday</time>
-              </div>
-              <div class="notice"><span><svg>
-                    <use href="#icon-file"></use>
-                  </svg></span>
-                <div><strong>AI Software Life Cycle</strong><small>New lecture notes have been uploaded.</small></div>
-                <time>May 18</time>
-              </div>
-            </div>
-          </article>
-
-          <article class="glass panel compact dashboard-modal-card">
-            <button class="modal-option" type="button" data-modal-title="Job Alerts">
-              <span class="alert-title">
-                <span class="alert-badge">5</span>
-                <svg aria-hidden="true">
-                  <use href="#icon-briefcase"></use>
-                </svg>Job Alerts</span>
-              <b aria-hidden="true">+</b>
-            </button>
-            <div class="modal-source" hidden>
-              <div class="panel-head">
-                <h2>Job Alerts</h2><a href="#">View All</a>
-              </div>
-              <div class="job"><span><svg>
-                    <use href="#icon-briefcase"></use>
-                  </svg></span>
-                <div><strong>Software Developer Intern</strong><small>TCS • Noida</small></div><em>New</em>
-              </div>
-              <div class="job"><span><svg>
-                    <use href="#icon-code"></use>
-                  </svg></span>
-                <div><strong>Data Analyst Intern</strong><small>Deloitte • Gurugram</small></div>
-              </div>
-              <div class="job"><span><svg>
-                    <use href="#icon-link"></use>
-                  </svg></span>
-                <div><strong>Web Developer Intern</strong><small>Infosys • Bangalore</small></div>
-              </div>
-              <button class="wide-button">View All Jobs</button>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <div class="support-stack">
-        <article class="query-summary dashboard-query">
-          <div class="query-heading">
-            <span>?</span>
-            <h2>My Questions/Queries</h2>
-          </div>
-          <div class="query-stats">
-            <div><span>Total</span><strong>50</strong></div>
-            <div><span>Closed</span><strong>40</strong></div>
-            <div><span>Open</span><strong>10</strong></div>
-          </div>
-        </article>
-
-        <article class="mentor-card">
-          <span class="mentor-photo" aria-hidden="true"></span>
+    <section class="profile-section">
+      <div class="glass panel profile-page-panel">
+        <div class="profile-page-title">
           <div>
-            <strong>Bhavesh Mehta (E1666)</strong>
-            <span>bhaveshe1666@cumail.in</span>
+            <span>Student account</span>
+            <h1>My Profile</h1>
           </div>
-          <button type="button">Message</button>
-        </article>
+          <span class="profile-record-status"><i></i> Profile active</span>
+        </div>
 
-        <article class="glass panel conversations">
-          <div class="panel-head">
-            <div class="conversation-heading">
-              <span class="conversation-icon"><svg>
-                  <use href="#icon-message"></use>
-                </svg></span>
-              <h2>Conversations</h2>
+        <div class="profile-modal-content">
+          <div class="profile-header-section">
+            <div class="profile-photo-wrapper">
+              <img src="assets/images/student_photo.png" alt="Dhananjay Kumar Verma">
             </div>
-            <a href="#">View All</a>
-          </div>
-          <div class="conversation-tabs" role="tablist" aria-label="Conversation type">
-            <button class="selected" type="button">Chat</button>
-            <button type="button">Mates</button>
-          </div>
-          <div class="conversation-list">
-            <div class="conversation-card">
-              <span class="mate-photo" aria-hidden="true"></span>
-              <div class="mate-copy">
-                <div class="mate-title">
-                  <strong>Maria Doe</strong>
-                  <span>( 23BCS12089 )</span>
+            <div class="profile-main-info">
+              <div class="profile-title-block">
+                <div>
+                  <span class="profile-eyebrow">B.A. Visual Effects</span>
+                  <h2>Dhananjay Kumar Verma <span class="profile-id">(16BAV1184)</span></h2>
                 </div>
-                <span class="mate-email"><svg>
-                    <use href="#icon-mail"></use>
-                  </svg>Maria.23BCS12087@Cumail.In</span>
+                <a href="mailto:dhananjay.16bav1184@cumail.in" class="profile-email">dhananjay.16bav1184@cumail.in</a>
               </div>
-              <span class="mate-status">Present</span>
-              <button class="send-message" type="button">Send Message</button>
+
+              <div class="profile-details-grid">
+                <div class="detail-group">
+                  <span>Father's Name</span>
+                  <strong>Surinder Verma</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Mother's Name</span>
+                  <strong>Anita Verma</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Religion</span>
+                  <strong>Hinduism</strong>
+                </div>
+                <div class="detail-group">
+                  <span>D.O.B</span>
+                  <strong>15 August 2002</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Admission Year</span>
+                  <strong>2020</strong>
+                </div>
+                <div class="detail-group">
+                  <span>University</span>
+                  <strong>Chandigarh University</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Current Semester</span>
+                  <strong>8</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Blood Group</span>
+                  <strong>O+</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Current Section</span>
+                  <strong>BAV-8A</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Program Code</span>
+                  <strong>BAV - B.A. (VFX)</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Student Status</span>
+                  <strong><span class="status-badge status-active">Active</span></strong>
+                </div>
+                <div class="detail-group">
+                  <span>Category</span>
+                  <strong>General</strong>
+                </div>
+                <div class="detail-group">
+                  <span>Tuition Fee</span>
+                  <strong class="detail-action">
+                    <span class="status-badge status-pending">Pending</span>
+                    <a href="#">Pay tuition <span aria-hidden="true">↗</span></a>
+                  </strong>
+                </div>
+                <div class="detail-group">
+                  <span>Course Registration</span>
+                  <strong class="detail-action">
+                    <span class="status-badge status-closed">Closed</span>
+                    <a href="#">Late registration <span aria-hidden="true">↗</span></a>
+                  </strong>
+                </div>
+                <div class="detail-group full-width">
+                  <span>Address</span>
+                  <strong>Sector 62, Mohali, Punjab 160062</strong>
+                </div>
+              </div>
             </div>
           </div>
-        </article>
 
-      </div>
-
-      <div class="announcements-layout">
-        <article class="glass panel compact announcements-panel">
-          <div class="announcement-header-row">
-            <div class="announcement-title">
-              <svg class="megaphone-red" aria-hidden="true">
-                <use href="#icon-megaphone"></use>
-              </svg>
-              <h2>Announcements</h2>
+          <div class="profile-tabs-section">
+            <div class="profile-tabs" role="tablist" aria-label="Profile information">
+              <button class="profile-tab active" type="button" role="tab" aria-selected="true" data-tab="contact">
+                <svg aria-hidden="true"><use href="#icon-id"></use></svg>
+                <span>Contact Details</span>
+              </button>
+              <button class="profile-tab" type="button" role="tab" aria-selected="false" data-tab="qualification">
+                <svg aria-hidden="true"><use href="#icon-graduation"></use></svg>
+                <span>Qualification Details</span>
+              </button>
+              <button class="profile-tab" type="button" role="tab" aria-selected="false" data-tab="suspension">
+                <svg aria-hidden="true"><use href="#icon-shield"></use></svg>
+                <span>Suspension Details</span>
+              </button>
+              <button class="profile-tab" type="button" role="tab" aria-selected="false" data-tab="mentor">
+                <svg aria-hidden="true"><use href="#icon-users"></use></svg>
+                <span>Student Mentor Details</span>
+              </button>
+              <button class="profile-tab" type="button" role="tab" aria-selected="false" data-tab="facilities">
+                <svg aria-hidden="true"><use href="#icon-home"></use></svg>
+                <span>Facilities Availed</span>
+              </button>
             </div>
-            <div class="announcement-filters">
-              <label class="announcement-search">
-                <input type="search" placeholder="Search Announcement">
-                <svg aria-hidden="true">
-                  <use href="#icon-search"></use>
-                </svg>
+
+            <div class="profile-table-filter" aria-label="Filter profile records">
+              <div class="profile-filter-heading">
+                <span class="profile-filter-icon"><svg aria-hidden="true"><use href="#icon-search"></use></svg></span>
+                <div>
+                  <strong>Find records</strong>
+                  <small>Search the selected profile section</small>
+                </div>
+              </div>
+              <label class="profile-filter-search">
+                <svg aria-hidden="true"><use href="#icon-search"></use></svg>
+                <input type="search" placeholder="Search records..." data-profile-filter-query>
               </label>
-              <div class="announcement-select-wrapper">
-                <select class="announcement-category-select" aria-label="Announcement Category Filter">
-                  <option value="all">ALL</option>
-                  <option value="academics">Academics</option>
-                  <option value="accounts">Accounts</option>
-                  <option value="administrative">Administrative</option>
-                  <option value="cultural">Cultural</option>
-                  <option value="examination">Examination</option>
-                  <option value="human resource">Human Resource</option>
-                  <option value="intl. relations">Intl. Relations</option>
-                  <option value="placement">Placement</option>
-                  <option value="polytechnic">PolyTechnic</option>
-                  <option value="registrar office">Registrar Office</option>
-                  <option value="sports">Sports</option>
-                  <option value="student affairs">Student Affairs</option>
-                  <option value="ucrd">UCRD</option>
+              <label class="profile-filter-field">
+                <span>Filter by</span>
+                <select data-profile-filter-column>
+                  <option value="all">All columns</option>
                 </select>
-              </div>
+              </label>
+              <button type="button" class="profile-filter-reset" data-profile-filter-reset disabled>Reset</button>
+              <span class="profile-filter-count" data-profile-filter-count aria-live="polite"></span>
             </div>
-          </div>
-          <div class="announcement-board">
-            <div class="announcement-list">
-              <div class="announcement-row featured">
-                <time><strong>Today</strong><span>3:00 PM</span></time>
-                <div class="announcement-copy">
-                  <div class="announcement-meta"><span>News</span></div>
-                  <h3>Chandigarh University emerges as overall champion at AIU National Youth Festival 2025</h3>
-                  <p>Respected All,</p>
-                  <p>We are writing to share with you a momentous achievement that has brought unparalleled glory to our
-                    institution. Chandigarh University has emerged as the <strong>overall champion at the AIU National
-                      Youth
-                      Festival 2025, held at Amity University, Noida.</strong></p>
-                  <p><strong>- Overall Champion- Rank 1</strong><br><strong>- Overall in Literary - 1st
-                      Position</strong></p>
+
+            <div class="profile-tab-content">
+              <div class="profile-panel active" id="tab-contact" role="tabpanel">
+                <div class="table-responsive">
+                  <table class="profile-table">
+                    <thead>
+                      <tr>
+                        <th>Contact Type</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Email ID</th>
+                        <th>Occupation</th>
+                        <th>University Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Father</td>
+                        <td>Surinder Verma</td>
+                        <td>9914601560</td>
+                        <td>surinder.verma@example.com</td>
+                        <td>Business Owner</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <td>Student</td>
+                        <td>Dhananjay Kumar Verma</td>
+                        <td>7355775500</td>
+                        <td>rajwindersingh.net@gmail.com</td>
+                        <td>Student</td>
+                        <td>16BAV1184@cuchd.in</td>
+                      </tr>
+                      <tr>
+                        <td>Mother</td>
+                        <td>Anita Verma</td>
+                        <td>9876543222</td>
+                        <td>anita.verma@example.com</td>
+                        <td>Teacher</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <td>Guardian</td>
+                        <td>Rakesh Sharma</td>
+                        <td>9812345670</td>
+                        <td>rakesh.sharma@example.com</td>
+                        <td>Government Employee</td>
+                        <td>-</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <div class="announcement-row">
-                <time><strong>Oct 20, 2025</strong><span>05:00 PM</span></time>
-                <div class="announcement-copy">
-                  <span>Academics</span>
-                  <p>This prestigious event witnessed participation from universities across India, and our students
-                    have made
-                    us proud by excelling in various categories. Students can apply for a maximum of <strong>1 Theory +
-                      1
-                      Practical / 2 Theory / 2 Practical's.</strong></p>
+
+              <div class="profile-panel" id="tab-qualification" role="tabpanel" hidden>
+                <div class="table-responsive qualification-table-wrap">
+                  <table class="profile-table qualification-table">
+                    <thead>
+                      <tr>
+                        <th>Qualification</th>
+                        <th>Stream</th>
+                        <th>School/College Institute</th>
+                        <th>University Board</th>
+                        <th>Passing Year</th>
+                        <th>Percent Marks</th>
+                        <th>Remarks</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Secondary (10th)</td>
+                        <td>General</td>
+                        <td>Government Model Senior Secondary School</td>
+                        <td>CBSE</td>
+                        <td>2018</td>
+                        <td>84.6%</td>
+                        <td>Passed</td>
+                      </tr>
+                      <tr>
+                        <td>Senior Secondary (12th)</td>
+                        <td>Arts & Multimedia</td>
+                        <td>DAV Senior Secondary School</td>
+                        <td>CBSE</td>
+                        <td>2020</td>
+                        <td>82.4%</td>
+                        <td>Passed with distinction</td>
+                      </tr>
+                      <tr>
+                        <td>Certificate</td>
+                        <td>Graphic Design</td>
+                        <td>National Institute of Digital Arts</td>
+                        <td>Skill India</td>
+                        <td>2021</td>
+                        <td>91%</td>
+                        <td>Completed</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <div class="announcement-row">
-                <time><strong>Oct 20, 2025</strong><span>05:00 PM</span></time>
-                <div class="announcement-copy">
-                  <span>Activities</span>
-                  <p>Workshop registrations, placement updates, and department activities will be shared here for quick
-                    access
-                    by all students.</p>
+
+              <div class="profile-panel" id="tab-suspension" role="tabpanel" hidden>
+                <div class="table-responsive suspension-table-wrap">
+                  <table class="profile-table suspension-table">
+                    <thead>
+                      <tr>
+                        <th>Suspended From</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Reason</th>
+                        <th>Remarks</th>
+                        <th>Suspended Date</th>
+                        <th>Revoke Date</th>
+                        <th>Revoke Remarks</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Library Services</td>
+                        <td>12 Feb 2023</td>
+                        <td>14 Feb 2023</td>
+                        <td>Overdue material</td>
+                        <td>Book returned and fine paid</td>
+                        <td>12 Feb 2023</td>
+                        <td>14 Feb 2023</td>
+                        <td>Access restored</td>
+                      </tr>
+                      <tr>
+                        <td>Sports Complex</td>
+                        <td>05 Sep 2023</td>
+                        <td>06 Sep 2023</td>
+                        <td>ID verification pending</td>
+                        <td>Temporary restriction</td>
+                        <td>05 Sep 2023</td>
+                        <td>06 Sep 2023</td>
+                        <td>Documents verified</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="profile-panel" id="tab-mentor" role="tabpanel" hidden>
+                <div class="table-responsive mentor-table-wrap">
+                  <table class="profile-table mentor-table">
+                    <thead>
+                      <tr>
+                        <th>Mentor Name</th>
+                        <th>Mentor ID</th>
+                        <th>Mentor Department</th>
+                        <th>Mentor Designation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Dr. Amandeep Singh</td>
+                        <td>CU-MEN-1042</td>
+                        <td>Film & Visual Arts</td>
+                        <td>Associate Professor</td>
+                      </tr>
+                      <tr>
+                        <td>Ms. Neha Kapoor</td>
+                        <td>CU-MEN-1187</td>
+                        <td>Animation & Design</td>
+                        <td>Assistant Professor</td>
+                      </tr>
+                      <tr>
+                        <td>Mr. Rohit Mehra</td>
+                        <td>CU-MEN-1215</td>
+                        <td>Student Welfare</td>
+                        <td>Academic Coordinator</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="profile-panel" id="tab-facilities" role="tabpanel" hidden>
+                <div class="table-responsive facilities-table-wrap">
+                  <table class="profile-table facilities-table">
+                    <thead>
+                      <tr>
+                        <th>Transport</th>
+                        <th>Route Name</th>
+                        <th>Hostel</th>
+                        <th>Hostel Name</th>
+                        <th>Room No</th>
+                        <th>Scholarship</th>
+                        <th>Scholarship Name</th>
+                        <th>Scholarship %</th>
+                        <th>Pending Fee</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Yes</td>
+                        <td>Mohali Phase 7</td>
+                        <td>No</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Yes</td>
+                        <td>Merit Scholarship</td>
+                        <td>20%</td>
+                        <td>₹12,500</td>
+                      </tr>
+                      <tr>
+                        <td>No</td>
+                        <td>-</td>
+                        <td>Yes</td>
+                        <td>Govind Hostel</td>
+                        <td>B-214</td>
+                        <td>No</td>
+                        <td>-</td>
+                        <td>0%</td>
+                        <td>₹8,000</td>
+                      </tr>
+                      <tr>
+                        <td>Yes</td>
+                        <td>Chandigarh Sector 43</td>
+                        <td>No</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Yes</td>
+                        <td>Sports Scholarship</td>
+                        <td>15%</td>
+                        <td>₹0</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
-        </article>
-
-        <article class="glass panel calendar-panel">
-          <div class="calendar-head">
-            <div>
-              <h2>May 2026</h2>
-              <span>Meeting on</span>
-            </div>
-            <div class="calendar-actions">
-              <button type="button" aria-label="Previous month"><svg aria-hidden="true">
-                  <use href="#icon-chevron"></use>
-                </svg></button>
-              <button type="button" aria-label="Next month"><svg aria-hidden="true">
-                  <use href="#icon-chevron"></use>
-                </svg></button>
-            </div>
-          </div>
-
-          <div class="calendar-filters" aria-label="Calendar filters">
-            <button class="active" type="button" data-calendar-filter="all">All Months</button>
-            <button type="button" data-calendar-filter="month">This Month</button>
-            <button type="button" data-calendar-filter="meeting">Meetings</button>
-          </div>
-
-          <div class="calendar-grid" aria-label="May 2026 calendar">
-            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-            <button type="button" disabled></button><button type="button" disabled></button><button type="button"
-              disabled></button><button type="button" disabled></button><button type="button" disabled></button><button
-              type="button" data-calendar-day="month">1</button><button type="button" data-calendar-day="month">2</button>
-            <button type="button" data-calendar-day="month">3</button><button type="button" data-calendar-day="month">4</button><button type="button" data-calendar-day="month">5</button><button
-              type="button" data-calendar-day="month">6</button><button type="button" data-calendar-day="month">7</button><button type="button" data-calendar-day="month">8</button><button
-              type="button" data-calendar-day="month">9</button>
-            <button type="button" data-calendar-day="month">10</button><button type="button" data-calendar-day="month">11</button><button type="button" data-calendar-day="month">12</button><button
-              type="button" data-calendar-day="month">13</button><button type="button" data-calendar-day="month">14</button><button class="today meeting-day"
-              type="button" data-calendar-day="month meeting">15</button><button type="button" data-calendar-day="month">16</button>
-            <button type="button" data-calendar-day="month">17</button><button type="button" data-calendar-day="month">18</button><button type="button" data-calendar-day="month">19</button><button
-              type="button" data-calendar-day="month">20</button><button type="button" data-calendar-day="month">21</button><button type="button" data-calendar-day="month">22</button><button
-              type="button" data-calendar-day="month">23</button>
-            <button type="button" data-calendar-day="month">24</button><button type="button" data-calendar-day="month">25</button><button type="button" data-calendar-day="month">26</button><button
-              type="button" data-calendar-day="month">27</button><button type="button" data-calendar-day="month">28</button><button type="button" data-calendar-day="month">29</button><button
-              type="button" data-calendar-day="month">30</button>
-            <button type="button" data-calendar-day="month">31</button><button type="button" disabled></button><button type="button"
-              disabled></button><button type="button" disabled></button><button type="button" disabled></button><button
-              type="button" disabled></button><button type="button" disabled></button>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
@@ -1453,7 +977,7 @@
           </div>
         </div>
         <div class="footer-logo">
-          <img src="logo.png" alt="CUIMS Logo">
+          <img src="assets/images/logo.png" alt="CUIMS Logo">
         </div>
       </div>
       <div class="footer-bottom">
@@ -1470,6 +994,33 @@
 
 
   </main>
+  <div id="navbar-notifications-source" hidden>
+    <div class="notice">
+      <span><svg><use href="#icon-book"></use></svg></span>
+      <div>
+        <strong>Software QA - Assignment 3</strong>
+        <small>Submission deadline is tonight at 11:59 PM. Please upload your PDF report.</small>
+      </div>
+      <time>10 mins ago</time>
+    </div>
+    <div class="notice">
+      <span><svg><use href="#icon-file"></use></svg></span>
+      <div>
+        <strong>Mid-Term Results Published</strong>
+        <small>Your mid-semester grades for DBMS and Software Engineering are now available.</small>
+      </div>
+      <time>2 hours ago</time>
+    </div>
+    <div class="notice">
+      <span><svg><use href="#icon-users"></use></svg></span>
+      <div>
+        <strong>Low Attendance Alert</strong>
+        <small>Your attendance in DBMS has dropped to 72%. Maintain 75% to avoid debarment.</small>
+      </div>
+      <time>Yesterday</time>
+    </div>
+  </div>
+
   <div class="dashboard-modal" id="dashboard-modal" hidden>
     <div class="modal-backdrop" data-modal-close></div>
     <section class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -1483,7 +1034,7 @@
 
 
 
-  <script src="index.js"></script>
+  <script src="assets/js/index.js"></script>
 </body>
 
 </html>

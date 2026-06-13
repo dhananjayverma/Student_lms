@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CUIMS Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/auth.css">
+</head>
+
+<body>
+  <main class="auth-page">
+    <section class="auth-shell" aria-label="CUIMS authentication">
+      <section class="auth-card">
+        <div class="auth-logo">
+          <img src="assets/images/logo.png" alt="CUIMS">
+        </div>
+        <div class="auth-heading">
+          <h1>LOGIN</h1>
+          <p>Welcome to University Information<br>Management System - <strong>Mohali Campus</strong></p>
+        </div>
+
+        <form class="auth-form active" id="login-form">
+          <label class="auth-field">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M20 21a8 8 0 0 0-16 0" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <input type="text" name="userId" placeholder="Enter User Id" autocomplete="username" required>
+          </label>
+
+          <label class="auth-field password-field" hidden>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <rect x="5" y="10" width="14" height="11" rx="2" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              <circle cx="12" cy="15.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+            <input type="password" name="password" placeholder="Enter Password" autocomplete="current-password"
+              minlength="1">
+          </label>
+
+          <button class="auth-submit" type="submit">Next</button>
+
+          <div class="auth-second-actions" hidden>
+            <span>OR</span>
+            <a class="registration-button" href="#">Click Here For Registration</a>
+            <a class="forgot-link" href="#">Forgot Password?</a>
+          </div>
+        </form>
+
+        <p class="auth-note" id="auth-message" aria-live="polite">
+          Enter your User ID to continue.
+        </p>
+
+        <div class="store-row" aria-label="Download app links">
+          <a href="#" aria-label="Get it on Google Play">
+            <small>GET IT ON</small>
+            <strong>Google Play</strong>
+          </a>
+          <a href="#" aria-label="Download on the App Store">
+            <small>Download on the</small>
+            <strong>App Store</strong>
+          </a>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="assets/js/auth.js"></script>
+</body>
+
+</html>

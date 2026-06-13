@@ -1,3 +1,9 @@
+const authSessionKey = "cuims-authenticated";
+const isAuthenticated = localStorage.getItem(authSessionKey) === "true";
+
+if (!isAuthenticated) {
+  window.location.href = "login.html";
+}
 
 const hour = new Date().getHours();
 const greeting = hour < 12 ? "Good Morning," : hour < 17 ? "Good Afternoon," : "Good Evening,";
@@ -11,6 +17,15 @@ const themeChoiceButtons = document.querySelectorAll("[data-theme-value]");
 const shell = document.querySelector(".shell");
 const mobileSidebarQuery = window.matchMedia("(max-width: 980px)");
 const desktopDashboardQuery = window.matchMedia("(min-width: 1181px)");
+
+document.querySelectorAll("[data-logout]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    localStorage.removeItem(authSessionKey);
+    localStorage.removeItem("cuims-user");
+    window.location.href = "login.html";
+  });
+});
 
 if (greetingNode) {
   greetingNode.textContent = greeting;
@@ -168,6 +183,52 @@ shell?.addEventListener("scroll", updateNavbarSurface, { passive: true });
 window.addEventListener("scroll", updateNavbarSurface, { passive: true });
 mobileSidebarQuery.addEventListener("change", updateNavbarSurface);
 updateNavbarSurface();
+
+const profileMenuWrappers = document.querySelectorAll(".profile-trigger-wrapper");
+
+const closeProfileMenus = (except = null) => {
+  profileMenuWrappers.forEach((wrapper) => {
+    if (wrapper === except) return;
+    const trigger = wrapper.querySelector(".profile-menu-trigger");
+    const menu = wrapper.querySelector(".profile-menu");
+    if (!trigger || !menu) return;
+    trigger.setAttribute("aria-expanded", "false");
+    menu.hidden = true;
+  });
+};
+
+profileMenuWrappers.forEach((wrapper) => {
+  const trigger = wrapper.querySelector(".profile-menu-trigger");
+  const menu = wrapper.querySelector(".profile-menu");
+  if (!trigger || !menu) return;
+
+  trigger.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const shouldOpen = menu.hidden;
+    closeProfileMenus(wrapper);
+    menu.hidden = !shouldOpen;
+    trigger.setAttribute("aria-expanded", String(shouldOpen));
+  });
+
+  menu.addEventListener("click", (event) => {
+    const link = event.target.closest("a");
+    if (link?.getAttribute("href") === "#") {
+      event.preventDefault();
+    }
+  });
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest(".profile-trigger-wrapper")) {
+    closeProfileMenus();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeProfileMenus();
+  }
+});
 
 const dashboardGrid = document.querySelector(".dashboard-grid");
 const dashboardMain = document.querySelector(".dashboard-main");
@@ -602,9 +663,13 @@ document.addEventListener("click", (event) => {
   if (!tabsContainer) return;
 
   const targetId = tab.dataset.tab;
+  tabsContainer.dataset.profileTheme = targetId;
 
   // Deactivate all tabs in this container
-  tabsContainer.querySelectorAll(".profile-tab").forEach(t => t.classList.remove("active"));
+  tabsContainer.querySelectorAll(".profile-tab").forEach((item) => {
+    item.classList.remove("active");
+    item.setAttribute("aria-selected", "false");
+  });
 
   // Deactivate all panels in this container
   tabsContainer.querySelectorAll(".profile-panel").forEach(p => {
@@ -614,11 +679,109 @@ document.addEventListener("click", (event) => {
 
   // Activate selected tab and panel
   tab.classList.add("active");
+  tab.setAttribute("aria-selected", "true");
   const targetPanel = tabsContainer.querySelector(`#tab-${targetId}`);
   if (targetPanel) {
     targetPanel.classList.add("active");
     targetPanel.hidden = false;
   }
+
+  updateProfileTableFilter(tabsContainer);
+});
+
+const updateProfileTableFilter = (tabsContainer) => {
+  const filterBar = tabsContainer.querySelector(".profile-table-filter");
+  const activePanel = tabsContainer.querySelector(".profile-panel.active");
+  const table = activePanel?.querySelector(".profile-table");
+  if (!filterBar || !table) return;
+
+  const queryInput = filterBar.querySelector("[data-profile-filter-query]");
+  const columnSelect = filterBar.querySelector("[data-profile-filter-column]");
+  const resetButton = filterBar.querySelector("[data-profile-filter-reset]");
+  const countNode = filterBar.querySelector("[data-profile-filter-count]");
+  const headings = [...table.querySelectorAll("thead th")];
+  const rows = [...table.querySelectorAll("tbody tr:not(.profile-empty-row):not(.suspension-empty-row)")];
+  const activeTabLabel = tabsContainer.querySelector(".profile-tab.active span")?.textContent.trim() || "records";
+
+  columnSelect.innerHTML = '<option value="all">All columns</option>';
+  headings.forEach((heading, index) => {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = heading.textContent.trim();
+    columnSelect.append(option);
+  });
+
+  queryInput.value = "";
+  queryInput.placeholder = `Search ${activeTabLabel.toLowerCase()}...`;
+  columnSelect.value = "all";
+  resetButton.disabled = true;
+  rows.forEach((row) => {
+    row.hidden = false;
+  });
+
+  const existingNoMatch = table.querySelector(".profile-filter-empty-row");
+  existingNoMatch?.remove();
+  countNode.textContent = rows.length ? `${rows.length} record${rows.length === 1 ? "" : "s"}` : "No records";
+};
+
+document.querySelectorAll(".profile-tabs-section").forEach((tabsContainer) => {
+  const filterBar = tabsContainer.querySelector(".profile-table-filter");
+  if (!filterBar) return;
+
+  const queryInput = filterBar.querySelector("[data-profile-filter-query]");
+  const columnSelect = filterBar.querySelector("[data-profile-filter-column]");
+  const resetButton = filterBar.querySelector("[data-profile-filter-reset]");
+  const countNode = filterBar.querySelector("[data-profile-filter-count]");
+
+  const applyProfileTableFilter = () => {
+    const table = tabsContainer.querySelector(".profile-panel.active .profile-table");
+    if (!table) return;
+
+    const query = queryInput.value.trim().toLowerCase();
+    const selectedColumn = columnSelect.value;
+    const rows = [...table.querySelectorAll("tbody tr:not(.profile-empty-row):not(.suspension-empty-row)")];
+    let visibleCount = 0;
+
+    table.querySelector(".profile-filter-empty-row")?.remove();
+
+    rows.forEach((row) => {
+      const cells = [...row.cells];
+      const searchableText = selectedColumn === "all"
+        ? cells.map((cell) => cell.textContent).join(" ")
+        : cells[Number(selectedColumn)]?.textContent || "";
+      const isVisible = !query || searchableText.toLowerCase().includes(query);
+      row.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
+    });
+
+    if (query && rows.length && visibleCount === 0) {
+      const noMatchRow = document.createElement("tr");
+      noMatchRow.className = "profile-filter-empty-row";
+      const cell = document.createElement("td");
+      cell.colSpan = table.querySelectorAll("thead th").length;
+      cell.textContent = "No matching records found";
+      noMatchRow.append(cell);
+      table.tBodies[0].append(noMatchRow);
+    }
+
+    resetButton.disabled = !query && selectedColumn === "all";
+    countNode.textContent = rows.length
+      ? `${visibleCount} of ${rows.length} record${rows.length === 1 ? "" : "s"}`
+      : "No records";
+  };
+
+  queryInput.addEventListener("input", applyProfileTableFilter);
+  columnSelect.addEventListener("change", applyProfileTableFilter);
+  resetButton.addEventListener("click", () => {
+    queryInput.value = "";
+    columnSelect.value = "all";
+    applyProfileTableFilter();
+    queryInput.focus();
+  });
+
+  tabsContainer.dataset.profileTheme =
+    tabsContainer.querySelector(".profile-tab.active")?.dataset.tab || "contact";
+  updateProfileTableFilter(tabsContainer);
 });
 
 // Announcements Search and Category Dropdown Filtering

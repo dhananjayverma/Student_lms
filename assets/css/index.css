@@ -20,10 +20,7 @@ body {
   height: 100vh;
   margin: 0;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 18% 0%, rgba(30, 98, 255, 0.12), transparent 30%),
-    radial-gradient(circle at 100% 12%, rgba(38, 198, 129, 0.10), transparent 28%),
-    linear-gradient(180deg, #f8fbff 0%, #eef4f9 52%, #f7faf7 100%);
+  background: url('../images/uni.png') no-repeat center center / cover;
   overflow: hidden;
   transition: background 320ms ease, color 320ms ease;
 }
@@ -35,45 +32,12 @@ body.dark-theme {
   --glass: #131e30;
   color: var(--ink);
   background:
-    radial-gradient(circle at 18% 0%, rgba(84, 126, 255, 0.16), transparent 30%),
-    radial-gradient(circle at 100% 10%, rgba(38, 198, 129, 0.10), transparent 28%),
-    linear-gradient(180deg, #0c1422 0%, #09111e 58%, #0b1720 100%);
+    linear-gradient(rgba(12, 20, 34, 0.5), rgba(9, 17, 30, 0.6)),
+    url('../images/uni.png') no-repeat center center / cover;
 }
 
 body.modal-open {
   overflow: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(7, 21, 79, 0.055), transparent 22%, transparent 78%, rgba(7, 21, 79, 0.045)),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 32%, rgba(255, 255, 255, 0.32));
-  opacity: 0.86;
-}
-
-body.dark-theme::before {
-  display: none;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.62), transparent 48%),
-    linear-gradient(180deg, transparent 0%, rgba(7, 21, 79, 0.035) 100%);
-  opacity: 0.72;
-}
-
-body.dark-theme::after {
-  display: none;
 }
 
 a {

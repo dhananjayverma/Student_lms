@@ -56,13 +56,23 @@ python -m http.server 8000
 
 ```
 LMS/
-├── index.html           # Main HTML structure
-├── index.css            # Global styles and glass-morphism effects
-├── sidebar.css          # Sidebar navigation styles
-├── dashboard.css        # Dashboard layout and component styles
-├── index.js             # Interactive functionality and event handling
-├── logo.png             # University logo
-└── README.md            # Project documentation
+├── index.html                 # Main dashboard page
+├── login.html                 # Login page
+├── profile.html               # Student profile page
+├── assets/
+│   ├── css/
+│   │   ├── auth.css           # Login page styles
+│   │   ├── index.css          # Global styles and glass-morphism effects
+│   │   ├── sidebar.css        # Sidebar navigation styles
+│   │   └── dashboard.css      # Dashboard layout and component styles
+│   ├── js/
+│   │   ├── auth.js            # Two-step demo login flow
+│   │   └── index.js           # Interactive functionality and event handling
+│   └── images/
+│       ├── logo.png           # University logo
+│       ├── student_photo.png  # Student avatar/photo
+│       └── uni.png            # Background image
+└── README.md                  # Project documentation
 ```
 
 ## 🎯 Key Components
@@ -89,7 +99,7 @@ The dashboard uses a modern glass-morphism aesthetic with:
 ## 🛠️ Customization
 
 ### Modifying Colors
-Edit the CSS variables in `index.css`:
+Edit the CSS variables in `assets/css/index.css`:
 ```css
 :root {
   --ink: #2a2e43;
@@ -101,7 +111,7 @@ Edit the CSS variables in `index.css`:
 ### Adding New Sections
 1. Add HTML structure in `index.html`
 2. Style components in appropriate CSS file
-3. Add interactivity in `index.js`
+3. Add interactivity in `assets/js/index.js`
 
 ### Updating Content
 Replace placeholder data in `index.html` with:
