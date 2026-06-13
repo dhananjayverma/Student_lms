@@ -1,4 +1,4 @@
- 
+
 const hour = new Date().getHours();
 const greeting = hour < 12 ? "Good Morning," : hour < 17 ? "Good Afternoon," : "Good Evening,";
 const greetingNode = document.querySelector(".hero-copy > span");
@@ -107,10 +107,10 @@ if (sidebar && sidebarMenu) {
       if (link.getAttribute("href") === "#") {
         event.preventDefault();
       }
-      
+
       // Remove active class from all links
       sidebarLinks.forEach(l => l.classList.remove("active"));
-      
+
       // Add active class to the clicked link
       link.classList.add("active");
 
@@ -180,7 +180,7 @@ const layoutAnnouncementsSidebar = announcementsLayout?.querySelector(".announce
 
 const updateDashboardColumns = () => {
   if (!dashboardGrid || !dashboardMain || !supportStack || !announcementsLayout ||
-      !layoutAnnouncementsMain || !layoutAnnouncementsPanel || !layoutAnnouncementsSidebar) return;
+    !layoutAnnouncementsMain || !layoutAnnouncementsPanel || !layoutAnnouncementsSidebar) return;
 
   if (desktopDashboardQuery.matches) {
     if (layoutAnnouncementWidgets) {
@@ -375,7 +375,7 @@ if (conversationPanelHead && conversationsPanel) {
 
   conversationPanelHead.addEventListener("click", () => {
     if (window.innerWidth > 980) return;
-    
+
     // Don't toggle if clicking on the "View All" link
     if (event.target.tagName.toLowerCase() === 'a') return;
 
@@ -394,16 +394,16 @@ document.addEventListener("click", (event) => {
   if (!tabsContainer) return;
 
   const targetId = tab.dataset.tab;
-  
+
   // Deactivate all tabs in this container
   tabsContainer.querySelectorAll(".profile-tab").forEach(t => t.classList.remove("active"));
-  
+
   // Deactivate all panels in this container
   tabsContainer.querySelectorAll(".profile-panel").forEach(p => {
     p.classList.remove("active");
     p.hidden = true;
   });
-  
+
   // Activate selected tab and panel
   tab.classList.add("active");
   const targetPanel = tabsContainer.querySelector(`#tab-${targetId}`);
@@ -412,3 +412,48 @@ document.addEventListener("click", (event) => {
     targetPanel.hidden = false;
   }
 });
+
+// Announcements Search and Category Dropdown Filtering
+const announcementSearchInput = document.querySelector(".announcement-search input");
+const announcementSelect = document.querySelector(".announcement-category-select");
+const announcementRows = document.querySelectorAll(".announcement-list .announcement-row");
+
+if (announcementRows.length > 0) {
+  let activeCategory = "all";
+  let searchQuery = "";
+
+  const filterAnnouncements = () => {
+    announcementRows.forEach((row) => {
+      // Find category in the row (e.g. News, Academics, Activities)
+      const metaSpan = row.querySelector(".announcement-meta span, .announcement-copy > span");
+      const category = metaSpan ? metaSpan.textContent.trim().toLowerCase() : "";
+
+      // Find title and text content
+      const copy = row.querySelector(".announcement-copy");
+      const fullText = copy ? copy.textContent.toLowerCase() : "";
+
+      const matchesCategory = activeCategory === "all" || category === activeCategory;
+      const matchesSearch = searchQuery === "" || fullText.includes(searchQuery);
+
+      if (matchesCategory && matchesSearch) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  };
+
+  if (announcementSearchInput) {
+    announcementSearchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      filterAnnouncements();
+    });
+  }
+
+  if (announcementSelect) {
+    announcementSelect.addEventListener("change", (e) => {
+      activeCategory = e.target.value.trim().toLowerCase();
+      filterAnnouncements();
+    });
+  }
+}
