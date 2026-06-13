@@ -6126,3 +6126,142 @@ body.dark-theme .job-badge.bg-green {
   background: rgba(16, 185, 129, 0.18);
   color: #86efac;
 }
+
+/* Dark Mode Modal Custom Styling & Enhancements */
+body.dark-theme .modal-backdrop {
+  background: rgba(4, 9, 20, 0.85) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+body.dark-theme .modal-panel {
+  background: #131e30 !important;
+  color: #edf4ff !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.dark-theme .modal-head {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-theme .modal-head h2 {
+  color: #edf4ff !important;
+}
+
+body.dark-theme .modal-close {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #edf4ff !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-theme .modal-close:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-theme .modal-body {
+  color: #edf4ff !important;
+}
+
+body.dark-theme .pills button {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #aebbd0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-theme .pills button:first-child {
+  background: #1e62ff !important;
+  color: #ffffff !important;
+  border-color: #1e62ff !important;
+}
+
+body.dark-theme .message-item {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-theme .message-item strong {
+  color: #edf4ff !important;
+}
+
+body.dark-theme .message-item span {
+  color: #aebbd0 !important;
+}
+
+body.dark-theme .message-item small {
+  color: #7d8da7 !important;
+}
+
+body.dark-theme .notice {
+  background: #1a2740 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  padding: 10px 12px !important;
+  border-radius: 12px !important;
+  margin-bottom: 8px !important;
+}
+
+body.dark-theme .notice strong {
+  color: #edf4ff !important;
+}
+
+body.dark-theme .notice small {
+  color: #aebbd0 !important;
+}
+
+body.dark-theme .notice time {
+  color: #7d8da7 !important;
+}
+
+body.dark-theme .profile-header-section {
+  background: #1a2740 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Dark Mode Profile Card overrides */
+body.dark-theme .profile {
+  background:
+    radial-gradient(circle at 92% 0%, rgba(30, 98, 255, 0.08), transparent 34%),
+    #131e30 !important;
+  color: #edf4ff !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-theme .profile:hover {
+  background:
+    radial-gradient(circle at 92% 0%, rgba(30, 98, 255, 0.14), transparent 34%),
+    #1a2740 !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+body.dark-theme .profile strong {
+  color: #edf4ff !important;
+}
+
+body.dark-theme .profile span {
+  color: #aebbd0 !important;
+}
+
+body.dark-theme .profile-chevron {
+  color: #edf4ff !important;
+}
+
+/* Mobile Drawer User Card overrides */
+body.dark-theme .drawer-user {
+  background:
+    radial-gradient(circle at 92% 0%, rgba(30, 98, 255, 0.08), transparent 34%),
+    #1a2740 !important;
+  color: #edf4ff !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-theme .drawer-user strong {
+  color: #edf4ff !important;
+}
+
+body.dark-theme .drawer-user span {
+  color: #aebbd0 !important;
+}
+
+body.dark-theme .drawer-user .profile-chevron {
+  color: #edf4ff !important;
+}
+
+

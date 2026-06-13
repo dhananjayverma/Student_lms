@@ -295,12 +295,15 @@ conversationViewAll?.addEventListener("click", (event) => {
   );
 });
 
-document.querySelectorAll(".widget-view-all-link").forEach((link) => {
-  link.addEventListener("click", (event) => {
+document.querySelectorAll(".widget-view-all-link, .nav-notification-trigger").forEach((trigger) => {
+  trigger.addEventListener("click", (event) => {
     event.preventDefault();
-    const sourceId = link.dataset.sourceId;
+    const sourceId = trigger.dataset.sourceId;
     const source = document.getElementById(sourceId);
-    openDashboardModalFromSource(link, source, link.dataset.modalTitle || link.textContent.trim());
+    if (document.body.classList.contains("nav-drawer-open")) {
+      closeSidebarDrawer();
+    }
+    openDashboardModalFromSource(trigger, source, trigger.dataset.modalTitle || trigger.textContent.trim());
   });
 });
 

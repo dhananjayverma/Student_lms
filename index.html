@@ -173,7 +173,7 @@
         </svg>
         <span>Theme</span>
       </button>
-      <button class="drawer-action" type="button">
+      <button class="drawer-action nav-notification-trigger" type="button" aria-label="Notifications" data-modal-title="Notifications" data-source-id="navbar-notifications-source">
         <svg>
           <use href="#icon-bell"></use>
         </svg>
@@ -554,7 +554,7 @@
         <button class="nav-utility" type="button" aria-label="Home"><svg>
             <use href="#icon-home"></use>
           </svg></button>
-        <button class="nav-utility badge" type="button" aria-label="Notifications"><svg>
+        <button class="nav-utility badge nav-notification-trigger" type="button" aria-label="Notifications" data-modal-title="Notifications" data-source-id="navbar-notifications-source"><svg>
             <use href="#icon-bell"></use>
           </svg></button>
         <button class="nav-utility" type="button" aria-label="Messages"><svg>
@@ -1645,6 +1645,33 @@
 
 
   </main>
+  <div id="navbar-notifications-source" hidden>
+    <div class="notice">
+      <span><svg><use href="#icon-book"></use></svg></span>
+      <div>
+        <strong>Software QA - Assignment 3</strong>
+        <small>Submission deadline is tonight at 11:59 PM. Please upload your PDF report.</small>
+      </div>
+      <time>10 mins ago</time>
+    </div>
+    <div class="notice">
+      <span><svg><use href="#icon-file"></use></svg></span>
+      <div>
+        <strong>Mid-Term Results Published</strong>
+        <small>Your mid-semester grades for DBMS and Software Engineering are now available.</small>
+      </div>
+      <time>2 hours ago</time>
+    </div>
+    <div class="notice">
+      <span><svg><use href="#icon-users"></use></svg></span>
+      <div>
+        <strong>Low Attendance Alert</strong>
+        <small>Your attendance in DBMS has dropped to 72%. Maintain 75% to avoid debarment.</small>
+      </div>
+      <time>Yesterday</time>
+    </div>
+  </div>
+
   <div class="dashboard-modal" id="dashboard-modal" hidden>
     <div class="modal-backdrop" data-modal-close></div>
     <section class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="modal-title">
