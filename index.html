@@ -520,6 +520,19 @@
 
   <main class="shell">
     <header class="topbar">
+      <div class="profile-trigger-wrapper mobile-only-profile">
+        <button class="profile-menu-trigger mobile-avatar-btn" type="button" aria-expanded="false"
+          aria-controls="mobile-profile-menu">
+          <span class="profile-avatar"><img src="assets/images/student_photo.png" alt="Profile"></span>
+        </button>
+        <div class="profile-menu" id="mobile-profile-menu" hidden>
+          <a href="profile.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>My Profile</span></a>
+          <a href="#" class="account-settings-trigger" data-modal-title="Account Settings" data-source-id="account-settings-source"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1z"/></svg><span>Account Settings</span></a>
+          <a href="#"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Change Password</span></a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M3 9a14 14 0 0 1 18 0M6 13a9 9 0 0 1 12 0M9.5 17a4 4 0 0 1 5 0"/><circle cx="12" cy="20" r=".5" fill="currentColor"/></svg><span>Change Internet Password</span></a>
+          <a href="login.html" data-logout><svg viewBox="0 0 24 24"><path d="M14 8V5H4v14h10v-3M10 12h11M18 9l3 3-3 3"/></svg><span>Sign Out</span></a>
+        </div>
+      </div>
       <button class="icon-button sidebar-toggle-button" type="button" aria-label="Open navigation drawer"
         aria-pressed="false" aria-controls="site-sidebar"><svg>
           <use href="#icon-menu"></use>
@@ -764,6 +777,14 @@
                 <button class="class-filter" type="button" data-filter="upcoming">Upcoming</button>
                 <button class="class-filter" type="button" data-filter="afternoon">Afternoon</button>
               </div>
+              <div class="class-filters-select-wrapper">
+                <select class="class-filter-select" aria-label="Filter classes">
+                  <option value="all">All</option>
+                  <option value="live">Live</option>
+                  <option value="upcoming">Upcoming</option>
+                  <option value="afternoon">Afternoon</option>
+                </select>
+              </div>
             </div>
 
             <div class="class-hero">
@@ -842,6 +863,13 @@
                     <use href="#icon-chevron"></use>
                   </svg>
                 </button>
+                <div class="semester-select-wrapper">
+                  <select class="semester-select" aria-label="Select semester">
+                    <option value="this">This Semester</option>
+                    <option value="last">Last Semester</option>
+                    <option value="all">All Semesters</option>
+                  </select>
+                </div>
               </div>
             </div>
 

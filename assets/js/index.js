@@ -557,6 +557,8 @@ const messageFilterButtons = document.querySelectorAll("[data-message-filter]");
 const messageItems = document.querySelectorAll(".important-message-item");
 const messageEmptyState = document.querySelector(".message-empty-state");
 
+const classFilterSelect = document.querySelector(".class-filter-select");
+
 classFilterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const filter = button.dataset.filter || "all";
@@ -564,6 +566,10 @@ classFilterButtons.forEach((button) => {
     classFilterButtons.forEach((item) => {
       item.classList.toggle("active", item === button);
     });
+
+    if (classFilterSelect) {
+      classFilterSelect.value = filter;
+    }
 
     scheduleItems.forEach((item) => {
       const isMatch =
@@ -575,6 +581,25 @@ classFilterButtons.forEach((button) => {
     });
   });
 });
+
+if (classFilterSelect) {
+  classFilterSelect.addEventListener("change", (e) => {
+    const filter = e.target.value;
+
+    classFilterButtons.forEach((item) => {
+      item.classList.toggle("active", item.dataset.filter === filter);
+    });
+
+    scheduleItems.forEach((item) => {
+      const isMatch =
+        filter === "all" ||
+        item.dataset.status === filter ||
+        item.dataset.period === filter;
+
+      item.classList.toggle("is-hidden", !isMatch);
+    });
+  });
+}
 
 messageFilterButtons.forEach((button) => {
   button.addEventListener("click", () => {
