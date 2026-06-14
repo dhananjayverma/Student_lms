@@ -3436,7 +3436,6 @@ body.theme-aurora .icon-button {
     background: rgba(19, 30, 48, 0.92);
   }
 
-  .hero,
   .dashboard-grid,
   .dashboard-main,
   .support-stack,
@@ -3446,16 +3445,39 @@ body.theme-aurora .icon-button {
     gap: 12px;
   }
 
-  .hero-copy,
-  .hero .card,
-  .progress-card,
-  .money-card {
-    grid-column: 1;
-    border-radius: 16px;
+  .hero {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
   }
 
   .hero-copy {
+    grid-column: 1 / -1;
+    border-radius: 16px;
     padding: 16px;
+  }
+
+  .hero .card,
+  .progress-card,
+  .money-card {
+    grid-column: span 1;
+    border-radius: 16px;
+    min-height: 200px;
+    padding: 12px 8px;
+  }
+
+  .progress-ring {
+    width: 60px;
+    height: 60px;
+  }
+
+  .progress-ring span {
+    font-size: 0.8rem;
+  }
+
+  .hero .card button {
+    width: 100%;
+    font-size: 0.65rem;
+    padding: 0 4px;
   }
 
   .hero-copy h1 {
@@ -3542,19 +3564,93 @@ body.theme-aurora .icon-button {
   }
 
   .dashboard-modal {
-    align-items: end;
-    padding: 0;
+    place-items: center;
+    padding: 16px;
   }
 
   .modal-panel {
     width: 100%;
     max-height: min(88dvh, 760px);
-    border-radius: 18px 18px 0 0;
+    border-radius: 18px;
   }
 
   .modal-body {
-    max-height: calc(88dvh - 76px);
+    max-height: calc(88dvh - 120px);
     padding: 14px;
+  }
+
+  .custom-modal-details {
+    gap: 14px;
+  }
+
+  .modal-summary-banner {
+    gap: 12px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .banner-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    flex: 0 0 auto;
+  }
+
+  .banner-value {
+    font-size: 1.2rem;
+  }
+
+  .details-section h3 {
+    margin-bottom: 10px;
+    font-size: 0.84rem;
+  }
+
+  .backlog-subject-list {
+    gap: 10px;
+  }
+
+  .subject-card {
+    gap: 7px;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .subject-header {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .subject-code,
+  .backlog-type-badge {
+    flex: 0 1 auto;
+    white-space: normal;
+  }
+
+  .subject-card h4 {
+    font-size: 0.86rem;
+    line-height: 1.25;
+  }
+
+  .subject-sem,
+  .exam-schedule {
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .exam-schedule {
+    align-items: flex-start;
+    padding: 8px 10px;
+  }
+
+  .modal-action-footer {
+    margin-top: 2px;
+  }
+
+  .pay-now-modal-btn,
+  .soft-modal-btn {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 14px;
   }
 }
 
@@ -3719,7 +3815,7 @@ body.theme-aurora .icon-button {
 
   .hero {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
     margin-top: 10px;
   }
@@ -3764,9 +3860,9 @@ body.theme-aurora .icon-button {
   .hero .card,
   .progress-card,
   .money-card {
-    grid-column: auto;
-    min-height: 142px;
-    padding: 12px;
+    grid-column: span 1;
+    min-height: 200px;
+    padding: 12px 8px;
     border-radius: 16px;
   }
 
@@ -3869,18 +3965,18 @@ body.theme-aurora .icon-button {
   }
 
   .dashboard-modal {
-    align-items: end;
-    padding: 0;
+    place-items: center;
+    padding: 16px;
   }
 
   .modal-panel {
     width: 100%;
     max-height: min(88dvh, 760px);
-    border-radius: 18px 18px 0 0;
+    border-radius: 18px;
   }
 
   .modal-body {
-    max-height: calc(88dvh - 76px);
+    max-height: calc(88dvh - 120px);
     padding: 14px;
   }
 
@@ -9072,7 +9168,6 @@ body.theme-aurora .icon-button {
     background: rgba(19, 30, 48, 0.92);
   }
 
-  .hero,
   .dashboard-grid,
   .dashboard-main,
   .support-stack,
@@ -9082,16 +9177,39 @@ body.theme-aurora .icon-button {
     gap: 12px;
   }
 
-  .hero-copy,
-  .hero .card,
-  .progress-card,
-  .money-card {
-    grid-column: 1;
-    border-radius: 16px;
+  .hero {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
   }
 
   .hero-copy {
+    grid-column: 1 / -1;
+    border-radius: 16px;
     padding: 16px;
+  }
+
+  .hero .card,
+  .progress-card,
+  .money-card {
+    grid-column: span 1;
+    border-radius: 16px;
+    min-height: 200px;
+    padding: 12px 8px;
+  }
+
+  .progress-ring {
+    width: 60px;
+    height: 60px;
+  }
+
+  .progress-ring span {
+    font-size: 0.8rem;
+  }
+
+  .hero .card button {
+    width: 100%;
+    font-size: 0.65rem;
+    padding: 0 4px;
   }
 
   .hero-copy h1 {
@@ -9178,18 +9296,18 @@ body.theme-aurora .icon-button {
   }
 
   .dashboard-modal {
-    align-items: end;
-    padding: 0;
+    place-items: center;
+    padding: 16px;
   }
 
   .modal-panel {
     width: 100%;
     max-height: min(88dvh, 760px);
-    border-radius: 18px 18px 0 0;
+    border-radius: 18px;
   }
 
   .modal-body {
-    max-height: calc(88dvh - 76px);
+    max-height: calc(88dvh - 120px);
     padding: 14px;
   }
 }
@@ -9293,5 +9411,834 @@ body.theme-aurora .icon-button {
 
   .settings-actions {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Last mobile dashboard override. Keep this late so repeated mobile rules cannot override it. */
+@media (max-width: 760px) {
+  body {
+    height: auto;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body.sidebar-collapsed .shell,
+  .shell {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+    padding-bottom: 24px;
+  }
+
+  .academic-panel {
+    border-radius: 16px;
+    overflow: visible;
+  }
+
+  .academic-tabs {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .academic-tab {
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    min-height: 64px;
+    padding: 8px 6px;
+    border-radius: 14px;
+    font-size: 0.74rem;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .academic-tab svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .academic-content {
+    padding: 10px;
+  }
+
+  .class-toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    padding: 12px;
+    gap: 10px;
+    border-radius: 14px;
+  }
+
+  .class-toolbar span {
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+  }
+
+  .class-toolbar strong {
+    font-size: 0.92rem;
+    line-height: 1.15;
+  }
+
+  .class-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
+
+  .class-filter {
+    min-height: 34px;
+    padding: 0 8px;
+    border-radius: 10px;
+    font-size: 0.68rem;
+  }
+
+  .class-hero,
+  .lecture-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .class-status,
+  .current-class,
+  .lecture-card {
+    height: auto;
+    min-height: 132px;
+    padding: 11px 10px 10px 13px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(26, 42, 70, 0.08);
+  }
+
+  .class-status {
+    display: grid;
+    align-content: start;
+    gap: 7px;
+  }
+
+  .current-class {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    align-content: start;
+  }
+
+  .class-kicker,
+  .current-class span,
+  .later-heading {
+    font-size: 0.58rem;
+    letter-spacing: 0.09em;
+  }
+
+  .class-kicker {
+    padding: 3px 7px;
+  }
+
+  .class-status strong,
+  .current-class h2,
+  .lecture-card h3 {
+    font-size: 0.78rem;
+    line-height: 1.2;
+  }
+
+  .class-status small,
+  .current-class p,
+  .lecture-card span {
+    font-size: 0.62rem;
+    line-height: 1.25;
+  }
+
+  .class-meta {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    align-items: flex-start;
+    gap: 6px;
+    margin-top: auto;
+  }
+
+  .class-meta b,
+  .current-class strong,
+  .lecture-card strong {
+    font-size: 0.64rem;
+    line-height: 1.25;
+  }
+
+  .class-meta em,
+  .current-class mark,
+  .lecture-card small {
+    width: max-content;
+    max-width: 100%;
+    padding: 4px 7px;
+    border-radius: 8px;
+    font-size: 0.58rem;
+    line-height: 1.15;
+  }
+
+  .current-class small {
+    grid-column: auto;
+    padding-top: 5px;
+    font-size: 0.6rem;
+    line-height: 1.25;
+  }
+
+  .later-heading {
+    margin: 10px 2px 8px;
+  }
+
+  .lecture-card {
+    min-height: 118px;
+    align-content: start;
+    gap: 5px;
+  }
+
+  .attendance-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .attendance-title-block {
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .attendance-header-icon {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+  }
+
+  .attendance-header-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .attendance-title-block h2 {
+    font-size: 0.96rem;
+    line-height: 1.15;
+  }
+
+  .attendance-title-block p {
+    font-size: 0.66rem;
+    line-height: 1.3;
+  }
+
+  .semester-select-btn {
+    min-height: 36px;
+    padding: 0 12px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+  }
+
+  .attendance-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .attendance-left-col {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .attendance-stat-card {
+    min-width: 0;
+    min-height: 116px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(26, 42, 70, 0.08);
+  }
+
+  .progress-ring-card,
+  .icon-stat-card {
+    padding: 10px 8px;
+  }
+
+  .progress-ring-card {
+    min-height: 116px;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .progress-ring-section {
+    justify-content: center;
+  }
+
+  .progress-ring-mini {
+    width: 48px;
+    height: 48px;
+  }
+
+  .progress-ring-mini span {
+    font-size: 0.7rem;
+  }
+
+  .card-icon-top-right {
+    display: none;
+  }
+
+  .icon-stat-card {
+    min-height: 116px;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .stat-icon-circle {
+    width: 34px;
+    height: 34px;
+  }
+
+  .stat-icon-circle svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .stat-card-text {
+    align-items: center;
+    text-align: center;
+  }
+
+  .stat-card-text strong {
+    font-size: 1.08rem;
+  }
+
+  .progress-ring-card .stat-card-text strong,
+  .stat-card-text b {
+    font-size: 0.62rem;
+    line-height: 1.15;
+  }
+
+  .stat-card-text span {
+    font-size: 0.56rem;
+    line-height: 1.2;
+  }
+
+  .attendance-right-card {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .attendance-right-card .course-list {
+    gap: 8px;
+  }
+
+  .course-row-item {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .course-icon-box {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .course-icon-box svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .course-info {
+    width: auto;
+    min-width: 0;
+  }
+
+  .course-info h3 {
+    font-size: 0.72rem;
+    line-height: 1.2;
+  }
+
+  .course-info span {
+    display: block;
+    overflow-wrap: anywhere;
+    font-size: 0.58rem;
+    line-height: 1.25;
+  }
+
+  .course-progress-section {
+    grid-column: 2 / -1;
+    min-width: 0;
+  }
+
+  .course-percentage {
+    min-width: 32px;
+    font-size: 0.72rem;
+  }
+
+  .course-dots-btn {
+    display: none;
+  }
+
+  .mentor-card {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px 12px;
+    min-height: auto;
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .mentor-photo {
+    grid-column: 1;
+    grid-row: 1;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+
+  .mentor-card div {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 3px;
+  }
+
+  .mentor-card strong {
+    font-size: 0.86rem;
+    line-height: 1.2;
+  }
+
+  .mentor-card span {
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .mentor-card button {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+    width: auto;
+    min-width: 92px;
+    min-height: 32px;
+    margin-top: 0;
+    padding: 0 12px;
+    border-radius: 12px;
+    font-size: 0.62rem;
+  }
+
+  .important-messages-widget {
+    padding: 12px 12px 0;
+    border-radius: 16px;
+  }
+
+  .important-messages-widget .announcement-widget-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .important-title {
+    gap: 10px;
+  }
+
+  .important-messages-widget .announcement-widget-icon {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    border-radius: 11px;
+  }
+
+  .important-messages-widget .announcement-widget-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .important-messages-widget .announcement-widget-head h3 {
+    font-size: 0.86rem;
+    line-height: 1.15;
+  }
+
+  .important-messages-widget .announcement-widget-head small {
+    font-size: 0.6rem;
+    line-height: 1.25;
+  }
+
+  .message-alert-pill {
+    align-self: start;
+    padding: 5px 8px;
+    font-size: 0.56rem;
+  }
+
+  .important-messages-widget .announcement-widget-body {
+    padding-bottom: 10px;
+  }
+
+  .widget-message-card {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 9px;
+    padding: 11px 10px 11px 12px;
+    border-radius: 14px;
+  }
+
+  .widget-message-card::before {
+    inset: 10px auto 10px 0;
+    width: 3px;
+  }
+
+  .message-count {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 0.68rem;
+  }
+
+  .message-card-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .message-card-top>strong {
+    font-size: 0.76rem;
+    line-height: 1.2;
+  }
+
+  .message-card-top em {
+    justify-self: end;
+    padding: 4px 7px;
+    font-size: 0.54rem;
+  }
+
+  .widget-message-card p {
+    font-size: 0.66rem;
+    line-height: 1.35;
+  }
+
+  .message-meta {
+    gap: 5px 10px;
+    margin-top: 8px;
+    font-size: 0.58rem;
+    line-height: 1.25;
+  }
+
+  .announcement-widget-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin: 0 -12px;
+    padding: 8px 10px 10px;
+  }
+
+  .announcement-widget-tabs button {
+    min-height: 34px;
+    gap: 4px;
+    padding: 0 5px;
+    border-radius: 10px;
+    font-size: 0.5rem;
+    line-height: 1.15;
+  }
+
+  .announcement-widget-tabs button svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .dashboard-modal {
+    place-items: start center;
+    align-content: start;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px;
+  }
+
+  .modal-panel {
+    display: flex;
+    flex-direction: column;
+    width: min(390px, calc(100vw - 24px));
+    max-height: none;
+    border-radius: 16px;
+    overflow: visible;
+  }
+
+  .modal-head {
+    flex: 0 0 auto;
+    min-height: 56px;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .modal-head h2 {
+    font-size: 0.92rem;
+    line-height: 1.2;
+  }
+
+  .modal-close {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+
+  .modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 12px;
+  }
+
+  .custom-modal-details {
+    gap: 12px;
+  }
+
+  .modal-summary-banner {
+    gap: 10px;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .banner-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+  }
+
+  .banner-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .banner-label {
+    font-size: 0.66rem;
+  }
+
+  .banner-value {
+    font-size: 1.08rem;
+    line-height: 1.12;
+  }
+
+  .banner-due {
+    font-size: 0.68rem;
+    line-height: 1.3;
+  }
+
+  .details-section h3 {
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+  }
+
+  .backlog-subject-list {
+    gap: 9px;
+  }
+
+  .subject-card {
+    gap: 6px;
+    padding: 10px;
+    border-radius: 11px;
+  }
+
+  .subject-header {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .subject-code {
+    font-size: 0.68rem;
+    padding: 2px 6px;
+  }
+
+  .backlog-type-badge {
+    max-width: 52%;
+    padding: 3px 7px;
+    font-size: 0.62rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .subject-card h4 {
+    font-size: 0.82rem;
+    line-height: 1.22;
+  }
+
+  .subject-sem {
+    font-size: 0.68rem;
+    line-height: 1.3;
+  }
+
+  .exam-schedule {
+    gap: 7px;
+    padding: 8px 9px;
+    border-radius: 9px;
+    font-size: 0.68rem;
+    line-height: 1.3;
+  }
+
+  .exam-schedule svg {
+    width: 13px;
+    height: 13px;
+    margin-top: 1px;
+  }
+
+  .modal-action-footer {
+    margin-top: 0;
+  }
+
+  .pay-now-modal-btn,
+  .soft-modal-btn {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 0.74rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .academic-tab {
+    min-height: 58px;
+    font-size: 0.68rem;
+  }
+
+  .class-hero,
+  .lecture-cards {
+    gap: 7px;
+  }
+
+  .class-status,
+  .current-class,
+  .lecture-card {
+    min-height: 124px;
+    padding: 10px 8px 9px 11px;
+  }
+
+  .attendance-left-col {
+    gap: 6px;
+  }
+
+  .attendance-stat-card,
+  .progress-ring-card,
+  .icon-stat-card {
+    min-height: 108px;
+  }
+
+  .progress-ring-card,
+  .icon-stat-card {
+    padding: 9px 6px;
+  }
+
+  .progress-ring-mini {
+    width: 42px;
+    height: 42px;
+  }
+
+  .stat-icon-circle {
+    width: 30px;
+    height: 30px;
+  }
+
+  .stat-card-text strong {
+    font-size: 0.96rem;
+  }
+
+  .progress-ring-card .stat-card-text strong,
+  .stat-card-text b {
+    font-size: 0.56rem;
+  }
+
+  .stat-card-text span {
+    font-size: 0.5rem;
+  }
+
+  .mentor-card {
+    grid-template-columns: 46px minmax(0, 1fr) auto;
+    padding: 12px;
+    gap: 7px 10px;
+  }
+
+  .mentor-photo {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+  }
+
+  .mentor-card strong {
+    font-size: 0.78rem;
+  }
+
+  .mentor-card span {
+    font-size: 0.62rem;
+  }
+
+  .mentor-card button {
+    min-width: 82px;
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 0.58rem;
+  }
+
+  .important-messages-widget {
+    padding: 10px 10px 0;
+  }
+
+  .important-messages-widget .announcement-widget-head h3 {
+    font-size: 0.8rem;
+  }
+
+  .important-messages-widget .announcement-widget-head small {
+    font-size: 0.56rem;
+  }
+
+  .widget-message-card {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 8px;
+    padding: 10px 8px 10px 10px;
+  }
+
+  .message-count {
+    width: 30px;
+    height: 30px;
+    font-size: 0.62rem;
+  }
+
+  .message-card-top>strong {
+    font-size: 0.7rem;
+  }
+
+  .message-card-top em {
+    padding: 3px 6px;
+    font-size: 0.5rem;
+  }
+
+  .widget-message-card p {
+    font-size: 0.6rem;
+  }
+
+  .announcement-widget-tabs {
+    gap: 5px;
+    margin: 0 -10px;
+    padding: 8px;
+  }
+
+  .announcement-widget-tabs button {
+    min-height: 32px;
+    font-size: 0.46rem;
+  }
+
+  .class-status strong,
+  .current-class h2,
+  .lecture-card h3 {
+    font-size: 0.72rem;
+  }
+
+  .class-meta b,
+  .current-class strong,
+  .lecture-card strong {
+    font-size: 0.6rem;
+  }
+
+  .class-status small,
+  .current-class p,
+  .lecture-card span,
+  .current-class small {
+    font-size: 0.58rem;
   }
 }
