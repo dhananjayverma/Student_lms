@@ -1,5 +1,22 @@
 const authSessionKey = "cuims-authenticated";
 const isAuthenticated = localStorage.getItem(authSessionKey) === "true";
+const dashboardThemeKey = "dashboard-theme";
+const dashboardTextColorKey = "dashboard-text-color";
+const dashboardAccentColorKey = "dashboard-accent-color";
+const dashboardThemes = [
+  "light",
+  "dark",
+  "glass",
+  "neon",
+  "focus",
+  "aurora",
+  "ocean",
+  "forest",
+  "sunset",
+  "rose",
+  "graphite",
+  "mint"
+];
 
 if (!isAuthenticated) {
   window.location.href = "login.html";
@@ -32,37 +49,97 @@ if (greetingNode) {
 }
 
 const setTheme = (theme) => {
-  const isDark = theme === "dark";
+  const selectedTheme = dashboardThemes.includes(theme) ? theme : "light";
+  const isDark = selectedTheme === "dark" || selectedTheme === "neon" || selectedTheme === "graphite";
 
   document.body.classList.toggle("dark-theme", isDark);
+  dashboardThemes
+    .filter((themeName) => themeName !== "light" && themeName !== "dark")
+    .forEach((themeName) => {
+      document.body.classList.toggle(`theme-${themeName}`, selectedTheme === themeName);
+    });
   themeToggleButtons.forEach((button) => {
     button.setAttribute("aria-pressed", String(isDark));
     button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
   });
   themeChoiceButtons.forEach((button) => {
-    const isActive = button.dataset.themeValue === theme;
+    const isActive = button.dataset.themeValue === selectedTheme;
     button.classList.toggle("active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
 };
 
-const savedTheme = localStorage.getItem("dashboard-theme");
+const isValidHexColor = (color) => /^#[0-9a-f]{6}$/i.test(color || "");
+
+const applyDashboardColors = () => {
+  const textColor = localStorage.getItem(dashboardTextColorKey);
+  const accentColor = localStorage.getItem(dashboardAccentColorKey);
+
+  if (isValidHexColor(textColor)) {
+    document.body.style.setProperty("--ink", textColor);
+  } else {
+    document.body.style.removeProperty("--ink");
+  }
+
+  if (isValidHexColor(accentColor)) {
+    document.body.style.setProperty("--blue", accentColor);
+  } else {
+    document.body.style.removeProperty("--blue");
+  }
+};
+
+const syncAccountSettingsControls = (root = document) => {
+  const savedTheme = localStorage.getItem(dashboardThemeKey);
+  const currentTheme = dashboardThemes.includes(savedTheme)
+    ? savedTheme
+    : (document.body.classList.contains("dark-theme") ? "dark" : "light");
+  const themeSelect = root.querySelector("[data-settings-theme-select]");
+  const textInput = root.querySelector("[data-settings-text-color]");
+  const accentInput = root.querySelector("[data-settings-accent-color]");
+  const savedTextColor = localStorage.getItem(dashboardTextColorKey);
+  const savedAccentColor = localStorage.getItem(dashboardAccentColorKey);
+
+  if (themeSelect) {
+    themeSelect.value = currentTheme;
+  }
+
+  root.querySelectorAll("[data-settings-theme]").forEach((button) => {
+    const isActive = button.dataset.settingsTheme === currentTheme;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  if (textInput) {
+    textInput.value = isValidHexColor(savedTextColor)
+      ? savedTextColor
+      : (currentTheme === "dark" || currentTheme === "neon" || currentTheme === "graphite" ? "#edf4ff" : "#07154f");
+  }
+
+  if (accentInput) {
+    accentInput.value = isValidHexColor(savedAccentColor) ? savedAccentColor : "#1e62ff";
+  }
+};
+
+const savedTheme = localStorage.getItem(dashboardThemeKey);
 const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-setTheme(savedTheme || (prefersDarkTheme ? "dark" : "light"));
+setTheme(dashboardThemes.includes(savedTheme) ? savedTheme : (prefersDarkTheme ? "dark" : "light"));
+applyDashboardColors();
 
 themeToggleButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const nextTheme = document.body.classList.contains("dark-theme") ? "light" : "dark";
-    localStorage.setItem("dashboard-theme", nextTheme);
+    localStorage.setItem(dashboardThemeKey, nextTheme);
     setTheme(nextTheme);
+    syncAccountSettingsControls(modalBody || document);
   });
 });
 
 themeChoiceButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const nextTheme = button.dataset.themeValue;
-    localStorage.setItem("dashboard-theme", nextTheme);
+    const nextTheme = dashboardThemes.includes(button.dataset.themeValue) ? button.dataset.themeValue : "light";
+    localStorage.setItem(dashboardThemeKey, nextTheme);
     setTheme(nextTheme);
+    syncAccountSettingsControls(modalBody || document);
   });
 });
 
@@ -101,17 +178,20 @@ const closeSidebarDrawer = () => {
 
 if (sidebar && sidebarMenu) {
   sidebar.addEventListener("wheel", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
     const privateScroller = event.target.closest(".menu-submenu-inner");
     const canScrollSubmenu = privateScroller && privateScroller.scrollHeight > privateScroller.clientHeight;
 
     if (canScrollSubmenu) {
+      event.preventDefault();
+      event.stopPropagation();
       privateScroller.scrollTop += event.deltaY;
       return;
     }
 
+    if (sidebarMenu.scrollHeight <= sidebarMenu.clientHeight) return;
+
+    event.preventDefault();
+    event.stopPropagation();
     sidebarMenu.scrollTop += event.deltaY;
   }, { passive: false });
 
@@ -335,6 +415,7 @@ const openDashboardModalFromSource = (trigger, source, title) => {
   );
   modal.hidden = false;
   document.body.classList.add("modal-open");
+  syncAccountSettingsControls(modalBody);
   modal.querySelector(".modal-close")?.focus();
 };
 
@@ -356,7 +437,7 @@ conversationViewAll?.addEventListener("click", (event) => {
   );
 });
 
-document.querySelectorAll(".widget-view-all-link, .nav-notification-trigger").forEach((trigger) => {
+document.querySelectorAll(".widget-view-all-link, .nav-notification-trigger, .account-settings-trigger").forEach((trigger) => {
   trigger.addEventListener("click", (event) => {
     event.preventDefault();
     const sourceId = trigger.dataset.sourceId;
@@ -364,13 +445,91 @@ document.querySelectorAll(".widget-view-all-link, .nav-notification-trigger").fo
     if (document.body.classList.contains("nav-drawer-open")) {
       closeSidebarDrawer();
     }
+    closeProfileMenus();
     openDashboardModalFromSource(trigger, source, trigger.dataset.modalTitle || trigger.textContent.trim());
   });
 });
 
+const applySelectedSettingsTheme = (shouldClose = false) => {
+  if (!modalBody) return;
+  const themeSelect = modalBody.querySelector("[data-settings-theme-select]");
+  const nextTheme = dashboardThemes.includes(themeSelect?.value) ? themeSelect.value : "light";
+  localStorage.setItem(dashboardThemeKey, nextTheme);
+  setTheme(nextTheme);
+  syncAccountSettingsControls(modalBody);
+
+  if (shouldClose) {
+    closeDashboardModal();
+  }
+};
+
 modalBody?.addEventListener("click", (event) => {
   if (event.target.closest(".send-message")) {
     event.preventDefault();
+  }
+
+  if (event.target.closest("[data-settings-apply-theme]")) {
+    event.preventDefault();
+    applySelectedSettingsTheme(true);
+  }
+
+  const themeButton = event.target.closest("[data-settings-theme]");
+  if (themeButton) {
+    const nextTheme = dashboardThemes.includes(themeButton.dataset.settingsTheme)
+      ? themeButton.dataset.settingsTheme
+      : "light";
+    localStorage.setItem(dashboardThemeKey, nextTheme);
+    setTheme(nextTheme);
+    syncAccountSettingsControls(modalBody);
+  }
+
+  const textPreset = event.target.closest("[data-settings-text-preset]");
+  if (textPreset) {
+    const color = textPreset.dataset.settingsTextPreset;
+    if (isValidHexColor(color)) {
+      localStorage.setItem(dashboardTextColorKey, color);
+      applyDashboardColors();
+      syncAccountSettingsControls(modalBody);
+    }
+  }
+
+  const accentPreset = event.target.closest("[data-settings-accent-preset]");
+  if (accentPreset) {
+    const color = accentPreset.dataset.settingsAccentPreset;
+    if (isValidHexColor(color)) {
+      localStorage.setItem(dashboardAccentColorKey, color);
+      applyDashboardColors();
+      syncAccountSettingsControls(modalBody);
+    }
+  }
+
+  if (event.target.closest("[data-settings-reset]")) {
+    localStorage.removeItem(dashboardThemeKey);
+    localStorage.removeItem(dashboardTextColorKey);
+    localStorage.removeItem(dashboardAccentColorKey);
+    setTheme(prefersDarkTheme ? "dark" : "light");
+    applyDashboardColors();
+    syncAccountSettingsControls(modalBody);
+  }
+});
+
+modalBody?.addEventListener("submit", (event) => {
+  if (!event.target.matches("[data-account-settings-form]")) return;
+  event.preventDefault();
+  applySelectedSettingsTheme(true);
+});
+
+modalBody?.addEventListener("input", (event) => {
+  const target = event.target;
+
+  if (target.matches("[data-settings-text-color]") && isValidHexColor(target.value)) {
+    localStorage.setItem(dashboardTextColorKey, target.value);
+    applyDashboardColors();
+  }
+
+  if (target.matches("[data-settings-accent-color]") && isValidHexColor(target.value)) {
+    localStorage.setItem(dashboardAccentColorKey, target.value);
+    applyDashboardColors();
   }
 });
 

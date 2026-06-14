@@ -575,7 +575,7 @@
           </button>
           <div class="profile-menu" id="profile-menu" hidden>
             <a href="profile.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>My Profile</span></a>
-            <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1z"/></svg><span>Account Settings</span></a>
+            <a href="#" class="account-settings-trigger" data-modal-title="Account Settings" data-source-id="account-settings-source"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1z"/></svg><span>Account Settings</span></a>
             <a href="#"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Change Password</span></a>
             <a href="#"><svg viewBox="0 0 24 24"><path d="M3 9a14 14 0 0 1 18 0M6 13a9 9 0 0 1 12 0M9.5 17a4 4 0 0 1 5 0"/><circle cx="12" cy="20" r=".5" fill="currentColor"/></svg><span>Change Internet Password</span></a>
             <a href="login.html" data-logout><svg viewBox="0 0 24 24"><path d="M14 8V5H4v14h10v-3M10 12h11M18 9l3 3-3 3"/></svg><span>Sign Out</span></a>
@@ -1019,6 +1019,85 @@
       </div>
       <time>Yesterday</time>
     </div>
+  </div>
+
+  <div id="account-settings-source" hidden>
+    <form class="account-settings-panel" data-account-settings-form>
+      <div class="settings-preview" aria-live="polite">
+        <span class="settings-preview-icon"><svg><use href="#icon-sun"></use></svg></span>
+        <div>
+          <strong>Personal website controls</strong>
+          <span>Theme applies after OK. Text and accent colors update instantly.</span>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-group-head">
+          <strong>Website theme</strong>
+          <span>Select a theme, then press OK to apply it.</span>
+        </div>
+        <label class="settings-select-field">
+          <span>Theme list</span>
+          <select data-settings-theme-select>
+            <option value="light">Light - clean default</option>
+            <option value="dark">Dark - night mode</option>
+            <option value="glass">Glass - soft transparent panels</option>
+            <option value="neon">Neon - dark glow effect</option>
+            <option value="focus">Focus - simple reading mode</option>
+            <option value="aurora">Aurora - colorful smooth wash</option>
+            <option value="ocean">Ocean - blue calm dashboard</option>
+            <option value="forest">Forest - green natural dashboard</option>
+            <option value="sunset">Sunset - warm orange style</option>
+            <option value="rose">Rose - soft pink style</option>
+            <option value="graphite">Graphite - deep professional mode</option>
+            <option value="mint">Mint - fresh light dashboard</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-group-head">
+          <strong>Text color</strong>
+          <span>Control the main readable text color.</span>
+        </div>
+        <div class="settings-color-row">
+          <label>
+            <span>Custom text color</span>
+            <input type="color" value="#07154f" data-settings-text-color>
+          </label>
+          <div class="settings-swatches" aria-label="Text color presets">
+            <button type="button" style="--swatch:#07154f" data-settings-text-preset="#07154f" aria-label="Use navy text"></button>
+            <button type="button" style="--swatch:#20242c" data-settings-text-preset="#20242c" aria-label="Use charcoal text"></button>
+            <button type="button" style="--swatch:#7c2d12" data-settings-text-preset="#7c2d12" aria-label="Use warm text"></button>
+            <button type="button" style="--swatch:#14532d" data-settings-text-preset="#14532d" aria-label="Use green text"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-group-head">
+          <strong>Accent color</strong>
+          <span>Use this color for buttons, links, and active states.</span>
+        </div>
+        <div class="settings-color-row">
+          <label>
+            <span>Custom accent color</span>
+            <input type="color" value="#1e62ff" data-settings-accent-color>
+          </label>
+          <div class="settings-swatches" aria-label="Accent color presets">
+            <button type="button" style="--swatch:#1e62ff" data-settings-accent-preset="#1e62ff" aria-label="Use blue accent"></button>
+            <button type="button" style="--swatch:#ff404f" data-settings-accent-preset="#ff404f" aria-label="Use red accent"></button>
+            <button type="button" style="--swatch:#0f9f78" data-settings-accent-preset="#0f9f78" aria-label="Use green accent"></button>
+            <button type="button" style="--swatch:#7b43ff" data-settings-accent-preset="#7b43ff" aria-label="Use violet accent"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button class="settings-reset" type="button" data-settings-reset>Reset</button>
+        <button class="settings-apply" type="submit" data-settings-apply-theme>OK</button>
+      </div>
+    </form>
   </div>
 
   <div class="dashboard-modal" id="dashboard-modal" hidden>
