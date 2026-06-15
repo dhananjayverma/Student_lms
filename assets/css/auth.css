@@ -58,8 +58,8 @@ a {
     0 40px 100px rgba(0, 0, 0, 0.22),
     0 15px 35px rgba(7, 21, 79, 0.15),
     inset 0 1px 1px rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(36px);
-  -webkit-backdrop-filter: blur(36px);
+  /* backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px); */
   transform: translate3d(0, 0, 0);
   will-change: backdrop-filter;
 }
