@@ -579,10 +579,15 @@ a {
   z-index: 2;
   width: 100%;
   min-height: calc(100vh - 140px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
 }
 
 .info-left-col {
-  width: 54%;
+  flex: 1;
+  max-width: 520px;
 }
 
 .cuims-badge {
@@ -662,7 +667,9 @@ a {
 }
 
 .info-right-col {
-  position: static;
+  position: relative;
+  width: 440px;
+  min-height: 600px;
   pointer-events: auto;
 }
 
@@ -722,39 +729,45 @@ a {
   right: 0;
   top: 200px;
   z-index: 3;
-  width: 440px;
+  width: 410px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   max-width: none;
 }
 
 .feature-card {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   min-height: 0;
-  padding: 14px 18px;
-  border-radius: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.4);
   cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.18);
+  transform: translateY(-3px) scale(1.025);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .feature-icon-wrapper {
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   color: #fff;
@@ -762,48 +775,83 @@ a {
 }
 
 .feature-icon-wrapper svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .feature-card:nth-child(1) {
   border-right: 5px solid #e30000;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(254, 226, 226, 0.88) 50%, rgba(255, 242, 242, 0.85) 100%);
+  background-size: 200% 200%;
+  animation: cardGradient 6s ease-in-out infinite;
 }
 .feature-card:nth-child(1) .feature-icon-wrapper {
   background: #e30000;
 }
+.feature-card:nth-child(1):hover {
+  background: linear-gradient(135deg, rgba(255, 240, 240, 0.92) 0%, rgba(254, 219, 219, 0.95) 50%, rgba(255, 230, 230, 0.92) 100%);
+  background-size: 200% 200%;
+  box-shadow: 0 16px 40px rgba(227, 0, 0, 0.12);
+}
 
 .feature-card:nth-child(2) {
   border-right: 5px solid #ff6b16;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 237, 213, 0.88) 50%, rgba(255, 248, 240, 0.85) 100%);
+  background-size: 200% 200%;
+  animation: cardGradient 6s ease-in-out infinite;
+  animation-delay: 1.5s;
 }
 .feature-card:nth-child(2) .feature-icon-wrapper {
   background: #ff6b16;
 }
+.feature-card:nth-child(2):hover {
+  background: linear-gradient(135deg, rgba(255, 248, 240, 0.92) 0%, rgba(254, 225, 190, 0.95) 50%, rgba(255, 242, 225, 0.92) 100%);
+  background-size: 200% 200%;
+  box-shadow: 0 16px 40px rgba(255, 107, 22, 0.12);
+}
 
 .feature-card:nth-child(3) {
   border-right: 5px solid #25c979;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(220, 252, 231, 0.88) 50%, rgba(240, 253, 244, 0.85) 100%);
+  background-size: 200% 200%;
+  animation: cardGradient 6s ease-in-out infinite;
+  animation-delay: 3s;
 }
 .feature-card:nth-child(3) .feature-icon-wrapper {
   background: #25c979;
 }
+.feature-card:nth-child(3):hover {
+  background: linear-gradient(135deg, rgba(240, 253, 244, 0.92) 0%, rgba(198, 250, 215, 0.95) 50%, rgba(230, 252, 238, 0.92) 100%);
+  background-size: 200% 200%;
+  box-shadow: 0 16px 40px rgba(37, 201, 121, 0.12);
+}
 
 .feature-card:nth-child(4) {
   border-right: 5px solid #8b37dd;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(243, 232, 255, 0.88) 50%, rgba(250, 242, 255, 0.85) 100%);
+  background-size: 200% 200%;
+  animation: cardGradient 6s ease-in-out infinite;
+  animation-delay: 4.5s;
 }
 .feature-card:nth-child(4) .feature-icon-wrapper {
   background: #8b37dd;
+}
+.feature-card:nth-child(4):hover {
+  background: linear-gradient(135deg, rgba(250, 242, 255, 0.92) 0%, rgba(233, 213, 252, 0.95) 50%, rgba(243, 225, 255, 0.92) 100%);
+  background-size: 200% 200%;
+  box-shadow: 0 16px 40px rgba(139, 55, 221, 0.12);
 }
 
 .feature-info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   text-align: left;
 }
 
 .feature-info h3 {
-  margin: 0 0 4px;
-  font-size: 14.5px;
+  margin: 0 0 2px;
+  font-size: 13px;
   font-weight: 800;
   color: #1a202c;
   line-height: 1.25;
@@ -811,7 +859,7 @@ a {
 
 .feature-info p {
   margin: 0;
-  font-size: 11.5px;
+  font-size: 10.5px;
   line-height: 1.45;
   color: #4a5568;
   font-weight: 500;
@@ -830,8 +878,8 @@ a {
 }
 
 .feature-chevron svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .bottom-glass-bar {
@@ -942,6 +990,42 @@ a {
   }
 }
 
+@keyframes cardGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 1440px) and (min-width: 1121px) {
+  .auth-info-panel {
+    inset: 0 0 0 460px;
+    padding: 60px 48px;
+  }
+  .info-container {
+    gap: 24px;
+  }
+  .info-right-col {
+    width: 400px;
+  }
+  .feature-grid {
+    width: 400px;
+    top: 180px;
+  }
+  .info-title {
+    font-size: 40px;
+  }
+  .info-description {
+    font-size: 13.5px;
+    max-width: 380px;
+  }
+}
+
 @media (max-width: 1120px) {
   .auth-info-panel {
     inset: 0 0 0 450px;
@@ -949,7 +1033,13 @@ a {
   }
 
   .info-left-col {
-    width: 54%;
+    width: auto;
+    flex: 1;
+  }
+
+  .info-right-col {
+    width: 370px;
+    min-height: 520px;
   }
 
   .info-title {
@@ -988,7 +1078,7 @@ a {
   .feature-grid {
     top: 170px;
     width: 370px;
-    gap: 10px;
+    gap: 12px;
   }
 
   .feature-card {
