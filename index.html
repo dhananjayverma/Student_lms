@@ -923,88 +923,71 @@
                 </div>
               </div>
 
-              <!-- Right Column: Course List -->
+              <!-- Right Column: Course Attendance Graph -->
               <div class="glass card attendance-right-card">
-                <div class="course-list">
-                  <!-- Course 1 -->
-                  <div class="course-row-item">
-                    <div class="course-icon-box blue-box">
-                      <svg>
-                        <use href="#icon-code"></use>
-                      </svg>
-                    </div>
-                    <div class="course-info">
-                      <h3>Software QA</h3>
-                      <span>23CSH-309 • Dr. Rashmi Goyal</span>
-                    </div>
-                    <div class="course-progress-section">
-                      <div class="course-progress-bar">
-                        <span class="bg-blue-green" style="width: 88%"></span>
-                      </div>
-                    </div>
-                    <span class="course-percentage">88%</span>
-                    <button class="course-dots-btn" type="button" aria-label="More options">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="1.5"></circle>
-                        <circle cx="12" cy="5" r="1.5"></circle>
-                        <circle cx="12" cy="19" r="1.5"></circle>
-                      </svg>
-                    </button>
+                <div class="attendance-graph-panel full-width-graph">
+                  <div class="graph-header">
+                    <h4>Subject Attendance Overview</h4>
+                    <span class="graph-subtitle">Detailed percentage comparison across subjects</span>
                   </div>
 
-                  <!-- Course 2 -->
-                  <div class="course-row-item warning">
-                    <div class="course-icon-box orange-box">
-                      <svg>
-                        <use href="#icon-wallet"></use>
-                      </svg>
+                  <div class="bar-graph-container">
+                    <!-- Y-Axis Values -->
+                    <div class="graph-y-axis">
+                      <span>100%</span>
+                      <span>75%</span>
+                      <span>50%</span>
+                      <span>25%</span>
+                      <span>0%</span>
                     </div>
-                    <div class="course-info">
-                      <h3>DBMS</h3>
-                      <span>23CST-204 • Prof. Amit Sharma</span>
-                    </div>
-                    <div class="course-progress-section">
-                      <div class="course-progress-bar">
-                        <span class="bg-orange" style="width: 72%"></span>
-                      </div>
-                    </div>
-                    <span class="course-percentage warning">72%</span>
-                    <button class="course-dots-btn" type="button" aria-label="More options">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="1.5"></circle>
-                        <circle cx="12" cy="5" r="1.5"></circle>
-                        <circle cx="12" cy="19" r="1.5"></circle>
-                      </svg>
-                    </button>
-                  </div>
 
-                  <!-- Course 3 -->
-                  <div class="course-row-item">
-                    <div class="course-icon-box green-box">
-                      <svg>
-                        <use href="#icon-sun"></use>
-                      </svg>
-                    </div>
-                    <div class="course-info">
-                      <h3>Design Thinking</h3>
-                      <span>23HSM-303 • Dr. Meera Sethi</span>
-                    </div>
-                    <div class="course-progress-section">
-                      <div class="course-progress-bar">
-                        <span class="bg-blue-green" style="width: 84%"></span>
+                    <!-- Main Graph Wrapper -->
+                    <div class="graph-grid-wrapper">
+                      <!-- Horizontal Grid Lines -->
+                      <div class="graph-grid-lines">
+                        <div class="grid-line"></div>
+                        <div class="grid-line"></div>
+                        <div class="grid-line"></div>
+                        <div class="grid-line"></div>
+                        <div class="grid-line"></div>
+                      </div>
+
+                      <!-- Graph Bars -->
+                      <div class="graph-bars">
+                        <!-- Bar 1 (Software QA) -->
+                        <div class="graph-bar-item" style="--bar-value: 88%;">
+                          <span class="bar-percentage-badge">88%</span>
+                          <div class="bar-tooltip">Software QA: 88% Attendance</div>
+                          <div class="bar-fill bg-blue-green"></div>
+                          <div class="bar-labels-group">
+                            <span class="bar-label">Software QA</span>
+                            <span class="bar-sub-label">23CSH-309 • Dr. Rashmi Goyal</span>
+                          </div>
+                        </div>
+
+                        <!-- Bar 2 (DBMS) -->
+                        <div class="graph-bar-item warning" style="--bar-value: 72%;">
+                          <span class="bar-percentage-badge warning">72%</span>
+                          <div class="bar-tooltip">DBMS: 72% Attendance</div>
+                          <div class="bar-fill bg-orange"></div>
+                          <div class="bar-labels-group">
+                            <span class="bar-label">DBMS</span>
+                            <span class="bar-sub-label">23CST-204 • Prof. Amit Sharma</span>
+                          </div>
+                        </div>
+
+                        <!-- Bar 3 (Design Thinking) -->
+                        <div class="graph-bar-item" style="--bar-value: 84%;">
+                          <span class="bar-percentage-badge">84%</span>
+                          <div class="bar-tooltip">Design Thinking: 84% Attendance</div>
+                          <div class="bar-fill bg-green"></div>
+                          <div class="bar-labels-group">
+                            <span class="bar-label">Design Thinking</span>
+                            <span class="bar-sub-label">23HSM-303 • Dr. Meera Sethi</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <span class="course-percentage">84%</span>
-                    <button class="course-dots-btn" type="button" aria-label="More options">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="1.5"></circle>
-                        <circle cx="12" cy="5" r="1.5"></circle>
-                        <circle cx="12" cy="19" r="1.5"></circle>
-                      </svg>
-                    </button>
                   </div>
                 </div>
               </div>
@@ -1109,6 +1092,20 @@
 
       <div class="support-stack">
         <article class="mentor-card">
+          <header class="mentor-card-head">
+            <i class="mentor-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </i>
+            <hgroup>
+              <h3>Academic Mentor</h3>
+              <small>Guidance & Support System</small>
+            </hgroup>
+          </header>
           <span class="mentor-photo" aria-hidden="true"></span>
           <div>
             <strong>Bhavesh Mehta (E1666)</strong>

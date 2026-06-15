@@ -2203,6 +2203,67 @@ body.dark-theme .attendance-bar {
   height: 14px;
 }
 
+/* Mentor Card Header Styling */
+.mentor-card-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.02) 60%, transparent 100%);
+  padding: 14px var(--dashboard-panel-pad);
+  margin: calc(-1 * var(--dashboard-panel-pad)) calc(-1 * var(--dashboard-panel-pad)) 12px calc(-1 * var(--dashboard-panel-pad));
+  border-radius: 15px 15px 0 0;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+  width: calc(100% + 2 * var(--dashboard-panel-pad));
+}
+
+body.dark-theme .mentor-card-head {
+  background: linear-gradient(90deg, rgba(30, 98, 255, 0.16) 0%, rgba(30, 98, 255, 0.03) 70%, transparent 100%);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.mentor-card-head hgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mentor-card-head h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 850;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.mentor-card-head small {
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.mentor-card-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  color: var(--blue);
+  background: rgba(30, 98, 255, 0.08);
+  border-radius: 8px;
+}
+
+body.dark-theme .mentor-card-icon {
+  color: #5587ff;
+  background: rgba(30, 98, 255, 0.18);
+}
+
+.mentor-card-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+
 .calendar-panel {
   min-height: 0;
   height: auto;
@@ -2968,7 +3029,9 @@ body.dark-theme .query-stats div {
 .modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(7, 21, 79, 0.45);
+  background: rgba(4, 9, 20, 0.72);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .modal-panel {
@@ -8398,6 +8461,245 @@ body.dark-theme .course-dots-btn:hover {
   height: 14px;
 }
 
+/* Full-Width Course Attendance Layout */
+.attendance-graph-panel.full-width-graph {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.graph-header {
+  margin-bottom: 24px;
+}
+
+.graph-header h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.010em;
+}
+
+.graph-header .graph-subtitle {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.bar-graph-container {
+  display: flex;
+  gap: 12px;
+  height: 240px; /* Taller graph to give ample room */
+  align-items: stretch;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.graph-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-weight: 700;
+  width: 32px;
+  text-align: right;
+  padding-right: 8px;
+  user-select: none;
+}
+
+.graph-grid-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.graph-grid-lines {
+  position: absolute;
+  inset: 0 0 48px 0; /* Align grid with the top of the bars, leaving room for labels below */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.graph-grid-lines .grid-line {
+  height: 1px;
+  width: 100%;
+  background: rgba(7, 21, 79, 0.05);
+}
+
+body.dark-theme .graph-grid-lines .grid-line {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.graph-bars {
+  position: absolute;
+  inset: 0 0 48px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 24px;
+  z-index: 2;
+}
+
+.graph-bar-item {
+  position: relative;
+  height: 100%;
+  width: 48px; /* Wider bars for full-width layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+}
+
+.graph-bar-item .bar-fill {
+  width: 100%;
+  height: var(--bar-value);
+  border-radius: 8px 8px 0 0;
+  transform-origin: bottom;
+  box-shadow: 0 2px 8px rgba(30, 98, 255, 0.12);
+  animation: growBar 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes growBar {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.graph-bar-item .bar-fill.bg-blue-green {
+  background: linear-gradient(180deg, #1e62ff 0%, #45d39a 100%);
+}
+
+.graph-bar-item .bar-fill.bg-orange {
+  background: linear-gradient(180deg, var(--amber) 0%, #ffcf73 100%);
+  box-shadow: 0 2px 8px rgba(255, 154, 46, 0.12);
+}
+
+.graph-bar-item .bar-fill.bg-green {
+  background: linear-gradient(180deg, #10b981 0%, #34d399 100%);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.12);
+}
+
+.graph-bar-item:hover .bar-fill {
+  filter: brightness(1.05);
+  box-shadow: 0 6px 20px rgba(30, 98, 255, 0.24);
+}
+
+.graph-bar-item.warning:hover .bar-fill {
+  box-shadow: 0 6px 20px rgba(255, 154, 46, 0.24);
+}
+
+/* Percentage text directly on top of the bar */
+.graph-bar-item .bar-percentage-badge {
+  position: absolute;
+  bottom: calc(var(--bar-value) + 6px);
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: #1e62ff;
+  transition: transform 0.2s ease, color 0.2s ease;
+  z-index: 3;
+}
+
+body.dark-theme .graph-bar-item .bar-percentage-badge {
+  color: #45d39a;
+}
+
+.graph-bar-item.warning .bar-percentage-badge {
+  color: var(--amber);
+}
+
+.graph-bar-item:hover .bar-percentage-badge {
+  transform: scale(1.15) translateY(-2px);
+}
+
+/* Two-line Labels below the bars */
+.bar-labels-group {
+  position: absolute;
+  bottom: -44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+  width: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bar-labels-group .bar-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.bar-labels-group .bar-sub-label {
+  font-size: 0.64rem;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.graph-bar-item:hover .bar-label {
+  color: var(--blue);
+}
+
+.graph-bar-item.warning:hover .bar-label {
+  color: var(--amber);
+}
+
+/* Interactive Tooltip style */
+.graph-bar-item .bar-tooltip {
+  position: absolute;
+  bottom: calc(var(--bar-value) + 26px); /* Floating above the percentage badge */
+  left: 50%;
+  transform: translate(-50%, 4px);
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(15, 23, 42, 0.94);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 10;
+}
+
+body.dark-theme .graph-bar-item .bar-tooltip {
+  background: rgba(255, 255, 255, 0.98);
+  color: #0f172a;
+}
+
+.graph-bar-item .bar-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: rgba(15, 23, 42, 0.94);
+}
+
+body.dark-theme .graph-bar-item .bar-tooltip::after {
+  border-top-color: rgba(255, 255, 255, 0.98);
+}
+
+.graph-bar-item:hover .bar-tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* Responsiveness adjustments for attendance-grid */
 @media (max-width: 1180px) {
   .attendance-grid {
@@ -8413,6 +8715,38 @@ body.dark-theme .course-dots-btn:hover {
 
   .attendance-stat-card {
     flex: 1 1 200px;
+  }
+}
+
+@media (max-width: 680px) {
+  .bar-graph-container {
+    height: 200px;
+  }
+  .graph-bars {
+    padding: 0 8px;
+    inset: 0 0 38px 0;
+  }
+  .graph-grid-lines {
+    inset: 0 0 38px 0;
+  }
+  .graph-bar-item {
+    width: 38px;
+  }
+  .bar-labels-group {
+    bottom: -38px;
+    width: 110px;
+  }
+  .bar-labels-group .bar-label {
+    font-size: 0.72rem;
+  }
+  .bar-labels-group .bar-sub-label {
+    display: none; /* Hide sub-labels on small screens to prevent overlapping */
+  }
+  .graph-bar-item .bar-tooltip {
+    bottom: calc(var(--bar-value) + 16px);
+  }
+  .graph-bar-item .bar-percentage-badge {
+    font-size: 0.72rem;
   }
 }
 

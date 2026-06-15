@@ -49,15 +49,15 @@ a {
   height: calc(95vh - 12px);
   min-height: 600px;
   /* margin-left: 24px; */
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 32px;
   background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.45) 0%,
-      rgba(255, 255, 255, 0.22) 100%);
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.48) 100%);
   box-shadow:
     0 40px 100px rgba(0, 0, 0, 0.22),
     0 15px 35px rgba(7, 21, 79, 0.15),
-    inset 0 1px 1px rgba(255, 255, 255, 0.45);
+    inset 0 1px 1px rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(36px);
   -webkit-backdrop-filter: blur(36px);
   transform: translate3d(0, 0, 0);
@@ -338,15 +338,15 @@ a {
     height: clamp(410px, calc(100dvh - 430px), 460px);
     max-height: 460px;
     min-height: 0;
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: 32px;
     background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.62) 0%,
-        rgba(255, 255, 255, 0.34) 100%);
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(255, 255, 255, 0.55) 100%);
     box-shadow:
       0 34px 82px rgba(0, 0, 0, 0.18),
       0 12px 30px rgba(7, 21, 79, 0.12),
-      inset 0 1px 1px rgba(255, 255, 255, 0.56);
+      inset 0 1px 1px rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(36px);
     -webkit-backdrop-filter: blur(36px);
   }
