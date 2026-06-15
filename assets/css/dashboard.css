@@ -4048,37 +4048,62 @@ body.theme-aurora .icon-button {
   }
 
   .profile-page-panel .profile-header-section {
+    display: grid !important;
+    grid-template-columns: 90px 1fr !important;
+    grid-template-rows: auto auto !important;
+    align-items: start !important;
+    gap: 14px 16px !important;
     margin: 10px;
     padding: 14px;
-    gap: 14px;
-    align-items: center;
-    text-align: center;
+    text-align: left !important;
   }
 
   .profile-page-panel .profile-photo-wrapper {
-    width: 108px;
-    height: 132px;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    flex: 0 0 90px !important;
+    width: 90px !important;
+    height: 110px !important;
+    border-width: 2px !important;
+    align-self: start !important;
+    margin: 0 !important;
+  }
+
+  .profile-page-panel .profile-main-info {
+    display: contents !important;
   }
 
   .profile-page-panel .profile-title-block {
-    align-items: center;
-    text-align: center;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 4px !important;
+    margin: 0 !important;
   }
 
   .profile-page-panel .profile-title-block h2 {
-    font-size: 1.08rem;
+    font-size: 0.98rem !important;
     line-height: 1.25;
+    margin: 2px 0 0 !important;
   }
 
   .profile-page-panel .profile-email {
     max-width: 100%;
     white-space: normal;
     overflow-wrap: anywhere;
+    font-size: 0.72rem !important;
+    margin-top: 2px !important;
   }
 
   .profile-page-panel .profile-details-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
   }
 
   .profile-page-panel .detail-group {
@@ -9404,31 +9429,54 @@ body.theme-aurora .icon-button {
   }
 
   .profile-page-panel .profile-header-section {
+    display: grid !important;
+    grid-template-columns: 90px 1fr !important;
+    grid-template-rows: auto auto !important;
+    align-items: start !important;
+    gap: 14px 16px !important;
     margin: 10px;
     padding: 14px;
-    align-items: center;
-    text-align: center;
+    text-align: left !important;
   }
 
   .profile-page-panel .profile-photo-wrapper {
-    width: 108px;
-    height: 132px;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    flex: 0 0 90px !important;
+    width: 90px !important;
+    height: 110px !important;
+    border-width: 2px !important;
+    align-self: start !important;
+    margin: 0 !important;
+  }
+
+  .profile-page-panel .profile-main-info {
+    display: contents !important;
   }
 
   .profile-page-panel .profile-title-block {
-    align-items: center;
-    text-align: center;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 4px !important;
+    margin: 0 !important;
   }
 
   .profile-page-panel .profile-title-block h2 {
-    font-size: 1.08rem;
+    font-size: 0.98rem !important;
     line-height: 1.25;
+    margin: 2px 0 0 !important;
   }
 
   .profile-page-panel .profile-email {
     max-width: 100%;
     white-space: normal;
     overflow-wrap: anywhere;
+    font-size: 0.72rem !important;
+    margin-top: 2px !important;
   }
 
   .profile-page-panel .detail-group {
@@ -10358,6 +10406,129 @@ body.theme-aurora .icon-button {
     position: absolute;
     top: 12px;
     right: 12px;
+  }
+
+  /* Profile page mobile layout enhancements */
+  .profile-page-panel .profile-tabs {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .profile-page-panel .profile-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .profile-table-filter {
+    display: grid !important;
+    grid-template-columns: 1fr auto auto !important;
+    gap: 8px !important;
+    padding: 10px !important;
+    margin: 10px 10px 0 !important;
+  }
+
+  .profile-filter-heading {
+    display: none !important;
+  }
+
+  .profile-filter-search {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    height: 36px !important;
+  }
+
+  .profile-filter-field {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    height: 36px !important;
+    padding: 0 8px !important;
+    gap: 6px !important;
+  }
+
+  .profile-filter-field select {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .profile-filter-reset {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    height: 36px !important;
+    padding: 0 12px !important;
+  }
+
+  .profile-filter-count {
+    grid-column: 3 !important;
+    grid-row: 2 !important;
+    height: 36px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 10px !important;
+    margin: 0 !important;
+    border-radius: 9px !important;
+    white-space: nowrap !important;
+    align-self: stretch !important;
+    justify-self: stretch !important;
+  }
+
+  .profile-page-panel .profile-header-section {
+    display: grid !important;
+    grid-template-columns: 90px 1fr !important;
+    grid-template-rows: auto auto !important;
+    align-items: start !important;
+    gap: 14px 16px !important;
+    margin: 10px !important;
+    padding: 14px !important;
+    text-align: left !important;
+  }
+
+  .profile-page-panel .profile-photo-wrapper {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    flex: 0 0 90px !important;
+    width: 90px !important;
+    height: 110px !important;
+    border-width: 2px !important;
+    align-self: start !important;
+    margin: 0 !important;
+  }
+
+  .profile-page-panel .profile-main-info {
+    display: contents !important;
+  }
+
+  .profile-page-panel .profile-title-block {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 4px !important;
+    margin: 0 !important;
+  }
+
+  .profile-page-panel .profile-title-block h2 {
+    font-size: 1.05rem !important;
+    line-height: 1.25 !important;
+    margin: 2px 0 0 !important;
+  }
+
+  .profile-page-panel .profile-email {
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    font-size: 0.75rem !important;
+    margin-top: 2px !important;
+  }
+
+  .profile-page-panel .profile-details-grid {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
   }
 }
 
