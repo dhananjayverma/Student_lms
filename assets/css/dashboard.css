@@ -4394,51 +4394,104 @@ body.theme-mint {
     url('../images/uni.png') no-repeat center center / cover;
 }
 
+body.theme-lavender {
+  --ink: #2d124d;
+  --muted: #6a5280;
+  --line: rgba(139, 92, 246, 0.12);
+  --glass: rgba(253, 249, 255, 0.9);
+  --blue: #8b5cf6;
+  background:
+    linear-gradient(135deg, rgba(243, 232, 255, 0.9), rgba(250, 245, 255, 0.86)),
+    url('../images/uni.png') no-repeat center center / cover;
+}
+
+body.theme-cyberpunk {
+  --ink: #00ffcc;
+  --muted: #8ab4f8;
+  --line: rgba(255, 234, 0, 0.22);
+  --glass: #070913;
+  --blue: #ffea00;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255, 0, 128, 0.2), transparent 30%),
+    radial-gradient(circle at 90% 90%, rgba(0, 255, 204, 0.15), transparent 35%),
+    linear-gradient(rgba(7, 9, 19, 0.88), rgba(9, 11, 23, 0.94)),
+    url('../images/uni.png') no-repeat center center / cover;
+}
+
+body.theme-steel {
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: rgba(148, 163, 184, 0.16);
+  --glass: rgba(241, 245, 249, 0.92);
+  --blue: #475569;
+  background:
+    linear-gradient(135deg, rgba(241, 245, 249, 0.92), rgba(226, 232, 240, 0.88)),
+    url('../images/uni.png') no-repeat center center / cover;
+}
+
 body.theme-ocean .glass,
 body.theme-forest .glass,
 body.theme-sunset .glass,
 body.theme-rose .glass,
 body.theme-mint .glass,
+body.theme-lavender .glass,
+body.theme-steel .glass,
 body.theme-ocean .sidebar,
 body.theme-forest .sidebar,
 body.theme-sunset .sidebar,
 body.theme-rose .sidebar,
 body.theme-mint .sidebar,
+body.theme-lavender .sidebar,
+body.theme-steel .sidebar,
 body.theme-ocean .profile-menu,
 body.theme-forest .profile-menu,
 body.theme-sunset .profile-menu,
 body.theme-rose .profile-menu,
 body.theme-mint .profile-menu,
+body.theme-lavender .profile-menu,
+body.theme-steel .profile-menu,
 body.theme-ocean .modal-panel,
 body.theme-forest .modal-panel,
 body.theme-sunset .modal-panel,
 body.theme-rose .modal-panel,
 body.theme-mint .modal-panel,
+body.theme-lavender .modal-panel,
+body.theme-steel .modal-panel,
 body.theme-ocean .nav-weather,
 body.theme-forest .nav-weather,
 body.theme-sunset .nav-weather,
 body.theme-rose .nav-weather,
 body.theme-mint .nav-weather,
+body.theme-lavender .nav-weather,
+body.theme-steel .nav-weather,
 body.theme-ocean .theme-switch,
 body.theme-forest .theme-switch,
 body.theme-sunset .theme-switch,
 body.theme-rose .theme-switch,
 body.theme-mint .theme-switch,
+body.theme-lavender .theme-switch,
+body.theme-steel .theme-switch,
 body.theme-ocean .search,
 body.theme-forest .search,
 body.theme-sunset .search,
 body.theme-rose .search,
 body.theme-mint .search,
+body.theme-lavender .search,
+body.theme-steel .search,
 body.theme-ocean .profile,
 body.theme-forest .profile,
 body.theme-sunset .profile,
 body.theme-rose .profile,
 body.theme-mint .profile,
+body.theme-lavender .profile,
+body.theme-steel .profile,
 body.theme-ocean .icon-button,
 body.theme-forest .icon-button,
 body.theme-sunset .icon-button,
 body.theme-rose .icon-button,
-body.theme-mint .icon-button {
+body.theme-mint .icon-button,
+body.theme-lavender .icon-button,
+body.theme-steel .icon-button {
   background: var(--glass);
   border-color: var(--line);
   box-shadow: 0 10px 26px rgba(30, 41, 59, 0.08);
@@ -4456,6 +4509,49 @@ body.theme-graphite.dark-theme .icon-button {
   background: #171b22;
   border-color: rgba(255, 255, 255, 0.10);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
+}
+
+body.theme-cyberpunk.dark-theme .glass,
+body.theme-cyberpunk.dark-theme .sidebar,
+body.theme-cyberpunk.dark-theme .profile-menu,
+body.theme-cyberpunk.dark-theme .modal-panel,
+body.theme-cyberpunk.dark-theme .nav-weather,
+body.theme-cyberpunk.dark-theme .theme-switch,
+body.theme-cyberpunk.dark-theme .search,
+body.theme-cyberpunk.dark-theme .profile,
+body.theme-cyberpunk.dark-theme .icon-button {
+  background: #070913;
+  border-color: rgba(255, 234, 0, 0.22);
+  box-shadow:
+    0 0 0 1px rgba(255, 0, 128, 0.1),
+    0 12px 28px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(255, 234, 0, 0.05);
+}
+
+/* Unified Panel & Card Theme Overrides */
+body[class*="theme-"] .mentor-card,
+body[class*="theme-"] .query-summary,
+body[class*="theme-"] .announcements-panel,
+body[class*="theme-"] .academic-panel,
+body[class*="theme-"] .calendar-panel,
+body[class*="theme-"] .conversations,
+body[class*="theme-"] .announcement-widget,
+body[class*="theme-"] .important-messages-widget {
+  background: var(--glass) !important;
+  border-color: var(--line) !important;
+  color: var(--ink);
+  box-shadow: 0 10px 26px rgba(30, 41, 59, 0.08);
+}
+
+body[class*="theme-"].dark-theme .mentor-card,
+body[class*="theme-"].dark-theme .query-summary,
+body[class*="theme-"].dark-theme .announcements-panel,
+body[class*="theme-"].dark-theme .academic-panel,
+body[class*="theme-"].dark-theme .calendar-panel,
+body[class*="theme-"].dark-theme .conversations,
+body[class*="theme-"].dark-theme .announcement-widget,
+body[class*="theme-"].dark-theme .important-messages-widget {
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
 }
 
 .pills {

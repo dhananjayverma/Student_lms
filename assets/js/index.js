@@ -15,7 +15,10 @@ const dashboardThemes = [
   "sunset",
   "rose",
   "graphite",
-  "mint"
+  "mint",
+  "lavender",
+  "cyberpunk",
+  "steel"
 ];
 
 if (!isAuthenticated) {
@@ -50,7 +53,7 @@ if (greetingNode) {
 
 const setTheme = (theme) => {
   const selectedTheme = dashboardThemes.includes(theme) ? theme : "light";
-  const isDark = selectedTheme === "dark" || selectedTheme === "neon" || selectedTheme === "graphite";
+  const isDark = selectedTheme === "dark" || selectedTheme === "neon" || selectedTheme === "graphite" || selectedTheme === "cyberpunk";
 
   document.body.classList.toggle("dark-theme", isDark);
   dashboardThemes
@@ -509,6 +512,16 @@ modalBody?.addEventListener("click", (event) => {
     localStorage.removeItem(dashboardAccentColorKey);
     setTheme(prefersDarkTheme ? "dark" : "light");
     applyDashboardColors();
+    syncAccountSettingsControls(modalBody);
+  }
+});
+
+modalBody?.addEventListener("change", (event) => {
+  const target = event.target;
+  if (target.matches("[data-settings-theme-select]")) {
+    const nextTheme = dashboardThemes.includes(target.value) ? target.value : "light";
+    localStorage.setItem(dashboardThemeKey, nextTheme);
+    setTheme(nextTheme);
     syncAccountSettingsControls(modalBody);
   }
 });
