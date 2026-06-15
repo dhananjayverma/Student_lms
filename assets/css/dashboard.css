@@ -2151,14 +2151,54 @@ body.dark-theme .attendance-bar {
 }
 
 .mentor-photo {
+  position: relative;
   width: 54px;
   height: 54px;
   border-radius: 14px;
-  background:
-    radial-gradient(circle at 50% 26%, #f3d2ba 0 15%, transparent 16%),
-    linear-gradient(180deg, transparent 44%, #151d2b 45% 74%, #6d7c93 75%),
-    linear-gradient(135deg, #d8dde8, #f6f7fb);
-  box-shadow: inset 0 -16px 0 rgba(8, 15, 28, 0.12), 0 10px 20px rgba(26, 42, 70, 0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+  text-shadow: none;
+  overflow: visible;
+}
+
+.mentor-card .mentor-photo .mentor-initials {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  user-select: none;
+  display: block;
+}
+
+.mentor-card .mentor-photo .mentor-status-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+  animation: mentorStatusPulse 2s infinite;
+  display: block;
+  z-index: 2;
+}
+
+@keyframes mentorStatusPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
 }
 
 .mentor-card div {
@@ -2206,8 +2246,10 @@ body.dark-theme .attendance-bar {
 /* Mentor Card Header Styling */
 .mentor-card-head {
   grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
   gap: 12px;
   background: linear-gradient(90deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.02) 60%, transparent 100%);
   padding: 14px var(--dashboard-panel-pad);
@@ -2223,9 +2265,11 @@ body.dark-theme .mentor-card-head {
 }
 
 .mentor-card-head hgroup {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   gap: 2px;
+  flex: 1 !important;
+  min-width: 0 !important;
 }
 
 .mentor-card-head h3 {
@@ -5335,6 +5379,15 @@ body.dark-theme .mentor-card strong {
 
 body.dark-theme .mentor-card span {
   color: #aebbd0;
+}
+
+body.dark-theme .mentor-photo {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+}
+
+body.dark-theme .mentor-card .mentor-photo .mentor-status-dot {
+  border-color: #131e30;
 }
 
 body.dark-theme .mentor-card button {
