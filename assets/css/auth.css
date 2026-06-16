@@ -49,7 +49,7 @@ a {
   height: calc(95vh - 12px);
   min-height: 600px;
   /* margin-left: 24px; */
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  /* border: 1px solid rgba(255, 255, 255, 0.55); */
   border-radius: 32px;
   background: linear-gradient(135deg,
       rgba(255, 255, 255, 0.78) 0%,
