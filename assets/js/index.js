@@ -397,6 +397,104 @@ const modalOptions = document.querySelectorAll(".modal-option");
 const conversationViewAll = document.querySelector(".conversation-view-all");
 let lastModalTrigger = null;
 
+const formatCurrency = (amount) => `₹ ${new Intl.NumberFormat("en-IN").format(amount)}`;
+
+const updateFeeFilters = (root) => {
+  const filterPanel = root?.querySelector("[data-fee-filters]");
+  if (!filterPanel) return;
+
+  const filters = {
+    semester: filterPanel.querySelector('[data-fee-filter="semester"]')?.value || "all",
+    year: filterPanel.querySelector('[data-fee-filter="year"]')?.value || "all",
+    category: filterPanel.querySelector('[data-fee-filter="category"]')?.value || "all"
+  };
+  const items = [...root.querySelectorAll("[data-fee-item]")];
+  const countNode = root.querySelector("[data-fee-filter-count]");
+  const summaryTotal = root.querySelector("[data-fee-summary-total]");
+  const totalNode = root.querySelector("[data-fee-total]");
+  const emptyState = root.querySelector("[data-fee-empty]");
+  const resetButton = root.querySelector("[data-fee-filter-reset]");
+  let visibleCount = 0;
+  let total = 0;
+
+  items.forEach((item) => {
+    const isMatch =
+      (filters.semester === "all" || item.dataset.semester === filters.semester) &&
+      (filters.year === "all" || item.dataset.year === filters.year) &&
+      (filters.category === "all" || item.dataset.category === filters.category);
+
+    item.classList.toggle("is-hidden", !isMatch);
+    if (isMatch) {
+      visibleCount += 1;
+      total += Number(item.dataset.amount || 0);
+    }
+  });
+
+  if (countNode) {
+    countNode.textContent = `${visibleCount} shown`;
+  }
+
+  if (summaryTotal) {
+    summaryTotal.textContent = formatCurrency(total);
+  }
+
+  if (totalNode) {
+    totalNode.textContent = formatCurrency(total);
+  }
+
+  if (emptyState) {
+    emptyState.hidden = visibleCount > 0;
+  }
+
+  if (resetButton) {
+    resetButton.disabled = Object.values(filters).every((value) => value === "all");
+  }
+};
+
+const updateBacklogFilters = (root) => {
+  const filterPanel = root?.querySelector("[data-backlog-filters]");
+  if (!filterPanel) return;
+
+  const filters = {
+    semester: filterPanel.querySelector('[data-backlog-filter="semester"]')?.value || "all",
+    year: filterPanel.querySelector('[data-backlog-filter="year"]')?.value || "all",
+    type: filterPanel.querySelector('[data-backlog-filter="type"]')?.value || "all"
+  };
+  const items = [...root.querySelectorAll("[data-backlog-item]")];
+  const countNode = root.querySelector("[data-backlog-filter-count]");
+  const summaryCount = root.querySelector("[data-backlog-summary-count]");
+  const emptyState = root.querySelector("[data-backlog-empty]");
+  const resetButton = root.querySelector("[data-backlog-filter-reset]");
+  let visibleCount = 0;
+
+  items.forEach((item) => {
+    const isMatch =
+      (filters.semester === "all" || item.dataset.semester === filters.semester) &&
+      (filters.year === "all" || item.dataset.year === filters.year) &&
+      (filters.type === "all" || item.dataset.type === filters.type);
+
+    item.classList.toggle("is-hidden", !isMatch);
+    if (isMatch) visibleCount += 1;
+  });
+
+  const subjectLabel = visibleCount === 1 ? "Subject" : "Subjects";
+  if (countNode) {
+    countNode.textContent = `${visibleCount} shown`;
+  }
+
+  if (summaryCount) {
+    summaryCount.textContent = `${String(visibleCount).padStart(2, "0")} ${subjectLabel}`;
+  }
+
+  if (emptyState) {
+    emptyState.hidden = visibleCount > 0;
+  }
+
+  if (resetButton) {
+    resetButton.disabled = Object.values(filters).every((value) => value === "all");
+  }
+};
+
 const closeDashboardModal = () => {
   if (!modal || !modalBody) return;
 
@@ -419,6 +517,8 @@ const openDashboardModalFromSource = (trigger, source, title) => {
   modal.hidden = false;
   document.body.classList.add("modal-open");
   syncAccountSettingsControls(modalBody);
+  updateFeeFilters(modalBody);
+  updateBacklogFilters(modalBody);
   modal.querySelector(".modal-close")?.focus();
 };
 
@@ -514,6 +614,20 @@ modalBody?.addEventListener("click", (event) => {
     applyDashboardColors();
     syncAccountSettingsControls(modalBody);
   }
+
+  if (event.target.closest("[data-backlog-filter-reset]")) {
+    modalBody.querySelectorAll("[data-backlog-filter]").forEach((select) => {
+      select.value = "all";
+    });
+    updateBacklogFilters(modalBody);
+  }
+
+  if (event.target.closest("[data-fee-filter-reset]")) {
+    modalBody.querySelectorAll("[data-fee-filter]").forEach((select) => {
+      select.value = "all";
+    });
+    updateFeeFilters(modalBody);
+  }
 });
 
 modalBody?.addEventListener("change", (event) => {
@@ -523,6 +637,14 @@ modalBody?.addEventListener("change", (event) => {
     localStorage.setItem(dashboardThemeKey, nextTheme);
     setTheme(nextTheme);
     syncAccountSettingsControls(modalBody);
+  }
+
+  if (target.matches("[data-backlog-filter]")) {
+    updateBacklogFilters(modalBody);
+  }
+
+  if (target.matches("[data-fee-filter]")) {
+    updateFeeFilters(modalBody);
   }
 });
 
@@ -827,6 +949,19 @@ document.querySelectorAll(".announcement-widget-tabs").forEach((tablist) => {
 
     button.classList.add("active");
     button.setAttribute("aria-selected", "true");
+  });
+});
+
+document.querySelectorAll(".conversation-tabs").forEach((tablist) => {
+  tablist.addEventListener("click", (event) => {
+    const button = event.target.closest("button[role='tab']");
+    if (!button || button.classList.contains("selected")) return;
+
+    tablist.querySelectorAll("button[role='tab']").forEach((tab) => {
+      const isSelected = tab === button;
+      tab.classList.toggle("selected", isSelected);
+      tab.setAttribute("aria-selected", String(isSelected));
+    });
   });
 });
 

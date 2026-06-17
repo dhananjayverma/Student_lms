@@ -662,31 +662,68 @@
             <div class="banner-icon"><svg><use href="#icon-wallet"></use></svg></div>
             <div class="banner-text">
               <span class="banner-label">Total Pending Fee</span>
-              <strong class="banner-value">₹ 10,000</strong>
+              <strong class="banner-value" data-fee-summary-total>₹ 10,000</strong>
               <span class="banner-due">Due Date: June 30, 2026</span>
             </div>
+          </div>
+
+          <div class="fee-filter-panel" data-fee-filters>
+            <label class="fee-filter-field">
+              <span>Semester</span>
+              <select data-fee-filter="semester" aria-label="Filter fee by semester">
+                <option value="all">All Semesters</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+            </label>
+            <label class="fee-filter-field">
+              <span>Year</span>
+              <select data-fee-filter="year" aria-label="Filter fee by year">
+                <option value="all">All Years</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+              </select>
+            </label>
+            <label class="fee-filter-field">
+              <span>Category</span>
+              <select data-fee-filter="category" aria-label="Filter fee by category">
+                <option value="all">All Categories</option>
+                <option value="tuition">Tuition</option>
+                <option value="examination">Examination</option>
+                <option value="library-sports">Library &amp; Sports</option>
+              </select>
+            </label>
+            <button class="fee-filter-reset" type="button" data-fee-filter-reset>Reset</button>
+            <span class="fee-filter-count" data-fee-filter-count>3 shown</span>
           </div>
           
           <div class="details-section">
             <h3>Fee Breakdown</h3>
             <div class="breakdown-list">
-              <div class="breakdown-row">
+              <div class="breakdown-row" data-fee-item data-semester="6" data-year="2026" data-category="tuition" data-amount="8500">
                 <span>Tuition Fee (Semester 6)</span>
                 <strong>₹ 8,500</strong>
               </div>
-              <div class="breakdown-row">
+              <div class="breakdown-row" data-fee-item data-semester="6" data-year="2026" data-category="examination" data-amount="1000">
                 <span>Examination Fee (June 2026)</span>
                 <strong>₹ 1,000</strong>
               </div>
-              <div class="breakdown-row">
+              <div class="breakdown-row" data-fee-item data-semester="6" data-year="2026" data-category="library-sports" data-amount="500">
                 <span>Library &amp; Sports Fee</span>
                 <strong>₹ 500</strong>
               </div>
-              <div class="breakdown-row total-row">
+              <div class="breakdown-row total-row" data-fee-total-row>
                 <span>Total Payable</span>
-                <strong>₹ 10,000</strong>
+                <strong data-fee-total>₹ 10,000</strong>
               </div>
             </div>
+            <div class="fee-empty-state" data-fee-empty hidden>No fee items match these filters.</div>
           </div>
           
           <div class="modal-action-footer">
@@ -702,15 +739,50 @@
             <div class="banner-icon"><svg><use href="#icon-file"></use></svg></div>
             <div class="banner-text">
               <span class="banner-label">Active Backlogs</span>
-              <strong class="banner-value">02 Subjects</strong>
+              <strong class="banner-value" data-backlog-summary-count>02 Subjects</strong>
               <span class="banner-due">Examination Period: July 2026</span>
             </div>
+          </div>
+
+          <div class="backlog-filter-panel" data-backlog-filters>
+            <label class="backlog-filter-field">
+              <span>Semester</span>
+              <select data-backlog-filter="semester" aria-label="Filter backlog by semester">
+                <option value="all">All Semesters</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+            </label>
+            <label class="backlog-filter-field">
+              <span>Year</span>
+              <select data-backlog-filter="year" aria-label="Filter backlog by year">
+                <option value="all">All Years</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+              </select>
+            </label>
+            <label class="backlog-filter-field">
+              <span>Type</span>
+              <select data-backlog-filter="type" aria-label="Filter backlog by type">
+                <option value="all">All Types</option>
+                <option value="internal">Internal</option>
+                <option value="external">External</option>
+              </select>
+            </label>
+            <button class="backlog-filter-reset" type="button" data-backlog-filter-reset>Reset</button>
+            <span class="backlog-filter-count" data-backlog-filter-count>2 shown</span>
           </div>
           
           <div class="details-section">
             <h3>Subject Details</h3>
             <div class="backlog-subject-list">
-              <div class="subject-card">
+              <div class="subject-card" data-backlog-item data-semester="5" data-year="2026" data-type="internal">
                 <div class="subject-header">
                   <span class="subject-code">CS-302</span>
                   <span class="backlog-type-badge internal">Internal Backlog</span>
@@ -723,7 +795,7 @@
                 </div>
               </div>
               
-              <div class="subject-card">
+              <div class="subject-card" data-backlog-item data-semester="5" data-year="2026" data-type="external">
                 <div class="subject-header">
                   <span class="subject-code">CS-304</span>
                   <span class="backlog-type-badge external">External Backlog</span>
@@ -736,6 +808,7 @@
                 </div>
               </div>
             </div>
+            <div class="backlog-empty-state" data-backlog-empty hidden>No backlog subjects match these filters.</div>
           </div>
           
           <div class="modal-action-footer">
@@ -1203,8 +1276,8 @@
             <a href="#" class="conversation-view-all" data-modal-title="Conversation Details">View All</a>
           </div>
           <div class="conversation-tabs" role="tablist" aria-label="Conversation type">
-            <button class="selected" type="button">Chat</button>
-            <button type="button">Mates</button>
+            <button class="selected" type="button" role="tab" aria-selected="true" data-conversation-tab="chat">Chat</button>
+            <button type="button" role="tab" aria-selected="false" data-conversation-tab="mates">Mates</button>
           </div>
           <div class="conversation-list">
             <div class="conversation-card">

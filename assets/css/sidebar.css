@@ -55,7 +55,7 @@ body.dark-theme .sidebar {
   min-height: 76px;
   margin-top: 8px;
   padding: 0 26px;
-  background: transparent;
+  background: #ffffff;
   box-shadow: none;
   position: relative;
   z-index: 2;
@@ -69,14 +69,8 @@ body.dark-theme .sidebar {
 }
 
 body.dark-theme .cu-logo {
-  margin: 12px;
-  min-height: 62px;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+  background: #0f172a;
   box-shadow: none;
 }
 
@@ -93,7 +87,9 @@ body.dark-theme .cu-logo {
 }
 
 body.dark-theme .cu-logo img {
-  filter: contrast(1.08) saturate(1.08);
+  content: url("../images/logo-dark.png");
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45));
+  opacity: 0.96;
 }
 
 .sidebar-menu {
@@ -952,7 +948,7 @@ body.sidebar-collapsed .logout-button {
     box-shadow: none;
     border-radius: 12px;
     padding: 0;
-    background: transparent;
+    background: #ffffff;
   }
 
   .cu-logo img {
@@ -1057,8 +1053,8 @@ body.sidebar-collapsed .logout-button {
   }
 
   body.dark-theme .cu-logo {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #0f172a;
+    border-color: rgba(255, 255, 255, 0.06);
     box-shadow: none;
   }
 
