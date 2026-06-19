@@ -79,14 +79,14 @@ form?.addEventListener("submit", (event) => {
     slides.forEach((s, i) => {
       if (i === index) {
         s.style.opacity = "1";
-        s.style.zIndex  = "1";
+        s.style.zIndex  = "2"; // active: above all others
         // Restart Ken Burns zoom by toggling the class
         s.classList.remove("kb-active");
         void s.offsetWidth; // reflow trick
         s.classList.add("kb-active");
       } else {
         s.style.opacity = "0";
-        s.style.zIndex  = "0";
+        s.style.zIndex  = "1"; // keep visible during crossfade
         s.classList.remove("kb-active");
       }
     });
@@ -105,9 +105,9 @@ form?.addEventListener("submit", (event) => {
   // Init — disable CSS animation (JS controls opacity + zoom class)
   slides.forEach(s => {
     s.style.animation  = "none";
-    s.style.transition = "opacity 1.2s ease-in-out";
+    s.style.transition = "opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1)";
     s.style.opacity    = "0";
-    s.style.zIndex     = "0";
+    s.style.zIndex     = "1";
   });
   goTo(0);
   startTimer();
