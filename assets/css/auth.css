@@ -30,17 +30,6 @@ body {
   overflow: hidden;
 }
 
-.bg-slide {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center 25%;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 1.2s ease-in-out;
-  /* No CSS animation — JS fully controls opacity */
-}
-
 /* First slide visible by default BEFORE JS runs — eliminates blue flash */
 .bg-slide:nth-child(1) {
   background-image: url("../images/uni.png");
@@ -110,31 +99,7 @@ body {
   pointer-events: none;
 }
 
-/* Ken Burns slow zoom — applied by JS when slide becomes active */
-@keyframes kenBurns {
-  0%   { transform: scale(1)    translateX(0%)   translateY(0%); }
-  50%  { transform: scale(1.08) translateX(-1%)  translateY(-0.5%); }
-  100% { transform: scale(1.12) translateX(1%)   translateY(0.5%); }
-}
 
-.bg-slide.kb-active {
-  animation: kenBurns 7s ease-in-out forwards;
-  transform-origin: center center;
-}
-
-/* Subtle dark overlay for readability */
-.bg-slideshow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.18) 0%,
-    rgba(7, 21, 79, 0.10) 100%
-  );
-  z-index: 2;
-  pointer-events: none;
-}
 
 /* Slide indicator dots */
 .bg-dots {
