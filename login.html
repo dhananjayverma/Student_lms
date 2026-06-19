@@ -13,6 +13,20 @@
 </head>
 
 <body>
+  <!-- Background Slideshow -->
+  <div class="bg-slideshow" id="bg-slideshow">
+    <div class="bg-slide" data-index="0"></div>
+    <div class="bg-slide" data-index="1"></div>
+    <div class="bg-slide" data-index="2"></div>
+  </div>
+
+  <!-- Dot Indicators -->
+  <div class="bg-dots" id="bg-dots">
+    <span class="bg-dot active" data-dot="0"></span>
+    <span class="bg-dot" data-dot="1"></span>
+    <span class="bg-dot" data-dot="2"></span>
+  </div>
+
   <main class="auth-page">
     <section class="auth-shell" aria-label="CUIMS authentication">
       <section class="auth-card">
@@ -45,7 +59,7 @@
 
           <button class="auth-submit" type="submit">Next</button>
 
-          <div class="auth-second-actions" hidden>
+          <div class="auth-second-actions">
             <span>OR</span>
             <a class="registration-button" href="#">Click Here For Registration</a>
             <a class="forgot-link" href="#">Forgot Password?</a>

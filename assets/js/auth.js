@@ -63,3 +63,62 @@ form?.addEventListener("submit", (event) => {
     window.location.href = "index.html";
   }, 400);
 });
+
+/* ═══════════════════════════════════════════
+   Background Slideshow Controller
+═══════════════════════════════════════════ */
+(function () {
+  const SLIDE_DURATION = 6000; // ms per slide (6s)
+  const slides = document.querySelectorAll(".bg-slide");
+  const dots   = document.querySelectorAll(".bg-dot");
+  let current  = 0;
+  let timer    = null;
+
+  // Activate a specific slide + restart its zoom animation
+  function goTo(index) {
+    slides.forEach((s, i) => {
+      if (i === index) {
+        s.style.opacity = "1";
+        s.style.zIndex  = "1";
+        // Restart Ken Burns zoom by toggling the class
+        s.classList.remove("kb-active");
+        void s.offsetWidth; // reflow trick
+        s.classList.add("kb-active");
+      } else {
+        s.style.opacity = "0";
+        s.style.zIndex  = "0";
+        s.classList.remove("kb-active");
+      }
+    });
+    dots.forEach((d, i) => d.classList.toggle("active", i === index));
+    current = index;
+  }
+
+  // Auto-advance
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+      goTo((current + 1) % slides.length);
+    }, SLIDE_DURATION);
+  }
+
+  // Init — disable CSS animation (JS controls opacity + zoom class)
+  slides.forEach(s => {
+    s.style.animation  = "none";
+    s.style.transition = "opacity 1.2s ease-in-out";
+    s.style.opacity    = "0";
+    s.style.zIndex     = "0";
+  });
+  goTo(0);
+  startTimer();
+
+  // Dots — click to jump
+  dots.forEach((dot, i) => {
+    dot.style.pointerEvents = "auto";
+    dot.style.cursor = "pointer";
+    dot.addEventListener("click", () => {
+      goTo(i);
+      startTimer(); // reset timer from this slide
+    });
+  });
+})();
