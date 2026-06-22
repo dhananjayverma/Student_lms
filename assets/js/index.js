@@ -3,6 +3,14 @@ const isAuthenticated = localStorage.getItem(authSessionKey) === "true";
 const dashboardThemeKey = "dashboard-theme";
 const dashboardTextColorKey = "dashboard-text-color";
 const dashboardAccentColorKey = "dashboard-accent-color";
+const dashboardBgColorKey = "dashboard-bg-color";
+const dashboardTextSizeKey = "dashboard-text-size";
+const dashboardHighlightKey = "dashboard-highlight";
+const dashboardHideTextKey = "dashboard-hide-text";
+const dashboardDensityKey = "dashboard-density";
+const dashboardPanelStyleKey = "dashboard-panel-style";
+const dashboardGrayscaleKey = "dashboard-grayscale";
+const dashboardMotionKey = "dashboard-motion";
 const dashboardThemes = [
   "light",
   "dark",
@@ -34,6 +42,9 @@ const sidebarToggleButton = document.querySelector(".sidebar-toggle-button");
 const sidebarBackdrop = document.querySelector(".sidebar-backdrop");
 const themeToggleButtons = document.querySelectorAll(".theme-toggle-button, .drawer-theme-toggle");
 const themeChoiceButtons = document.querySelectorAll("[data-theme-value]");
+const quickPanel = document.querySelector("[data-quick-panel]");
+const quickToggle = document.querySelector("[data-quick-toggle]");
+const quickMenu = document.querySelector("[data-quick-menu]");
 const shell = document.querySelector(".shell");
 const mobileSidebarQuery = window.matchMedia("(max-width: 980px)");
 const desktopDashboardQuery = window.matchMedia("(min-width: 1181px)");
@@ -77,6 +88,7 @@ const isValidHexColor = (color) => /^#[0-9a-f]{6}$/i.test(color || "");
 const applyDashboardColors = () => {
   const textColor = localStorage.getItem(dashboardTextColorKey);
   const accentColor = localStorage.getItem(dashboardAccentColorKey);
+  const bgColor = localStorage.getItem(dashboardBgColorKey);
 
   if (isValidHexColor(textColor)) {
     document.body.style.setProperty("--ink", textColor);
@@ -89,6 +101,43 @@ const applyDashboardColors = () => {
   } else {
     document.body.style.removeProperty("--blue");
   }
+
+  if (isValidHexColor(bgColor)) {
+    document.body.style.setProperty("--dashboard-custom-bg", bgColor);
+    document.body.classList.add("quick-custom-bg");
+  } else {
+    document.body.style.removeProperty("--dashboard-custom-bg");
+    document.body.classList.remove("quick-custom-bg");
+  }
+};
+
+const applyQuickDisplaySettings = () => {
+  const textSize = localStorage.getItem(dashboardTextSizeKey);
+  const density = localStorage.getItem(dashboardDensityKey);
+  const panelStyle = localStorage.getItem(dashboardPanelStyleKey);
+  const isHighlighted = localStorage.getItem(dashboardHighlightKey) === "true";
+  const isTextHidden = localStorage.getItem(dashboardHideTextKey) === "true";
+  const isGrayscale = localStorage.getItem(dashboardGrayscaleKey) === "true";
+  const isCalm = localStorage.getItem(dashboardMotionKey) === "true";
+
+  if (textSize === "small") {
+    document.documentElement.style.fontSize = "14.5px";
+  } else if (textSize === "large") {
+    document.documentElement.style.fontSize = "17px";
+  } else {
+    document.documentElement.style.removeProperty("font-size");
+  }
+
+  document.body.classList.toggle("quick-text-small", textSize === "small");
+  document.body.classList.toggle("quick-text-large", textSize === "large");
+  document.body.classList.toggle("quick-density-compact", density === "compact");
+  document.body.classList.toggle("quick-density-relaxed", density === "relaxed");
+  document.body.classList.toggle("quick-panel-soft", panelStyle === "soft");
+  document.body.classList.toggle("quick-panel-sharp", panelStyle === "sharp");
+  document.body.classList.toggle("quick-highlight", isHighlighted);
+  document.body.classList.toggle("quick-hide-text", isTextHidden);
+  document.body.classList.toggle("quick-grayscale", isGrayscale);
+  document.body.classList.toggle("quick-calm-motion", isCalm);
 };
 
 const syncAccountSettingsControls = (root = document) => {
@@ -123,10 +172,83 @@ const syncAccountSettingsControls = (root = document) => {
   }
 };
 
+const syncQuickControls = () => {
+  if (!quickPanel) return;
+  const savedTheme = localStorage.getItem(dashboardThemeKey);
+  const currentTheme = dashboardThemes.includes(savedTheme)
+    ? savedTheme
+    : (document.body.classList.contains("dark-theme") ? "dark" : "light");
+  const savedTextColor = localStorage.getItem(dashboardTextColorKey);
+  const savedAccentColor = localStorage.getItem(dashboardAccentColorKey);
+  const savedBgColor = localStorage.getItem(dashboardBgColorKey);
+  const textSize = localStorage.getItem(dashboardTextSizeKey) || "normal";
+  const density = localStorage.getItem(dashboardDensityKey) || "normal";
+  const panelStyle = localStorage.getItem(dashboardPanelStyleKey) || "normal";
+  const isHighlighted = localStorage.getItem(dashboardHighlightKey) === "true";
+  const isTextHidden = localStorage.getItem(dashboardHideTextKey) === "true";
+  const isGrayscale = localStorage.getItem(dashboardGrayscaleKey) === "true";
+  const isCalm = localStorage.getItem(dashboardMotionKey) === "true";
+
+  quickPanel.querySelectorAll("[data-quick-theme]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.quickTheme === currentTheme);
+  });
+
+  quickPanel.querySelectorAll("[data-quick-text-color]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.quickTextColor === savedTextColor);
+  });
+
+  quickPanel.querySelectorAll("[data-quick-bg-color]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.quickBgColor === savedBgColor);
+  });
+
+  quickPanel.querySelectorAll("[data-quick-accent-color]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.quickAccentColor === savedAccentColor);
+  });
+
+  quickPanel.querySelectorAll("[data-quick-text-size]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.quickTextSize === textSize);
+  });
+
+  quickPanel.querySelectorAll("[data-quick-density]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.quickDensity === density);
+  });
+
+  quickPanel.querySelectorAll("[data-quick-panel-style]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.quickPanelStyle === panelStyle);
+  });
+
+  const textPicker = quickPanel.querySelector("[data-quick-text-picker]");
+  const bgPicker = quickPanel.querySelector("[data-quick-bg-picker]");
+  const accentPicker = quickPanel.querySelector("[data-quick-accent-picker]");
+  const highlightButton = quickPanel.querySelector("[data-quick-highlight]");
+  const hideTextButton = quickPanel.querySelector("[data-quick-hide-text]");
+  const grayscaleButton = quickPanel.querySelector("[data-quick-grayscale]");
+  const motionButton = quickPanel.querySelector("[data-quick-motion]");
+
+  if (textPicker) {
+    textPicker.value = isValidHexColor(savedTextColor) ? savedTextColor : "#07154f";
+  }
+
+  if (bgPicker) {
+    bgPicker.value = isValidHexColor(savedBgColor) ? savedBgColor : "#f8fbff";
+  }
+
+  if (accentPicker) {
+    accentPicker.value = isValidHexColor(savedAccentColor) ? savedAccentColor : "#1e62ff";
+  }
+
+  highlightButton?.classList.toggle("active", isHighlighted);
+  hideTextButton?.classList.toggle("active", isTextHidden);
+  grayscaleButton?.classList.toggle("active", isGrayscale);
+  motionButton?.classList.toggle("active", isCalm);
+};
+
 const savedTheme = localStorage.getItem(dashboardThemeKey);
 const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
 setTheme(dashboardThemes.includes(savedTheme) ? savedTheme : (prefersDarkTheme ? "dark" : "light"));
 applyDashboardColors();
+applyQuickDisplaySettings();
+syncQuickControls();
 
 themeToggleButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -134,6 +256,7 @@ themeToggleButtons.forEach((button) => {
     localStorage.setItem(dashboardThemeKey, nextTheme);
     setTheme(nextTheme);
     syncAccountSettingsControls(modalBody || document);
+    syncQuickControls();
   });
 });
 
@@ -143,7 +266,187 @@ themeChoiceButtons.forEach((button) => {
     localStorage.setItem(dashboardThemeKey, nextTheme);
     setTheme(nextTheme);
     syncAccountSettingsControls(modalBody || document);
+    syncQuickControls();
   });
+});
+
+quickToggle?.addEventListener("click", () => {
+  const isOpen = !quickPanel?.classList.contains("is-open");
+  quickPanel?.classList.toggle("is-open", isOpen);
+  quickToggle.setAttribute("aria-expanded", String(isOpen));
+  quickToggle.setAttribute("aria-label", isOpen ? "Close quick display controls" : "Open quick display controls");
+});
+
+// Close button inside the panel header
+quickMenu?.addEventListener("click", (event) => {
+  if (event.target.closest("[data-quick-close]")) {
+    quickPanel?.classList.remove("is-open");
+    quickToggle?.setAttribute("aria-expanded", "false");
+    quickToggle?.setAttribute("aria-label", "Open quick display controls");
+  }
+}, { capture: true });
+
+document.addEventListener("click", (event) => {
+  if (!quickPanel?.classList.contains("is-open")) return;
+  if (event.target.closest("[data-quick-panel]")) return;
+  quickPanel.classList.remove("is-open");
+  quickToggle?.setAttribute("aria-expanded", "false");
+  quickToggle?.setAttribute("aria-label", "Open quick display controls");
+});
+
+quickMenu?.addEventListener("click", (event) => {
+  const themeButton = event.target.closest("[data-quick-theme]");
+  if (themeButton) {
+    const nextTheme = dashboardThemes.includes(themeButton.dataset.quickTheme) ? themeButton.dataset.quickTheme : "light";
+    localStorage.setItem(dashboardThemeKey, nextTheme);
+    setTheme(nextTheme);
+    syncAccountSettingsControls(modalBody || document);
+    syncQuickControls();
+  }
+
+  const textButton = event.target.closest("[data-quick-text-color]");
+  if (textButton) {
+    const color = textButton.dataset.quickTextColor;
+    if (isValidHexColor(color)) {
+      localStorage.setItem(dashboardTextColorKey, color);
+      applyDashboardColors();
+      syncAccountSettingsControls(modalBody || document);
+      syncQuickControls();
+    }
+  }
+
+  const bgButton = event.target.closest("[data-quick-bg-color]");
+  if (bgButton) {
+    const color = bgButton.dataset.quickBgColor;
+    if (isValidHexColor(color)) {
+      localStorage.setItem(dashboardBgColorKey, color);
+      applyDashboardColors();
+      syncQuickControls();
+    }
+  }
+
+  const accentButton = event.target.closest("[data-quick-accent-color]");
+  if (accentButton) {
+    const color = accentButton.dataset.quickAccentColor;
+    if (isValidHexColor(color)) {
+      localStorage.setItem(dashboardAccentColorKey, color);
+      applyDashboardColors();
+      syncAccountSettingsControls(modalBody || document);
+      syncQuickControls();
+    }
+  }
+
+  const textSizeButton = event.target.closest("[data-quick-text-size]");
+  if (textSizeButton) {
+    const nextSize = ["small", "normal", "large"].includes(textSizeButton.dataset.quickTextSize)
+      ? textSizeButton.dataset.quickTextSize
+      : "normal";
+    if (nextSize === "normal") {
+      localStorage.removeItem(dashboardTextSizeKey);
+    } else {
+      localStorage.setItem(dashboardTextSizeKey, nextSize);
+    }
+    applyQuickDisplaySettings();
+    syncQuickControls();
+  }
+
+  const densityButton = event.target.closest("[data-quick-density]");
+  if (densityButton) {
+    const nextDensity = ["compact", "normal", "relaxed"].includes(densityButton.dataset.quickDensity)
+      ? densityButton.dataset.quickDensity
+      : "normal";
+    if (nextDensity === "normal") {
+      localStorage.removeItem(dashboardDensityKey);
+    } else {
+      localStorage.setItem(dashboardDensityKey, nextDensity);
+    }
+    applyQuickDisplaySettings();
+    syncQuickControls();
+  }
+
+  const panelStyleButton = event.target.closest("[data-quick-panel-style]");
+  if (panelStyleButton) {
+    const nextStyle = ["normal", "soft", "sharp"].includes(panelStyleButton.dataset.quickPanelStyle)
+      ? panelStyleButton.dataset.quickPanelStyle
+      : "normal";
+    if (nextStyle === "normal") {
+      localStorage.removeItem(dashboardPanelStyleKey);
+    } else {
+      localStorage.setItem(dashboardPanelStyleKey, nextStyle);
+    }
+    applyQuickDisplaySettings();
+    syncQuickControls();
+  }
+
+  if (event.target.closest("[data-quick-highlight]")) {
+    const nextValue = localStorage.getItem(dashboardHighlightKey) !== "true";
+    localStorage.setItem(dashboardHighlightKey, String(nextValue));
+    applyQuickDisplaySettings();
+    syncQuickControls();
+  }
+
+  if (event.target.closest("[data-quick-hide-text]")) {
+    const nextValue = localStorage.getItem(dashboardHideTextKey) !== "true";
+    localStorage.setItem(dashboardHideTextKey, String(nextValue));
+    applyQuickDisplaySettings();
+    syncQuickControls();
+  }
+
+  if (event.target.closest("[data-quick-grayscale]")) {
+    const nextValue = localStorage.getItem(dashboardGrayscaleKey) !== "true";
+    localStorage.setItem(dashboardGrayscaleKey, String(nextValue));
+    applyQuickDisplaySettings();
+    syncQuickControls();
+  }
+
+  if (event.target.closest("[data-quick-motion]")) {
+    const nextValue = localStorage.getItem(dashboardMotionKey) !== "true";
+    localStorage.setItem(dashboardMotionKey, String(nextValue));
+    applyQuickDisplaySettings();
+    syncQuickControls();
+  }
+
+  if (event.target.closest("[data-quick-reset]")) {
+    localStorage.removeItem(dashboardThemeKey);
+    localStorage.removeItem(dashboardTextColorKey);
+    localStorage.removeItem(dashboardAccentColorKey);
+    localStorage.removeItem(dashboardBgColorKey);
+    localStorage.removeItem(dashboardTextSizeKey);
+    localStorage.removeItem(dashboardHighlightKey);
+    localStorage.removeItem(dashboardHideTextKey);
+    localStorage.removeItem(dashboardDensityKey);
+    localStorage.removeItem(dashboardPanelStyleKey);
+    localStorage.removeItem(dashboardGrayscaleKey);
+    localStorage.removeItem(dashboardMotionKey);
+    setTheme(prefersDarkTheme ? "dark" : "light");
+    applyDashboardColors();
+    applyQuickDisplaySettings();
+    syncAccountSettingsControls(modalBody || document);
+    syncQuickControls();
+  }
+});
+
+quickMenu?.addEventListener("input", (event) => {
+  const target = event.target;
+  if (target.matches("[data-quick-text-picker]") && isValidHexColor(target.value)) {
+    localStorage.setItem(dashboardTextColorKey, target.value);
+    applyDashboardColors();
+    syncAccountSettingsControls(modalBody || document);
+    syncQuickControls();
+  }
+
+  if (target.matches("[data-quick-bg-picker]") && isValidHexColor(target.value)) {
+    localStorage.setItem(dashboardBgColorKey, target.value);
+    applyDashboardColors();
+    syncQuickControls();
+  }
+
+  if (target.matches("[data-quick-accent-picker]") && isValidHexColor(target.value)) {
+    localStorage.setItem(dashboardAccentColorKey, target.value);
+    applyDashboardColors();
+    syncAccountSettingsControls(modalBody || document);
+    syncQuickControls();
+  }
 });
 
 const currentDate = new Intl.DateTimeFormat("en-US", {
@@ -560,6 +863,7 @@ const applySelectedSettingsTheme = (shouldClose = false) => {
   localStorage.setItem(dashboardThemeKey, nextTheme);
   setTheme(nextTheme);
   syncAccountSettingsControls(modalBody);
+  syncQuickControls();
 
   if (shouldClose) {
     closeDashboardModal();
@@ -593,6 +897,7 @@ modalBody?.addEventListener("click", (event) => {
       localStorage.setItem(dashboardTextColorKey, color);
       applyDashboardColors();
       syncAccountSettingsControls(modalBody);
+      syncQuickControls();
     }
   }
 
@@ -603,6 +908,7 @@ modalBody?.addEventListener("click", (event) => {
       localStorage.setItem(dashboardAccentColorKey, color);
       applyDashboardColors();
       syncAccountSettingsControls(modalBody);
+      syncQuickControls();
     }
   }
 
@@ -610,9 +916,15 @@ modalBody?.addEventListener("click", (event) => {
     localStorage.removeItem(dashboardThemeKey);
     localStorage.removeItem(dashboardTextColorKey);
     localStorage.removeItem(dashboardAccentColorKey);
+    localStorage.removeItem(dashboardBgColorKey);
+    localStorage.removeItem(dashboardTextSizeKey);
+    localStorage.removeItem(dashboardHighlightKey);
+    localStorage.removeItem(dashboardHideTextKey);
     setTheme(prefersDarkTheme ? "dark" : "light");
     applyDashboardColors();
+    applyQuickDisplaySettings();
     syncAccountSettingsControls(modalBody);
+    syncQuickControls();
   }
 
   if (event.target.closest("[data-backlog-filter-reset]")) {
@@ -637,6 +949,7 @@ modalBody?.addEventListener("change", (event) => {
     localStorage.setItem(dashboardThemeKey, nextTheme);
     setTheme(nextTheme);
     syncAccountSettingsControls(modalBody);
+    syncQuickControls();
   }
 
   if (target.matches("[data-backlog-filter]")) {
@@ -660,11 +973,13 @@ modalBody?.addEventListener("input", (event) => {
   if (target.matches("[data-settings-text-color]") && isValidHexColor(target.value)) {
     localStorage.setItem(dashboardTextColorKey, target.value);
     applyDashboardColors();
+    syncQuickControls();
   }
 
   if (target.matches("[data-settings-accent-color]") && isValidHexColor(target.value)) {
     localStorage.setItem(dashboardAccentColorKey, target.value);
     applyDashboardColors();
+    syncQuickControls();
   }
 });
 

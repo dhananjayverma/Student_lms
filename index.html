@@ -7,7 +7,7 @@
   <title>CUIMS Glass Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/css/index.css">
   <link rel="stylesheet" href="assets/css/sidebar.css">
@@ -73,6 +73,12 @@
     <symbol id="icon-search" viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="7" />
       <path d="m20 20-3.5-3.5" />
+    </symbol>
+    <symbol id="icon-eye-off" viewBox="0 0 24 24">
+      <path d="M3 3l18 18" />
+      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+      <path d="M9.9 4.2A10.8 10.8 0 0 1 12 4c5 0 8.5 3.3 10 8a12.2 12.2 0 0 1-2.2 3.8" />
+      <path d="M6.6 6.6A12 12 0 0 0 2 12c1.5 4.7 5 8 10 8a10.8 10.8 0 0 0 4.1-.8" />
     </symbol>
     <symbol id="icon-sun" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="4" />
@@ -1183,10 +1189,10 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
             </i>
-            <hgroup>
+            <div class="mentor-card-title">
               <h3>Academic Mentor</h3>
               <small>Guidance & Support System</small>
-            </hgroup>
+            </div>
           </header>
           <span class="mentor-photo" aria-label="Bhavesh Mehta Avatar">
             <span class="mentor-initials">BM</span>
@@ -1742,6 +1748,145 @@
 
 
   </main>
+
+  <aside class="quick-access-panel" aria-label="Quick display controls" data-quick-panel>
+    <button class="quick-access-toggle" type="button" aria-label="Open quick display controls" aria-expanded="false" data-quick-toggle>
+      <img src="assets/images/log.png" alt="" aria-hidden="true">
+    </button>
+    <div class="quick-access-menu" data-quick-menu>
+      <div class="quick-access-head">
+        <div class="quick-head-left">
+          <strong>Quick Controls</strong>
+          <span>Display tools</span>
+        </div>
+        <button class="quick-close-btn" type="button" aria-label="Close quick controls" data-quick-close>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="quick-control-group">
+        <span class="qcg-label">Theme</span>
+        <div class="quick-theme-grid">
+          <button type="button" class="quick-theme-btn" data-quick-theme="light">☀️ Light</button>
+          <button type="button" class="quick-theme-btn" data-quick-theme="dark">🌙 Dark</button>
+          <button type="button" class="quick-theme-btn" data-quick-theme="focus">🎯 Focus</button>
+          <button type="button" class="quick-theme-btn" data-quick-theme="glass">🔮 Glass</button>
+          <button type="button" class="quick-theme-btn" data-quick-theme="aurora">🌌 Aurora</button>
+          <button type="button" class="quick-theme-btn" data-quick-theme="neon">⚡ Neon</button>
+        </div>
+        <select data-quick-theme-select aria-label="Quick theme" style="display:none">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="focus">Focus</option>
+          <option value="glass">Glass</option>
+          <option value="aurora">Aurora</option>
+          <option value="neon">Neon</option>
+          <option value="ocean">Ocean</option>
+          <option value="forest">Forest</option>
+          <option value="sunset">Sunset</option>
+          <option value="rose">Rose</option>
+          <option value="graphite">Graphite</option>
+          <option value="mint">Mint</option>
+          <option value="lavender">Lavender</option>
+          <option value="cyberpunk">Cyberpunk</option>
+          <option value="steel">Steel</option>
+        </select>
+      </div>
+
+      <div class="quick-control-group">
+        <span class="qcg-label">Text Color</span>
+        <div class="quick-swatch-row">
+          <button type="button" class="qswatch" style="--swatch:#07154f" data-quick-text-color="#07154f" aria-label="Navy text" title="Navy"></button>
+          <button type="button" class="qswatch" style="--swatch:#20242c" data-quick-text-color="#20242c" aria-label="Charcoal text" title="Charcoal"></button>
+          <button type="button" class="qswatch" style="--swatch:#7c2d12" data-quick-text-color="#7c2d12" aria-label="Warm text" title="Warm brown"></button>
+          <button type="button" class="qswatch" style="--swatch:#14532d" data-quick-text-color="#14532d" aria-label="Green text" title="Forest green"></button>
+          <button type="button" class="qswatch" style="--swatch:#1e3a5f" data-quick-text-color="#1e3a5f" aria-label="Steel blue text" title="Steel blue"></button>
+          <div class="quick-color-picker-wrap" title="Pick any text color">
+            <input type="color" value="#07154f" aria-label="Custom text color" data-quick-text-picker>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-control-group">
+        <span class="qcg-label">Background</span>
+        <div class="quick-swatch-row">
+          <button type="button" class="qswatch qswatch-light" style="--swatch:#f8fbff" data-quick-bg-color="#f8fbff" aria-label="Soft blue" title="Soft blue"></button>
+          <button type="button" class="qswatch qswatch-light" style="--swatch:#fff7ed" data-quick-bg-color="#fff7ed" aria-label="Warm cream" title="Warm cream"></button>
+          <button type="button" class="qswatch qswatch-light" style="--swatch:#ecfdf5" data-quick-bg-color="#ecfdf5" aria-label="Mint" title="Mint"></button>
+          <button type="button" class="qswatch qswatch-light" style="--swatch:#f5f3ff" data-quick-bg-color="#f5f3ff" aria-label="Lavender" title="Lavender"></button>
+          <button type="button" class="qswatch qswatch-light" style="--swatch:#fefce8" data-quick-bg-color="#fefce8" aria-label="Lemon" title="Lemon"></button>
+          <div class="quick-color-picker-wrap" title="Pick any background color">
+            <input type="color" value="#f8fbff" aria-label="Custom background color" data-quick-bg-picker>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-control-group">
+        <span class="qcg-label">Accent Color</span>
+        <div class="quick-swatch-row">
+          <button type="button" class="qswatch" style="--swatch:#1e62ff" data-quick-accent-color="#1e62ff" aria-label="Blue" title="Blue"></button>
+          <button type="button" class="qswatch" style="--swatch:#ff404f" data-quick-accent-color="#ff404f" aria-label="Red" title="Red"></button>
+          <button type="button" class="qswatch" style="--swatch:#0f9f78" data-quick-accent-color="#0f9f78" aria-label="Green" title="Green"></button>
+          <button type="button" class="qswatch" style="--swatch:#7b43ff" data-quick-accent-color="#7b43ff" aria-label="Violet" title="Violet"></button>
+          <button type="button" class="qswatch" style="--swatch:#f59e0b" data-quick-accent-color="#f59e0b" aria-label="Amber" title="Amber"></button>
+          <div class="quick-color-picker-wrap" title="Pick any accent color">
+            <input type="color" value="#1e62ff" aria-label="Custom accent color" data-quick-accent-picker>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-control-group">
+        <span class="qcg-label">Text Size</span>
+        <div class="quick-segment">
+          <button type="button" data-quick-text-size="small"><span class="qs-size-sm">A</span><span class="qs-size-label">Small</span></button>
+          <button type="button" data-quick-text-size="normal"><span class="qs-size-md">A</span><span class="qs-size-label">Normal</span></button>
+          <button type="button" data-quick-text-size="large"><span class="qs-size-lg">A</span><span class="qs-size-label">Large</span></button>
+        </div>
+      </div>
+
+      <div class="quick-control-group">
+        <span class="qcg-label">Spacing</span>
+        <div class="quick-segment">
+          <button type="button" data-quick-density="compact">Tight</button>
+          <button type="button" data-quick-density="normal">Normal</button>
+          <button type="button" data-quick-density="relaxed">Wide</button>
+        </div>
+      </div>
+
+      <div class="quick-control-group">
+        <span class="qcg-label">Panel Style</span>
+        <div class="quick-segment">
+          <button type="button" data-quick-panel-style="normal">Clean</button>
+          <button type="button" data-quick-panel-style="soft">Soft</button>
+          <button type="button" data-quick-panel-style="sharp">Sharp</button>
+        </div>
+      </div>
+
+      <div class="quick-toggle-row">
+        <button type="button" data-quick-highlight>
+          <svg aria-hidden="true"><use href="#icon-file"></use></svg>
+          Highlight
+        </button>
+        <button type="button" data-quick-hide-text>
+          <svg aria-hidden="true"><use href="#icon-eye-off"></use></svg>
+          Hide text
+        </button>
+        <button type="button" data-quick-grayscale>
+          <svg aria-hidden="true"><use href="#icon-eye-off"></use></svg>
+          Grayscale
+        </button>
+        <button type="button" data-quick-motion>
+          <svg aria-hidden="true"><use href="#icon-clock"></use></svg>
+          Calm
+        </button>
+      </div>
+
+      <button class="quick-reset" type="button" data-quick-reset>↺ Reset all controls</button>
+    </div>
+  </aside>
+
   <div id="navbar-notifications-source" hidden>
     <div class="notice">
       <span><svg><use href="#icon-book"></use></svg></span>
