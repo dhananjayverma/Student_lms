@@ -32,6 +32,10 @@
       <circle cx="12" cy="12" r="9" />
       <path d="M12 7v5l3 2" />
     </symbol>
+    <symbol id="icon-location" viewBox="0 0 24 24">
+      <path d="M12 21s7-5.3 7-12a7 7 0 0 0-14 0c0 6.7 7 12 7 12z" />
+      <circle cx="12" cy="9" r="2.4" />
+    </symbol>
     <symbol id="icon-file" viewBox="0 0 24 24">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
       <path d="M14 2v6h6" />
@@ -840,9 +844,12 @@
 
           <div class="academic-content active" id="classes-panel" role="tabpanel" aria-labelledby="classes-tab">
             <div class="class-toolbar">
-              <div>
-                <span>Today Schedule</span>
-                <strong>5 lectures planned</strong>
+              <div class="class-toolbar-title">
+                <i aria-hidden="true"><svg><use href="#icon-calendar"></use></svg></i>
+                <div>
+                  <span>Today Schedule</span>
+                  <strong>5 lectures planned</strong>
+                </div>
               </div>
               <div class="class-filters" aria-label="Filter classes">
                 <button class="class-filter active" type="button" data-filter="all">All</button>
@@ -862,25 +869,27 @@
 
             <div class="class-hero">
               <div class="class-status schedule-item" data-status="live" data-period="morning">
+                <span class="schedule-card-icon" aria-hidden="true"><svg><use href="#icon-video"></use></svg></span>
                 <span class="class-kicker">Now</span>
                 <div>
                   <strong>Software Engineering</strong>
-                  <small>09am - 09:45am</small>
+                  <small class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>09am - 09:45am</small>
                 </div>
                 <div class="class-meta">
-                  <b>Room D3-105</b>
+                  <b class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>Room D3-105</b>
                   <em>Live</em>
                 </div>
               </div>
               <div class="current-class schedule-item" data-status="upcoming" data-period="morning">
+                <span class="schedule-card-icon" aria-hidden="true"><svg><use href="#icon-calendar"></use></svg></span>
                 <div>
                   <span>Up Next</span>
                   <h2>Software QA</h2>
-                  <p>10am - 10:45am</p>
+                  <p class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>10am - 10:45am</p>
                   <strong>Dr. Rashmi Goyal</strong>
                 </div>
                 <mark>23CSH-309</mark>
-                <small>Venue: D3 Block room no. 105</small>
+                <small class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>Venue: D3 Block room no. 105</small>
               </div>
             </div>
 
@@ -888,27 +897,27 @@
             <div class="lecture-cards">
               <article class="lecture-card blue schedule-item" data-status="upcoming" data-period="morning">
                 <h3>AI Advance</h3>
-                <span>10am - 10:45am</span>
+                <span class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>10am - 10:45am</span>
                 <strong>Dr. Rashmi Goyal</strong>
-                <small>Lab 2</small>
+                <small class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>Lab 2</small>
               </article>
               <article class="lecture-card pink schedule-item" data-status="upcoming" data-period="morning">
                 <h3>Data mining</h3>
-                <span>11am - 11:45am</span>
+                <span class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>11am - 11:45am</span>
                 <strong>Dr. Rashmi Goyal</strong>
-                <small>D3-203</small>
+                <small class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>D3-203</small>
               </article>
               <article class="lecture-card green schedule-item" data-status="upcoming" data-period="afternoon">
                 <h3>DBMS</h3>
-                <span>01pm - 01:45pm</span>
+                <span class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>01pm - 01:45pm</span>
                 <strong>Dr. Rashmi Goyal</strong>
-                <small>D3-105</small>
+                <small class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>D3-105</small>
               </article>
               <article class="lecture-card red schedule-item" data-status="upcoming" data-period="afternoon">
                 <h3>Virtual Reality</h3>
-                <span>03pm - 03:45pm</span>
+                <span class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>03pm - 03:45pm</span>
                 <strong>Dr. Rashmi Goyal</strong>
-                <small>Studio</small>
+                <small class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>Studio</small>
               </article>
             </div>
           </div>

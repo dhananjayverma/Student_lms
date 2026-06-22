@@ -1574,10 +1574,10 @@ body.dark-theme .tabs .selected {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-  margin: 12px 12px 0;
+  margin: 10px 10px 0;
   border: 1px solid rgba(30, 98, 255, 0.14);
-  border-radius: 16px;
-  padding: 8px;
+  border-radius: 14px;
+  padding: 6px;
   background:
     radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.15), transparent 34%),
     linear-gradient(135deg, #ffffff 0%, #eaf2ff 52%, #fff7ed 100%);
@@ -1593,13 +1593,13 @@ body.dark-theme .tabs .selected {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 50px;
-  padding: 0 18px;
+  min-height: 42px;
+  padding: 0 14px;
   color: #5f6d85;
   background: rgba(255, 255, 255, 0.42);
   border: 1px solid rgba(148, 163, 184, 0.14);
-  border-radius: 13px;
-  font-size: 0.82rem;
+  border-radius: 11px;
+  font-size: 0.76rem;
   font-weight: 800;
   text-align: left;
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -1610,9 +1610,9 @@ body.dark-theme .tabs .selected {
 }
 
 .academic-tab svg {
-  width: 17px;
-  height: 17px;
-  flex: 0 0 17px;
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
 }
 
 .academic-tab.active {
@@ -1631,6 +1631,10 @@ body.dark-theme .tabs .selected {
   background-size: 26px 26px, 26px 26px, auto;
 }
 
+#attendance-panel {
+  padding: 18px;
+}
+
 .class-toolbar {
   display: flex;
   align-items: center;
@@ -1645,9 +1649,37 @@ body.dark-theme .tabs .selected {
   backdrop-filter: blur(10px);
 }
 
-.class-toolbar>div:first-child {
+.class-toolbar-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.class-toolbar-title>i {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border-radius: 14px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+  box-shadow:
+    0 14px 28px rgba(37, 99, 235, 0.24),
+    inset 0 1px 1px rgba(255, 255, 255, 0.32);
+  font-style: normal;
+}
+
+.class-toolbar-title svg {
+  width: 19px;
+  height: 19px;
+}
+
+.class-toolbar-title>div {
   display: grid;
   gap: 3px;
+  min-width: 0;
 }
 
 .class-toolbar span {
@@ -1721,6 +1753,7 @@ body.dark-theme .tabs .selected {
   background:
     linear-gradient(135deg, rgba(37, 99, 235, 0.13), rgba(14, 165, 233, 0.05) 48%, rgba(255, 255, 255, 0) 72%),
     #ffffff;
+  overflow: hidden;
 }
 
 .class-status::before,
@@ -1747,9 +1780,41 @@ body.dark-theme .tabs .selected {
   text-transform: uppercase;
 }
 
-.class-status div {
+.schedule-card-icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 14px;
+  color: currentColor;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(154, 171, 197, 0.22);
+  box-shadow: 0 12px 24px rgba(26, 42, 70, 0.08);
+  opacity: 0.9;
+}
+
+.schedule-card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.class-status .schedule-card-icon {
+  color: var(--blue);
+  background: rgba(219, 234, 254, 0.72);
+}
+
+.current-class .schedule-card-icon {
+  color: var(--amber);
+  background: rgba(255, 247, 237, 0.78);
+}
+
+.class-status>div:not(.class-meta) {
   display: grid;
   gap: 4px;
+  padding-right: 46px;
 }
 
 .class-status strong {
@@ -1762,6 +1827,21 @@ body.dark-theme .tabs .selected {
   color: #7d8796;
   font-size: 0.72rem;
   font-weight: 600;
+}
+
+.icon-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.icon-line svg {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  color: currentColor;
+  opacity: 0.78;
 }
 
 .class-meta {
@@ -1797,6 +1877,25 @@ body.dark-theme .tabs .selected {
   background:
     linear-gradient(135deg, rgba(245, 142, 36, 0.16), rgba(255, 255, 255, 0) 66%),
     #ffffff;
+  overflow: hidden;
+}
+
+.current-class>div:first-of-type {
+  display: grid;
+  gap: 4px;
+  padding-right: 46px;
+}
+
+.current-class .schedule-card-icon {
+  top: auto;
+  right: 16px;
+  bottom: 14px;
+  opacity: 0.56;
+}
+
+.current-class mark {
+  position: relative;
+  z-index: 1;
 }
 
 .current-class::before {
@@ -1898,11 +1997,35 @@ body.dark-theme .tabs .selected {
   opacity: 0.85;
 }
 
+.lecture-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(0deg, currentColor 0%, currentColor 100%);
+  opacity: 0.11;
+  transform: translateY(105%);
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
+  pointer-events: none;
+}
+
+.lecture-card>* {
+  position: relative;
+  z-index: 1;
+}
+
 .lecture-card:hover {
   border-color: rgba(30, 98, 255, 0.20);
   background: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 16px 30px rgba(26, 42, 70, 0.13);
+}
+
+.lecture-card:hover::after,
+.lecture-card:active::after,
+.lecture-card:focus-within::after {
+  opacity: 0.16;
+  transform: translateY(0);
 }
 
 .lecture-card h3 {
@@ -1922,7 +2045,7 @@ body.dark-theme .tabs .selected {
 .lecture-card small {
   width: max-content;
   border-radius: 999px;
-  padding: 3px 8px;
+  padding: 4px 9px;
   background: rgba(37, 99, 235, 0.07);
   color: #52637a;
   font-weight: 800;
@@ -8320,22 +8443,22 @@ body.dark-theme .profile-page-panel .table-responsive {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   gap: 12px;
 }
 
 .attendance-title-block {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .attendance-header-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #1e3a8a;
   /* deep blue */
@@ -8348,13 +8471,13 @@ body.dark-theme .attendance-header-icon {
 }
 
 .attendance-header-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .attendance-title-block h2 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--ink);
   letter-spacing: -0.01em;
@@ -8362,7 +8485,7 @@ body.dark-theme .attendance-header-icon {
 
 .attendance-title-block p {
   margin: 2px 0 0;
-  font-size: 0.76rem;
+  font-size: 0.68rem;
   color: var(--muted);
   font-weight: 600;
 }
@@ -8371,13 +8494,13 @@ body.dark-theme .attendance-header-icon {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-height: 38px;
+  min-height: 34px;
   border: 1px solid rgba(7, 21, 79, 0.08);
   border-radius: 10px;
-  padding: 0 14px;
+  padding: 0 12px;
   background: #ffffff;
   color: var(--ink);
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(7, 21, 79, 0.03);
   transition: all 260ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -8418,19 +8541,19 @@ body.dark-theme .semester-select-btn svg {
 .attendance-grid {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .attendance-left-col {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
 /* Summary Cards */
 .attendance-stat-card {
   position: relative;
-  border-radius: 18px;
+  border-radius: 14px;
   border: 1px solid rgba(30, 98, 255, 0.08);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%);
   box-shadow:
@@ -8463,11 +8586,11 @@ body.dark-theme .attendance-stat-card:hover {
 }
 
 .progress-ring-card {
-  padding: 18px 16px 16px;
+  padding: 14px 14px 13px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 146px;
+  min-height: 118px;
 }
 
 .progress-ring-section {
@@ -8478,8 +8601,8 @@ body.dark-theme .attendance-stat-card:hover {
 
 .progress-ring-mini {
   display: grid;
-  width: 68px;
-  height: 68px;
+  width: 58px;
+  height: 58px;
   place-items: center;
   border-radius: 50%;
   background:
@@ -8496,21 +8619,21 @@ body.dark-theme .progress-ring-mini {
 }
 
 .progress-ring-mini span {
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 850;
   color: var(--ink);
 }
 
 .card-icon-top-right {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 14px;
+  right: 14px;
   color: var(--violet);
 }
 
 .card-icon-top-right svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .stat-card-text {
@@ -8520,37 +8643,37 @@ body.dark-theme .progress-ring-mini {
 }
 
 .stat-card-text strong {
-  font-size: 1.4rem;
+  font-size: 1.18rem;
   font-weight: 850;
   color: var(--ink);
   line-height: 1.1;
 }
 
 .progress-ring-card .stat-card-text strong {
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 800;
   margin-top: 10px;
 }
 
 .stat-card-text b {
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 800;
   color: var(--ink);
   margin-top: 1px;
 }
 
 .stat-card-text span {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   color: var(--muted);
   font-weight: 600;
 }
 
 .icon-stat-card {
-  padding: 16px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 128px;
+  gap: 9px;
+  min-height: 112px;
   align-items: flex-start;
 }
 
@@ -8558,8 +8681,8 @@ body.dark-theme .progress-ring-mini {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
 }
 
@@ -8574,14 +8697,14 @@ body.dark-theme .progress-ring-mini {
 }
 
 .stat-icon-circle svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 }
 
 /* Right Column: Course List Container */
 .attendance-right-card {
-  padding: 24px;
-  border-radius: 18px;
+  padding: 18px;
+  border-radius: 14px;
   border: 1px solid rgba(30, 98, 255, 0.08);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%);
   box-shadow:
@@ -8750,19 +8873,19 @@ body.dark-theme .course-dots-btn:hover {
 }
 
 .graph-header {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .graph-header h4 {
   margin: 0 0 4px 0;
-  font-size: 0.94rem;
+  font-size: 0.84rem;
   font-weight: 800;
   color: var(--ink);
   letter-spacing: -0.010em;
 }
 
 .graph-header .graph-subtitle {
-  font-size: 0.72rem;
+  font-size: 0.66rem;
   color: var(--muted);
   font-weight: 600;
 }
@@ -8770,17 +8893,17 @@ body.dark-theme .course-dots-btn:hover {
 .bar-graph-container {
   display: flex;
   gap: 12px;
-  height: 240px; /* Taller graph to give ample room */
+  height: 190px;
   align-items: stretch;
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .graph-y-axis {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 0.65rem;
+  font-size: 0.58rem;
   color: var(--muted);
   font-weight: 700;
   width: 32px;
@@ -8821,14 +8944,14 @@ body.dark-theme .graph-grid-lines .grid-line {
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  padding: 0 24px;
+  padding: 0 20px;
   z-index: 2;
 }
 
 .graph-bar-item {
   position: relative;
   height: 100%;
-  width: 48px; /* Wider bars for full-width layout */
+  width: 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -8881,7 +9004,7 @@ body.dark-theme .graph-grid-lines .grid-line {
 .graph-bar-item .bar-percentage-badge {
   position: absolute;
   bottom: calc(var(--bar-value) + 6px);
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 900;
   color: #1e62ff;
   transition: transform 0.2s ease, color 0.2s ease;
@@ -8915,7 +9038,7 @@ body.dark-theme .graph-bar-item .bar-percentage-badge {
 }
 
 .bar-labels-group .bar-label {
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 800;
   color: var(--ink);
   white-space: nowrap;
@@ -8923,7 +9046,7 @@ body.dark-theme .graph-bar-item .bar-percentage-badge {
 }
 
 .bar-labels-group .bar-sub-label {
-  font-size: 0.64rem;
+  font-size: 0.58rem;
   color: var(--muted);
   font-weight: 600;
   white-space: nowrap;
@@ -10509,6 +10632,45 @@ body.theme-aurora .icon-button {
     letter-spacing: 0.09em;
   }
 
+  .class-toolbar-title {
+    gap: 8px;
+  }
+
+  .class-toolbar-title>i {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    border-radius: 10px;
+  }
+
+  .class-toolbar-title svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .schedule-card-icon {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+
+  .schedule-card-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .class-status>div:not(.class-meta),
+  .current-class>div:first-of-type {
+    padding-right: 32px;
+  }
+
+  .current-class .schedule-card-icon {
+    right: 10px;
+    bottom: 10px;
+  }
+
   .class-kicker {
     padding: 3px 7px;
   }
@@ -10598,7 +10760,9 @@ body.theme-aurora .icon-button {
   }
 
   .lecture-card small {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     width: 100%;
     max-width: 100%;
     padding: 6px 0 0;
@@ -10616,6 +10780,12 @@ body.theme-aurora .icon-button {
     content: "Venue: ";
     font-weight: 600;
     color: #7d8796;
+  }
+
+  .icon-line svg {
+    width: 12px;
+    height: 12px;
+    flex-basis: 12px;
   }
 
   body.dark-theme .lecture-card small {
