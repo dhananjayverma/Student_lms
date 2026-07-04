@@ -674,6 +674,65 @@ document.addEventListener("pointerdown", () => {
 
 const academicTabs = document.querySelectorAll(".academic-tab");
 const academicPanels = document.querySelectorAll(".academic-content");
+const academicPanel = document.querySelector(".academic-panel");
+
+const measureAcademicPanelHeight = (panel) => {
+  if (!academicPanel || !panel) return 0;
+
+  const wasHidden = panel.hidden;
+  const previousPosition = panel.style.position;
+  const previousVisibility = panel.style.visibility;
+  const previousPointerEvents = panel.style.pointerEvents;
+  const previousWidth = panel.style.width;
+  const previousHeight = panel.style.height;
+
+  if (wasHidden) {
+    panel.hidden = false;
+    panel.style.position = "absolute";
+    panel.style.visibility = "hidden";
+    panel.style.pointerEvents = "none";
+    panel.style.width = `${academicPanel.clientWidth}px`;
+  }
+
+  panel.style.height = "auto";
+  const height = panel.scrollHeight;
+  panel.style.height = previousHeight;
+
+  if (wasHidden) {
+    panel.hidden = true;
+    panel.style.position = previousPosition;
+    panel.style.visibility = previousVisibility;
+    panel.style.pointerEvents = previousPointerEvents;
+    panel.style.width = previousWidth;
+  }
+
+  return height;
+};
+
+const syncAcademicContentHeight = () => {
+  const activePanel = document.querySelector(".academic-content.active") || document.querySelector("#classes-panel");
+  const classesPanel = document.querySelector("#classes-panel");
+  if (!academicPanel || !activePanel) return;
+
+  if (!desktopDashboardQuery.matches) {
+    academicPanel.style.setProperty("--academic-content-height", `${measureAcademicPanelHeight(activePanel)}px`);
+    return;
+  }
+
+  academicPanel.style.setProperty(
+    "--academic-content-height",
+    `${measureAcademicPanelHeight(classesPanel || activePanel)}px`
+  );
+};
+
+const syncAcademicLayout = () => {
+  syncAcademicContentHeight();
+};
+
+syncAcademicLayout();
+window.addEventListener("resize", () => {
+  window.requestAnimationFrame(syncAcademicLayout);
+});
 
 academicTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
@@ -690,6 +749,8 @@ academicTabs.forEach((tab) => {
       panel.classList.toggle("active", isActive);
       panel.hidden = !isActive;
     });
+
+    syncAcademicLayout();
   });
 });
 
