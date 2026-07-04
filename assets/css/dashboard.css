@@ -111,12 +111,12 @@ body.sidebar-collapsed .shell {
   top: 8px;
   z-index: 100;
   display: flex;
-  min-height: 76px;
+  min-height: 70px;
   align-items: center;
   gap: 12px;
   border: 0;
   border-radius: 0;
-  padding: 8px 0;
+  padding: 6px 0;
   background: transparent;
   box-shadow: none;
   transition:
@@ -134,7 +134,7 @@ body.navbar-scrolled .topbar::before {
   right: 0;
   left: 284px;
   z-index: -1;
-  height: 92px;
+  height: 84px;
   border-bottom: 1px solid #e2e7f0;
   background: #ffffff;
   box-shadow: 0 8px 18px rgba(42, 60, 100, 0.10);
@@ -148,7 +148,7 @@ body.navbar-scrolled .topbar {
   border: 0;
   border-bottom: 0;
   border-radius: 0;
-  padding: 8px 24px 8px 16px;
+  padding: 6px 24px 6px 16px;
   background: transparent;
   box-shadow: none;
 }
@@ -185,7 +185,7 @@ body.dark-theme.navbar-scrolled .topbar::before {
 .nav-weather {
   display: flex;
   min-width: 220px;
-  height: 58px;
+  height: 54px;
   flex: 0 0 220px;
   align-items: center;
   gap: 13px;
@@ -237,8 +237,8 @@ body.dark-theme.navbar-scrolled .topbar::before {
 
 .icon-button {
   display: grid;
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   place-items: center;
   border-radius: 16px;
   color: #07154f;
@@ -264,9 +264,9 @@ body.dark-theme.navbar-scrolled .topbar::before {
 .sidebar-toggle-button {
   position: relative;
   display: grid;
-  width: 64px;
-  height: 64px;
-  flex: 0 0 64px;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
   color: #405267;
   background: #ffffff;
   border-color: #e5e9f2;
@@ -363,7 +363,7 @@ body.dark-theme .theme-toggle-button svg {
   align-items: center;
   gap: 14px;
   min-width: 180px;
-  height: 58px;
+  height: 54px;
   border: 1px solid #e1e7f0;
   border-radius: 14px;
   padding: 0 14px 0 16px;
@@ -537,7 +537,7 @@ body.dark-theme .quick-actions button span {
 
 .theme-switch {
   display: flex;
-  height: 58px;
+  height: 54px;
   align-items: center;
   gap: 4px;
   border: 1px solid #e2e7f0;
@@ -549,7 +549,7 @@ body.dark-theme .quick-actions button span {
 
 .theme-choice {
   display: flex;
-  height: 46px;
+  height: 42px;
   align-items: center;
   gap: 8px;
   border-radius: 10px;
@@ -591,7 +591,7 @@ body.dark-theme .theme-choice.active {
   position: relative;
   display: grid;
   width: 34px;
-  height: 48px;
+  height: 44px;
   flex: 0 0 34px;
   place-items: center;
   border-radius: 10px;
@@ -612,7 +612,7 @@ body.dark-theme .nav-utility {
 
 .profile {
   min-width: 230px;
-  min-height: 58px;
+  min-height: 54px;
   gap: 12px;
   padding: 6px 14px 6px 8px;
   border-radius: 14px;
@@ -673,9 +673,9 @@ body.dark-theme .nav-utility {
 
 .profile-avatar {
   display: grid;
-  width: 46px;
-  height: 46px;
-  flex: 0 0 46px;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
   place-items: center;
   border-radius: 50%;
   color: #ffffff;
