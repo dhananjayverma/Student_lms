@@ -179,6 +179,13 @@
         <span>16BAV1184</span>
       </div>
     </div>
+    <div class="drawer-weather" aria-label="Date and weather">
+      <strong class="nav-date">Jun 13, 2026</strong>
+      <span class="weather-icon" aria-hidden="true"><svg>
+          <use href="#icon-sun"></use>
+        </svg></span>
+      <span class="weather-copy"><b>45°C</b><small>Clear sky</small></span>
+    </div>
     <div class="drawer-search">
       <label>
         <svg>
@@ -189,6 +196,12 @@
     </div>
 
     <div class="drawer-actions" aria-label="Quick actions">
+      <button class="drawer-action" type="button" aria-label="Color themes" data-quick-toggle>
+        <svg>
+          <use href="#icon-palette"></use>
+        </svg>
+        <span>Color</span>
+      </button>
       <button class="drawer-action drawer-theme-toggle" type="button" aria-label="Switch to dark mode"
         aria-pressed="false">
         <svg>
@@ -1807,9 +1820,7 @@
   </main>
 
   <aside class="quick-access-panel" aria-label="Quick display controls" data-quick-panel>
-    <button class="quick-access-toggle" type="button" aria-label="Open quick display controls" aria-expanded="false" data-quick-toggle>
-      <img src="assets/images/log.png" alt="" aria-hidden="true">
-    </button>
+
     <div class="quick-access-menu" data-quick-menu>
       <div class="quick-access-head">
         <div class="quick-head-left">

@@ -3581,14 +3581,21 @@ body.dark-theme .settings-swatches button {
 
 .quick-access-panel {
   position: fixed;
-  right: 22px;
-  bottom: 24px;
-  z-index: 65;
+  inset: 0;
+  z-index: 1000;
   display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-end;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
+  background: transparent;
+  transition: background 260ms ease, backdrop-filter 260ms ease;
+}
+
+.quick-access-panel.is-open {
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .quick-access-toggle,
@@ -3662,8 +3669,8 @@ body.dark-theme .settings-swatches button {
 }
 
 .quick-access-menu {
-  width: min(390px, calc(100vw - 96px));
-  max-height: min(680px, calc(100vh - 180px));
+  width: min(540px, calc(100vw - 32px));
+  max-height: min(680px, calc(100vh - 32px));
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
@@ -3671,8 +3678,6 @@ body.dark-theme .settings-swatches button {
   contain: layout paint;
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--blue) 52%, #cbd5e1) transparent;
-  margin-right: 0;
-  margin-bottom: 0;
   padding: 16px;
   border: 1px solid rgba(255, 255, 255, 0.58);
   border-radius: 22px;
@@ -3688,8 +3693,8 @@ body.dark-theme .settings-swatches button {
     inset 0 1px 1px rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(28px) saturate(1.24);
   -webkit-backdrop-filter: blur(28px) saturate(1.24);
-  transform: translateY(20px) scale(0.95);
-  transform-origin: right bottom;
+  transform: scale(0.95);
+  transform-origin: center;
   opacity: 0;
   visibility: hidden;
   animation: quickMenuGlow 12s ease-in-out infinite;
@@ -3803,7 +3808,7 @@ body.dark-theme .settings-swatches button {
 }
 
 .quick-access-panel.is-open .quick-access-menu {
-  transform: translateY(0) scale(1);
+  transform: scale(1);
   opacity: 1;
   visibility: visible;
   animation-duration: 20s;
@@ -4857,9 +4862,7 @@ body.theme-aurora .icon-button {
 
   .class-hero,
   .lecture-cards,
-  .current-class,
-  .conversation-card,
-  .mentor-card {
+  .current-class {
     grid-template-columns: 1fr;
   }
 
@@ -4880,12 +4883,6 @@ body.theme-aurora .icon-button {
     font-size: 0.62rem;
   }
 
-  .send-message,
-  .mentor-card button {
-    grid-column: 1 / -1;
-    justify-self: stretch;
-    width: 100%;
-  }
 
   .dashboard-modal {
     place-items: center;
@@ -5277,17 +5274,7 @@ body.theme-aurora .icon-button {
     grid-template-columns: 1fr;
   }
 
-  .conversation-card,
-  .mentor-card {
-    grid-template-columns: 48px minmax(0, 1fr);
-  }
 
-  .send-message,
-  .mentor-card button {
-    grid-column: 1 / -1;
-    justify-self: stretch;
-    width: 100%;
-  }
 
   .dashboard-modal {
     place-items: center;
@@ -7054,8 +7041,7 @@ body.dark-theme .tabs .selected {
   /* Collapsible panels on mobile */
   .later-heading,
   .announcement-head,
-  .calendar-head,
-  .conversations .panel-head {
+  .calendar-head {
     cursor: pointer;
     position: relative;
     padding-right: 24px;
@@ -7064,8 +7050,7 @@ body.dark-theme .tabs .selected {
 
   .later-heading::after,
   .announcement-head::after,
-  .calendar-head::after,
-  .conversations .panel-head::after {
+  .calendar-head::after {
     content: "";
     position: absolute;
     right: 0;
@@ -7083,15 +7068,13 @@ body.dark-theme .tabs .selected {
 
   body.dark-theme .later-heading::after,
   body.dark-theme .announcement-head::after,
-  body.dark-theme .calendar-head::after,
-  body.dark-theme .conversations .panel-head::after {
+  body.dark-theme .calendar-head::after {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23eef5ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m18 15-6-6-6 6'/%3E%3C/svg%3E");
   }
 
   .later-heading.collapsed::after,
   .announcements-panel.collapsed .announcement-head::after,
-  .calendar-panel.collapsed .calendar-head::after,
-  .conversations.collapsed .panel-head::after {
+  .calendar-panel.collapsed .calendar-head::after {
     transform: translateY(-50%) rotate(-180deg);
   }
 
@@ -7100,16 +7083,12 @@ body.dark-theme .tabs .selected {
   .announcements-panel.collapsed .announcement-board,
   .calendar-panel.collapsed .calendar-grid,
   .calendar-panel.collapsed .calendar-filters,
-  .calendar-panel.collapsed .calendar-actions,
-  .conversations.collapsed .conversation-tabs,
-  .conversations.collapsed .conversation-list,
-  .conversations.collapsed .panel-head>a {
+  .calendar-panel.collapsed .calendar-actions {
     display: none;
   }
 
   .announcements-panel.collapsed,
-  .calendar-panel.collapsed,
-  .conversations.collapsed {
+  .calendar-panel.collapsed {
     min-height: 0 !important;
     height: auto !important;
     padding-bottom: 0 !important;
@@ -7248,6 +7227,17 @@ body.dark-theme .tabs .selected {
 
 
   .top-actions {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .top-actions .profile-trigger-wrapper {
     display: none;
   }
 
@@ -7692,27 +7682,6 @@ body.dark-theme .tabs .selected {
     padding: 14px;
   }
 
-  .mentor-card {
-    grid-template-columns: 50px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 10px 12px;
-    padding: 14px;
-  }
-
-  .mentor-photo {
-    width: 50px;
-    height: 50px;
-  }
-
-  .mentor-card button {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: end;
-    min-width: 96px;
-    min-height: 34px;
-    font-size: 0.6rem;
-    margin-top: 0;
-  }
 
   .conversations .conversation-heading h2 {
     font-size: 0.88rem;
@@ -7732,13 +7701,6 @@ body.dark-theme .tabs .selected {
     padding: 0;
   }
 
-  .conversation-card {
-    grid-template-columns: 48px 1fr auto;
-    gap: 10px 12px;
-    min-height: auto;
-    padding: 12px;
-    align-items: center;
-  }
 
   .mate-photo {
     width: 46px;
@@ -7752,14 +7714,6 @@ body.dark-theme .tabs .selected {
     margin-top: 0;
   }
 
-  .send-message {
-    justify-self: end;
-    min-width: 110px;
-    min-height: 34px;
-    padding: 0 12px;
-    font-size: 0.58rem;
-    margin-top: 0;
-  }
 
   .conversation-detail-card {
     grid-template-columns: 50px minmax(0, 1fr);
@@ -7842,16 +7796,8 @@ body.dark-theme .tabs .selected {
     grid-template-columns: minmax(300px, 1.2fr) repeat(3, minmax(150px, 0.7fr));
   }
 
-  .conversation-card {
-    grid-template-columns: 52px minmax(0, 1fr);
-  }
 
-  .send-message {
-    grid-column: 2;
-    grid-row: auto;
-    justify-self: start;
-    min-height: 34px;
-  }
+
 }
 
 @media (min-width: 981px) and (max-width: 1180px) {
@@ -7977,25 +7923,9 @@ body.dark-theme .tabs .selected {
     border-radius: 14px;
   }
 
-  .mentor-card {
-    grid-template-columns: 48px minmax(0, 1fr);
-  }
 
-  .mentor-card button {
-    grid-column: 1 / -1;
-    justify-self: stretch;
-    width: 100%;
-  }
 
-  .conversation-card {
-    grid-template-columns: 48px minmax(0, 1fr);
-  }
 
-  .send-message {
-    grid-column: 1 / -1;
-    justify-self: stretch;
-    width: 100%;
-  }
 
   .conversation-modal-summary {
     grid-template-columns: 1fr;
@@ -8076,7 +8006,6 @@ body.dark-theme .tabs .selected {
   .hero-copy,
   .panel,
   .query-summary,
-  .mentor-card,
   .conversations {
     padding: 12px;
   }
@@ -9847,6 +9776,7 @@ body.dark-theme .semester-select-btn svg {
   gap: 3px;
   width: clamp(162px, 18vw, 220px);
   height: clamp(162px, 18vw, 220px);
+  border-radius: 50%;
   box-shadow:
     0 20px 38px rgba(26, 42, 70, 0.16),
     inset 0 1px 3px rgba(255, 255, 255, 0.92);
@@ -11804,9 +11734,7 @@ body.theme-aurora .icon-button {
 
   .class-hero,
   .lecture-cards,
-  .current-class,
-  .conversation-card,
-  .mentor-card {
+  .current-class {
     grid-template-columns: 1fr;
   }
 
@@ -11827,12 +11755,6 @@ body.theme-aurora .icon-button {
     font-size: 0.62rem;
   }
 
-  .send-message,
-  .mentor-card button {
-    grid-column: 1 / -1;
-    justify-self: stretch;
-    width: 100%;
-  }
 
   .dashboard-modal {
     place-items: center;
@@ -12000,20 +11922,21 @@ body.theme-aurora .icon-button {
   .academic-panel {
     border-radius: 16px;
     overflow: hidden;
+    padding: 0 !important;
   }
 
   .academic-tabs {
-    gap: 8px;
-    padding: 8px;
+    gap: 0;
+    padding: 0;
   }
 
   .academic-tab {
     flex-direction: column;
     justify-content: center;
-    gap: 6px;
-    min-height: 64px;
-    padding: 8px 6px;
-    border-radius: 14px;
+    gap: 4px;
+    min-height: 52px;
+    padding: 6px;
+    border-radius: 0;
     font-size: 0.74rem;
     line-height: 1.15;
     text-align: center;
@@ -12538,53 +12461,7 @@ body.theme-aurora .icon-button {
     display: none;
   }
 
-  .mentor-card {
-    display: grid;
-    grid-template-columns: 52px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 8px 12px;
-    min-height: auto;
-    padding: 14px;
-    border-radius: 16px;
-  }
 
-  .mentor-photo {
-    grid-column: 1;
-    grid-row: 1;
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-  }
-
-  .mentor-card div {
-    grid-column: 2;
-    grid-row: 1;
-    gap: 3px;
-  }
-
-  .mentor-card strong {
-    font-size: 0.86rem;
-    line-height: 1.2;
-  }
-
-  .mentor-card span {
-    font-size: 0.68rem;
-    line-height: 1.25;
-  }
-
-  .mentor-card button {
-    grid-column: 3;
-    grid-row: 1;
-    align-self: start;
-    justify-self: end;
-    width: auto;
-    min-width: 92px;
-    min-height: 32px;
-    margin-top: 0;
-    padding: 0 12px;
-    border-radius: 12px;
-    font-size: 0.62rem;
-  }
 
   .important-messages-widget {
     padding: 12px 12px 0;
@@ -13115,32 +12992,7 @@ body.theme-aurora .icon-button {
     font-size: 0.5rem;
   }
 
-  .mentor-card {
-    grid-template-columns: 46px minmax(0, 1fr) auto;
-    padding: 12px;
-    gap: 7px 10px;
-  }
 
-  .mentor-photo {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-  }
-
-  .mentor-card strong {
-    font-size: 0.78rem;
-  }
-
-  .mentor-card span {
-    font-size: 0.62rem;
-  }
-
-  .mentor-card button {
-    min-width: 82px;
-    min-height: 32px;
-    padding: 0 10px;
-    font-size: 0.58rem;
-  }
 
   .important-messages-widget {
     padding: 10px 10px 0;
@@ -14009,16 +13861,22 @@ body.dark-theme .attendance-mini-ring {
   }
 
   .attendance-main-ring {
-    width: min(66vw, 210px);
-    height: min(66vw, 210px);
+    width: clamp(140px, 50vw, 190px);
+    height: clamp(140px, 50vw, 190px);
+    border-radius: 50%;
+  }
+
+  .attendance-main-ring .attendance-ring-track,
+  .attendance-main-ring .attendance-ring-progress {
+    stroke-width: 18;
   }
 
   .attendance-main-ring span {
-    font-size: clamp(2.6rem, 13vw, 3.6rem);
+    font-size: clamp(2rem, 10vw, 2.8rem);
   }
 
   .attendance-main-ring b {
-    font-size: clamp(0.78rem, 3.6vw, 0.98rem);
+    font-size: clamp(0.72rem, 3.2vw, 0.9rem);
   }
 
   .attendance-performance-breakdown {
@@ -14326,20 +14184,56 @@ body.dark-theme #attendance-panel .attendance-performance-card {
     height: auto !important;
     transform: none !important;
     width: auto !important;
+    grid-template-rows: auto !important;
   }
 
   #attendance-panel .attendance-infographic {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    gap: 0 !important;
     overflow: visible !important;
+  }
+
+  #attendance-panel .attendance-center-stack {
+    order: -1 !important;
+    margin-bottom: 24px !important;
+    gap: 8px !important;
+  }
+  
+  #attendance-panel .attendance-course-panel {
+    padding: 0 16px !important;
+    height: auto !important;
+    min-height: 0 !important;
   }
 
   #attendance-panel .attendance-centerpiece {
     grid-template-columns: 1fr !important;
     text-align: center !important;
+    padding: 10px !important;
   }
 
   #attendance-panel .attendance-center-caption {
     justify-items: center !important;
     text-align: center !important;
+  }
+}
+
+@media (max-width: 680px) {
+  #attendance-panel .attendance-main-ring {
+    width: 130px !important;
+    height: 130px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 12px 24px rgba(26, 42, 70, 0.12), inset 0 1px 3px rgba(255, 255, 255, 0.92) !important;
+  }
+  #attendance-panel .attendance-main-ring span {
+    font-size: 2.1rem !important;
+  }
+  #attendance-panel .attendance-main-ring b {
+    font-size: 0.72rem !important;
+  }
+  #attendance-panel .attendance-main-ring .attendance-ring-track,
+  #attendance-panel .attendance-main-ring .attendance-ring-progress {
+    stroke-width: 14 !important;
   }
 }

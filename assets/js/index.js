@@ -288,7 +288,8 @@ quickMenu?.addEventListener("click", (event) => {
 
 document.addEventListener("click", (event) => {
   if (!quickPanel?.classList.contains("is-open")) return;
-  if (event.target.closest("[data-quick-panel]")) return;
+  if (event.target.closest("[data-quick-menu]")) return;
+  if (event.target.closest("[data-quick-toggle]")) return;
   quickPanel.classList.remove("is-open");
   quickToggle?.setAttribute("aria-expanded", "false");
   quickToggle?.setAttribute("aria-label", "Open quick display controls");

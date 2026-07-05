@@ -31,6 +31,7 @@
 
 .drawer-close,
 .drawer-user,
+.drawer-weather,
 .drawer-search,
 .drawer-actions {
   display: none;
@@ -913,28 +914,118 @@ body.sidebar-collapsed .logout-button {
   }
 
   .drawer-close {
-    position: relative;
-    display: grid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 38px;
     height: 38px;
-    place-items: center;
     border: 0;
     border-radius: 10px;
-    color: transparent;
-    background: transparent;
-    box-shadow: none;
-    font-size: 0;
+    color: #26344f;
+    background: #f0f4f8;
+    font-size: 24px;
     line-height: 1;
+    cursor: pointer;
   }
 
-  .drawer-close::before {
-    content: "";
+  .drawer-search {
+    display: block;
+    padding: 0 14px 12px;
+  }
+
+  .drawer-weather {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 14px 16px;
+    margin: 0 14px 16px;
+    border-bottom: 1px solid rgba(7, 21, 79, 0.08);
+  }
+
+  body.dark-theme .drawer-weather {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .drawer-weather .nav-date {
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--text-dark);
+  }
+
+  body.dark-theme .drawer-weather .nav-date {
+    color: #e2e8f0;
+  }
+
+  .drawer-weather .weather-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff9d00;
+  }
+
+  .drawer-weather .weather-icon svg {
     width: 22px;
-    height: 16px;
-    border-top: 3px solid #26344f;
-    border-bottom: 3px solid #26344f;
-    box-shadow: 0 6.5px 0 #26344f;
-    border-radius: 2px;
+    height: 22px;
+  }
+
+  .drawer-weather .weather-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1;
+    color: var(--text-muted);
+  }
+
+  body.dark-theme .drawer-weather .weather-copy {
+    color: #94a3b8;
+  }
+
+  .drawer-weather .weather-copy b {
+    font-size: 0.86rem;
+    color: var(--text-dark);
+  }
+
+  body.dark-theme .drawer-weather .weather-copy b {
+    color: #f1f5f9;
+  }
+
+  .drawer-weather .weather-copy small {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+  }
+
+  .drawer-search label {
+    position: relative;
+    display: block;
+  }
+
+  .drawer-search svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    color: var(--blue);
+    opacity: 0.7;
+  }
+
+  .drawer-search input {
+    width: 100%;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(7, 21, 79, 0.08);
+    padding: 0 12px 0 36px;
+    font-size: 0.78rem;
+    color: #45474d;
+  }
+
+  body.dark-theme .drawer-search input {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #cbd5e0;
   }
 
   body.nav-drawer-open .sidebar {
@@ -1003,7 +1094,7 @@ body.sidebar-collapsed .logout-button {
 
   .drawer-actions {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
     margin: 0 12px 10px;
   }
@@ -1034,8 +1125,7 @@ body.sidebar-collapsed .logout-button {
     color: #1e62ff;
   }
 
-  .drawer-user,
-  .drawer-actions {
+  .drawer-user {
     display: none;
   }
 
@@ -1174,43 +1264,6 @@ body.sidebar-collapsed .logout-button {
     display: flex;
   }
 
-  .drawer-search {
-    display: none;
-    padding: 0 14px 12px;
-  }
-
-  .drawer-search label {
-    position: relative;
-    display: block;
-  }
-
-  .drawer-search svg {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 15px;
-    height: 15px;
-    color: var(--blue);
-    opacity: 0.7;
-  }
-
-  .drawer-search input {
-    width: 100%;
-    height: 38px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(7, 21, 79, 0.08);
-    padding: 0 12px 0 36px;
-    font-size: 0.78rem;
-    color: #45474d;
-  }
-
-  body.dark-theme .drawer-search input {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: #cbd5e0;
-  }
 
   .sidebar-menu,
   body.sidebar-collapsed .sidebar-menu {
