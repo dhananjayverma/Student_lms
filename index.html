@@ -1783,130 +1783,45 @@
             <!-- College Activity Calendar Modal Source -->
             <div id="college-calendar-modal-source" hidden>
               <div class="calendar-modal-layout">
-                <!-- Left Side: Calendar Grid -->
-                <div class="calendar-modal-grid-pane">
-                  <div class="calendar-modal-header">
-                    <h3>May 2026</h3>
-                    <div class="calendar-modal-legend">
-                      <span class="legend-dot academic"></span> <small>Academics</small>
-                      <span class="legend-dot exams"></span> <small>Exams</small>
-                      <span class="legend-dot cultural"></span> <small>Events</small>
+                <!-- Top Nav & Category Filters (Full Width) -->
+                <div class="calendar-modal-top-bar">
+                  <div class="modal-month-nav">
+                    <h3 class="modal-month-title">May 2026</h3>
+                    <div class="modal-month-chevrons">
+                      <button class="modal-prev-month-btn" type="button" aria-label="Previous month">
+                        <svg><use href="#icon-chevron"></use></svg>
+                      </button>
+                      <button class="modal-next-month-btn" type="button" aria-label="Next month">
+                        <svg><use href="#icon-chevron"></use></svg>
+                      </button>
                     </div>
                   </div>
-                  <div class="modal-calendar-grid">
-                    <span class="day-name">Sun</span><span class="day-name">Mon</span><span class="day-name">Tue</span>
-                    <span class="day-name">Wed</span><span class="day-name">Thu</span><span class="day-name">Fri</span><span class="day-name">Sat</span>
-                    
-                    <button class="empty-day" disabled></button><button class="empty-day" disabled></button><button class="empty-day" disabled></button>
-                    <button class="empty-day" disabled></button><button class="empty-day" disabled></button>
-                    
-                    <button class="calendar-day" type="button" data-date="2026-05-01">1</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-02">2</button>
-                    <button class="calendar-day event-day cultural" type="button" data-date="2026-05-03">3</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-04">4</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-05">5</button>
-                    <button class="calendar-day event-day academic" type="button" data-date="2026-05-06">6</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-07">7</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-08">8</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-09">9</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-10">10</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-11">11</button>
-                    <button class="calendar-day event-day exams" type="button" data-date="2026-05-12">12</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-13">13</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-14">14</button>
-                    <button class="calendar-day today event-day academic" type="button" data-date="2026-05-15">15</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-16">16</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-17">17</button>
-                    <button class="calendar-day event-day cultural" type="button" data-date="2026-05-18">18</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-19">19</button>
-                    <button class="calendar-day event-day exams" type="button" data-date="2026-05-20">20</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-21">21</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-22">22</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-23">23</button>
-                    <button class="calendar-day event-day academic" type="button" data-date="2026-05-24">24</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-25">25</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-26">26</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-27">27</button>
-                    <button class="calendar-day event-day cultural" type="button" data-date="2026-05-28">28</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-29">29</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-30">30</button>
-                    <button class="calendar-day" type="button" data-date="2026-05-31">31</button>
+                  
+                  <div class="calendar-modal-filters">
+                    <button class="filter-chip active" type="button" data-filter="all">All Events</button>
+                    <button class="filter-chip academic" type="button" data-filter="academic"><span class="chip-dot academic"></span> Academics</button>
+                    <button class="filter-chip exams" type="button" data-filter="exams"><span class="chip-dot exams"></span> Exams</button>
+                    <button class="filter-chip cultural" type="button" data-filter="cultural"><span class="chip-dot cultural"></span> Events</button>
                   </div>
                 </div>
-                
-                <!-- Right Side: Detailed Activity List -->
-                <div class="calendar-modal-activities-pane">
-                  <div class="activities-pane-head">
-                    <div style="display: flex; flex-direction: column;">
-                      <h4>Activities & Events</h4>
-                      <span class="activities-subtitle">May 2026</span>
+
+                <!-- Split Content Pane: Left Calendar, Right Timeline -->
+                <div class="calendar-modal-split-content">
+                  <!-- Left Column: Calendar Grid -->
+                  <div class="calendar-modal-grid-pane">
+                    <div class="modal-calendar-grid full-width-grid">
+                      <!-- Populated dynamically by JS -->
                     </div>
-                    <button class="clear-date-filter-btn" type="button" style="background: none; border: none; font-size: 0.72rem; font-weight: 700; color: var(--blue); cursor: pointer; display: none; padding: 4px 8px; border-radius: 6px; background: rgba(37, 99, 235, 0.08);">Show All</button>
                   </div>
-                  <div class="modal-activities-list">
-                    <div class="no-activities-placeholder" style="display: none; text-align: center; padding: 40px 20px; color: var(--muted);">
-                      <svg style="width: 32px; height: 32px; fill: var(--muted); margin-bottom: 8px; opacity: 0.5; vertical-align: middle;"><use href="#icon-clock"></use></svg>
-                      <div style="font-size: 0.8rem; font-weight: 700; margin-top: 6px;">No activities scheduled</div>
-                    </div>
 
-                    <div class="modal-activity-card academic-card" data-activity-date="2026-05-06">
-                      <div class="activity-time-badge">
-                        <strong>May 06</strong>
-                        <span>10:00 AM</span>
-                      </div>
-                      <div class="activity-info">
-                        <h5>Mid-Term Academic Review</h5>
-                        <p>Evaluation of course plans and submissions by the Academic Board.</p>
-                        <span class="activity-type text-blue">Academic</span>
-                      </div>
+                  <!-- Right Column: Timeline Activities -->
+                  <div class="calendar-modal-timeline-pane">
+                    <div class="timeline-pane-header">
+                      <h4 class="timeline-title">May 2026 Schedule</h4>
+                      <button class="clear-date-filter-btn" type="button" style="background: none; border: none; font-size: 0.72rem; font-weight: 700; color: var(--blue); cursor: pointer; display: none; padding: 6px 12px; border-radius: 6px; background: rgba(37, 99, 235, 0.08);">Show All</button>
                     </div>
-                    
-                    <div class="modal-activity-card exams-card" data-activity-date="2026-05-12">
-                      <div class="activity-time-badge">
-                        <strong>May 12</strong>
-                        <span>09:30 AM</span>
-                      </div>
-                      <div class="activity-info">
-                        <h5>Practical Examinations Start</h5>
-                        <p>Practical assessments for all engineering and science courses.</p>
-                        <span class="activity-type text-red">Exams</span>
-                      </div>
-                    </div>
-                    
-                    <div class="modal-activity-card academic-card" data-activity-date="2026-05-15">
-                      <div class="activity-time-badge">
-                        <strong>May 15</strong>
-                        <span>02:00 PM</span>
-                      </div>
-                      <div class="activity-info">
-                        <h5>Expert Guest Lecture on AI/ML</h5>
-                        <p>Industrial applications of modern transformer architectures in Lab 3.</p>
-                        <span class="activity-type text-blue">Academic</span>
-                      </div>
-                    </div>
-                    
-                    <div class="modal-activity-card cultural-card" data-activity-date="2026-05-18">
-                      <div class="activity-time-badge">
-                        <strong>May 18</strong>
-                        <span>04:00 PM</span>
-                      </div>
-                      <div class="activity-info">
-                        <h5>Pre-Carnival Auditions</h5>
-                        <p>Auditions for music, dance, and theater events at Open Air Theatre.</p>
-                        <span class="activity-type text-amber">Events</span>
-                      </div>
-                    </div>
-
-                    <div class="modal-activity-card exams-card" data-activity-date="2026-05-20">
-                      <div class="activity-time-badge">
-                        <strong>May 20</strong>
-                        <span>11:59 PM</span>
-                      </div>
-                      <div class="activity-info">
-                        <h5>Assignment Submission Deadline</h5>
-                        <p>Final submission portal closes on LMS for all 6th Sem subjects.</p>
-                        <span class="activity-type text-red">Exams</span>
-                      </div>
+                    <div class="modal-timeline-list">
+                      <!-- Populated dynamically by JS -->
                     </div>
                   </div>
                 </div>

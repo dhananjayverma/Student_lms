@@ -889,65 +889,236 @@ const closeDashboardModal = () => {
   lastModalTrigger?.focus();
 };
 
+const calendarEvents = [
+  // May 2026
+  { date: "2026-05-06", title: "Mid-Term Academic Review", desc: "Evaluation of course plans and submissions by the Academic Board.", type: "academic", time: "10:00 AM" },
+  { date: "2026-05-12", title: "Practical Examinations Start", desc: "Practical assessments for all engineering and science courses.", type: "exams", time: "09:30 AM" },
+  { date: "2026-05-15", title: "Expert Guest Lecture on AI/ML", desc: "Industrial applications of modern transformer architectures in Lab 3.", type: "academic", time: "02:00 PM" },
+  { date: "2026-05-18", title: "Pre-Carnival Auditions", desc: "Auditions for music, dance, and theater events at Open Air Theatre.", type: "cultural", time: "04:00 PM" },
+  { date: "2026-05-20", title: "Assignment Submission Deadline", desc: "Final submission portal closes on LMS for all 6th Sem subjects.", type: "exams", time: "11:59 PM" },
+  
+  // June 2026
+  { date: "2026-06-03", title: "Final Semester Exams Begin", desc: "Written end-semester theory examinations for all branches.", type: "exams", time: "09:30 AM" },
+  { date: "2026-06-10", title: "Summer Internship Training", desc: "Orientation program for corporate internship projects.", type: "academic", time: "11:00 AM" },
+  { date: "2026-06-18", title: "National Hackathon 2026", desc: "Annual engineering coding challenge at Central Lab 3.", type: "cultural", time: "10:00 AM" },
+  { date: "2026-06-24", title: "Placement Expert Seminar", desc: "Resume review and mock interview tips session.", type: "academic", time: "02:00 PM" },
+  { date: "2026-06-28", title: "Hostel Facilitation Camp", desc: "Hostel check-in and room allocations for the new semester.", type: "academic", time: "09:30 AM" },
+  
+  // July 2026
+  { date: "2026-07-02", title: "AI Research Symposium", desc: "Modern transformer architectures workshop by tech experts.", type: "cultural", time: "11:30 AM" },
+  { date: "2026-07-10", title: "CU Youth Carnival 2026", desc: "Cultural festival including concerts and arts exhibitions.", type: "cultural", time: "06:00 PM" },
+  { date: "2026-07-15", title: "Odd Semester Classes Start", desc: "Commencement of academic sessions for the new term.", type: "academic", time: "09:00 AM" }
+];
+
 const initCalendarModalInteraction = (modalBody) => {
   const layout = modalBody.querySelector(".calendar-modal-layout");
   if (!layout) return;
 
-  const days = layout.querySelectorAll(".calendar-day");
-  const cards = layout.querySelectorAll(".modal-activity-card");
-  const placeholder = layout.querySelector(".no-activities-placeholder");
+  const mainHeader = document.querySelector(".calendar-panel .calendar-head h2")?.textContent.trim() || "May 2026";
+  const [monthName, yearStr] = mainHeader.split(" ");
+  const monthsList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let currentYear = parseInt(yearStr, 10) || 2026;
+  let currentMonth = monthsList.indexOf(monthName);
+  if (currentMonth === -1) currentMonth = 4;
+
+  const monthTitle = layout.querySelector(".modal-month-title");
+  const grid = layout.querySelector(".modal-calendar-grid");
+  const listContainer = layout.querySelector(".modal-timeline-list");
   const clearBtn = layout.querySelector(".clear-date-filter-btn");
   const paneSubTitle = layout.querySelector(".activities-subtitle");
+  const prevBtn = layout.querySelector(".modal-prev-month-btn");
+  const nextBtn = layout.querySelector(".modal-next-month-btn");
+  const filterChips = layout.querySelectorAll(".filter-chip");
 
-  const resetFilter = () => {
-    days.forEach(day => day.classList.remove("selected-day"));
-    cards.forEach(card => card.style.display = "flex");
-    if (placeholder) placeholder.style.display = "none";
-    if (clearBtn) clearBtn.style.display = "none";
-    if (paneSubTitle) paneSubTitle.textContent = "May 2026";
+  let activeCategory = "all";
+  let selectedDateStr = null;
+
+  const getFilteredEvents = () => {
+    const monthPrefix = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`;
+    let events = calendarEvents.filter(e => e.date.startsWith(monthPrefix));
+
+    if (selectedDateStr) {
+      events = events.filter(e => e.date === selectedDateStr);
+    }
+
+    if (activeCategory !== "all") {
+      events = events.filter(e => e.type === activeCategory);
+    }
+
+    return events;
   };
 
-  if (clearBtn) {
-    clearBtn.addEventListener("click", resetFilter);
-  }
+  const renderActivitiesList = () => {
+    listContainer.replaceChildren();
 
-  days.forEach(day => {
-    day.addEventListener("click", () => {
-      const selectedDate = day.dataset.date;
-      if (!selectedDate) return;
+    const placeholder = document.createElement("div");
+    placeholder.className = "no-activities-placeholder";
+    placeholder.style.display = "none";
+    placeholder.style.textAlign = "center";
+    placeholder.style.padding = "40px 20px";
+    placeholder.style.color = "var(--muted)";
+    placeholder.style.gridColumn = "1 / -1";
+    placeholder.innerHTML = `
+      <svg style="width: 32px; height: 32px; fill: var(--muted); margin-bottom: 8px; opacity: 0.5; vertical-align: middle;"><use href="#icon-clock"></use></svg>
+      <div style="font-size: 0.8rem; font-weight: 700; margin-top: 6px;">No activities scheduled</div>
+    `;
+    listContainer.appendChild(placeholder);
 
-      // Update selected class
-      days.forEach(d => d.classList.remove("selected-day"));
-      day.classList.add("selected-day");
+    const filtered = getFilteredEvents();
 
-      // Update subtitle to show specific date
-      const dayNum = parseInt(day.textContent.trim(), 10);
-      if (paneSubTitle) {
-        paneSubTitle.textContent = `May ${dayNum < 10 ? '0' + dayNum : dayNum}, 2026`;
+    if (filtered.length === 0) {
+      placeholder.style.display = "block";
+      return;
+    }
+
+    filtered.forEach(e => {
+      const item = document.createElement("div");
+      item.className = "timeline-item";
+      item.dataset.activityDate = e.date;
+
+      const dateObj = new Date(e.date);
+      const mShort = dateObj.toLocaleString("en-US", { month: "short" });
+      const dNum = String(dateObj.getDate()).padStart(2, '0');
+
+      item.innerHTML = `
+        <span class="timeline-marker ${e.type}"></span>
+        <span class="timeline-time ${e.type}">${mShort} ${dNum} &bull; ${e.time}</span>
+        <div class="timeline-content">
+          <h5>${e.title}</h5>
+          <p>${e.desc}</p>
+        </div>
+      `;
+      listContainer.appendChild(item);
+    });
+  };
+
+  const renderCalendar = (year, month) => {
+    if (monthTitle) {
+      monthTitle.textContent = `${monthsList[month]} ${year}`;
+    }
+    
+    const firstDayIndex = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+
+    grid.replaceChildren();
+
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    dayNames.forEach(name => {
+      const span = document.createElement("span");
+      span.className = "day-name";
+      span.textContent = name;
+      grid.appendChild(span);
+    });
+
+    for (let i = 0; i < firstDayIndex; i++) {
+      const btn = document.createElement("button");
+      btn.className = "empty-day";
+      btn.disabled = true;
+      grid.appendChild(btn);
+    }
+
+    for (let dayNum = 1; dayNum <= totalDays; dayNum++) {
+      const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayNum).padStart(2, '0')}`;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "calendar-day";
+      btn.textContent = dayNum;
+      btn.dataset.date = dateStr;
+
+      const today = new Date();
+      if (today.getFullYear() === year && today.getMonth() === month && today.getDate() === dayNum) {
+        btn.classList.add("today");
       }
 
-      // Show/hide cards based on date match
-      let visibleCount = 0;
-      cards.forEach(card => {
-        if (card.dataset.activityDate === selectedDate) {
-          card.style.display = "flex";
-          visibleCount++;
+      if (selectedDateStr === dateStr) {
+        btn.classList.add("selected-day");
+      }
+
+      const dayEvents = calendarEvents.filter(e => e.date === dateStr);
+      if (dayEvents.length > 0) {
+        btn.classList.add("event-day");
+        btn.classList.add(dayEvents[0].type);
+      }
+
+      btn.addEventListener("click", () => {
+        const isAlreadySelected = selectedDateStr === dateStr;
+        
+        if (isAlreadySelected) {
+          selectedDateStr = null;
+          btn.classList.remove("selected-day");
+          if (paneSubTitle) paneSubTitle.textContent = `${monthsList[month]} ${year}`;
+          if (clearBtn) clearBtn.style.display = "none";
         } else {
-          card.style.display = "none";
+          selectedDateStr = dateStr;
+          const days = grid.querySelectorAll(".calendar-day");
+          days.forEach(d => d.classList.remove("selected-day"));
+          btn.classList.add("selected-day");
+          if (paneSubTitle) {
+            paneSubTitle.textContent = `${monthsList[month]} ${dayNum < 10 ? '0' + dayNum : dayNum}, ${year}`;
+          }
+          if (clearBtn) {
+            clearBtn.style.display = "inline-block";
+          }
         }
+        
+        renderActivitiesList();
       });
 
-      // Toggle empty placeholder state
-      if (placeholder) {
-        placeholder.style.display = visibleCount === 0 ? "block" : "none";
-      }
+      grid.appendChild(btn);
+    }
 
-      // Show "Show All" button to let user reset filter
-      if (clearBtn) {
-        clearBtn.style.display = "inline-block";
-      }
+    renderActivitiesList();
+  };
+
+  // Filter Chips
+  filterChips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      filterChips.forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      activeCategory = chip.dataset.filter;
+      renderActivitiesList();
     });
   });
+
+  // Navigations
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      selectedDateStr = null;
+      if (paneSubTitle) paneSubTitle.textContent = `${monthsList[currentMonth]} ${currentYear}`;
+      renderCalendar(currentYear, currentMonth);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      selectedDateStr = null;
+      if (paneSubTitle) paneSubTitle.textContent = `${monthsList[currentMonth]} ${currentYear}`;
+      renderCalendar(currentYear, currentMonth);
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      selectedDateStr = null;
+      const days = grid.querySelectorAll(".calendar-day");
+      days.forEach(d => d.classList.remove("selected-day"));
+      if (paneSubTitle) paneSubTitle.textContent = `${monthsList[currentMonth]} ${currentYear}`;
+      clearBtn.style.display = "none";
+      renderActivitiesList();
+    });
+  }
+
+  renderCalendar(currentYear, currentMonth);
 };
 
 const openDashboardModalFromSource = (trigger, source, title) => {

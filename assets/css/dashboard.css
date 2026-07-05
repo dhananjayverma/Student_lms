@@ -14323,68 +14323,175 @@ body.dark-theme #attendance-panel .attendance-performance-card {
 
 /* Calendar Modal Layout Styles */
 .calendar-modal-layout {
-  display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: 24px;
-  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 480px;
 }
 
-.calendar-modal-grid-pane {
-  border-right: 1px solid rgba(7, 21, 79, 0.08);
-  padding-right: 24px;
-}
-
-.calendar-modal-header {
+.calendar-modal-top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 1px solid rgba(7, 21, 79, 0.08);
+  padding-bottom: 14px;
 }
 
-.calendar-modal-header h3 {
+.modal-month-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.modal-month-title {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--ink);
   font-weight: 800;
 }
 
-.calendar-modal-legend {
+.modal-month-chevrons {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  gap: 6px;
 }
 
-.legend-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
+.modal-month-chevrons button {
+  padding: 5px;
+  border: 1px solid rgba(7, 21, 79, 0.1);
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: all 0.2s ease;
+}
+
+.modal-month-chevrons button:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.modal-month-chevrons button svg {
+  width: 12px;
+  height: 12px;
+  fill: var(--ink);
+}
+
+.modal-month-chevrons .modal-prev-month-btn svg {
+  transform: rotate(90deg);
+}
+
+.modal-month-chevrons .modal-next-month-btn svg {
+  transform: rotate(-90deg);
+}
+
+/* Filter Chips Styling */
+.calendar-modal-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(7, 21, 79, 0.08);
+  background: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-chip:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.filter-chip.active {
+  background: #1e293b;
+  color: #ffffff;
+  border-color: #1e293b;
+}
+
+.filter-chip.active.academic {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+.filter-chip.active.exams {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
+}
+
+.filter-chip.active.cultural {
+  background: #d97706;
+  border-color: #d97706;
+  color: #ffffff;
+}
+
+.chip-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
 }
 
-.legend-dot.academic { background-color: #3b82f6; }
-.legend-dot.exams { background-color: #ef4444; }
-.legend-dot.cultural { background-color: #f59e0b; }
+.chip-dot.academic { background-color: #3b82f6; }
+.chip-dot.exams { background-color: #ef4444; }
+.chip-dot.cultural { background-color: #f59e0b; }
+
+.filter-chip.active .chip-dot {
+  background-color: #ffffff !important;
+}
+
+/* Split content styling */
+.calendar-modal-split-content {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Calendar Grid Pane */
+.calendar-modal-grid-pane {
+  background: #ffffff;
+  border: 1px solid rgba(7, 21, 79, 0.06);
+  border-radius: 16px;
+  padding: 16px;
+}
 
 .modal-calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
+  gap: 6px;
 }
 
 .modal-calendar-grid .day-name {
   text-align: center;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
   color: var(--muted);
   padding-bottom: 6px;
   text-transform: uppercase;
+  border-bottom: 1px solid rgba(7, 21, 79, 0.04);
 }
 
 .modal-calendar-grid button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 42px;
+  height: 40px;
   border: 1px dashed rgba(37, 99, 235, 0.08);
   border-radius: 10px;
   background: rgba(248, 250, 252, 0.7);
@@ -14416,6 +14523,14 @@ body.dark-theme #attendance-panel .attendance-performance-card {
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
 }
 
+.modal-calendar-grid button.selected-day {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border-style: solid !important;
+  border-color: #1d4ed8 !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+}
+
 .modal-calendar-grid button.event-day::after {
   content: "";
   position: absolute;
@@ -14429,122 +14544,142 @@ body.dark-theme #attendance-panel .attendance-performance-card {
 .modal-calendar-grid button.event-day.exams::after { background-color: #ef4444; }
 .modal-calendar-grid button.event-day.cultural::after { background-color: #f59e0b; }
 
-.calendar-modal-activities-pane {
+/* Timeline pane styling */
+.calendar-modal-timeline-pane {
+  background: #ffffff;
+  border: 1px solid rgba(7, 21, 79, 0.06);
+  border-radius: 16px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
+  align-self: stretch;
 }
 
-.activities-pane-head {
+.timeline-pane-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  border-bottom: 1px solid rgba(7, 21, 79, 0.06);
+  border-bottom: 1px solid rgba(7, 21, 79, 0.05);
   padding-bottom: 10px;
 }
 
-.activities-pane-head h4 {
+.timeline-pane-header h4 {
   margin: 0;
-  font-size: 0.9rem;
-  font-weight: 900;
+  font-size: 0.88rem;
+  font-weight: 800;
   color: var(--ink);
 }
 
-.activities-pane-head span {
-  font-size: 0.74rem;
-  color: var(--muted);
+.clear-date-filter-btn {
+  background: none;
+  border: none;
+  font-size: 0.72rem;
   font-weight: 700;
+  color: var(--blue);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(37, 99, 235, 0.08);
+  transition: all 0.2s;
 }
 
-.modal-activities-list {
+.clear-date-filter-btn:hover {
+  background: rgba(37, 99, 235, 0.15);
+}
+
+.modal-timeline-list {
+  position: relative;
+  padding-left: 18px;
+  border-left: 2px solid rgba(7, 21, 79, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-height: 340px;
+  gap: 16px;
+  max-height: 320px;
   overflow-y: auto;
-  padding-right: 6px;
+  padding-right: 4px;
 }
 
-.modal-activity-card {
+.timeline-item {
+  position: relative;
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -23px;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  z-index: 2;
+}
+
+.timeline-marker.academic {
+  background-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.timeline-marker.exams {
+  background-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25);
+}
+
+.timeline-marker.cultural {
+  background-color: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+}
+
+.timeline-time {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #3b82f6;
+}
+
+.timeline-time.exams { color: #dc2626; }
+.timeline-time.cultural { color: #d97706; }
+
+.timeline-content {
+  background: #f8fafc;
   padding: 10px 12px;
-  border: 1px solid rgba(7, 21, 79, 0.05);
-  border-radius: 12px;
-  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(7, 21, 79, 0.04);
   transition: all 0.2s ease;
 }
 
-.modal-activity-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+.timeline-content:hover {
+  transform: translateX(2px);
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border-color: rgba(7, 21, 79, 0.08);
 }
 
-.activity-time-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #f1f5f9;
-  border-radius: 8px;
-  padding: 6px 8px;
-  min-width: 60px;
-  text-align: center;
-}
-
-.activity-time-badge strong {
-  font-size: 0.74rem;
-  color: #1e293b;
-  font-weight: 800;
-}
-
-.activity-time-badge span {
-  font-size: 0.6rem;
-  color: #64748b;
-  font-weight: 600;
-  margin-top: 2px;
-}
-
-.activity-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.activity-info h5 {
+.timeline-content h5 {
   margin: 0;
   font-size: 0.78rem;
   font-weight: 800;
   color: #1e293b;
 }
 
-.activity-info p {
+.timeline-content p {
   margin: 0;
   font-size: 0.68rem;
   color: #64748b;
   line-height: 1.4;
+  margin-top: 2px;
 }
 
-.activity-info .activity-type {
-  font-size: 0.62rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-top: 4px;
+@media (max-width: 768px) {
+  .calendar-modal-split-content {
+    grid-template-columns: 1fr;
+  }
 }
-
-.activity-info .activity-type.text-blue { color: #2563eb; }
-.activity-info .activity-type.text-red { color: #dc2626; }
-.activity-info .activity-type.text-amber { color: #d97706; }
 
 @media (max-width: 680px) {
-  .calendar-modal-layout {
+  .full-width-list {
     grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .calendar-modal-grid-pane {
-    border-right: none;
-    padding-right: 0;
-    border-bottom: 1px solid rgba(7, 21, 79, 0.08);
-    padding-bottom: 20px;
   }
 }
