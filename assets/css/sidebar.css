@@ -919,7 +919,7 @@ body.sidebar-collapsed .logout-button {
   }
 
   .drawer-logo img {
-    height: 38px;
+    height: 26px;
     width: auto;
     object-fit: contain;
   }
@@ -1131,8 +1131,8 @@ body.sidebar-collapsed .logout-button {
   }
 
   .drawer-action svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     color: #1e62ff;
   }
 
