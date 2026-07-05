@@ -43,7 +43,7 @@ const sidebarBackdrop = document.querySelector(".sidebar-backdrop");
 const themeToggleButtons = document.querySelectorAll(".theme-toggle-button, .drawer-theme-toggle");
 const themeChoiceButtons = document.querySelectorAll("[data-theme-value]");
 const quickPanel = document.querySelector("[data-quick-panel]");
-const quickToggle = document.querySelector("[data-quick-toggle]");
+const quickToggles = document.querySelectorAll("[data-quick-toggle]");
 const quickMenu = document.querySelector("[data-quick-menu]");
 const shell = document.querySelector(".shell");
 const mobileSidebarQuery = window.matchMedia("(max-width: 980px)");
@@ -270,19 +270,27 @@ themeChoiceButtons.forEach((button) => {
   });
 });
 
-quickToggle?.addEventListener("click", () => {
-  const isOpen = !quickPanel?.classList.contains("is-open");
-  quickPanel?.classList.toggle("is-open", isOpen);
-  quickToggle.setAttribute("aria-expanded", String(isOpen));
-  quickToggle.setAttribute("aria-label", isOpen ? "Close quick display controls" : "Open quick display controls");
+// Helper to update ARIA states for all quick toggle buttons
+const setQuickTogglesState = (isOpen) => {
+  quickToggles.forEach((btn) => {
+    btn.setAttribute("aria-expanded", String(isOpen));
+    btn.setAttribute("aria-label", isOpen ? "Close quick display controls" : "Open quick display controls");
+  });
+};
+
+quickToggles.forEach((toggleBtn) => {
+  toggleBtn.addEventListener("click", () => {
+    const isOpen = !quickPanel?.classList.contains("is-open");
+    quickPanel?.classList.toggle("is-open", isOpen);
+    setQuickTogglesState(isOpen);
+  });
 });
 
 // Close button inside the panel header
 quickMenu?.addEventListener("click", (event) => {
   if (event.target.closest("[data-quick-close]")) {
     quickPanel?.classList.remove("is-open");
-    quickToggle?.setAttribute("aria-expanded", "false");
-    quickToggle?.setAttribute("aria-label", "Open quick display controls");
+    setQuickTogglesState(false);
   }
 }, { capture: true });
 
@@ -291,8 +299,7 @@ document.addEventListener("click", (event) => {
   if (event.target.closest("[data-quick-menu]")) return;
   if (event.target.closest("[data-quick-toggle]")) return;
   quickPanel.classList.remove("is-open");
-  quickToggle?.setAttribute("aria-expanded", "false");
-  quickToggle?.setAttribute("aria-label", "Open quick display controls");
+  setQuickTogglesState(false);
 });
 
 quickMenu?.addEventListener("click", (event) => {
@@ -730,7 +737,20 @@ const syncAcademicLayout = () => {
   syncAcademicContentHeight();
 };
 
+// Run immediately, on page load, and after short delays to ensure all CSS/fonts are loaded and layout is stable
 syncAcademicLayout();
+setTimeout(syncAcademicLayout, 50);
+setTimeout(syncAcademicLayout, 300);
+
+if (document.readyState === "complete") {
+  syncAcademicLayout();
+} else {
+  window.addEventListener("load", () => {
+    syncAcademicLayout();
+    setTimeout(syncAcademicLayout, 100);
+  });
+}
+
 window.addEventListener("resize", () => {
   window.requestAnimationFrame(syncAcademicLayout);
 });
@@ -869,6 +889,67 @@ const closeDashboardModal = () => {
   lastModalTrigger?.focus();
 };
 
+const initCalendarModalInteraction = (modalBody) => {
+  const layout = modalBody.querySelector(".calendar-modal-layout");
+  if (!layout) return;
+
+  const days = layout.querySelectorAll(".calendar-day");
+  const cards = layout.querySelectorAll(".modal-activity-card");
+  const placeholder = layout.querySelector(".no-activities-placeholder");
+  const clearBtn = layout.querySelector(".clear-date-filter-btn");
+  const paneSubTitle = layout.querySelector(".activities-subtitle");
+
+  const resetFilter = () => {
+    days.forEach(day => day.classList.remove("selected-day"));
+    cards.forEach(card => card.style.display = "flex");
+    if (placeholder) placeholder.style.display = "none";
+    if (clearBtn) clearBtn.style.display = "none";
+    if (paneSubTitle) paneSubTitle.textContent = "May 2026";
+  };
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", resetFilter);
+  }
+
+  days.forEach(day => {
+    day.addEventListener("click", () => {
+      const selectedDate = day.dataset.date;
+      if (!selectedDate) return;
+
+      // Update selected class
+      days.forEach(d => d.classList.remove("selected-day"));
+      day.classList.add("selected-day");
+
+      // Update subtitle to show specific date
+      const dayNum = parseInt(day.textContent.trim(), 10);
+      if (paneSubTitle) {
+        paneSubTitle.textContent = `May ${dayNum < 10 ? '0' + dayNum : dayNum}, 2026`;
+      }
+
+      // Show/hide cards based on date match
+      let visibleCount = 0;
+      cards.forEach(card => {
+        if (card.dataset.activityDate === selectedDate) {
+          card.style.display = "flex";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      // Toggle empty placeholder state
+      if (placeholder) {
+        placeholder.style.display = visibleCount === 0 ? "block" : "none";
+      }
+
+      // Show "Show All" button to let user reset filter
+      if (clearBtn) {
+        clearBtn.style.display = "inline-block";
+      }
+    });
+  });
+};
+
 const openDashboardModalFromSource = (trigger, source, title) => {
   if (!modal || !modalTitle || !modalBody || !source) return;
 
@@ -884,6 +965,7 @@ const openDashboardModalFromSource = (trigger, source, title) => {
   syncAccountSettingsControls(modalBody);
   updateFeeFilters(modalBody);
   updateBacklogFilters(modalBody);
+  initCalendarModalInteraction(modalBody);
   modal.querySelector(".modal-close")?.focus();
 };
 
