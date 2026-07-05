@@ -913,6 +913,17 @@ body.sidebar-collapsed .logout-button {
     padding: 18px 20px 8px 24px;
   }
 
+  .drawer-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .drawer-logo img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+  }
+
   .drawer-close {
     display: flex;
     justify-content: center;
@@ -1094,7 +1105,7 @@ body.sidebar-collapsed .logout-button {
 
   .drawer-actions {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
     margin: 0 12px 10px;
   }

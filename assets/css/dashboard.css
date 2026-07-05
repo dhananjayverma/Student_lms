@@ -7227,17 +7227,6 @@ body.dark-theme .tabs .selected {
 
 
   .top-actions {
-    display: flex;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    justify-content: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .top-actions .profile-trigger-wrapper {
     display: none;
   }
 
