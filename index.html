@@ -1,3 +1,6 @@
+<!-- ==========================================
+     SECTION: Document Root & Head Metadata
+     ========================================== -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +18,9 @@
 </head>
 
 <body>
+  <!-- ==========================================
+       SECTION: SVG Icon Sprite Library
+       ========================================== -->
   <svg class="icon-sprite" aria-hidden="true">
     <symbol id="icon-home" viewBox="0 0 24 24">
       <path d="M3 10.5 12 3l9 7.5" />
@@ -174,6 +180,9 @@
       <polygon points="12 6 18.5 10.25 18.5 13.75 12 18 5.5 13.75 5.5 10.25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
   </svg>
+  <!-- ==========================================
+       SECTION: Ambient Background & Sidebar Navigation
+       ========================================== -->
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
 
@@ -568,6 +577,9 @@
     </div>
   </aside>
 
+  <!-- ==========================================
+       SECTION: Main Content Area & Topbar Header
+       ========================================== -->
   <main class="shell">
     <header class="topbar">
       <div class="profile-trigger-wrapper mobile-only-profile">
@@ -647,6 +659,9 @@
       </div>
     </header>
 
+    <!-- ==========================================
+         SECTION: Welcome Banner / Student Greeting
+         ========================================== -->
     <section class="hero">
       <div class="hero-copy">
         <span>Good Morning!</span>
@@ -677,6 +692,9 @@
         </div>
       </div>
 
+      <!-- ==========================================
+           SECTION: Profile Gauge Widget
+           ========================================== -->
       <article class="glass card profile-card-widget">
         <div class="card-title">
           <span>My Profile</span>
@@ -696,6 +714,9 @@
         </div>
       </article>
 
+      <!-- ==========================================
+           SECTION: Badges Grid Widget
+           ========================================== -->
       <article class="glass card badges-card">
         <div class="card-title">
           <span>My Badges</span>
@@ -725,6 +746,9 @@
         </div>
       </article>
 
+      <!-- ==========================================
+           SECTION: Quick Stats Summary Tiles
+           ========================================== -->
       <div class="stats-group">
         <div class="stats-row">
           <div class="glass card stat-tile backlog-tile widget-view-all-link" data-source-id="backlog-modal-source" data-modal-title="Backlog Details">
@@ -906,8 +930,14 @@
       </div>
     </section>
 
+    <!-- ==========================================
+         SECTION: Main Academic & Classes Grid Layout
+         ========================================== -->
     <section class="dashboard-grid">
       <div class="dashboard-main">
+        <!-- ==========================================
+             SECTION: Academic Tab Controls (Classes vs Attendance)
+             ========================================== -->
         <article class="glass panel academic-panel">
           <div class="academic-tabs" role="tablist" aria-label="Academic information">
             <button class="academic-tab active" id="classes-tab" type="button" role="tab" aria-selected="true"
@@ -926,6 +956,9 @@
             </button>
           </div>
 
+          <!-- ==========================================
+               SECTION: Tab Panel: Today's Class / Lecture Schedule
+               ========================================== -->
           <div class="academic-content active" id="classes-panel" role="tabpanel" aria-labelledby="classes-tab">
             <div class="class-toolbar">
               <div class="class-toolbar-title">
@@ -1010,6 +1043,9 @@
             </div>
           </div>
 
+          <!-- ==========================================
+               SECTION: Tab Panel: Course Tree & Attendance (Radial Visualizer)
+               ========================================== -->
           <div class="academic-content" id="attendance-panel" role="tabpanel" aria-labelledby="attendance-tab" hidden>
             <div class="orbital-attendance-dashboard">
               <!-- Left Wing (6 courses + vertical dotted connectors in between) -->
@@ -1259,6 +1295,9 @@
         </div>
       </div>
 
+      <!-- ==========================================
+           SECTION: Support Stack Column (Messages & Announcements)
+           ========================================== -->
       <div class="support-stack">
         <article class="announcement-widget important-messages-widget">
           <div class="announcement-widget-head">
@@ -1329,6 +1368,9 @@
         </article>
 
         <!-- Important Messages Modal Source -->
+        <!-- ==========================================
+             SECTION: Modal Content Source: Important Messages Details
+             ========================================== -->
         <div id="important-messages-modal-source" hidden>
           <div class="custom-modal-details important-messages-details-modal">
             <div class="modal-messages-list" style="display: flex; flex-direction: column; gap: 12px; padding: 4px 0;">
@@ -1854,6 +1896,9 @@
             </div>
 
             <!-- College Activity Calendar Modal Source -->
+            <!-- ==========================================
+                 SECTION: Modal Content Source: College Activity Calendar
+                 ========================================== -->
             <div id="college-calendar-modal-source" hidden>
               <div class="calendar-modal-layout">
                 <!-- Top Nav & Category Filters (Full Width) -->
@@ -1968,6 +2013,9 @@
 
   </main>
 
+  <!-- ==========================================
+       SECTION: Quick Access Accessibility Control Center Aside
+       ========================================== -->
   <aside class="quick-access-panel" aria-label="Quick display controls" data-quick-panel>
 
     <div class="quick-access-menu" data-quick-menu>
@@ -2104,6 +2152,9 @@
     </div>
   </aside>
 
+  <!-- ==========================================
+       SECTION: Source Container: Navbar Notifications
+       ========================================== -->
   <div id="navbar-notifications-source" hidden>
     <div class="notice">
       <span><svg><use href="#icon-book"></use></svg></span>
@@ -2131,6 +2182,9 @@
     </div>
   </div>
 
+  <!-- ==========================================
+       SECTION: Source Container: Account & Theme Settings Form
+       ========================================== -->
   <div id="account-settings-source" hidden>
     <form class="account-settings-panel" data-account-settings-form>
       <div class="settings-preview" aria-live="polite">
@@ -2213,6 +2267,9 @@
     </form>
   </div>
 
+  <!-- ==========================================
+       SECTION: Main Interactive Dashboard Modal Overlay Dialog
+       ========================================== -->
   <div class="dashboard-modal" id="dashboard-modal" hidden>
     <div class="modal-backdrop" data-modal-close></div>
     <section class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -2226,6 +2283,9 @@
 
 
 
+  <!-- ==========================================
+       SECTION: Page Scripts & Dynamic Logic Imports
+       ========================================== -->
   <script src="assets/js/index.js"></script>
 </body>
 

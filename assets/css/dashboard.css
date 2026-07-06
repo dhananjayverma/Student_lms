@@ -1,3 +1,6 @@
+/* ==========================================================================
+   SECTION: Core Layout Variables & Grid Containers
+   ========================================================================== */
 .shell {
   --dashboard-gap: 16px;
   --dashboard-gap-sm: 12px;
@@ -21,6 +24,9 @@ body.sidebar-collapsed .shell {
   display: none;
 }
 
+/* ==========================================================================
+   SECTION: Animations & Keyframes
+   ========================================================================== */
 @keyframes heroRise {
   from {
     opacity: 0;
@@ -198,6 +204,9 @@ body.dark-theme.navbar-scrolled .topbar::before {
   box-shadow: 0 5px 14px rgba(42, 60, 100, 0.08);
 }
 
+/* ==========================================================================
+   SECTION: Typography & Theme Utility Styles
+   ========================================================================== */
 .nav-date {
   font-size: 0.82rem;
   white-space: nowrap;
@@ -236,6 +245,9 @@ body.dark-theme.navbar-scrolled .topbar::before {
 
 
 
+/* ==========================================================================
+   SECTION: Buttons & Interactive Components
+   ========================================================================== */
 .icon-button {
   display: grid;
   width: 52px;
@@ -358,6 +370,9 @@ body.dark-theme .theme-toggle-button svg {
   font-weight: 900;
 }
 
+/* ==========================================================================
+   SECTION: Forms, Inputs & Search Components
+   ========================================================================== */
 .search {
   display: flex;
   flex: 1 1 100%;
@@ -538,6 +553,9 @@ body.dark-theme .quick-actions button span {
   flex: 0 0 auto;
 }
 
+/* ==========================================================================
+   SECTION: Header & Topbar Styling
+   ========================================================================== */
 .theme-switch {
   display: flex;
   height: 54px;
@@ -795,6 +813,9 @@ body.dark-theme .hero-copy {
     inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
+/* ==========================================================================
+   SECTION: Welcome Hero Section & Badges Widgets Styling
+   ========================================================================== */
 body.dark-theme .hero-copy>span,
 body.dark-theme .quick-actions button,
 body.dark-theme .progress-card button,
@@ -1031,6 +1052,9 @@ body.dark-theme .hero-copy p::after {
     0 6px 14px rgba(7, 21, 79, 0.08);
 }
 
+/* ==========================================================================
+   SECTION: Cards & Panels Styling
+   ========================================================================== */
 .card,
 .panel {
   min-width: 0;
@@ -1197,6 +1221,9 @@ body.dark-theme .progress-ring {
   box-shadow: 0 6px 14px rgba(30, 98, 255, 0.12);
 }
 
+/* ==========================================================================
+   SECTION: Quick Stats Tiles Styling
+   ========================================================================== */
 .stat-list {
   display: grid;
   align-content: space-between;
@@ -1613,6 +1640,9 @@ body.dark-theme .tabs .selected {
   font-weight: 700;
 }
 
+/* ==========================================================================
+   SECTION: Classes & Lectures Schedule Styling (Tab 1)
+   ========================================================================== */
 .academic-panel {
   position: relative;
   align-self: start;
@@ -3316,6 +3346,9 @@ body.dark-theme .query-stats div {
   display: none;
 }
 
+/* ==========================================================================
+   SECTION: Interactive Modal Dialog Box & Overlay Styling
+   ========================================================================== */
 .dashboard-modal[hidden] {
   display: none;
 }
@@ -3868,9 +3901,9 @@ body.dark-theme .settings-swatches button {
   animation-duration: 20s;
 }
 
-/* ============================================================
-   QUICK CONTROLS PANEL — Premium Redesign
-   ============================================================ */
+/* ==========================================================================
+   SECTION: Accessibility Control Panel & Settings Styling
+   ========================================================================== */
 
 .quick-access-head {
   position: sticky;
@@ -5785,7 +5818,9 @@ body.theme-cyberpunk.dark-theme .icon-button {
     0 0 20px rgba(255, 234, 0, 0.05);
 }
 
-/* Unified Panel & Card Theme Overrides */
+/* ==========================================================================
+   SECTION: Dark Mode & Theme Override Rules
+   ========================================================================== */
 body[class*="theme-"] .mentor-card,
 body[class*="theme-"] .query-summary,
 body[class*="theme-"] .announcements-panel,
@@ -5905,6 +5940,9 @@ body[class*="theme-"].dark-theme .important-messages-widget {
   margin-top: 8px;
 }
 
+/* ==========================================================================
+   SECTION: Announcement & Messages Feed Styling
+   ========================================================================== */
 .announcements-layout {
   grid-column: 1 / -1;
   display: grid;
@@ -15368,7 +15406,9 @@ body.dark-theme .widget-message-card:hover {
     margin-bottom: 5px !important;
   }
 
-  /* Desktop Conic-Gradient Orbital Attendance Layout */
+  /* ==========================================================================
+     SECTION: Course Tree & Attendance (Radial Visualizer) Styles
+     ========================================================================== */
   .orbital-attendance-dashboard {
     display: grid !important;
     grid-template-columns: 1fr 180px 1fr !important;
