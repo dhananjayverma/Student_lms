@@ -473,6 +473,7 @@ body.dark-theme .menu-group.expanded>.menu-toggle .chevron {
 .menu-submenu {
   display: grid;
   grid-template-rows: 0fr;
+  height: 0;
   opacity: 0;
   transform: translateY(-8px) scale(0.98);
   transition:
@@ -480,12 +481,15 @@ body.dark-theme .menu-group.expanded>.menu-toggle .chevron {
     opacity 220ms ease,
     transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow: hidden;
+  visibility: hidden;
 }
 
 .menu-group.expanded>.menu-submenu {
   grid-template-rows: 1fr;
+  height: auto;
   opacity: 1;
   transform: translateY(0) scale(1);
+  visibility: visible;
 }
 
 .menu-submenu-inner {

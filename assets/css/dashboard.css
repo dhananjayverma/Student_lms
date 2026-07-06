@@ -1949,7 +1949,7 @@ body.dark-theme .tabs .selected {
 .current-class {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 7px 12px;
   min-height: 122px;
   padding: 16px 16px 14px 20px;
