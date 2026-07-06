@@ -1907,6 +1907,13 @@ body.dark-theme .tabs .selected {
   font-weight: 500;
 }
 
+.class-teacher {
+  color: #30343d;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
 .icon-line {
   display: inline-flex;
   align-items: center;
@@ -1949,7 +1956,7 @@ body.dark-theme .tabs .selected {
 .current-class {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   gap: 7px 12px;
   min-height: 122px;
   padding: 16px 16px 14px 20px;
@@ -1968,7 +1975,7 @@ body.dark-theme .tabs .selected {
 .current-class .schedule-card-icon {
   top: auto;
   right: 16px;
-  bottom: 14px;
+  bottom: 28px;
   opacity: 0.56;
 }
 
@@ -2029,6 +2036,11 @@ body.dark-theme .tabs .selected {
   border-top: 1px solid rgba(154, 171, 197, 0.24);
   color: #52637a;
   font-size: 0.74rem;
+}
+
+.current-class .lecture-footer {
+  padding-right: 74px;
+  box-sizing: border-box;
 }
 
 .later-heading {
@@ -12246,6 +12258,10 @@ body.theme-aurora .icon-button {
     bottom: 10px;
   }
 
+  .current-class .lecture-footer {
+    padding-right: 46px;
+  }
+
   .class-kicker {
     padding: 3px 7px;
   }
@@ -16449,8 +16465,8 @@ body.dark-theme .back-dashboard-btn:hover {
   letter-spacing: 0.6px !important;
   padding: 3px 9px !important;
   border-radius: 20px !important;
-  background: rgba(30, 98, 255, 0.10) !important;
-  color: #1e62ff !important;
+  background: rgba(16, 185, 129, 0.14) !important;
+  color: #047857 !important;
   display: inline-block !important;
   white-space: nowrap !important;
   z-index: 2 !important;
@@ -16476,6 +16492,6 @@ body.dark-theme .back-dashboard-btn:hover {
 
 .lecture-card.is-disabled .lecture-status-tag,
 .current-class.is-disabled .lecture-status-tag {
-  background: rgba(148, 163, 184, 0.12) !important;
-  color: #64748b !important;
+  background: rgba(16, 185, 129, 0.14) !important;
+  color: #047857 !important;
 }

@@ -1361,7 +1361,7 @@ const lecturesData = [
   { id: 5, name: "DBMS", code: "23CST-204", start: "13:45", end: "14:45", timeLabel: "01:45pm - 02:45pm", teacher: "Dr. Rashmi Goyal", room: "D3-105", color: "green", period: "afternoon" },
   { id: 6, name: "Cloud Computing", code: "23CST-311", start: "14:45", end: "15:45", timeLabel: "02:45pm - 03:45pm", teacher: "Dr. Rashmi Goyal", room: "D3-311", color: "orange", period: "afternoon" },
   { id: 7, name: "Virtual Reality", code: "23CSV-302", start: "15:45", end: "16:45", timeLabel: "03:45pm - 04:45pm", teacher: "Dr. Rashmi Goyal", room: "Studio", color: "red", period: "afternoon" },
-  { id: 8, name: "Cyber Security", code: "23CST-312", start: "16:45", end: "17:45", timeLabel: "04:45pm - 05:45pm", teacher: "Dr. Rashmi Goyal", room: "Lab 3", color: "pink", period: "afternoon" }
+  { id: 8, name: "Cyber Security", start: "16:45", end: "17:45", timeLabel: "04:45pm - 05:45pm", teacher: "Dr. Rashmi Goyal", room: "Lab 3", color: "pink", period: "afternoon" }
 ];
 
 function getLectureStatus(startStr, endStr) {
@@ -1499,6 +1499,7 @@ function renderLMSClasses() {
       <div>
         <strong>${firstCard.name}</strong>
         <small class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>${firstCard.timeLabel}</small>
+        <span class="class-teacher">${firstCard.teacher}</span>
       </div>
       <div class="class-meta">
         <b class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>${firstCard.room}</b>
@@ -1516,7 +1517,6 @@ function renderLMSClasses() {
         <p class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>${secondCard.timeLabel}</p>
         <strong>${secondCard.teacher}</strong>
       </div>
-      <mark>${secondCard.code}</mark>
       <div class="lecture-footer">
         <small class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>${secondCard.room}</small>
         <span class="lecture-status-tag">${secondCard.status === 'upcoming' ? 'Upcoming' : 'Completed'}</span>
