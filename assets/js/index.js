@@ -659,7 +659,7 @@ const updateDashboardColumns = () => {
 desktopDashboardQuery.addEventListener("change", updateDashboardColumns);
 updateDashboardColumns();
 
-const privateDataCards = document.querySelectorAll(".fee-card, .backlog-card");
+const privateDataCards = document.querySelectorAll(".fee-tile, .backlog-tile");
 
 privateDataCards.forEach((card) => {
   card.addEventListener("pointerdown", (event) => {

@@ -159,6 +159,20 @@
       <path d="m23 6-9.5 9.5-5-5L1 18" />
       <path d="M17 6h6v6" />
     </symbol>
+    <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+      <line x1="7" y1="17" x2="17" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="7 7 17 7 17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-trophy" viewBox="0 0 24 24">
+      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-badge" viewBox="0 0 24 24">
+      <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <polygon points="12 6 18.5 10.25 18.5 13.75 12 18 5.5 13.75 5.5 10.25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
   </svg>
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
@@ -637,7 +651,7 @@
       <div class="hero-copy">
         <span>Good Morning!</span>
         <h1>Dhananjay Kumar Verma</h1>
-        <p>Learning today, leading tomorrow.</p>
+        <p>Explore your interests and meet like-minded students by joining one of our community!</p>
         <div class="quick-actions">
           <button><span><svg>
                 <use href="#icon-id"></use>
@@ -663,34 +677,71 @@
         </div>
       </div>
 
-      <article class="glass card progress-card">
-        <div class="card-title">My Progress</div>
-        <div class="progress-ring" style="--value: 78">
-          <span>78%</span>
+      <article class="glass card profile-card-widget">
+        <div class="card-title">
+          <span>My Profile</span>
+          <a href="profile.html" class="arrow-btn" aria-label="View profile details">
+            <svg><use href="#icon-arrow-up-right"></use></svg>
+          </a>
         </div>
-        <p>Overall Progress</p>
-        <button>View Details</button>
+        <div class="gauge-container">
+          <div class="circle-container">
+            <svg viewBox="0 0 100 100" class="circle-svg">
+              <circle class="circle-bg" cx="50" cy="50" r="40" />
+              <circle class="circle-progress" cx="50" cy="50" r="40" style="stroke-dasharray: 251.2; stroke-dashoffset: 60.288;" />
+            </svg>
+            <div class="circle-value">76%</div>
+          </div>
+          <span class="gauge-label">Almost there!</span>
+        </div>
       </article>
 
-      <article class="glass card money-card fee-card">
-        <div class="tile-icon red"><svg>
-            <use href="#icon-wallet"></use>
-          </svg></div>
-        <span>Pending Fee</span>
-        <strong>₹ 10,000</strong>
-        <small>Due</small>
-        <button class="widget-view-all-link" data-source-id="fee-modal-source" data-modal-title="Fee Payment Details">Pay Now</button>
+      <article class="glass card badges-card">
+        <div class="card-title">
+          <span>My Badges</span>
+          <a href="#" class="arrow-btn" aria-label="View all badges">
+            <svg><use href="#icon-arrow-up-right"></use></svg>
+          </a>
+        </div>
+        <div class="badges-grid">
+          <div class="badge-item blue-bg">
+            <svg><use href="#icon-badge"></use></svg>
+          </div>
+          <div class="badge-item yellow-bg">
+            <svg><use href="#icon-trophy"></use></svg>
+          </div>
+          <div class="badge-item green-bg">
+            <svg><use href="#icon-star"></use></svg>
+          </div>
+          <div class="badge-item blue-bg">
+            <svg><use href="#icon-badge"></use></svg>
+          </div>
+          <div class="badge-item yellow-bg">
+            <svg><use href="#icon-trophy"></use></svg>
+          </div>
+          <div class="badge-item green-bg">
+            <svg><use href="#icon-star"></use></svg>
+          </div>
+        </div>
       </article>
 
-      <article class="glass card money-card backlog-card">
-        <div class="tile-icon amber"><svg>
-            <use href="#icon-file"></use>
-          </svg></div>
-        <span>Backlog</span>
-        <strong>02</strong>
-        <small>Subjects</small>
-        <button class="soft widget-view-all-link" data-source-id="backlog-modal-source" data-modal-title="Backlog Details">View Details</button>
-      </article>
+      <div class="stats-group">
+        <div class="stats-row">
+          <div class="glass card stat-tile backlog-tile widget-view-all-link" data-source-id="backlog-modal-source" data-modal-title="Backlog Details">
+            <span>Backlog</span>
+            <strong class="red-text tile-blur">6</strong>
+          </div>
+          <div class="glass card stat-tile cgpa-tile">
+            <span>CGPA</span>
+            <strong>90</strong>
+          </div>
+        </div>
+        <div class="glass card stat-tile fee-tile widget-view-all-link" data-source-id="fee-modal-source" data-modal-title="Fee Payment Details">
+          <span>Pending Fee</span>
+          <strong class="red-text tile-blur">10,000</strong>
+        </div>
+      </div>
+
 
       <!-- Fee Modal Source -->
       <div id="fee-modal-source" hidden>
@@ -1256,54 +1307,76 @@
           </div>
           <div class="announcement-widget-body">
             <div class="widget-message-card important-message-item" data-message-type="leave" data-message-status="approved">
-              <span class="message-count">CL</span>
-              <div>
-                <div class="message-card-top">
-                  <strong>Casual Leave Approved</strong>
-                  <em>Approved</em>
-                </div>
-                <p>Leave applied for <strong>01 Jun 2026</strong> was approved by
-                  <strong>Pratik Singh Rana::E17989</strong>.</p>
-                <div class="message-meta">
-                  <span>Administrator</span>
-                  <span>Jun 12 2026, 4:42 PM</span>
-                </div>
+              <p>Leave applied for <strong>01 Jun 2026</strong> was approved by <strong>Pratik Singh Rana::E17989</strong>.</p>
+              <div class="message-meta">
+                <span>Administrator</span>
+                <span>Jun 12 2026, 4:42 PM</span>
               </div>
             </div>
             
             <div class="widget-message-card important-message-item" data-message-type="academic" data-message-status="info">
-              <span class="message-count" style="background: #eef2ff; color: #4f46e5;">AC</span>
-              <div>
-                <div class="message-card-top">
-                  <strong>Assignment Deadline Extended</strong>
-                  <em style="color: #4f46e5; background: #eef2ff;">Update</em>
-                </div>
-                <p>The deadline for <strong>Data Structures</strong> assignment has been extended to <strong>20 Jun 2026</strong>.</p>
-                <div class="message-meta">
-                  <span>Academic Coordinator</span>
-                  <span>Jun 15 2026, 10:15 AM</span>
-                </div>
+              <p>The deadline for <strong>Data Structures</strong> assignment has been extended to <strong>20 Jun 2026</strong>.</p>
+              <div class="message-meta">
+                <span>Academic Coordinator</span>
+                <span>Jun 15 2026, 10:15 AM</span>
               </div>
             </div>
             
             <div class="widget-message-card important-message-item" data-message-type="admin" data-message-status="warning">
-              <span class="message-count" style="background: #fffbeb; color: #d97706;">Fee</span>
-              <div>
-                <div class="message-card-top">
-                  <strong>Semester Fee Reminder</strong>
-                  <em style="color: #d97706; background: #fffbeb;">Reminder</em>
-                </div>
-                <p>Please clear your pending dues for the current semester before <strong>30 Jun 2026</strong>.</p>
-                <div class="message-meta">
-                  <span>Accounts Dept</span>
-                  <span>Jun 16 2026, 09:30 AM</span>
-                </div>
+              <p>Please clear your pending dues for the current semester before <strong>30 Jun 2026</strong>.</p>
+              <div class="message-meta">
+                <span>Accounts Dept</span>
+                <span>Jun 16 2026, 09:30 AM</span>
+              </div>
+            </div>
+
+            <div class="widget-message-card important-message-item" data-message-type="academic" data-message-status="info">
+              <p>The Mid-Term Examination schedule has been released. Please check the portal.</p>
+              <div class="message-meta">
+                <span>Exam Cell</span>
+                <span>Jun 17 2026, 11:00 AM</span>
               </div>
             </div>
             
             <div class="message-empty-state" hidden>No messages found for this filter.</div>
           </div>
         </article>
+
+        <!-- Important Messages Modal Source -->
+        <div id="important-messages-modal-source" hidden>
+          <div class="custom-modal-details important-messages-details-modal">
+            <div class="modal-messages-list" style="display: flex; flex-direction: column; gap: 12px; padding: 4px 0;">
+              <div class="widget-message-card" style="margin: 0;">
+                <p>Leave applied for <strong>01 Jun 2026</strong> was approved by <strong>Pratik Singh Rana::E17989</strong>.</p>
+                <div class="message-meta">
+                  <span>Administrator</span>
+                  <span>Jun 12 2026, 4:42 PM</span>
+                </div>
+              </div>
+              <div class="widget-message-card" style="margin: 0;">
+                <p>The deadline for <strong>Data Structures</strong> assignment has been extended to <strong>20 Jun 2026</strong>.</p>
+                <div class="message-meta">
+                  <span>Academic Coordinator</span>
+                  <span>Jun 15 2026, 10:15 AM</span>
+                </div>
+              </div>
+              <div class="widget-message-card" style="margin: 0;">
+                <p>Please clear your pending dues for the current semester before <strong>30 Jun 2026</strong>.</p>
+                <div class="message-meta">
+                  <span>Accounts Dept</span>
+                  <span>Jun 16 2026, 09:30 AM</span>
+                </div>
+              </div>
+              <div class="widget-message-card" style="margin: 0;">
+                <p>The Mid-Term Examination schedule has been released. Please check the portal.</p>
+                <div class="message-meta">
+                  <span>Exam Cell</span>
+                  <span>Jun 17 2026, 11:00 AM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <article class="mentor-card">
           <header class="mentor-card-head">
