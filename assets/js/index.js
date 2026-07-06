@@ -1376,10 +1376,8 @@ function getLectureStatus(startStr, endStr) {
 
   if (currentMinutes >= startMin && currentMinutes <= endMin) {
     return "live";
-  } else if (currentMinutes < startMin) {
-    return "upcoming";
   } else {
-    return "past";
+    return "upcoming";
   }
 }
 
