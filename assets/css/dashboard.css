@@ -2625,7 +2625,7 @@ body.dark-theme .mentor-card-icon {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  grid-auto-rows: 36px;
+  grid-auto-rows: 34px;
   overflow: hidden;
   border: 1px solid rgba(7, 21, 79, 0.10);
   border-radius: 12px;
@@ -16099,7 +16099,7 @@ body.dark-theme .profile-quick-actions button:hover {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 6px !important;
   }
-  
+
   .profile-quick-actions button {
     flex-direction: column !important;
     justify-content: center !important;
@@ -16182,7 +16182,8 @@ body.dark-theme .back-dashboard-btn:hover {
 
 /* Mobile Profile Details Grid Collapse/Expand Style Rules */
 .profile-expand-container {
-  display: none; /* Hidden by default on desktop */
+  display: none;
+  /* Hidden by default on desktop */
 }
 
 @media (max-width: 760px) {
@@ -16228,7 +16229,7 @@ body.dark-theme .back-dashboard-btn:hover {
   }
 
   /* Expanded state chevron rotation */
-  .profile-details-grid.expanded + .profile-expand-container .btn-profile-expand .chevron-icon {
+  .profile-details-grid.expanded+.profile-expand-container .btn-profile-expand .chevron-icon {
     transform: rotate(180deg);
   }
 
@@ -16281,10 +16282,12 @@ body.dark-theme .back-dashboard-btn:hover {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
   }
+
   70% {
     transform: scale(1);
     box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
   }
+
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
@@ -16409,7 +16412,8 @@ body.dark-theme .back-dashboard-btn:hover {
 
 /* Live Button Active / Hover */
 .live-btn {
-  background: #ef4444 !important; /* Premium red background */
+  background: #ef4444 !important;
+  /* Premium red background */
   border-color: #ef4444 !important;
   color: #ffffff !important;
   box-shadow: 0 4px 14px rgba(239, 68, 68, 0.2) !important;
@@ -16436,10 +16440,10 @@ body.dark-theme .back-dashboard-btn:hover {
 }
 
 .upcoming-btn.active {
-  background: #1e293b !important;
-  border-color: #1e293b !important;
+  background: #16a34a !important;
+  border-color: #16a34a !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(30, 41, 59, 0.15) !important;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25) !important;
 }
 
 .class-filter-btn:hover:not([disabled]) {

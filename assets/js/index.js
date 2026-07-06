@@ -1434,20 +1434,8 @@ function updateFilterButtons(hasLiveClass) {
 
   if (hasLiveClass) {
     liveBtn.removeAttribute("disabled");
-    liveBtn.style.setProperty("background", "#ef4444", "important");
-    liveBtn.style.setProperty("border-color", "#ef4444", "important");
-    liveBtn.style.setProperty("color", "#ffffff", "important");
-    liveBtn.style.setProperty("cursor", "pointer", "important");
-    liveBtn.style.setProperty("pointer-events", "auto", "important");
   } else {
-    liveBtn.setAttribute("disabled", "true");
-    liveBtn.style.setProperty("background", "#f1f5f9", "important");
-    liveBtn.style.setProperty("border-color", "rgba(154, 171, 197, 0.15)", "important");
-    liveBtn.style.setProperty("color", "#94a3b8", "important");
-    liveBtn.style.setProperty("cursor", "not-allowed", "important");
-    liveBtn.style.setProperty("pointer-events", "none", "important");
-    
-    // Remove active style if disabled
+    liveBtn.setAttribute("disabled", "");
     liveBtn.classList.remove("active");
   }
 }
