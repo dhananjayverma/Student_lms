@@ -1158,6 +1158,26 @@ conversationViewAll?.addEventListener("click", (event) => {
   );
 });
 
+// Tap-to-reveal for stat tiles (Backlog, CGPA, Pending Fee) on mobile
+document.querySelectorAll(".stat-tile").forEach((tile) => {
+  tile.addEventListener("click", (event) => {
+    if (tile.querySelector(".tile-blur") && !tile.classList.contains("revealed")) {
+      const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+      if (isMobile) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        
+        // Collapse all other revealed tiles
+        document.querySelectorAll(".stat-tile.revealed").forEach((t) => {
+          if (t !== tile) t.classList.remove("revealed");
+        });
+        
+        tile.classList.add("revealed");
+      }
+    }
+  });
+});
+
 document.querySelectorAll(".widget-view-all-link, .nav-notification-trigger, .account-settings-trigger").forEach((trigger) => {
   trigger.addEventListener("click", (event) => {
     event.preventDefault();
@@ -1168,6 +1188,16 @@ document.querySelectorAll(".widget-view-all-link, .nav-notification-trigger, .ac
     }
     closeProfileMenus();
     openDashboardModalFromSource(trigger, source, trigger.dataset.modalTitle || trigger.textContent.trim());
+  });
+});
+
+// Re-blur tiles when clicking outside
+document.addEventListener("click", (event) => {
+  const activeTile = event.target.closest(".stat-tile");
+  document.querySelectorAll(".stat-tile.revealed").forEach((tile) => {
+    if (tile !== activeTile) {
+      tile.classList.remove("revealed");
+    }
   });
 });
 
@@ -1789,4 +1819,17 @@ if (announcementRows.length > 0) {
       filterAnnouncements();
     });
   }
+}
+
+// Toggle Attendance View More / Less on mobile
+const toggleAttendanceBtn = document.getElementById("toggle-attendance-btn");
+const attendanceDashboard = document.querySelector(".orbital-attendance-dashboard");
+if (toggleAttendanceBtn && attendanceDashboard) {
+  toggleAttendanceBtn.addEventListener("click", () => {
+    const isExpanded = attendanceDashboard.classList.toggle("expanded");
+    toggleAttendanceBtn.textContent = isExpanded ? "View Less" : "View More";
+    if (typeof syncAcademicLayout === "function") {
+      syncAcademicLayout();
+    }
+  });
 }
