@@ -1818,8 +1818,10 @@ body.dark-theme .tabs .selected {
 
 .class-status {
   position: relative;
-  display: grid;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 8px;
   min-height: 122px;
   padding: 16px 16px 14px 20px;
@@ -1887,19 +1889,22 @@ body.dark-theme .tabs .selected {
 .class-status>div:not(.class-meta) {
   display: grid;
   gap: 4px;
+  width: 100%;
   padding-right: 46px;
 }
 
 .class-status strong {
+  display: block;
+  margin: 5px 0 6px;
   color: #172033;
-  font-size: 1.06rem;
-  line-height: 1.2;
+  font-size: clamp(1.08rem, 1.35vw, 1.28rem);
+  line-height: 1.1;
 }
 
 .class-status small {
   color: #7d8796;
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 0.74rem;
+  font-weight: 500;
 }
 
 .icon-line {
@@ -1921,7 +1926,8 @@ body.dark-theme .tabs .selected {
   display: flex !important;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1px;
+  width: 100%;
+  margin-top: auto;
   gap: 10px;
 }
 
@@ -1943,7 +1949,7 @@ body.dark-theme .tabs .selected {
 .current-class {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   gap: 7px 12px;
   min-height: 122px;
   padding: 16px 16px 14px 20px;
@@ -2049,10 +2055,10 @@ body.dark-theme .tabs .selected {
 .lecture-card {
   position: relative;
   display: grid;
-  min-height: 98px;
+  min-height: 130px;
   align-content: center;
-  gap: 5px;
-  padding: 13px 13px 13px 16px;
+  gap: 7px;
+  padding: 16px 16px 16px 20px;
   border-radius: 12px;
   overflow: hidden;
   background:
@@ -16214,4 +16220,262 @@ body.dark-theme .back-dashboard-btn:hover {
   .profile-details-grid:not(.expanded) .profile-hide-collapsed {
     display: none !important;
   }
+}
+
+/* Make all cards exactly the same size and remove panel bottom gap */
+.academic-panel {
+  min-height: auto !important;
+}
+
+.class-status,
+.current-class,
+.lecture-card {
+  min-height: 130px !important;
+  padding: 16px 16px 16px 20px !important;
+  box-sizing: border-box !important;
+}
+
+/* Inactive/Upcoming/Past cards disabled styling (No Blur, No Opacity reduction) */
+.schedule-item.is-disabled {
+  opacity: 1 !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.schedule-item.is-disabled:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 16px 30px rgba(26, 42, 70, 0.12) !important;
+}
+
+/* Active Live indicator dot and card border glow */
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  margin-right: 6px;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse 1.6s infinite;
+  vertical-align: middle;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.class-status:not(.is-disabled) {
+  border-color: rgba(30, 98, 255, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(30, 98, 255, 0.14) !important;
+}
+
+/* Premium Card Overlay Popup */
+.lecture-popup-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(15, 23, 42, 0.90) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  box-sizing: border-box !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.lecture-popup-overlay.show {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+@media (min-width: 981px) {
+  .lecture-cards {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 14px !important;
+    padding-bottom: 12px !important;
+    scroll-snap-type: x mandatory !important;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  .lecture-card {
+    flex: 0 0 calc(33.33% - 10px) !important;
+    min-width: calc(33.33% - 10px) !important;
+    height: 148px !important;
+    scroll-snap-align: start !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .lecture-cards::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+/* Mobile: show 1.2 cards per view with peek */
+@media (max-width: 980px) {
+  .lecture-cards {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 12px !important;
+    padding-bottom: 10px !important;
+    scroll-snap-type: x mandatory !important;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  .lecture-card {
+    flex: 0 0 calc(80vw) !important;
+    min-width: calc(80vw) !important;
+    height: 140px !important;
+    scroll-snap-align: start !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  .lecture-cards::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+/* Premium Filter Buttons Styling */
+.class-filters {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+.class-filter-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 18px !important;
+  border-radius: 30px !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid rgba(154, 171, 197, 0.28) !important;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  box-sizing: border-box !important;
+}
+
+/* Live Button Active / Hover */
+.live-btn {
+  background: #ef4444 !important; /* Premium red background */
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.2) !important;
+}
+
+.live-btn.active {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.45) !important;
+}
+
+.live-btn[disabled] {
+  opacity: 0.40 !important;
+  background: #f1f5f9 !important;
+  color: #94a3b8 !important;
+  border-color: rgba(154, 171, 197, 0.15) !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* Upcoming Button Active / Hover */
+.upcoming-btn {
+  background: #ffffff !important;
+  border-color: rgba(154, 171, 197, 0.28) !important;
+  color: #1e293b !important;
+}
+
+.upcoming-btn.active {
+  background: #1e293b !important;
+  border-color: #1e293b !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(30, 41, 59, 0.15) !important;
+}
+
+.class-filter-btn:hover:not([disabled]) {
+  transform: translateY(-1.5px) !important;
+}
+
+/* Lecture Card Footer - Location only now (status moved to top-right) */
+.lecture-footer {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-top: auto !important;
+}
+
+/* Status Tag — positioned absolute top-right corner of card */
+.lecture-status-tag {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  padding: 3px 9px !important;
+  border-radius: 20px !important;
+  background: rgba(30, 98, 255, 0.10) !important;
+  color: #1e62ff !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+  z-index: 2 !important;
+}
+
+/* Completed status style */
+.lecture-status-tag.completed {
+  background: rgba(148, 163, 184, 0.15) !important;
+  color: #64748b !important;
+}
+
+/* Live status style */
+.lecture-status-tag.live-tag {
+  background: rgba(239, 68, 68, 0.10) !important;
+  color: #ef4444 !important;
+}
+
+/* Ensure cards have relative positioning for the absolute badge */
+.lecture-card,
+.current-class {
+  position: relative !important;
+}
+
+.lecture-card.is-disabled .lecture-status-tag,
+.current-class.is-disabled .lecture-status-tag {
+  background: rgba(148, 163, 184, 0.12) !important;
+  color: #64748b !important;
 }

@@ -1347,54 +1347,283 @@ document.addEventListener("keydown", (event) => {
 const laterHeadingToggle = document.querySelector(".later-heading");
 const laterLectures = document.querySelector(".lecture-cards");
 const classFilterButtons = document.querySelectorAll(".class-filter");
-const scheduleItems = document.querySelectorAll(".schedule-item");
 const messageFilterButtons = document.querySelectorAll("[data-message-filter]");
 const messageItems = document.querySelectorAll(".important-message-item");
 const messageEmptyState = document.querySelector(".message-empty-state");
-
 const classFilterSelect = document.querySelector(".class-filter-select");
 
-classFilterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const filter = button.dataset.filter || "all";
+// Dynamic 8-lecture schedule data for the single day
+const lecturesData = [
+  { id: 1, name: "Software Engineering", code: "23CST-301", start: "09:45", end: "10:45", timeLabel: "09:45am - 10:45am", teacher: "Dr. Rashmi Goyal", room: "Room D3-105", color: "blue", period: "morning" },
+  { id: 2, name: "Software QA", code: "23CSH-309", start: "10:45", end: "11:45", timeLabel: "10:45am - 11:45am", teacher: "Dr. Rashmi Goyal", room: "Venue: D3 Block room no. 105", color: "orange", period: "morning" },
+  { id: 3, name: "AI Advance", code: "23CST-310", start: "11:45", end: "12:45", timeLabel: "11:45am - 12:45pm", teacher: "Dr. Rashmi Goyal", room: "Lab 2", color: "blue", period: "morning" },
+  { id: 4, name: "Data mining", code: "23CSD-304", start: "12:45", end: "13:45", timeLabel: "12:45pm - 01:45pm", teacher: "Dr. Rashmi Goyal", room: "D3-203", color: "pink", period: "morning" },
+  { id: 5, name: "DBMS", code: "23CST-204", start: "13:45", end: "14:45", timeLabel: "01:45pm - 02:45pm", teacher: "Dr. Rashmi Goyal", room: "D3-105", color: "green", period: "afternoon" },
+  { id: 6, name: "Cloud Computing", code: "23CST-311", start: "14:45", end: "15:45", timeLabel: "02:45pm - 03:45pm", teacher: "Dr. Rashmi Goyal", room: "D3-311", color: "orange", period: "afternoon" },
+  { id: 7, name: "Virtual Reality", code: "23CSV-302", start: "15:45", end: "16:45", timeLabel: "03:45pm - 04:45pm", teacher: "Dr. Rashmi Goyal", room: "Studio", color: "red", period: "afternoon" },
+  { id: 8, name: "Cyber Security", start: "16:45", end: "17:45", timeLabel: "04:45pm - 05:45pm", teacher: "Dr. Rashmi Goyal", room: "Lab 3", color: "pink", period: "afternoon" }
+];
 
-    classFilterButtons.forEach((item) => {
-      item.classList.toggle("active", item === button);
-    });
+function getLectureStatus(startStr, endStr) {
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-    if (classFilterSelect) {
-      classFilterSelect.value = filter;
+  const [sh, sm] = startStr.split(":").map(Number);
+  const [eh, em] = endStr.split(":").map(Number);
+
+  const startMin = sh * 60 + sm;
+  const endMin = eh * 60 + em;
+
+  if (currentMinutes >= startMin && currentMinutes <= endMin) {
+    return "live";
+  } else if (currentMinutes < startMin) {
+    return "upcoming";
+  } else {
+    return "past";
+  }
+}
+
+function arrangeLectures() {
+  const categorized = lecturesData.map(lecture => {
+    return { ...lecture, status: getLectureStatus(lecture.start, lecture.end) };
+  });
+
+  let liveIndex = categorized.findIndex(l => l.status === "live");
+  let firstCard, secondCard;
+  let remaining = [];
+
+  if (liveIndex !== -1) {
+    firstCard = { ...categorized[liveIndex] };
+    const nextIndex = (liveIndex + 1) % 8;
+    secondCard = { ...categorized[nextIndex] };
+
+    for (let i = 0; i < 8; i++) {
+      if (i !== liveIndex && i !== nextIndex) {
+        remaining.push(categorized[i]);
+      }
+    }
+  } else {
+    let upcomingIndex = categorized.findIndex(l => l.status === "upcoming");
+    if (upcomingIndex !== -1) {
+      firstCard = { ...categorized[upcomingIndex] };
+      const nextIndex = (upcomingIndex + 1) % 8;
+      secondCard = { ...categorized[nextIndex] };
+
+      for (let i = 0; i < 8; i++) {
+        if (i !== upcomingIndex && i !== nextIndex) {
+          remaining.push(categorized[i]);
+        }
+      }
+    } else {
+      firstCard = { ...categorized[6] };
+      secondCard = { ...categorized[7] };
+
+      for (let i = 0; i < 6; i++) {
+        remaining.push(categorized[i]);
+      }
+    }
+  }
+
+  return { firstCard, secondCard, remaining };
+}
+
+// Filter state application and button management
+function updateFilterButtons(hasLiveClass) {
+  const liveBtn = document.querySelector(".live-btn");
+  if (!liveBtn) return;
+
+  if (hasLiveClass) {
+    liveBtn.removeAttribute("disabled");
+    liveBtn.style.setProperty("background", "#ef4444", "important");
+    liveBtn.style.setProperty("border-color", "#ef4444", "important");
+    liveBtn.style.setProperty("color", "#ffffff", "important");
+    liveBtn.style.setProperty("cursor", "pointer", "important");
+    liveBtn.style.setProperty("pointer-events", "auto", "important");
+  } else {
+    liveBtn.setAttribute("disabled", "true");
+    liveBtn.style.setProperty("background", "#f1f5f9", "important");
+    liveBtn.style.setProperty("border-color", "rgba(154, 171, 197, 0.15)", "important");
+    liveBtn.style.setProperty("color", "#94a3b8", "important");
+    liveBtn.style.setProperty("cursor", "not-allowed", "important");
+    liveBtn.style.setProperty("pointer-events", "none", "important");
+    
+    // Remove active style if disabled
+    liveBtn.classList.remove("active");
+  }
+}
+
+function applyFilters() {
+  const liveBtn = document.querySelector(".live-btn");
+  const upcomingBtn = document.querySelector(".upcoming-btn");
+
+  const showLive = liveBtn ? (liveBtn.classList.contains("active") && !liveBtn.disabled) : true;
+  const showUpcoming = upcomingBtn ? upcomingBtn.classList.contains("active") : true;
+
+  // If no filter is specifically active, show everything
+  const noFilter = !showLive && !showUpcoming;
+
+  const currentItems = document.querySelectorAll(".schedule-item");
+  currentItems.forEach((item) => {
+    const status = item.dataset.status;
+    const isLive = status === "live";
+    const isUpcoming = status === "upcoming";
+    const isPast = status === "past";
+
+    let visible = false;
+    if (noFilter) {
+      visible = true; // Show all if nothing selected
+    } else {
+      if (isLive && showLive) visible = true;
+      // Show both upcoming AND past classes under "upcoming" filter
+      if ((isUpcoming || isPast) && showUpcoming) visible = true;
     }
 
-    scheduleItems.forEach((item) => {
-      const isMatch =
-        filter === "all" ||
-        item.dataset.status === filter ||
-        item.dataset.period === filter;
-
-      item.classList.toggle("is-hidden", !isMatch);
-    });
-  });
-});
-
-if (classFilterSelect) {
-  classFilterSelect.addEventListener("change", (e) => {
-    const filter = e.target.value;
-
-    classFilterButtons.forEach((item) => {
-      item.classList.toggle("active", item.dataset.filter === filter);
-    });
-
-    scheduleItems.forEach((item) => {
-      const isMatch =
-        filter === "all" ||
-        item.dataset.status === filter ||
-        item.dataset.period === filter;
-
-      item.classList.toggle("is-hidden", !isMatch);
-    });
+    item.classList.toggle("is-hidden", !visible);
   });
 }
+
+function renderLMSClasses() {
+  const heroContainer = document.querySelector(".class-hero");
+  const gridContainer = document.querySelector(".lecture-cards");
+  if (!heroContainer || !gridContainer) return;
+
+  const { firstCard, secondCard, remaining } = arrangeLectures();
+
+  heroContainer.innerHTML = "";
+  gridContainer.innerHTML = "";
+
+  const firstCardHtml = `
+    <div class="class-status schedule-item ${firstCard.status === 'live' ? '' : 'is-disabled'}" data-status="${firstCard.status}" data-period="${firstCard.period}">
+      <span class="schedule-card-icon" aria-hidden="true"><svg><use href="#icon-video"></use></svg></span>
+      <span class="class-kicker">${firstCard.status === 'live' ? 'Now' : 'Today'}</span>
+      <div>
+        <strong>${firstCard.name}</strong>
+        <small class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>${firstCard.timeLabel}</small>
+      </div>
+      <div class="class-meta">
+        <b class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>${firstCard.room}</b>
+        ${firstCard.status === 'live' ? '<em><span class="pulse-dot"></span>Live</em>' : '<em>Upcoming</em>'}
+      </div>
+    </div>
+  `;
+
+  const secondCardHtml = `
+    <div class="current-class schedule-item ${secondCard.status === 'live' ? '' : 'is-disabled'}" data-status="${secondCard.status}" data-period="${secondCard.period}">
+      <span class="schedule-card-icon" aria-hidden="true"><svg><use href="#icon-calendar"></use></svg></span>
+      <div>
+        <span>Up Next</span>
+        <h2>${secondCard.name}</h2>
+        <p class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>${secondCard.timeLabel}</p>
+        <strong>${secondCard.teacher}</strong>
+      </div>
+      <div class="lecture-footer">
+        <small class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>${secondCard.room}</small>
+        <span class="lecture-status-tag">${secondCard.status === 'upcoming' ? 'Upcoming' : 'Completed'}</span>
+      </div>
+    </div>
+  `;
+
+  heroContainer.innerHTML = firstCardHtml + secondCardHtml;
+
+  remaining.forEach(item => {
+    const statusClass = item.status === 'upcoming' ? '' : item.status === 'past' ? 'completed' : 'live-tag';
+    const statusLabel = item.status === 'upcoming' ? 'Upcoming' : item.status === 'past' ? 'Completed' : 'Live';
+    const cardHtml = `
+      <article class="lecture-card ${item.color} schedule-item ${item.status === 'live' ? '' : 'is-disabled'}" data-status="${item.status}" data-period="${item.period}">
+        <span class="lecture-status-tag ${statusClass}">${statusLabel}</span>
+        <h3>${item.name}</h3>
+        <span class="icon-line"><svg aria-hidden="true"><use href="#icon-clock"></use></svg>${item.timeLabel}</span>
+        <strong>${item.teacher}</strong>
+        <div class="lecture-footer">
+          <small class="icon-line"><svg aria-hidden="true"><use href="#icon-location"></use></svg>${item.room}</small>
+        </div>
+      </article>
+    `;
+    gridContainer.insertAdjacentHTML("beforeend", cardHtml);
+  });
+
+  // Calculate if there is any live class in the schedule
+  const hasLiveClass = firstCard.status === "live" || secondCard.status === "live" || remaining.some(r => r.status === "live");
+  updateFilterButtons(hasLiveClass);
+
+  // Apply filters ONLY if buttons are already initialized (after first render)
+  if (document.querySelector(".live-btn.active") !== null || document.querySelector(".upcoming-btn.active") !== null) {
+    applyFilters();
+  }
+}
+
+// Set up filter button references and initial active states FIRST (before rendering)
+const liveFilterBtn = document.querySelector(".live-btn");
+const upcomingFilterBtn = document.querySelector(".upcoming-btn");
+
+// Always show upcoming by default
+if (upcomingFilterBtn) {
+  upcomingFilterBtn.classList.add("active");
+}
+
+// Enable live button only if a live class exists right now
+if (liveFilterBtn) {
+  const liveClassExists = lecturesData.some(l => getLectureStatus(l.start, l.end) === "live");
+  if (liveClassExists) {
+    liveFilterBtn.classList.add("active");
+  }
+}
+
+// Render after buttons are initialized so applyFilters() works correctly
+renderLMSClasses();
+setInterval(renderLMSClasses, 30000);
+
+// Click listeners
+if (liveFilterBtn) {
+  liveFilterBtn.addEventListener("click", () => {
+    if (liveFilterBtn.disabled) return;
+    const upcomingActive = upcomingFilterBtn && upcomingFilterBtn.classList.contains("active");
+    if (!upcomingActive && liveFilterBtn.classList.contains("active")) {
+      return; // Prevent all filters being off
+    }
+    liveFilterBtn.classList.toggle("active");
+    applyFilters();
+  });
+}
+
+if (upcomingFilterBtn) {
+  upcomingFilterBtn.addEventListener("click", () => {
+    const liveActive = liveFilterBtn && liveFilterBtn.classList.contains("active") && !liveFilterBtn.disabled;
+    if (!liveActive && upcomingFilterBtn.classList.contains("active")) {
+      return; // Prevent all filters being off
+    }
+    upcomingFilterBtn.classList.toggle("active");
+    applyFilters();
+  });
+}
+
+document.addEventListener("click", (e) => {
+  const disabledCard = e.target.closest(".schedule-item.is-disabled");
+  if (disabledCard) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Check if overlay already exists in this card
+    let overlay = disabledCard.querySelector(".lecture-popup-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.className = "lecture-popup-overlay";
+      overlay.textContent = "Lecture coming soon";
+      disabledCard.appendChild(overlay);
+    }
+
+    // Trigger animation frame to ensure display transition works
+    requestAnimationFrame(() => {
+      overlay.classList.add("show");
+    });
+
+    // Automatically hide after 2 seconds
+    if (disabledCard.overlayTimeout) clearTimeout(disabledCard.overlayTimeout);
+    disabledCard.overlayTimeout = setTimeout(() => {
+      overlay.classList.remove("show");
+    }, 2000);
+  }
+});
 
 messageFilterButtons.forEach((button) => {
   button.addEventListener("click", () => {
