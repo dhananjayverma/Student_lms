@@ -1833,3 +1833,16 @@ if (toggleAttendanceBtn && attendanceDashboard) {
     }
   });
 }
+
+// Profile Page Details Grid View More/Less Toggle on mobile
+const btnProfileExpand = document.querySelector(".btn-profile-expand");
+const profileDetailsGrid = document.querySelector(".profile-details-grid");
+if (btnProfileExpand && profileDetailsGrid) {
+  btnProfileExpand.addEventListener("click", () => {
+    const isExpanded = profileDetailsGrid.classList.toggle("expanded");
+    const textNode = btnProfileExpand.querySelector("span");
+    if (textNode) {
+      textNode.textContent = isExpanded ? "Show Less Details" : "Show More Details";
+    }
+  });
+}

@@ -598,12 +598,27 @@
       </div>
     </header>
 
+    <div class="profile-quick-actions">
+      <button><span><svg><use href="#icon-id"></use></svg></span>ID Card</button>
+      <button><span><svg><use href="#icon-mail"></use></svg></span>Email</button>
+      <button><span><svg><use href="#icon-link"></use></svg></span>Important Links</button>
+      <button><span><svg><use href="#icon-bell"></use></svg></span>Notices</button>
+      <button><span><svg><use href="#icon-book"></use></svg></span>LMS</button>
+      <button><span><svg><use href="#icon-shield"></use></svg></span>Anti Ragging</button>
+      <button><span><svg><use href="#icon-user-check"></use></svg></span>Student Facilitation</button>
+    </div>
+
     <section class="profile-section">
       <div class="glass panel profile-page-panel">
         <div class="profile-page-title">
-          <div>
-            <span>Student account</span>
-            <h1>My Profile</h1>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <a href="index.html" class="back-dashboard-btn" aria-label="Go back to dashboard">
+              <svg><use href="#icon-chevron-left"></use></svg>
+            </a>
+            <div>
+              <span>Student account</span>
+              <h1>My Profile</h1>
+            </div>
           </div>
           <span class="profile-record-status"><i></i> Profile active</span>
         </div>
@@ -647,48 +662,54 @@
                   <span>University</span>
                   <strong>Chandigarh University</strong>
                 </div>
-                <div class="detail-group">
+                <div class="detail-group profile-hide-collapsed">
                   <span>Current Semester</span>
                   <strong>8</strong>
                 </div>
-                <div class="detail-group">
+                <div class="detail-group profile-hide-collapsed">
                   <span>Blood Group</span>
                   <strong>O+</strong>
                 </div>
-                <div class="detail-group">
+                <div class="detail-group profile-hide-collapsed">
                   <span>Current Section</span>
                   <strong>BAV-8A</strong>
                 </div>
-                <div class="detail-group">
+                <div class="detail-group profile-hide-collapsed">
                   <span>Program Code</span>
                   <strong>BAV - B.A. (VFX)</strong>
                 </div>
-                <div class="detail-group">
+                <div class="detail-group profile-hide-collapsed">
                   <span>Student Status</span>
                   <strong><span class="status-badge status-active">Active</span></strong>
                 </div>
-                <div class="detail-group">
+                <div class="detail-group profile-hide-collapsed">
                   <span>Category</span>
                   <strong>General</strong>
                 </div>
-                <div class="detail-group">
+                <div class="detail-group profile-hide-collapsed">
                   <span>Tuition Fee</span>
                   <strong class="detail-action">
                     <span class="status-badge status-pending">Pending</span>
                     <a href="#">Pay tuition <span aria-hidden="true">↗</span></a>
                   </strong>
                 </div>
-                <div class="detail-group">
+                <div class="detail-group profile-hide-collapsed">
                   <span>Course Registration</span>
                   <strong class="detail-action">
                     <span class="status-badge status-closed">Closed</span>
                     <a href="#">Late registration <span aria-hidden="true">↗</span></a>
                   </strong>
                 </div>
-                <div class="detail-group full-width">
+                <div class="detail-group full-width profile-hide-collapsed">
                   <span>Address</span>
                   <strong>Sector 62, Mohali, Punjab 160062</strong>
                 </div>
+              </div>
+              <div class="profile-expand-container">
+                <button class="btn-profile-expand" aria-label="Show more details">
+                  <span>Show More Details</span>
+                  <svg class="chevron-icon" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
               </div>
             </div>
           </div>
