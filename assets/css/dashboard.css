@@ -1410,11 +1410,7 @@ body.dark-theme .academic-tabs {
 }
 
 body.dark-theme .academic-content {
-  background:
-    linear-gradient(90deg, rgba(143, 177, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(143, 177, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(135deg, #111827, #172235);
-  background-size: 26px 26px, 26px 26px, auto;
+  background: transparent !important;
 }
 
 body.dark-theme .class-toolbar strong {
@@ -1704,11 +1700,7 @@ body.dark-theme .tabs .selected {
   height: var(--academic-content-height, auto);
   overflow: hidden;
   padding: var(--dashboard-panel-pad);
-  background:
-    linear-gradient(90deg, rgba(30, 98, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(30, 98, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(245, 248, 253, 0.88));
-  background-size: 26px 26px, 26px 26px, auto;
+  background: transparent !important;
 }
 
 #attendance-panel {
