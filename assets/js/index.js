@@ -722,15 +722,18 @@ const syncAcademicContentHeight = () => {
   const classesPanel = document.querySelector("#classes-panel");
   if (!academicPanel || !activePanel) return;
 
+  // On mobile/tablet, let height be natural (auto) to avoid layout recalculation loops
   if (!desktopDashboardQuery.matches) {
-    academicPanel.style.setProperty("--academic-content-height", `${measureAcademicPanelHeight(activePanel)}px`);
+    academicPanel.style.removeProperty("--academic-content-height");
     return;
   }
 
-  academicPanel.style.setProperty(
-    "--academic-content-height",
-    `${measureAcademicPanelHeight(classesPanel || activePanel)}px`
-  );
+  const newHeight = `${measureAcademicPanelHeight(classesPanel || activePanel)}px`;
+  const currentHeight = academicPanel.style.getPropertyValue("--academic-content-height");
+  
+  if (currentHeight !== newHeight) {
+    academicPanel.style.setProperty("--academic-content-height", newHeight);
+  }
 };
 
 const syncAcademicLayout = () => {
@@ -751,8 +754,26 @@ if (document.readyState === "complete") {
   });
 }
 
+let lastWidth = window.innerWidth;
+let resizeTimeout;
+
 window.addEventListener("resize", () => {
-  window.requestAnimationFrame(syncAcademicLayout);
+  const currentWidth = window.innerWidth;
+  
+  // Only sync immediately if the width change is significant (> 25px) to ignore scrollbar toggling
+  if (Math.abs(currentWidth - lastWidth) > 25) {
+    lastWidth = currentWidth;
+    window.requestAnimationFrame(syncAcademicLayout);
+  }
+
+  // Ensure a clean final layout sync at the end of any resizing action
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    if (window.innerWidth !== lastWidth) {
+      lastWidth = window.innerWidth;
+      syncAcademicLayout();
+    }
+  }, 150);
 });
 
 academicTabs.forEach((tab) => {
